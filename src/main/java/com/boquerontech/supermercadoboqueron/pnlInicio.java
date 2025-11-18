@@ -40,7 +40,7 @@ public class pnlInicio extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        pnlHeader = new javax.swing.JPanel();
         lblName = new javax.swing.JLabel();
         pnlUser1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -172,16 +172,16 @@ public class pnlInicio extends javax.swing.JPanel {
 
         add(pnlFondo, java.awt.BorderLayout.CENTER);
 
-        jPanel2.setBackground(new java.awt.Color(233, 253, 253));
-        jPanel2.setLayout(new java.awt.BorderLayout());
+        pnlHeader.setBackground(new java.awt.Color(233, 253, 253));
+        pnlHeader.setLayout(new java.awt.BorderLayout());
 
         lblName.setBackground(new java.awt.Color(233, 253, 253));
         lblName.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblName.setForeground(new java.awt.Color(0, 0, 0));
         lblName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblName.setText("Clientes");
+        lblName.setText("Inicio");
         lblName.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel2.add(lblName, java.awt.BorderLayout.CENTER);
+        pnlHeader.add(lblName, java.awt.BorderLayout.CENTER);
 
         pnlUser1.setBackground(new java.awt.Color(233, 253, 253));
         pnlUser1.setForeground(new java.awt.Color(0, 0, 0));
@@ -215,9 +215,9 @@ public class pnlInicio extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         pnlUser1.add(jLabel10, gridBagConstraints);
 
-        jPanel2.add(pnlUser1, java.awt.BorderLayout.EAST);
+        pnlHeader.add(pnlUser1, java.awt.BorderLayout.EAST);
 
-        add(jPanel2, java.awt.BorderLayout.PAGE_START);
+        add(pnlHeader, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -231,12 +231,12 @@ public class pnlInicio extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblName;
     private javax.swing.JPanel pnlContenido;
     private javax.swing.JPanel pnlFondo;
+    private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlIngresos;
     private javax.swing.JPanel pnlStock;
     private javax.swing.JPanel pnlUser1;
