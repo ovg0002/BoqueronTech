@@ -4,9 +4,9 @@
  */
 package com.boquerontech.supermercadoboqueron;
 
+import com.boquerontech.supermercadoboqueron.inventario.Inventario;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.boquerontech.supermercadoboqueron.ventas.Ventas;
-import com.mycompany.proyecto2adam1.pnlInicio;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
@@ -190,7 +190,7 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVentasActionPerformed
 
     private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioActionPerformed
-        //colocarPanel();
+        colocarPanel(new Inventario());
     }//GEN-LAST:event_btnInventarioActionPerformed
 
     private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed

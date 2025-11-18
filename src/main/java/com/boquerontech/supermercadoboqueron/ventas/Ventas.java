@@ -4,6 +4,10 @@
  */
 package com.boquerontech.supermercadoboqueron.ventas;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JRadioButton;
+
 /**
  *
  * @author velag
@@ -15,8 +19,34 @@ public class Ventas extends javax.swing.JPanel {
      */
     public Ventas() {
         initComponents();
+        configurarEventosPago();
     }
 
+    /*
+    Método que sirve para cambiar el método seleccionado que aparece en el ticket virtual por el método
+    seleccionado, este método evita tener que hacer 3 métodos separados (uno por cada opción de pago)
+    */
+    private void configurarEventosPago() {
+        // Creamos el comportamiento común para los botones (la acción que realizará al cambiar el botón)
+        ActionListener listenerPago = (ActionEvent evt) -> {
+            // Obtenemos el botón que ha sido pulsado
+            JRadioButton botonSeleccionado = (JRadioButton) evt.getSource();
+            
+            // Actualizamos el label con el texto del botón (Ej: "Efectivo", "Bizum", etc.)
+            metodoPagoLabel.setText("Método de pago: " + botonSeleccionado.getText());
+        };
+
+        // Asignamos este comportamiento a tus tres botones
+        efectivoOpt.addActionListener(listenerPago);
+        tarjetaOpt.addActionListener(listenerPago);
+        bizumOpt.addActionListener(listenerPago);
+
+        // Como el método seleccionado por defecto es Efectivo, se pone éste por defecto en el ticket virutal
+        if (efectivoOpt.isSelected()) {
+            metodoPagoLabel.setText("Método de pago: " + efectivoOpt.getText());
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,19 +57,19 @@ public class Ventas extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel2 = new javax.swing.JPanel();
+        metodosDePagoGroup = new javax.swing.ButtonGroup();
+        cabecera = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         relleno = new javax.swing.JPanel();
         trabajadorPanel = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        bodyPanel = new javax.swing.JPanel();
+        panelCodigoProd = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         codigoProductoTxt = new javax.swing.JTextField();
         anadirProductoBtn = new javax.swing.JButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        jPanel4 = new javax.swing.JPanel();
+        mainPanel = new javax.swing.JPanel();
         listaLbl = new javax.swing.JLabel();
-        escaneadosScroll = new javax.swing.JScrollPane();
         usuarioLbl = new javax.swing.JLabel();
         usuarioPanel = new javax.swing.JPanel();
         clienteFoto = new javax.swing.JLabel();
@@ -47,30 +77,49 @@ public class Ventas extends javax.swing.JPanel {
         nombreClienteTxt = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         telefonoTxt = new javax.swing.JTextField();
-        prefijoTlfTxt = new javax.swing.JComboBox<>();
         enviarClienteBtn = new javax.swing.JButton();
         puntosLbl = new javax.swing.JLabel();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         metodoPagoLbl = new javax.swing.JLabel();
         metodoPagoPanel = new javax.swing.JPanel();
+        efectivoOpt = new javax.swing.JRadioButton();
+        tarjetaOpt = new javax.swing.JRadioButton();
+        bizumOpt = new javax.swing.JRadioButton();
         ticketVirtualLbl = new javax.swing.JLabel();
-        ticketVirtualPromocionesScroll = new javax.swing.JScrollPane();
         finalizarBtn = new javax.swing.JButton();
+        escaneadosPanel = new javax.swing.JPanel();
+        bottomEscaneados = new javax.swing.JPanel();
+        totalEscaneadosLabel = new javax.swing.JLabel();
+        escaneadosScroll = new javax.swing.JScrollPane();
+        escaneadosPanelRellenar = new javax.swing.JPanel();
+        productoEscaneadoItem1 = new com.boquerontech.supermercadoboqueron.ventas.items.ProductoEscaneadoItem();
+        ticketVirtualPanel = new javax.swing.JPanel();
+        bottomTickVirt = new javax.swing.JPanel();
+        totalTicketVirtualLabel = new javax.swing.JLabel();
+        atendidoLabel = new javax.swing.JLabel();
+        metodoPagoLabel = new javax.swing.JLabel();
+        TickVirtScroll = new javax.swing.JScrollPane();
+        ticketVirtualPanelRellenar = new javax.swing.JPanel();
+        productoEscaneadoItem2 = new com.boquerontech.supermercadoboqueron.ventas.items.ProductoEscaneadoItem();
 
         setBackground(new java.awt.Color(204, 255, 255));
         setLayout(new java.awt.BorderLayout());
 
-        jPanel2.setOpaque(false);
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        cabecera.setOpaque(false);
+        cabecera.setLayout(new java.awt.GridBagLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("VENTAS");
+        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 0);
-        jPanel2.add(jLabel2, gridBagConstraints);
+        cabecera.add(jLabel2, gridBagConstraints);
 
         relleno.setBackground(new java.awt.Color(204, 204, 204));
         relleno.setOpaque(false);
@@ -92,7 +141,7 @@ public class Ventas extends javax.swing.JPanel {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 0);
-        jPanel2.add(relleno, gridBagConstraints);
+        cabecera.add(relleno, gridBagConstraints);
 
         trabajadorPanel.setBackground(new java.awt.Color(204, 204, 204));
         trabajadorPanel.setPreferredSize(new java.awt.Dimension(200, 50));
@@ -112,25 +161,25 @@ public class Ventas extends javax.swing.JPanel {
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 20);
-        jPanel2.add(trabajadorPanel, gridBagConstraints);
+        cabecera.add(trabajadorPanel, gridBagConstraints);
 
-        add(jPanel2, java.awt.BorderLayout.PAGE_START);
+        add(cabecera, java.awt.BorderLayout.PAGE_START);
 
-        jPanel1.setOpaque(false);
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        bodyPanel.setOpaque(false);
+        bodyPanel.setLayout(new java.awt.BorderLayout());
 
-        jPanel3.setMaximumSize(new java.awt.Dimension(654165165, 40));
-        jPanel3.setMinimumSize(new java.awt.Dimension(400, 40));
-        jPanel3.setOpaque(false);
-        jPanel3.setPreferredSize(new java.awt.Dimension(400, 40));
-        jPanel3.setLayout(new java.awt.GridBagLayout());
+        panelCodigoProd.setMaximumSize(new java.awt.Dimension(654165165, 40));
+        panelCodigoProd.setMinimumSize(new java.awt.Dimension(400, 40));
+        panelCodigoProd.setOpaque(false);
+        panelCodigoProd.setPreferredSize(new java.awt.Dimension(400, 40));
+        panelCodigoProd.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/codigoBarras.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 0);
-        jPanel3.add(jLabel1, gridBagConstraints);
+        panelCodigoProd.add(jLabel1, gridBagConstraints);
 
         codigoProductoTxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         codigoProductoTxt.setForeground(new java.awt.Color(150, 150, 150));
@@ -151,7 +200,7 @@ public class Ventas extends javax.swing.JPanel {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
-        jPanel3.add(codigoProductoTxt, gridBagConstraints);
+        panelCodigoProd.add(codigoProductoTxt, gridBagConstraints);
 
         anadirProductoBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         anadirProductoBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/proximo.png"))); // NOI18N
@@ -163,16 +212,16 @@ public class Ventas extends javax.swing.JPanel {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
-        jPanel3.add(anadirProductoBtn, gridBagConstraints);
+        panelCodigoProd.add(anadirProductoBtn, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        jPanel3.add(filler1, gridBagConstraints);
+        panelCodigoProd.add(filler1, gridBagConstraints);
 
-        jPanel1.add(jPanel3, java.awt.BorderLayout.PAGE_START);
+        bodyPanel.add(panelCodigoProd, java.awt.BorderLayout.PAGE_START);
 
-        jPanel4.setOpaque(false);
-        jPanel4.setLayout(new java.awt.GridBagLayout());
+        mainPanel.setOpaque(false);
+        mainPanel.setLayout(new java.awt.GridBagLayout());
 
         listaLbl.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         listaLbl.setForeground(new java.awt.Color(0, 0, 0));
@@ -181,18 +230,7 @@ public class Ventas extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(20, 20, 10, 10);
-        jPanel4.add(listaLbl, gridBagConstraints);
-
-        escaneadosScroll.setMinimumSize(new java.awt.Dimension(100, 100));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 20, 20, 10);
-        jPanel4.add(escaneadosScroll, gridBagConstraints);
+        mainPanel.add(listaLbl, gridBagConstraints);
 
         usuarioLbl.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         usuarioLbl.setForeground(new java.awt.Color(0, 0, 0));
@@ -201,69 +239,112 @@ public class Ventas extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(20, 10, 10, 10);
-        jPanel4.add(usuarioLbl, gridBagConstraints);
+        mainPanel.add(usuarioLbl, gridBagConstraints);
 
-        usuarioPanel.setPreferredSize(new java.awt.Dimension(100, 100));
+        usuarioPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        usuarioPanel.setMaximumSize(new java.awt.Dimension(300, 200));
+        usuarioPanel.setMinimumSize(new java.awt.Dimension(300, 200));
+        usuarioPanel.setPreferredSize(new java.awt.Dimension(300, 200));
         usuarioPanel.setLayout(new java.awt.GridBagLayout());
 
-        clienteFoto.setText("img");
+        clienteFoto.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        clienteFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_user.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 10);
         usuarioPanel.add(clienteFoto, gridBagConstraints);
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel3.setText("Nombre");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
         usuarioPanel.add(jLabel3, gridBagConstraints);
 
+        nombreClienteTxt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        nombreClienteTxt.setForeground(new java.awt.Color(150, 150, 150));
         nombreClienteTxt.setText("Nombre de cliente");
+        nombreClienteTxt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                nombreClienteTxtFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nombreClienteTxtFocusLost(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
         usuarioPanel.add(nombreClienteTxt, gridBagConstraints);
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel4.setText("Teléfono");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
         usuarioPanel.add(jLabel4, gridBagConstraints);
 
-        telefonoTxt.setText("jTextField2");
+        telefonoTxt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        telefonoTxt.setForeground(new java.awt.Color(150, 150, 150));
+        telefonoTxt.setText("612345678");
+        telefonoTxt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                telefonoTxtFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                telefonoTxtFocusLost(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 10);
         usuarioPanel.add(telefonoTxt, gridBagConstraints);
 
-        prefijoTlfTxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        usuarioPanel.add(prefijoTlfTxt, gridBagConstraints);
-
-        enviarClienteBtn.setText("jButton1");
+        enviarClienteBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        enviarClienteBtn.setText("LogIn");
+        enviarClienteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
         usuarioPanel.add(enviarClienteBtn, gridBagConstraints);
 
-        puntosLbl.setText("puntos");
+        puntosLbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        puntosLbl.setText("{puntos}");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 5, 10);
         usuarioPanel.add(puntosLbl, gridBagConstraints);
+
+        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("+"))));
+        jFormattedTextField1.setText("+34");
+        jFormattedTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
+        usuarioPanel.add(jFormattedTextField1, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -271,7 +352,7 @@ public class Ventas extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
-        jPanel4.add(usuarioPanel, gridBagConstraints);
+        mainPanel.add(usuarioPanel, gridBagConstraints);
 
         metodoPagoLbl.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         metodoPagoLbl.setForeground(new java.awt.Color(0, 0, 0));
@@ -280,29 +361,52 @@ public class Ventas extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel4.add(metodoPagoLbl, gridBagConstraints);
+        mainPanel.add(metodoPagoLbl, gridBagConstraints);
 
-        metodoPagoPanel.setMaximumSize(new java.awt.Dimension(32767, 100));
-        metodoPagoPanel.setMinimumSize(new java.awt.Dimension(0, 100));
-        metodoPagoPanel.setPreferredSize(new java.awt.Dimension(188, 100));
+        metodoPagoPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        metodoPagoPanel.setMaximumSize(new java.awt.Dimension(300, 200));
+        metodoPagoPanel.setMinimumSize(new java.awt.Dimension(300, 200));
+        metodoPagoPanel.setPreferredSize(new java.awt.Dimension(300, 200));
+        metodoPagoPanel.setLayout(new java.awt.GridBagLayout());
 
-        javax.swing.GroupLayout metodoPagoPanelLayout = new javax.swing.GroupLayout(metodoPagoPanel);
-        metodoPagoPanel.setLayout(metodoPagoPanelLayout);
-        metodoPagoPanelLayout.setHorizontalGroup(
-            metodoPagoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 188, Short.MAX_VALUE)
-        );
-        metodoPagoPanelLayout.setVerticalGroup(
-            metodoPagoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        metodosDePagoGroup.add(efectivoOpt);
+        efectivoOpt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        efectivoOpt.setSelected(true);
+        efectivoOpt.setText("Efectivo");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        metodoPagoPanel.add(efectivoOpt, gridBagConstraints);
+
+        metodosDePagoGroup.add(tarjetaOpt);
+        tarjetaOpt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        tarjetaOpt.setText("Tarjeta de Crédito");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        metodoPagoPanel.add(tarjetaOpt, gridBagConstraints);
+
+        metodosDePagoGroup.add(bizumOpt);
+        bizumOpt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        bizumOpt.setText("Bizum");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        metodoPagoPanel.add(bizumOpt, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 20, 10);
-        jPanel4.add(metodoPagoPanel, gridBagConstraints);
+        mainPanel.add(metodoPagoPanel, gridBagConstraints);
 
         ticketVirtualLbl.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         ticketVirtualLbl.setForeground(new java.awt.Color(0, 0, 0));
@@ -311,18 +415,7 @@ public class Ventas extends javax.swing.JPanel {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(20, 10, 10, 20);
-        jPanel4.add(ticketVirtualLbl, gridBagConstraints);
-
-        ticketVirtualPromocionesScroll.setMinimumSize(new java.awt.Dimension(100, 100));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 20, 20);
-        jPanel4.add(ticketVirtualPromocionesScroll, gridBagConstraints);
+        mainPanel.add(ticketVirtualLbl, gridBagConstraints);
 
         finalizarBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         finalizarBtn.setText("Finalizar Compra");
@@ -331,16 +424,108 @@ public class Ventas extends javax.swing.JPanel {
         finalizarBtn.setMinimumSize(new java.awt.Dimension(200, 40));
         finalizarBtn.setPreferredSize(new java.awt.Dimension(200, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 20, 20);
-        jPanel4.add(finalizarBtn, gridBagConstraints);
+        mainPanel.add(finalizarBtn, gridBagConstraints);
 
-        jPanel1.add(jPanel4, java.awt.BorderLayout.CENTER);
+        escaneadosPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        escaneadosPanel.setPreferredSize(new java.awt.Dimension(598, 683));
+        escaneadosPanel.setLayout(new java.awt.BorderLayout());
 
-        add(jPanel1, java.awt.BorderLayout.CENTER);
+        bottomEscaneados.setPreferredSize(new java.awt.Dimension(526, 100));
+        bottomEscaneados.setLayout(new java.awt.GridBagLayout());
+
+        totalEscaneadosLabel.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        totalEscaneadosLabel.setText("Total de la compra = {total}");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 20);
+        bottomEscaneados.add(totalEscaneadosLabel, gridBagConstraints);
+
+        escaneadosPanel.add(bottomEscaneados, java.awt.BorderLayout.PAGE_END);
+
+        escaneadosScroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        escaneadosScroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        escaneadosPanelRellenar.setLayout(new javax.swing.BoxLayout(escaneadosPanelRellenar, javax.swing.BoxLayout.Y_AXIS));
+        escaneadosPanelRellenar.add(productoEscaneadoItem1);
+
+        escaneadosScroll.setViewportView(escaneadosPanelRellenar);
+
+        escaneadosPanel.add(escaneadosScroll, java.awt.BorderLayout.CENTER);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 20, 20, 10);
+        mainPanel.add(escaneadosPanel, gridBagConstraints);
+
+        ticketVirtualPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        ticketVirtualPanel.setLayout(new java.awt.BorderLayout());
+
+        bottomTickVirt.setPreferredSize(new java.awt.Dimension(526, 100));
+        bottomTickVirt.setLayout(new java.awt.GridBagLayout());
+
+        totalTicketVirtualLabel.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        totalTicketVirtualLabel.setText("Total de la compra = {total}");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 5, 20);
+        bottomTickVirt.add(totalTicketVirtualLabel, gridBagConstraints);
+
+        atendidoLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        atendidoLabel.setText("Atendido por: {emp}");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 20, 20, 10);
+        bottomTickVirt.add(atendidoLabel, gridBagConstraints);
+
+        metodoPagoLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        metodoPagoLabel.setText("Método de pago: {met}");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 20, 20);
+        bottomTickVirt.add(metodoPagoLabel, gridBagConstraints);
+
+        ticketVirtualPanel.add(bottomTickVirt, java.awt.BorderLayout.PAGE_END);
+
+        TickVirtScroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        TickVirtScroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        ticketVirtualPanelRellenar.setPreferredSize(new java.awt.Dimension(526, 581));
+        ticketVirtualPanelRellenar.setLayout(new javax.swing.BoxLayout(ticketVirtualPanelRellenar, javax.swing.BoxLayout.Y_AXIS));
+        ticketVirtualPanelRellenar.add(productoEscaneadoItem2);
+
+        TickVirtScroll.setViewportView(ticketVirtualPanelRellenar);
+
+        ticketVirtualPanel.add(TickVirtScroll, java.awt.BorderLayout.CENTER);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 20, 20);
+        mainPanel.add(ticketVirtualPanel, gridBagConstraints);
+
+        bodyPanel.add(mainPanel, java.awt.BorderLayout.CENTER);
+
+        add(bodyPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void codigoProductoTxtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_codigoProductoTxtFocusGained
         if (codigoProductoTxt.getText().equals("Código del producto")) {
             codigoProductoTxt.setText("");
@@ -350,38 +535,82 @@ public class Ventas extends javax.swing.JPanel {
 
     private void codigoProductoTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_codigoProductoTxtFocusLost
         if (codigoProductoTxt.getText().trim().isEmpty()) {
-        codigoProductoTxt.setText("Código del producto");
-        codigoProductoTxt.setForeground(new java.awt.Color(150, 150, 150)); // texto placeholder gris
-    }
+            codigoProductoTxt.setText("Código del producto");
+            codigoProductoTxt.setForeground(new java.awt.Color(150, 150, 150)); // texto placeholder gris
+        }
     }//GEN-LAST:event_codigoProductoTxtFocusLost
+
+    private void nombreClienteTxtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nombreClienteTxtFocusGained
+        if (nombreClienteTxt.getText().equals("Nombre de cliente")) {
+            nombreClienteTxt.setText("");
+            nombreClienteTxt.setForeground(new java.awt.Color(0, 0, 0)); // texto normal
+        }
+    }//GEN-LAST:event_nombreClienteTxtFocusGained
+
+    private void nombreClienteTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nombreClienteTxtFocusLost
+        if (nombreClienteTxt.getText().trim().isEmpty()) {
+            nombreClienteTxt.setText("Nombre de cliente");
+            nombreClienteTxt.setForeground(new java.awt.Color(150, 150, 150)); // texto placeholder gris
+        }
+    }//GEN-LAST:event_nombreClienteTxtFocusLost
+
+    private void telefonoTxtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_telefonoTxtFocusGained
+        if (telefonoTxt.getText().equals("612345678")) {
+            telefonoTxt.setText("");
+            telefonoTxt.setForeground(new java.awt.Color(0, 0, 0)); // texto normal
+        }
+    }//GEN-LAST:event_telefonoTxtFocusGained
+
+    private void telefonoTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_telefonoTxtFocusLost
+        if (telefonoTxt.getText().trim().isEmpty()) {
+            telefonoTxt.setText("612345678");
+            telefonoTxt.setForeground(new java.awt.Color(150, 150, 150)); // texto placeholder gris
+        }
+    }//GEN-LAST:event_telefonoTxtFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane TickVirtScroll;
     private javax.swing.JButton anadirProductoBtn;
+    private javax.swing.JLabel atendidoLabel;
+    private javax.swing.JRadioButton bizumOpt;
+    private javax.swing.JPanel bodyPanel;
+    private javax.swing.JPanel bottomEscaneados;
+    private javax.swing.JPanel bottomTickVirt;
+    private javax.swing.JPanel cabecera;
     private javax.swing.JLabel clienteFoto;
     private javax.swing.JTextField codigoProductoTxt;
+    private javax.swing.JRadioButton efectivoOpt;
     private javax.swing.JButton enviarClienteBtn;
+    private javax.swing.JPanel escaneadosPanel;
+    private javax.swing.JPanel escaneadosPanelRellenar;
     private javax.swing.JScrollPane escaneadosScroll;
     private javax.swing.Box.Filler filler1;
     private javax.swing.JButton finalizarBtn;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel listaLbl;
+    private javax.swing.JPanel mainPanel;
+    private javax.swing.JLabel metodoPagoLabel;
     private javax.swing.JLabel metodoPagoLbl;
     private javax.swing.JPanel metodoPagoPanel;
+    private javax.swing.ButtonGroup metodosDePagoGroup;
     private javax.swing.JTextField nombreClienteTxt;
-    private javax.swing.JComboBox<String> prefijoTlfTxt;
+    private javax.swing.JPanel panelCodigoProd;
+    private com.boquerontech.supermercadoboqueron.ventas.items.ProductoEscaneadoItem productoEscaneadoItem1;
+    private com.boquerontech.supermercadoboqueron.ventas.items.ProductoEscaneadoItem productoEscaneadoItem2;
     private javax.swing.JLabel puntosLbl;
     private javax.swing.JPanel relleno;
+    private javax.swing.JRadioButton tarjetaOpt;
     private javax.swing.JTextField telefonoTxt;
     private javax.swing.JLabel ticketVirtualLbl;
-    private javax.swing.JScrollPane ticketVirtualPromocionesScroll;
+    private javax.swing.JPanel ticketVirtualPanel;
+    private javax.swing.JPanel ticketVirtualPanelRellenar;
+    private javax.swing.JLabel totalEscaneadosLabel;
+    private javax.swing.JLabel totalTicketVirtualLabel;
     private javax.swing.JPanel trabajadorPanel;
     private javax.swing.JLabel usuarioLbl;
     private javax.swing.JPanel usuarioPanel;
