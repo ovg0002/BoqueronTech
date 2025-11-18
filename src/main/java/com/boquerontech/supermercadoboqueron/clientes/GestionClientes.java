@@ -28,13 +28,15 @@ public class GestionClientes extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        pnlFondo = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        lblName = new javax.swing.JLabel();
         pnlUser = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        pnlFondo = new javax.swing.JPanel();
         pnlContenido = new javax.swing.JPanel();
-        pnlIngresos = new javax.swing.JPanel();
+        pnlBotones = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -43,9 +45,16 @@ public class GestionClientes extends javax.swing.JPanel {
 
         setLayout(new java.awt.BorderLayout());
 
-        pnlFondo.setBackground(new java.awt.Color(233, 253, 253));
-        pnlFondo.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), javax.swing.BorderFactory.createTitledBorder(null, "Clientes", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Segoe UI", 1, 24), new java.awt.Color(0, 0, 0)))); // NOI18N
-        pnlFondo.setLayout(new java.awt.GridBagLayout());
+        jPanel2.setBackground(new java.awt.Color(233, 253, 253));
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        lblName.setBackground(new java.awt.Color(233, 253, 253));
+        lblName.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblName.setForeground(new java.awt.Color(0, 0, 0));
+        lblName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblName.setText("Clientes");
+        lblName.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(lblName, java.awt.BorderLayout.CENTER);
 
         pnlUser.setBackground(new java.awt.Color(233, 253, 253));
         pnlUser.setForeground(new java.awt.Color(0, 0, 0));
@@ -79,20 +88,19 @@ public class GestionClientes extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         pnlUser.add(jLabel7, gridBagConstraints);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 57;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 20);
-        pnlFondo.add(pnlUser, gridBagConstraints);
+        jPanel2.add(pnlUser, java.awt.BorderLayout.EAST);
+
+        add(jPanel2, java.awt.BorderLayout.PAGE_START);
+
+        pnlFondo.setBackground(new java.awt.Color(233, 253, 253));
+        pnlFondo.setLayout(new java.awt.GridBagLayout());
 
         pnlContenido.setBackground(new java.awt.Color(233, 253, 253));
         pnlContenido.setLayout(new java.awt.GridLayout(1, 2));
 
-        pnlIngresos.setBackground(new java.awt.Color(233, 253, 253));
-        pnlIngresos.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        pnlIngresos.setLayout(new java.awt.GridBagLayout());
+        pnlBotones.setBackground(new java.awt.Color(233, 253, 253));
+        pnlBotones.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        pnlBotones.setLayout(new java.awt.GridBagLayout());
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setForeground(new java.awt.Color(100, 120, 200));
@@ -102,7 +110,7 @@ public class GestionClientes extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipady = 18;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
-        pnlIngresos.add(jButton1, gridBagConstraints);
+        pnlBotones.add(jButton1, gridBagConstraints);
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setForeground(new java.awt.Color(100, 120, 200));
@@ -114,7 +122,7 @@ public class GestionClientes extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipady = 18;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
-        pnlIngresos.add(jButton2, gridBagConstraints);
+        pnlBotones.add(jButton2, gridBagConstraints);
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setForeground(new java.awt.Color(100, 120, 200));
@@ -126,7 +134,7 @@ public class GestionClientes extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipady = 18;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
-        pnlIngresos.add(jButton3, gridBagConstraints);
+        pnlBotones.add(jButton3, gridBagConstraints);
 
         jButton4.setBackground(new java.awt.Color(255, 255, 255));
         jButton4.setForeground(new java.awt.Color(100, 120, 200));
@@ -138,9 +146,9 @@ public class GestionClientes extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipady = 18;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
-        pnlIngresos.add(jButton4, gridBagConstraints);
+        pnlBotones.add(jButton4, gridBagConstraints);
 
-        pnlContenido.add(pnlIngresos);
+        pnlContenido.add(pnlBotones);
 
         jPanel1.setBackground(new java.awt.Color(233, 253, 253));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -170,9 +178,11 @@ public class GestionClientes extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JPanel pnlBotones;
     private javax.swing.JPanel pnlContenido;
     private javax.swing.JPanel pnlFondo;
-    private javax.swing.JPanel pnlIngresos;
     private javax.swing.JPanel pnlUser;
     // End of variables declaration//GEN-END:variables
 }
