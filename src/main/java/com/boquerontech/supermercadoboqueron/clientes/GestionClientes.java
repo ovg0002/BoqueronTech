@@ -18,6 +18,9 @@ public class GestionClientes extends javax.swing.JPanel {
     public GestionClientes() {
         initComponents();
         pnlCard.add(new NuevoCliente(), "NuevoCliente");
+        pnlCard.add(new ConsultarCliente(), "ConsultarCliente");
+        pnlCard.add(new ModificarCliente(), "ModificarCliente");
+        pnlCard.add(new EliminarCliente(), "EliminarCliente");
         
     }
 
@@ -125,6 +128,11 @@ public class GestionClientes extends javax.swing.JPanel {
         jButton2.setForeground(new java.awt.Color(100, 120, 200));
         jButton2.setText("CONSULTAR CLIENTE");
         jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -137,6 +145,11 @@ public class GestionClientes extends javax.swing.JPanel {
         jButton3.setForeground(new java.awt.Color(100, 120, 200));
         jButton3.setText("ELIMINAR CLIENTE");
         jButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -149,6 +162,11 @@ public class GestionClientes extends javax.swing.JPanel {
         jButton4.setForeground(new java.awt.Color(100, 120, 200));
         jButton4.setText("MODIFICAR CLIENTE");
         jButton4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -172,8 +190,23 @@ public class GestionClientes extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         CardLayout cl = (CardLayout) pnlCard.getLayout();
         cl.show(pnlCard, "NuevoCliente");
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        CardLayout cl = (CardLayout) pnlCard.getLayout();
+        cl.show(pnlCard, "ConsultarCliente");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        CardLayout cl = (CardLayout) pnlCard.getLayout();
+        cl.show(pnlCard, "ModificarCliente");
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        CardLayout cl = (CardLayout) pnlCard.getLayout();
+        cl.show(pnlCard, "EliminarCliente");
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
