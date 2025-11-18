@@ -3,7 +3,11 @@ H:\AAAProgramacion\Java\BoqueronTech\src\main\java\com\boquerontech\supermercado
 H:\AAAProgramacion\Java\BoqueronTech\src\main\java\com\boquerontech\supermercadoboqueron\clientes\GestionClientes.java
 H:\AAAProgramacion\Java\BoqueronTech\src\main\java\com\boquerontech\supermercadoboqueron\clientes\ModificarCliente.java
 H:\AAAProgramacion\Java\BoqueronTech\src\main\java\com\boquerontech\supermercadoboqueron\clientes\NuevoCliente.java
-H:\AAAProgramacion\Java\BoqueronTech\src\main\java\com\boquerontech\supermercadoboqueron\empleados\Empleados.java
+H:\AAAProgramacion\Java\BoqueronTech\src\main\java\com\boquerontech\supermercadoboqueron\empleados\ConsultarEmpleado.java
+H:\AAAProgramacion\Java\BoqueronTech\src\main\java\com\boquerontech\supermercadoboqueron\empleados\EliminarEmpleado.java
+H:\AAAProgramacion\Java\BoqueronTech\src\main\java\com\boquerontech\supermercadoboqueron\empleados\GestionEmpleado.java
+H:\AAAProgramacion\Java\BoqueronTech\src\main\java\com\boquerontech\supermercadoboqueron\empleados\ModificarEmpleado.java
+H:\AAAProgramacion\Java\BoqueronTech\src\main\java\com\boquerontech\supermercadoboqueron\empleados\NuevoEmpleado.java
 H:\AAAProgramacion\Java\BoqueronTech\src\main\java\com\boquerontech\supermercadoboqueron\facturas\Facturas.java
 H:\AAAProgramacion\Java\BoqueronTech\src\main\java\com\boquerontech\supermercadoboqueron\GestionDocumentos.java
 H:\AAAProgramacion\Java\BoqueronTech\src\main\java\com\boquerontech\supermercadoboqueron\informes\Informes.java

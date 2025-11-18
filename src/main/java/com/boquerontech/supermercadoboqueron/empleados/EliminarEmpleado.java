@@ -2,20 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.boquerontech.supermercadoboqueron.clientes;
+package com.boquerontech.supermercadoboqueron.empleados;
 
+import com.boquerontech.supermercadoboqueron.clientes.*;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author adrih
  */
-public class EliminarCliente extends javax.swing.JPanel {
+public class EliminarEmpleado extends javax.swing.JPanel {
 
     /**
      * Creates new form NuevoCliente
      */
-    public EliminarCliente() {
+    public EliminarEmpleado() {
         initComponents();
     }
 
@@ -58,7 +59,7 @@ public class EliminarCliente extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Eliminar un cliente");
+        jLabel1.setText("Dar de baja un empleado");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -90,7 +91,7 @@ public class EliminarCliente extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Cod Cliente");
+        jLabel4.setText("Cod Empleado");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -124,7 +125,7 @@ public class EliminarCliente extends javax.swing.JPanel {
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Edad");
+        jLabel7.setText("Fecha incorp.:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -135,7 +136,7 @@ public class EliminarCliente extends javax.swing.JPanel {
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel8.setText("Puntos");
+        jLabel8.setText("Sueldo:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
@@ -185,7 +186,7 @@ public class EliminarCliente extends javax.swing.JPanel {
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel13.setText("<Edad actual>");
+        jLabel13.setText("<dd/mm/aaaa>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 2;
@@ -205,7 +206,7 @@ public class EliminarCliente extends javax.swing.JPanel {
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel15.setText("<x ptos.>");
+        jLabel15.setText("<x €/h>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 4;

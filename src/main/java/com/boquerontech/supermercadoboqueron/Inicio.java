@@ -5,6 +5,7 @@
 package com.boquerontech.supermercadoboqueron;
 
 import com.boquerontech.supermercadoboqueron.clientes.GestionClientes;
+import com.boquerontech.supermercadoboqueron.empleados.GestionEmpleado;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.boquerontech.supermercadoboqueron.ventas.Ventas;
 import com.mycompany.proyecto2adam1.pnlInicio;
@@ -175,7 +176,7 @@ public class Inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleadosActionPerformed
-        //colocarPanel();
+        colocarPanel(new GestionEmpleado());
     }//GEN-LAST:event_btnEmpleadosActionPerformed
 
     private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
