@@ -29,10 +29,6 @@ public class pnlInicio extends javax.swing.JPanel {
         java.awt.GridBagConstraints gridBagConstraints;
 
         pnlFondo = new javax.swing.JPanel();
-        pnlUser = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         pnlContenido = new javax.swing.JPanel();
         pnlStock = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -44,48 +40,17 @@ public class pnlInicio extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        pnlHeader = new javax.swing.JPanel();
+        lblName = new javax.swing.JLabel();
+        pnlUser1 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setLayout(new java.awt.BorderLayout());
 
         pnlFondo.setBackground(new java.awt.Color(233, 253, 253));
-        pnlFondo.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), javax.swing.BorderFactory.createTitledBorder(null, "Inicio", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Segoe UI", 1, 24), new java.awt.Color(0, 0, 0)))); // NOI18N
         pnlFondo.setLayout(new java.awt.GridBagLayout());
-
-        pnlUser.setBackground(new java.awt.Color(233, 253, 253));
-        pnlUser.setLayout(new java.awt.GridBagLayout());
-
-        jLabel5.setText("ico");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        pnlUser.add(jLabel5, gridBagConstraints);
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel6.setText("Nombre Empleado");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        pnlUser.add(jLabel6, gridBagConstraints);
-
-        jLabel7.setText("Rol Empleado");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        pnlUser.add(jLabel7, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 57;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 20);
-        pnlFondo.add(pnlUser, gridBagConstraints);
 
         pnlContenido.setBackground(new java.awt.Color(233, 253, 253));
         pnlContenido.setLayout(new java.awt.GridLayout(1, 2));
@@ -206,6 +171,53 @@ public class pnlInicio extends javax.swing.JPanel {
         pnlFondo.add(pnlContenido, gridBagConstraints);
 
         add(pnlFondo, java.awt.BorderLayout.CENTER);
+
+        pnlHeader.setBackground(new java.awt.Color(233, 253, 253));
+        pnlHeader.setLayout(new java.awt.BorderLayout());
+
+        lblName.setBackground(new java.awt.Color(233, 253, 253));
+        lblName.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblName.setForeground(new java.awt.Color(0, 0, 0));
+        lblName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblName.setText("Inicio");
+        lblName.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        pnlHeader.add(lblName, java.awt.BorderLayout.CENTER);
+
+        pnlUser1.setBackground(new java.awt.Color(233, 253, 253));
+        pnlUser1.setForeground(new java.awt.Color(0, 0, 0));
+        pnlUser1.setLayout(new java.awt.GridBagLayout());
+
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("ico");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        pnlUser1.add(jLabel8, gridBagConstraints);
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel9.setText("Nombre Empleado");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        pnlUser1.add(jLabel9, gridBagConstraints);
+
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setText("Rol Empleado");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        pnlUser1.add(jLabel10, gridBagConstraints);
+
+        pnlHeader.add(pnlUser1, java.awt.BorderLayout.EAST);
+
+        add(pnlHeader, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -213,18 +225,20 @@ public class pnlInicio extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblName;
     private javax.swing.JPanel pnlContenido;
     private javax.swing.JPanel pnlFondo;
+    private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlIngresos;
     private javax.swing.JPanel pnlStock;
-    private javax.swing.JPanel pnlUser;
+    private javax.swing.JPanel pnlUser1;
     // End of variables declaration//GEN-END:variables
 }
