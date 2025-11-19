@@ -4,6 +4,9 @@
  */
 package com.boquerontech.supermercadoboqueron;
 
+import com.boquerontech.supermercadoboqueron.inventario.Inventario;
+import com.boquerontech.supermercadoboqueron.clientes.GestionClientes;
+import com.boquerontech.supermercadoboqueron.empleados.GestionEmpleado;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.boquerontech.supermercadoboqueron.ventas.Ventas;
 import java.awt.BorderLayout;
@@ -173,15 +176,15 @@ public class Inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleadosActionPerformed
-        //colocarPanel();
+        colocarPanel(new GestionEmpleado());
     }//GEN-LAST:event_btnEmpleadosActionPerformed
 
     private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
-        //colocarPanel();
+        colocarPanel(new pnlInicio());
     }//GEN-LAST:event_btnInicioActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
-        //colocarPanel();
+        colocarPanel(new GestionClientes());
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
@@ -189,7 +192,7 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVentasActionPerformed
 
     private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioActionPerformed
-        //colocarPanel();
+        colocarPanel(new Inventario());
     }//GEN-LAST:event_btnInventarioActionPerformed
 
     private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed

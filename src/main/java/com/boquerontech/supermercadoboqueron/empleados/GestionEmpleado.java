@@ -2,25 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.boquerontech.supermercadoboqueron.clientes;
+package com.boquerontech.supermercadoboqueron.empleados;
 
+import com.boquerontech.supermercadoboqueron.clientes.*;
 import java.awt.CardLayout;
 
 /**
  *
  * @author Adrian
  */
-public class GestionClientes extends javax.swing.JPanel {
+public class GestionEmpleado extends javax.swing.JPanel {
 
     /**
      * Creates new form pnlInicio
      */
-    public GestionClientes() {
+    public GestionEmpleado() {
         initComponents();
-        pnlCard.add(new NuevoCliente(), "NuevoCliente");
-        pnlCard.add(new ConsultarCliente(), "ConsultarCliente");
-        pnlCard.add(new ModificarCliente(), "ModificarCliente");
-        pnlCard.add(new EliminarCliente(), "EliminarCliente");
+        pnlCard.add(new NuevoEmpleado(), "NuevoEmpleado");
+        pnlCard.add(new ConsultarEmpleado(), "ConsultarEmpleado");
+        pnlCard.add(new ModificarEmpleado(), "ModificarEmpleado");
+        pnlCard.add(new EliminarEmpleado(), "EliminarEmpleado");
         
     }
 
@@ -58,7 +59,7 @@ public class GestionClientes extends javax.swing.JPanel {
         lblName.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblName.setForeground(new java.awt.Color(0, 0, 0));
         lblName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblName.setText("Clientes");
+        lblName.setText("EMPLEADOS");
         lblName.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         pnlHeader.add(lblName, java.awt.BorderLayout.CENTER);
 
@@ -111,7 +112,7 @@ public class GestionClientes extends javax.swing.JPanel {
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setForeground(new java.awt.Color(100, 120, 200));
-        jButton1.setText("NUEVO CLIENTE");
+        jButton1.setText("NUEVO EMPLEADO");
         jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,7 +127,7 @@ public class GestionClientes extends javax.swing.JPanel {
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setForeground(new java.awt.Color(100, 120, 200));
-        jButton2.setText("CONSULTAR CLIENTE");
+        jButton2.setText("CONSULTAR EMPLEADO");
         jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,7 +144,7 @@ public class GestionClientes extends javax.swing.JPanel {
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setForeground(new java.awt.Color(100, 120, 200));
-        jButton3.setText("ELIMINAR CLIENTE");
+        jButton3.setText("ELIMINAR EMPLEADO");
         jButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,7 +161,7 @@ public class GestionClientes extends javax.swing.JPanel {
 
         jButton4.setBackground(new java.awt.Color(255, 255, 255));
         jButton4.setForeground(new java.awt.Color(100, 120, 200));
-        jButton4.setText("MODIFICAR CLIENTE");
+        jButton4.setText("MODIFICAR EMPLEADO");
         jButton4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,23 +190,23 @@ public class GestionClientes extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         CardLayout cl = (CardLayout) pnlCard.getLayout();
-        cl.show(pnlCard, "NuevoCliente");
+        cl.show(pnlCard, "NuevoEmpleado");
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         CardLayout cl = (CardLayout) pnlCard.getLayout();
-        cl.show(pnlCard, "ConsultarCliente");
+        cl.show(pnlCard, "ConsultarEmpleado");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         CardLayout cl = (CardLayout) pnlCard.getLayout();
-        cl.show(pnlCard, "ModificarCliente");
+        cl.show(pnlCard, "ModificarEmpleado");
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         CardLayout cl = (CardLayout) pnlCard.getLayout();
-        cl.show(pnlCard, "EliminarCliente");
+        cl.show(pnlCard, "EliminarEmpleado");
     }//GEN-LAST:event_jButton3ActionPerformed
 
 

@@ -4,19 +4,43 @@
  */
 package com.boquerontech.supermercadoboqueron.inventario;
 
+import com.boquerontech.supermercadoboqueron.inventario.items.ProductoInventarioItem;
+import java.awt.GridLayout;
+
 /**
  *
  * @author MEDAC
  */
 public class Inventario extends javax.swing.JPanel {
 
+    // SOLO PARA PROBAR
+    private int numProductos = 100;
+    
+    private byte maxProdPagina = 20;
+    private int restantes;
+    private int indexParado;
+    
     /**
      * Creates new form Inventario
      */
     public Inventario() {
         initComponents();
+        rellenarConProductos();
     }
 
+    // Esta lógica será más compleja cuanto metamos el tema de sacar la info de la bbdd
+    private void rellenarConProductos() {
+        for (int i = 1; i <= numProductos; i++) {
+            if (i > maxProdPagina) {
+                restantes = numProductos - maxProdPagina;
+                indexParado = i;
+                System.out.println(restantes);
+                break;
+            }
+            mainPanel.add(new ProductoInventarioItem());
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -25,20 +49,198 @@ public class Inventario extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        topPanel = new javax.swing.JPanel();
+        buscarTxt = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        trabajadorPanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        bottomPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jSpinner1 = new javax.swing.JSpinner();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        mainPanel = new javax.swing.JPanel();
+
+        setBackground(new java.awt.Color(204, 255, 255));
+        setLayout(new java.awt.BorderLayout());
+
+        topPanel.setOpaque(false);
+        topPanel.setLayout(new java.awt.GridBagLayout());
+
+        buscarTxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        buscarTxt.setForeground(new java.awt.Color(150, 150, 150));
+        buscarTxt.setText("Buscar");
+        buscarTxt.setMaximumSize(new java.awt.Dimension(200, 31));
+        buscarTxt.setMinimumSize(new java.awt.Dimension(200, 31));
+        buscarTxt.setPreferredSize(new java.awt.Dimension(200, 31));
+        buscarTxt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                buscarTxtFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                buscarTxtFocusLost(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 10);
+        topPanel.add(buscarTxt, gridBagConstraints);
+
+        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Min. Stock 10", "Min. Stock 25", "Min. Stock 50", "Min. Stock 100", "Min. Stock 200", "Min. Stock 500" }));
+        jComboBox1.setMaximumSize(new java.awt.Dimension(200, 31));
+        jComboBox1.setMinimumSize(new java.awt.Dimension(200, 31));
+        jComboBox1.setPreferredSize(new java.awt.Dimension(200, 31));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 40);
+        topPanel.add(jComboBox1, gridBagConstraints);
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("INVENTARIO");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 0);
+        topPanel.add(jLabel3, gridBagConstraints);
+
+        trabajadorPanel.setBackground(new java.awt.Color(204, 204, 204));
+        trabajadorPanel.setPreferredSize(new java.awt.Dimension(200, 50));
+
+        javax.swing.GroupLayout trabajadorPanelLayout = new javax.swing.GroupLayout(trabajadorPanel);
+        trabajadorPanel.setLayout(trabajadorPanelLayout);
+        trabajadorPanelLayout.setHorizontalGroup(
+            trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        trabajadorPanelLayout.setVerticalGroup(
+            trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
         );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 40, 20, 20);
+        topPanel.add(trabajadorPanel, gridBagConstraints);
+
+        jPanel1.setMaximumSize(new java.awt.Dimension(210, 31));
+        jPanel1.setMinimumSize(new java.awt.Dimension(210, 31));
+        jPanel1.setOpaque(false);
+        jPanel1.setPreferredSize(new java.awt.Dimension(210, 31));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 210, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 31, Short.MAX_VALUE)
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        topPanel.add(jPanel1, gridBagConstraints);
+
+        add(topPanel, java.awt.BorderLayout.PAGE_START);
+
+        bottomPanel.setOpaque(false);
+        bottomPanel.setLayout(new java.awt.GridBagLayout());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("jLabel1");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 0);
+        bottomPanel.add(jLabel1, gridBagConstraints);
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton1.setText("Eliminar Producto");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 5);
+        bottomPanel.add(jButton1, gridBagConstraints);
+
+        jSpinner1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(20, 5, 20, 5);
+        bottomPanel.add(jSpinner1, gridBagConstraints);
+
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton2.setText("Añadir Producto");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(20, 5, 20, 5);
+        bottomPanel.add(jButton2, gridBagConstraints);
+
+        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton3.setText("Pedidos");
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(20, 5, 20, 0);
+        bottomPanel.add(jButton3, gridBagConstraints);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("CAMBIAR POR BOTON");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 20);
+        bottomPanel.add(jLabel2, gridBagConstraints);
+
+        add(bottomPanel, java.awt.BorderLayout.PAGE_END);
+
+        mainPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        mainPanel.setOpaque(false);
+        mainPanel.setLayout(new java.awt.GridLayout(5, 4, 20, 20));
+        add(mainPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buscarTxtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_buscarTxtFocusGained
+        if (buscarTxt.getText().equals("Buscar")) {
+            buscarTxt.setText("");
+            buscarTxt.setForeground(new java.awt.Color(0, 0, 0)); // texto normal
+        }
+    }//GEN-LAST:event_buscarTxtFocusGained
+
+    private void buscarTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_buscarTxtFocusLost
+        if (buscarTxt.getText().trim().isEmpty()) {
+            buscarTxt.setText("Buscar");
+            buscarTxt.setForeground(new java.awt.Color(150, 150, 150)); // texto placeholder gris
+        }
+    }//GEN-LAST:event_buscarTxtFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel bottomPanel;
+    private javax.swing.JTextField buscarTxt;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JPanel mainPanel;
+    private javax.swing.JPanel topPanel;
+    private javax.swing.JPanel trabajadorPanel;
     // End of variables declaration//GEN-END:variables
 }
