@@ -68,7 +68,7 @@ public class GestionClientes extends javax.swing.JPanel {
         nuevoClienteBtn.setForeground(new java.awt.Color(100, 120, 200));
         nuevoClienteBtn.setText("NUEVO CLIENTE");
         nuevoClienteBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
-        nuevoClienteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        nuevoClienteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         nuevoClienteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nuevoClienteBtnActionPerformed(evt);
@@ -85,7 +85,7 @@ public class GestionClientes extends javax.swing.JPanel {
         consultarClienteBtn.setForeground(new java.awt.Color(100, 120, 200));
         consultarClienteBtn.setText("CONSULTAR CLIENTE");
         consultarClienteBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
-        consultarClienteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        consultarClienteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         consultarClienteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 consultarClienteBtnActionPerformed(evt);
@@ -104,7 +104,7 @@ public class GestionClientes extends javax.swing.JPanel {
         modificarClienteBtn.setForeground(new java.awt.Color(100, 120, 200));
         modificarClienteBtn.setText("ELIMINAR CLIENTE");
         modificarClienteBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
-        modificarClienteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        modificarClienteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         modificarClienteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modificarClienteBtnActionPerformed(evt);
@@ -123,7 +123,7 @@ public class GestionClientes extends javax.swing.JPanel {
         eliminarClienteBtn.setForeground(new java.awt.Color(100, 120, 200));
         eliminarClienteBtn.setText("MODIFICAR CLIENTE");
         eliminarClienteBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
-        eliminarClienteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        eliminarClienteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         eliminarClienteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eliminarClienteBtnActionPerformed(evt);
@@ -191,7 +191,7 @@ public class GestionClientes extends javax.swing.JPanel {
 
         pnlUser.setBackground(new java.awt.Color(255, 255, 255));
         pnlUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnlUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnlUser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pnlUser.setPreferredSize(new java.awt.Dimension(161, 60));
         pnlUser.setLayout(new java.awt.GridBagLayout());
 
@@ -228,7 +228,7 @@ public class GestionClientes extends javax.swing.JPanel {
             trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 200, Short.MAX_VALUE)
             .addGroup(trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(pnlUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pnlUser, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
         );
         trabajadorPanelLayout.setVerticalGroup(
             trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -4,6 +4,7 @@
  */
 package com.boquerontech.supermercadoboqueron.ventas;
 
+import com.boquerontech.supermercadoboqueron.ventas.items.ProductoEscaneadoItem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JRadioButton;
@@ -20,6 +21,14 @@ public class Ventas extends javax.swing.JPanel {
     public Ventas() {
         initComponents();
         configurarEventosPago();
+        rellenarEscaneados();
+    }
+    
+    private void rellenarEscaneados() {
+        for (int i = 0; i < 15; i++) {
+            escaneadosPanelRellenar.add(new ProductoEscaneadoItem());
+            ticketVirtualPanelRellenar.add(new ProductoEscaneadoItem());
+        }
     }
 
     /*
@@ -83,7 +92,7 @@ public class Ventas extends javax.swing.JPanel {
         telefonoTxt = new javax.swing.JTextField();
         enviarClienteBtn = new javax.swing.JButton();
         puntosLbl = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        prefijoTlfTxt = new javax.swing.JFormattedTextField();
         metodoPagoLbl = new javax.swing.JLabel();
         metodoPagoPanel = new javax.swing.JPanel();
         efectivoOpt = new javax.swing.JRadioButton();
@@ -96,7 +105,6 @@ public class Ventas extends javax.swing.JPanel {
         totalEscaneadosLabel = new javax.swing.JLabel();
         escaneadosScroll = new javax.swing.JScrollPane();
         escaneadosPanelRellenar = new javax.swing.JPanel();
-        productoEscaneadoItem1 = new com.boquerontech.supermercadoboqueron.ventas.items.ProductoEscaneadoItem();
         ticketVirtualPanel = new javax.swing.JPanel();
         bottomTickVirt = new javax.swing.JPanel();
         totalTicketVirtualLabel = new javax.swing.JLabel();
@@ -104,7 +112,6 @@ public class Ventas extends javax.swing.JPanel {
         metodoPagoLabel = new javax.swing.JLabel();
         TickVirtScroll = new javax.swing.JScrollPane();
         ticketVirtualPanelRellenar = new javax.swing.JPanel();
-        productoEscaneadoItem2 = new com.boquerontech.supermercadoboqueron.ventas.items.ProductoEscaneadoItem();
 
         setBackground(new java.awt.Color(233, 253, 253));
         setLayout(new java.awt.BorderLayout());
@@ -151,7 +158,7 @@ public class Ventas extends javax.swing.JPanel {
 
         pnlUser.setBackground(new java.awt.Color(255, 255, 255));
         pnlUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnlUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnlUser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pnlUser.setPreferredSize(new java.awt.Dimension(161, 60));
         pnlUser.setLayout(new java.awt.GridBagLayout());
 
@@ -243,7 +250,7 @@ public class Ventas extends javax.swing.JPanel {
 
         anadirProductoBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         anadirProductoBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/proximo.png"))); // NOI18N
-        anadirProductoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        anadirProductoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         anadirProductoBtn.setMaximumSize(new java.awt.Dimension(40, 40));
         anadirProductoBtn.setMinimumSize(new java.awt.Dimension(40, 40));
         anadirProductoBtn.setPreferredSize(new java.awt.Dimension(40, 40));
@@ -356,7 +363,7 @@ public class Ventas extends javax.swing.JPanel {
 
         enviarClienteBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         enviarClienteBtn.setText("LogIn");
-        enviarClienteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        enviarClienteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
@@ -374,15 +381,15 @@ public class Ventas extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 5, 10);
         usuarioPanel.add(puntosLbl, gridBagConstraints);
 
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("+"))));
-        jFormattedTextField1.setText("+34");
-        jFormattedTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        prefijoTlfTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("+"))));
+        prefijoTlfTxt.setText("+34");
+        prefijoTlfTxt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
-        usuarioPanel.add(jFormattedTextField1, gridBagConstraints);
+        usuarioPanel.add(prefijoTlfTxt, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -411,7 +418,7 @@ public class Ventas extends javax.swing.JPanel {
         efectivoOpt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         efectivoOpt.setSelected(true);
         efectivoOpt.setText("Efectivo");
-        efectivoOpt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        efectivoOpt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -422,7 +429,7 @@ public class Ventas extends javax.swing.JPanel {
         metodosDePagoGroup.add(tarjetaOpt);
         tarjetaOpt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tarjetaOpt.setText("Tarjeta de Crédito");
-        tarjetaOpt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tarjetaOpt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -433,7 +440,7 @@ public class Ventas extends javax.swing.JPanel {
         metodosDePagoGroup.add(bizumOpt);
         bizumOpt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         bizumOpt.setText("Bizum");
-        bizumOpt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bizumOpt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -459,7 +466,7 @@ public class Ventas extends javax.swing.JPanel {
 
         finalizarBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         finalizarBtn.setText("Finalizar Compra");
-        finalizarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        finalizarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         finalizarBtn.setMaximumSize(new java.awt.Dimension(200, 40));
         finalizarBtn.setMinimumSize(new java.awt.Dimension(200, 40));
         finalizarBtn.setPreferredSize(new java.awt.Dimension(200, 40));
@@ -493,8 +500,6 @@ public class Ventas extends javax.swing.JPanel {
 
         escaneadosPanelRellenar.setBackground(new java.awt.Color(255, 255, 255));
         escaneadosPanelRellenar.setLayout(new javax.swing.BoxLayout(escaneadosPanelRellenar, javax.swing.BoxLayout.Y_AXIS));
-        escaneadosPanelRellenar.add(productoEscaneadoItem1);
-
         escaneadosScroll.setViewportView(escaneadosPanelRellenar);
 
         escaneadosPanel.add(escaneadosScroll, java.awt.BorderLayout.CENTER);
@@ -549,13 +554,9 @@ public class Ventas extends javax.swing.JPanel {
         TickVirtScroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         TickVirtScroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
+        ticketVirtualPanelRellenar.setBackground(new java.awt.Color(255, 255, 255));
         ticketVirtualPanelRellenar.setPreferredSize(new java.awt.Dimension(526, 581));
         ticketVirtualPanelRellenar.setLayout(new javax.swing.BoxLayout(ticketVirtualPanelRellenar, javax.swing.BoxLayout.Y_AXIS));
-
-        productoEscaneadoItem2.setBackground(new java.awt.Color(255, 255, 255));
-        productoEscaneadoItem2.setOpaque(true);
-        ticketVirtualPanelRellenar.add(productoEscaneadoItem2);
-
         TickVirtScroll.setViewportView(ticketVirtualPanelRellenar);
 
         ticketVirtualPanel.add(TickVirtScroll, java.awt.BorderLayout.CENTER);
@@ -636,7 +637,6 @@ public class Ventas extends javax.swing.JPanel {
     private javax.swing.JScrollPane escaneadosScroll;
     private javax.swing.Box.Filler filler1;
     private javax.swing.JButton finalizarBtn;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -653,8 +653,7 @@ public class Ventas extends javax.swing.JPanel {
     private javax.swing.JTextField nombreClienteTxt;
     private javax.swing.JPanel panelCodigoProd;
     private javax.swing.JPanel pnlUser;
-    private com.boquerontech.supermercadoboqueron.ventas.items.ProductoEscaneadoItem productoEscaneadoItem1;
-    private com.boquerontech.supermercadoboqueron.ventas.items.ProductoEscaneadoItem productoEscaneadoItem2;
+    private javax.swing.JFormattedTextField prefijoTlfTxt;
     private javax.swing.JLabel puntosLbl;
     private javax.swing.JPanel relleno;
     private javax.swing.JRadioButton tarjetaOpt;

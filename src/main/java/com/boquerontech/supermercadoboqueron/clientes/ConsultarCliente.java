@@ -62,10 +62,10 @@ public class ConsultarCliente extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.insets = new java.awt.Insets(5, 100, 15, 0);
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
         mainPnl.add(tituloLbl, gridBagConstraints);
 
-        nombreCompletoLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        nombreCompletoLbl.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         nombreCompletoLbl.setText("Nombre y apellidos");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -75,7 +75,7 @@ public class ConsultarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         mainPnl.add(nombreCompletoLbl, gridBagConstraints);
 
-        fechaNacimientoLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        fechaNacimientoLbl.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         fechaNacimientoLbl.setText("Fecha de nacimiento");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -85,7 +85,7 @@ public class ConsultarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         mainPnl.add(fechaNacimientoLbl, gridBagConstraints);
 
-        dniLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        dniLbl.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         dniLbl.setText("DNI");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -95,7 +95,7 @@ public class ConsultarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         mainPnl.add(dniLbl, gridBagConstraints);
 
-        codClienteLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        codClienteLbl.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         codClienteLbl.setText("Cod Cliente");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -106,7 +106,7 @@ public class ConsultarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         mainPnl.add(codClienteLbl, gridBagConstraints);
 
-        edadLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        edadLbl.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         edadLbl.setText("Edad");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -116,7 +116,7 @@ public class ConsultarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         mainPnl.add(edadLbl, gridBagConstraints);
 
-        telefonoLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        telefonoLbl.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         telefonoLbl.setText("Teléfono");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -126,7 +126,7 @@ public class ConsultarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         mainPnl.add(telefonoLbl, gridBagConstraints);
 
-        puntosLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        puntosLbl.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         puntosLbl.setText("Puntos");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -135,7 +135,7 @@ public class ConsultarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         mainPnl.add(puntosLbl, gridBagConstraints);
 
-        nombreCompletoTxt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        nombreCompletoTxt.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         nombreCompletoTxt.setText("<Nombre y apellidos>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -144,7 +144,7 @@ public class ConsultarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         mainPnl.add(nombreCompletoTxt, gridBagConstraints);
 
-        fechaNacimientoTxt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        fechaNacimientoTxt.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         fechaNacimientoTxt.setText("<dd/mm/aaaa>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -153,7 +153,7 @@ public class ConsultarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         mainPnl.add(fechaNacimientoTxt, gridBagConstraints);
 
-        dniTxt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        dniTxt.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         dniTxt.setText("<12345678A>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -162,7 +162,7 @@ public class ConsultarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         mainPnl.add(dniTxt, gridBagConstraints);
 
-        codigoClienteTxt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        codigoClienteTxt.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         codigoClienteTxt.setText("<código cliente>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -171,7 +171,7 @@ public class ConsultarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         mainPnl.add(codigoClienteTxt, gridBagConstraints);
 
-        edadTxt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        edadTxt.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         edadTxt.setText("<Edad actual>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
@@ -180,7 +180,7 @@ public class ConsultarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         mainPnl.add(edadTxt, gridBagConstraints);
 
-        telefonoTxt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        telefonoTxt.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         telefonoTxt.setText("<+34 612345678>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
@@ -189,7 +189,7 @@ public class ConsultarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         mainPnl.add(telefonoTxt, gridBagConstraints);
 
-        puntosTxt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        puntosTxt.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         puntosTxt.setText("<x ptos.>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
@@ -200,6 +200,7 @@ public class ConsultarCliente extends javax.swing.JPanel {
 
         jScrollPane1.setBorder(null);
 
+        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -252,17 +253,28 @@ public class ConsultarCliente extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
         mainPnl.add(jTextField2, gridBagConstraints);
 
         add(mainPnl, java.awt.BorderLayout.CENTER);
 
         btnPnl.setBackground(new java.awt.Color(233, 253, 253));
-        btnPnl.setLayout(new java.awt.BorderLayout());
+        btnPnl.setLayout(new java.awt.GridBagLayout());
 
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(117, 117, 117));
         jButton1.setText("Cerrar");
+        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(117, 117, 117), 1, true));
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnPnl.add(jButton1, java.awt.BorderLayout.WEST);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.ipadx = 25;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 20, 20, 20);
+        btnPnl.add(jButton1, gridBagConstraints);
 
         add(btnPnl, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
