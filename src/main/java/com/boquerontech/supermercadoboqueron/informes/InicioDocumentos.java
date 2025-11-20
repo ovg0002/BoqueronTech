@@ -33,54 +33,25 @@ public InicioDocumentos(Inicio inicioInstance) {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        pnlCabecera = new javax.swing.JPanel();
+        lblTittle = new javax.swing.JLabel();
+        relleno = new javax.swing.JPanel();
+        trabajadorPanel = new javax.swing.JPanel();
+        pnlUser = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(233, 253, 253));
-        setForeground(new java.awt.Color(0, 0, 0));
         setLayout(new java.awt.BorderLayout());
-
-        jPanel1.setOpaque(false);
-        jPanel1.setLayout(new java.awt.GridBagLayout());
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Documentos");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 637;
-        gridBagConstraints.ipady = 68;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel1.add(jLabel2, gridBagConstraints);
-
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("<html>Nombre empleado<br> <small>Rol empleado</small></html>");
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        jLabel1.setOpaque(true);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 50;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 599, 0, 0);
-        jPanel1.add(jLabel1, gridBagConstraints);
-
-        add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
         jPanel3.setOpaque(false);
         jPanel3.setLayout(new java.awt.GridBagLayout());
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jButton1.setForeground(new java.awt.Color(48, 91, 171));
         jButton1.setText("Análisis y consultas");
@@ -97,7 +68,6 @@ public InicioDocumentos(Inicio inicioInstance) {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
         jPanel3.add(jButton1, gridBagConstraints);
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jButton2.setForeground(new java.awt.Color(48, 91, 171));
         jButton2.setText("Gestión de productos");
@@ -116,7 +86,6 @@ public InicioDocumentos(Inicio inicioInstance) {
         gridBagConstraints.insets = new java.awt.Insets(30, 0, 30, 0);
         jPanel3.add(jButton2, gridBagConstraints);
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jButton3.setForeground(new java.awt.Color(48, 91, 171));
         jButton3.setText("Consultas de clientes");
@@ -136,6 +105,102 @@ public InicioDocumentos(Inicio inicioInstance) {
         jPanel3.add(jButton3, gridBagConstraints);
 
         add(jPanel3, java.awt.BorderLayout.CENTER);
+
+        pnlCabecera.setBackground(new java.awt.Color(233, 253, 253));
+        pnlCabecera.setLayout(new java.awt.GridBagLayout());
+
+        lblTittle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lblTittle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTittle.setText("Documentos");
+        lblTittle.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 0);
+        pnlCabecera.add(lblTittle, gridBagConstraints);
+
+        relleno.setBackground(new java.awt.Color(204, 204, 204));
+        relleno.setOpaque(false);
+        relleno.setPreferredSize(new java.awt.Dimension(200, 50));
+
+        javax.swing.GroupLayout rellenoLayout = new javax.swing.GroupLayout(relleno);
+        relleno.setLayout(rellenoLayout);
+        rellenoLayout.setHorizontalGroup(
+            rellenoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+        );
+        rellenoLayout.setVerticalGroup(
+            rellenoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 0);
+        pnlCabecera.add(relleno, gridBagConstraints);
+
+        trabajadorPanel.setBackground(new java.awt.Color(204, 204, 204));
+        trabajadorPanel.setPreferredSize(new java.awt.Dimension(200, 60));
+
+        pnlUser.setBackground(new java.awt.Color(255, 255, 255));
+        pnlUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnlUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnlUser.setPreferredSize(new java.awt.Dimension(161, 60));
+        pnlUser.setLayout(new java.awt.GridBagLayout());
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/img_torrente.png"))); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        pnlUser.add(jLabel5, gridBagConstraints);
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setText("Torrente Segura");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        pnlUser.add(jLabel6, gridBagConstraints);
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel7.setText("Jefe Boqueron");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        pnlUser.add(jLabel7, gridBagConstraints);
+
+        javax.swing.GroupLayout trabajadorPanelLayout = new javax.swing.GroupLayout(trabajadorPanel);
+        trabajadorPanel.setLayout(trabajadorPanelLayout);
+        trabajadorPanelLayout.setHorizontalGroup(
+            trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+            .addGroup(trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(pnlUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        trabajadorPanelLayout.setVerticalGroup(
+            trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+            .addGroup(trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(pnlUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 20);
+        pnlCabecera.add(trabajadorPanel, gridBagConstraints);
+
+        add(pnlCabecera, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -159,9 +224,14 @@ public InicioDocumentos(Inicio inicioInstance) {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lblTittle;
+    private javax.swing.JPanel pnlCabecera;
+    private javax.swing.JPanel pnlUser;
+    private javax.swing.JPanel relleno;
+    private javax.swing.JPanel trabajadorPanel;
     // End of variables declaration//GEN-END:variables
 }

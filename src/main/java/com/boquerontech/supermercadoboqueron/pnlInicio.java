@@ -41,11 +41,14 @@ public class pnlInicio extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         pnlHeader = new javax.swing.JPanel();
-        lblName = new javax.swing.JLabel();
-        pnlUser1 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        pnlCabecera = new javax.swing.JPanel();
+        lblTittle = new javax.swing.JLabel();
+        relleno = new javax.swing.JPanel();
+        trabajadorPanel = new javax.swing.JPanel();
+        pnlUser = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -95,7 +98,7 @@ public class pnlInicio extends javax.swing.JPanel {
         pnlIngresos.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
         pnlIngresos.setLayout(new java.awt.GridBagLayout());
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Ingresos del dia");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -103,14 +106,14 @@ public class pnlInicio extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(8, 8, 8, 8);
         pnlIngresos.add(jLabel2, gridBagConstraints);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("12345.12€");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(8, 8, 8, 8);
+        gridBagConstraints.insets = new java.awt.Insets(8, 8, 15, 8);
         pnlIngresos.add(jLabel3, gridBagConstraints);
 
         jButton1.setForeground(new java.awt.Color(100, 120, 200));
@@ -123,7 +126,7 @@ public class pnlInicio extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 8;
         gridBagConstraints.ipady = 17;
-        gridBagConstraints.insets = new java.awt.Insets(8, 8, 7, 8);
+        gridBagConstraints.insets = new java.awt.Insets(15, 8, 15, 8);
         pnlIngresos.add(jButton1, gridBagConstraints);
 
         jButton2.setForeground(new java.awt.Color(100, 120, 200));
@@ -136,7 +139,7 @@ public class pnlInicio extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 8;
         gridBagConstraints.ipady = 17;
-        gridBagConstraints.insets = new java.awt.Insets(8, 8, 7, 8);
+        gridBagConstraints.insets = new java.awt.Insets(15, 8, 15, 8);
         pnlIngresos.add(jButton2, gridBagConstraints);
 
         jButton3.setForeground(new java.awt.Color(100, 120, 200));
@@ -149,7 +152,7 @@ public class pnlInicio extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 8;
         gridBagConstraints.ipady = 17;
-        gridBagConstraints.insets = new java.awt.Insets(8, 8, 7, 8);
+        gridBagConstraints.insets = new java.awt.Insets(15, 8, 15, 8);
         pnlIngresos.add(jButton3, gridBagConstraints);
 
         pnlContenido.add(pnlIngresos);
@@ -170,42 +173,101 @@ public class pnlInicio extends javax.swing.JPanel {
         pnlHeader.setBackground(new java.awt.Color(233, 253, 253));
         pnlHeader.setLayout(new java.awt.BorderLayout());
 
-        lblName.setBackground(new java.awt.Color(233, 253, 253));
-        lblName.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblName.setText("Inicio");
-        lblName.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        pnlHeader.add(lblName, java.awt.BorderLayout.CENTER);
+        pnlCabecera.setBackground(new java.awt.Color(233, 253, 253));
+        pnlCabecera.setLayout(new java.awt.GridBagLayout());
 
-        pnlUser1.setBackground(new java.awt.Color(233, 253, 253));
-        pnlUser1.setLayout(new java.awt.GridBagLayout());
+        lblTittle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lblTittle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTittle.setText("Inicio");
+        lblTittle.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 0);
+        pnlCabecera.add(lblTittle, gridBagConstraints);
 
-        jLabel8.setText("ico");
+        relleno.setBackground(new java.awt.Color(204, 204, 204));
+        relleno.setOpaque(false);
+        relleno.setPreferredSize(new java.awt.Dimension(200, 50));
+
+        javax.swing.GroupLayout rellenoLayout = new javax.swing.GroupLayout(relleno);
+        relleno.setLayout(rellenoLayout);
+        rellenoLayout.setHorizontalGroup(
+            rellenoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+        );
+        rellenoLayout.setVerticalGroup(
+            rellenoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 0);
+        pnlCabecera.add(relleno, gridBagConstraints);
+
+        trabajadorPanel.setBackground(new java.awt.Color(204, 204, 204));
+        trabajadorPanel.setPreferredSize(new java.awt.Dimension(200, 60));
+
+        pnlUser.setBackground(new java.awt.Color(255, 255, 255));
+        pnlUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnlUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnlUser.setPreferredSize(new java.awt.Dimension(161, 60));
+        pnlUser.setLayout(new java.awt.GridBagLayout());
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/img_torrente.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        pnlUser1.add(jLabel8, gridBagConstraints);
+        pnlUser.add(jLabel5, gridBagConstraints);
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel9.setText("Nombre Empleado");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        pnlUser1.add(jLabel9, gridBagConstraints);
-
-        jLabel10.setText("Rol Empleado");
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setText("Torrente Segura");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        pnlUser1.add(jLabel10, gridBagConstraints);
+        pnlUser.add(jLabel6, gridBagConstraints);
 
-        pnlHeader.add(pnlUser1, java.awt.BorderLayout.EAST);
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel7.setText("Jefe Boqueron");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        pnlUser.add(jLabel7, gridBagConstraints);
+
+        javax.swing.GroupLayout trabajadorPanelLayout = new javax.swing.GroupLayout(trabajadorPanel);
+        trabajadorPanel.setLayout(trabajadorPanelLayout);
+        trabajadorPanelLayout.setHorizontalGroup(
+            trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+            .addGroup(trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(pnlUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        trabajadorPanelLayout.setVerticalGroup(
+            trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+            .addGroup(trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(pnlUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 20);
+        pnlCabecera.add(trabajadorPanel, gridBagConstraints);
+
+        pnlHeader.add(pnlCabecera, java.awt.BorderLayout.PAGE_START);
 
         add(pnlHeader, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
@@ -215,20 +277,23 @@ public class pnlInicio extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblTittle;
+    private javax.swing.JPanel pnlCabecera;
     private javax.swing.JPanel pnlContenido;
     private javax.swing.JPanel pnlFondo;
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlIngresos;
     private javax.swing.JPanel pnlStock;
-    private javax.swing.JPanel pnlUser1;
+    private javax.swing.JPanel pnlUser;
+    private javax.swing.JPanel relleno;
+    private javax.swing.JPanel trabajadorPanel;
     // End of variables declaration//GEN-END:variables
 }

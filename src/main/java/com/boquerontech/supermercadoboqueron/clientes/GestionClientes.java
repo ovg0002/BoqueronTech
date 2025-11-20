@@ -42,8 +42,8 @@ public class GestionClientes extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         pnlCard = new javax.swing.JPanel();
-        cabecera = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        pnlCabecera = new javax.swing.JPanel();
+        lblTittle = new javax.swing.JLabel();
         relleno = new javax.swing.JPanel();
         trabajadorPanel = new javax.swing.JPanel();
         pnlUser = new javax.swing.JPanel();
@@ -149,20 +149,20 @@ public class GestionClientes extends javax.swing.JPanel {
 
         add(pnlFondo, java.awt.BorderLayout.CENTER);
 
-        cabecera.setBackground(new java.awt.Color(233, 253, 253));
-        cabecera.setLayout(new java.awt.GridBagLayout());
+        pnlCabecera.setBackground(new java.awt.Color(233, 253, 253));
+        pnlCabecera.setLayout(new java.awt.GridBagLayout());
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Clientes");
-        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        lblTittle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lblTittle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTittle.setText("Clientes");
+        lblTittle.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 0);
-        cabecera.add(jLabel2, gridBagConstraints);
+        pnlCabecera.add(lblTittle, gridBagConstraints);
 
         relleno.setBackground(new java.awt.Color(204, 204, 204));
         relleno.setOpaque(false);
@@ -184,7 +184,7 @@ public class GestionClientes extends javax.swing.JPanel {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 0);
-        cabecera.add(relleno, gridBagConstraints);
+        pnlCabecera.add(relleno, gridBagConstraints);
 
         trabajadorPanel.setBackground(new java.awt.Color(204, 204, 204));
         trabajadorPanel.setPreferredSize(new java.awt.Dimension(200, 60));
@@ -241,9 +241,9 @@ public class GestionClientes extends javax.swing.JPanel {
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 20);
-        cabecera.add(trabajadorPanel, gridBagConstraints);
+        pnlCabecera.add(trabajadorPanel, gridBagConstraints);
 
-        add(cabecera, java.awt.BorderLayout.PAGE_START);
+        add(pnlCabecera, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -269,16 +269,16 @@ public class GestionClientes extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel cabecera;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel lblTittle;
     private javax.swing.JPanel pnlBotones;
+    private javax.swing.JPanel pnlCabecera;
     private javax.swing.JPanel pnlCard;
     private javax.swing.JPanel pnlContenido;
     private javax.swing.JPanel pnlFondo;
