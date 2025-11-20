@@ -36,9 +36,6 @@ public class ModificarDardebajaPromocionP extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        topPanel = new javax.swing.JPanel();
-        tituloLbl = new javax.swing.JLabel();
-        usuarioLbl = new javax.swing.JLabel();
         bottomPanel = new javax.swing.JPanel();
         salirBtn = new javax.swing.JButton();
         midPanel = new javax.swing.JPanel();
@@ -47,51 +44,26 @@ public class ModificarDardebajaPromocionP extends javax.swing.JPanel {
         itemsPanel = new javax.swing.JPanel();
         itemModificardardebajaPromocion1 = new com.boquerontech.supermercadoboqueron.promociones.items.itemModificardardebajaPromocion();
         itemModificardardebajaPromocion2 = new com.boquerontech.supermercadoboqueron.promociones.items.itemModificardardebajaPromocion();
+        pnlCabecera = new javax.swing.JPanel();
+        lblTittle = new javax.swing.JLabel();
+        relleno = new javax.swing.JPanel();
+        trabajadorPanel = new javax.swing.JPanel();
+        pnlUser = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(233, 253, 253));
-        setForeground(new java.awt.Color(0, 0, 0));
         setLayout(new java.awt.BorderLayout());
-
-        topPanel.setOpaque(false);
-        topPanel.setLayout(new java.awt.GridBagLayout());
-
-        tituloLbl.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        tituloLbl.setForeground(new java.awt.Color(0, 0, 0));
-        tituloLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tituloLbl.setText("Modificar/dar de baja promoción");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 637;
-        gridBagConstraints.ipady = 68;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        topPanel.add(tituloLbl, gridBagConstraints);
-
-        usuarioLbl.setBackground(new java.awt.Color(255, 255, 255));
-        usuarioLbl.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        usuarioLbl.setForeground(new java.awt.Color(0, 0, 0));
-        usuarioLbl.setText("<html>Nombre empleado<br> <small>Rol empleado</small></html>");
-        usuarioLbl.setOpaque(true);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 50;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 599, 0, 0);
-        topPanel.add(usuarioLbl, gridBagConstraints);
-
-        add(topPanel, java.awt.BorderLayout.PAGE_START);
 
         bottomPanel.setOpaque(false);
         bottomPanel.setLayout(new java.awt.GridBagLayout());
 
-        salirBtn.setBackground(new java.awt.Color(255, 255, 255));
         salirBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         salirBtn.setForeground(new java.awt.Color(199, 108, 108));
         salirBtn.setText("Salir");
         salirBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(199, 108, 108)));
-        salirBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        salirBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         salirBtn.setOpaque(true);
         salirBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,7 +85,6 @@ public class ModificarDardebajaPromocionP extends javax.swing.JPanel {
         midPanel.setLayout(new java.awt.GridBagLayout());
 
         buscarTF.setBackground(new java.awt.Color(233, 253, 253));
-        buscarTF.setForeground(new java.awt.Color(0, 0, 0));
         buscarTF.setText("Buscar");
         buscarTF.setOpaque(true);
         buscarTF.setPreferredSize(new java.awt.Dimension(64, 100));
@@ -139,6 +110,102 @@ public class ModificarDardebajaPromocionP extends javax.swing.JPanel {
         midPanel.add(jScrollPane1, gridBagConstraints);
 
         add(midPanel, java.awt.BorderLayout.CENTER);
+
+        pnlCabecera.setBackground(new java.awt.Color(233, 253, 253));
+        pnlCabecera.setLayout(new java.awt.GridBagLayout());
+
+        lblTittle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lblTittle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTittle.setText("Modificar / Baja Promociones");
+        lblTittle.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 0);
+        pnlCabecera.add(lblTittle, gridBagConstraints);
+
+        relleno.setBackground(new java.awt.Color(204, 204, 204));
+        relleno.setOpaque(false);
+        relleno.setPreferredSize(new java.awt.Dimension(200, 50));
+
+        javax.swing.GroupLayout rellenoLayout = new javax.swing.GroupLayout(relleno);
+        relleno.setLayout(rellenoLayout);
+        rellenoLayout.setHorizontalGroup(
+            rellenoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+        );
+        rellenoLayout.setVerticalGroup(
+            rellenoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 0);
+        pnlCabecera.add(relleno, gridBagConstraints);
+
+        trabajadorPanel.setBackground(new java.awt.Color(204, 204, 204));
+        trabajadorPanel.setPreferredSize(new java.awt.Dimension(200, 60));
+
+        pnlUser.setBackground(new java.awt.Color(255, 255, 255));
+        pnlUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnlUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnlUser.setPreferredSize(new java.awt.Dimension(161, 60));
+        pnlUser.setLayout(new java.awt.GridBagLayout());
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/img_torrente.png"))); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        pnlUser.add(jLabel5, gridBagConstraints);
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setText("Torrente Segura");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        pnlUser.add(jLabel6, gridBagConstraints);
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel7.setText("Jefe Boqueron");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        pnlUser.add(jLabel7, gridBagConstraints);
+
+        javax.swing.GroupLayout trabajadorPanelLayout = new javax.swing.GroupLayout(trabajadorPanel);
+        trabajadorPanel.setLayout(trabajadorPanelLayout);
+        trabajadorPanelLayout.setHorizontalGroup(
+            trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+            .addGroup(trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(pnlUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        trabajadorPanelLayout.setVerticalGroup(
+            trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+            .addGroup(trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(pnlUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 20);
+        pnlCabecera.add(trabajadorPanel, gridBagConstraints);
+
+        add(pnlCabecera, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
     private void salirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirBtnActionPerformed
@@ -153,11 +220,16 @@ public class ModificarDardebajaPromocionP extends javax.swing.JPanel {
     private com.boquerontech.supermercadoboqueron.promociones.items.itemModificardardebajaPromocion itemModificardardebajaPromocion1;
     private com.boquerontech.supermercadoboqueron.promociones.items.itemModificardardebajaPromocion itemModificardardebajaPromocion2;
     private javax.swing.JPanel itemsPanel;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblTittle;
     private javax.swing.JPanel midPanel;
+    private javax.swing.JPanel pnlCabecera;
+    private javax.swing.JPanel pnlUser;
+    private javax.swing.JPanel relleno;
     private javax.swing.JButton salirBtn;
-    private javax.swing.JLabel tituloLbl;
-    private javax.swing.JPanel topPanel;
-    private javax.swing.JLabel usuarioLbl;
+    private javax.swing.JPanel trabajadorPanel;
     // End of variables declaration//GEN-END:variables
 }

@@ -215,12 +215,12 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProveedoresActionPerformed
 
     private void btnPromocionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromocionesActionPerformed
-        colocarPanel(new InicioPromoP());
+        colocarPanel(new InicioPromoP(this));
         seleccionarBoton(btnPromociones);
     }//GEN-LAST:event_btnPromocionesActionPerformed
 
     private void btnDocumentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDocumentosActionPerformed
-        colocarPanel(new InicioDocumentos());
+        colocarPanel(new InicioDocumentos(this));
         seleccionarBoton(btnDocumentos);
     }//GEN-LAST:event_btnDocumentosActionPerformed
 

@@ -37,10 +37,10 @@ public class GestionClientes extends javax.swing.JPanel {
         pnlFondo = new javax.swing.JPanel();
         pnlContenido = new javax.swing.JPanel();
         pnlBotones = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        nuevoClienteBtn = new javax.swing.JButton();
+        consultarClienteBtn = new javax.swing.JButton();
+        modificarClienteBtn = new javax.swing.JButton();
+        eliminarClienteBtn = new javax.swing.JButton();
         pnlCard = new javax.swing.JPanel();
         pnlCabecera = new javax.swing.JPanel();
         lblTittle = new javax.swing.JLabel();
@@ -64,14 +64,14 @@ public class GestionClientes extends javax.swing.JPanel {
         pnlBotones.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
         pnlBotones.setLayout(new java.awt.GridBagLayout());
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(100, 120, 200));
-        jButton1.setText("NUEVO CLIENTE");
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        nuevoClienteBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        nuevoClienteBtn.setForeground(new java.awt.Color(100, 120, 200));
+        nuevoClienteBtn.setText("NUEVO CLIENTE");
+        nuevoClienteBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
+        nuevoClienteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        nuevoClienteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                nuevoClienteBtnActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -79,16 +79,16 @@ public class GestionClientes extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.ipady = 18;
         gridBagConstraints.insets = new java.awt.Insets(10, 25, 10, 25);
-        pnlBotones.add(jButton1, gridBagConstraints);
+        pnlBotones.add(nuevoClienteBtn, gridBagConstraints);
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(100, 120, 200));
-        jButton2.setText("CONSULTAR CLIENTE");
-        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        consultarClienteBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        consultarClienteBtn.setForeground(new java.awt.Color(100, 120, 200));
+        consultarClienteBtn.setText("CONSULTAR CLIENTE");
+        consultarClienteBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
+        consultarClienteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        consultarClienteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                consultarClienteBtnActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -98,16 +98,16 @@ public class GestionClientes extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.ipady = 18;
         gridBagConstraints.insets = new java.awt.Insets(10, 25, 10, 25);
-        pnlBotones.add(jButton2, gridBagConstraints);
+        pnlBotones.add(consultarClienteBtn, gridBagConstraints);
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(100, 120, 200));
-        jButton3.setText("ELIMINAR CLIENTE");
-        jButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        modificarClienteBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        modificarClienteBtn.setForeground(new java.awt.Color(100, 120, 200));
+        modificarClienteBtn.setText("ELIMINAR CLIENTE");
+        modificarClienteBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
+        modificarClienteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        modificarClienteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                modificarClienteBtnActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -117,16 +117,16 @@ public class GestionClientes extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.ipady = 18;
         gridBagConstraints.insets = new java.awt.Insets(10, 25, 10, 25);
-        pnlBotones.add(jButton3, gridBagConstraints);
+        pnlBotones.add(modificarClienteBtn, gridBagConstraints);
 
-        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(100, 120, 200));
-        jButton4.setText("MODIFICAR CLIENTE");
-        jButton4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
-        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        eliminarClienteBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        eliminarClienteBtn.setForeground(new java.awt.Color(100, 120, 200));
+        eliminarClienteBtn.setText("MODIFICAR CLIENTE");
+        eliminarClienteBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
+        eliminarClienteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        eliminarClienteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                eliminarClienteBtnActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -136,7 +136,7 @@ public class GestionClientes extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.ipady = 18;
         gridBagConstraints.insets = new java.awt.Insets(10, 25, 10, 25);
-        pnlBotones.add(jButton4, gridBagConstraints);
+        pnlBotones.add(eliminarClienteBtn, gridBagConstraints);
 
         pnlContenido.add(pnlBotones, java.awt.BorderLayout.WEST);
 
@@ -246,37 +246,37 @@ public class GestionClientes extends javax.swing.JPanel {
         add(pnlCabecera, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void nuevoClienteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoClienteBtnActionPerformed
         CardLayout cl = (CardLayout) pnlCard.getLayout();
         cl.show(pnlCard, "NuevoCliente");
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_nuevoClienteBtnActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void consultarClienteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarClienteBtnActionPerformed
         CardLayout cl = (CardLayout) pnlCard.getLayout();
         cl.show(pnlCard, "ConsultarCliente");
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_consultarClienteBtnActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void eliminarClienteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarClienteBtnActionPerformed
         CardLayout cl = (CardLayout) pnlCard.getLayout();
         cl.show(pnlCard, "ModificarCliente");
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_eliminarClienteBtnActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void modificarClienteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarClienteBtnActionPerformed
         CardLayout cl = (CardLayout) pnlCard.getLayout();
         cl.show(pnlCard, "EliminarCliente");
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_modificarClienteBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton consultarClienteBtn;
+    private javax.swing.JButton eliminarClienteBtn;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel lblTittle;
+    private javax.swing.JButton modificarClienteBtn;
+    private javax.swing.JButton nuevoClienteBtn;
     private javax.swing.JPanel pnlBotones;
     private javax.swing.JPanel pnlCabecera;
     private javax.swing.JPanel pnlCard;
