@@ -2,19 +2,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.boquerontech.supermercadoboqueron.facturas;
+package com.boquerontech.supermercadoboqueron.proveedores;
+
+import com.boquerontech.supermercadoboqueron.Inicio;
 
 /**
  *
  * @author MEDAC
  */
-public class Facturas extends javax.swing.JPanel {
+public class ConsultarProveedores extends javax.swing.JPanel {
+
+    private Inicio inicioInstance;
 
     /**
-     * Creates new form Facturas
+     * Creates new form ConsultarProveedores
      */
-    public Facturas() {
+    public ConsultarProveedores() {
         initComponents();
+    }
+    public ConsultarProveedores(Inicio inicioInstance) {
+        initComponents();
+        this.inicioInstance = inicioInstance;
     }
 
     /**
@@ -26,15 +34,17 @@ public class Facturas extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setBackground(new java.awt.Color(233, 253, 253));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 593, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 500, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
