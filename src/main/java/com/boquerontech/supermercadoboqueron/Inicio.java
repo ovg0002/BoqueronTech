@@ -4,6 +4,8 @@
  */
 package com.boquerontech.supermercadoboqueron;
 
+import com.boquerontech.supermercadoboqueron.informes.GestionProductos;
+import com.boquerontech.supermercadoboqueron.promociones.InicioPromoP;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.boquerontech.supermercadoboqueron.ventas.Ventas;
 import java.awt.BorderLayout;
@@ -197,14 +199,14 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProveedoresActionPerformed
 
     private void btnPromocionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromocionesActionPerformed
-        //colocarPanel();
+        colocarPanel(new InicioPromoP(this));
     }//GEN-LAST:event_btnPromocionesActionPerformed
 
     private void btnDocumentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDocumentosActionPerformed
-        //colocarPanel();
+        colocarPanel(new GestionProductos());
     }//GEN-LAST:event_btnDocumentosActionPerformed
 
-    private void colocarPanel(JPanel panel) {
+    public void colocarPanel(JPanel panel) {
         contenidoPanel.removeAll();
         contenidoPanel.add(panel, BorderLayout.CENTER);
         contenidoPanel.revalidate();

@@ -143,6 +143,7 @@ public class ModificarDardebajaPromocionP extends javax.swing.JPanel {
 
     private void salirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirBtnActionPerformed
         inicioInstance.colocarPanel(new InicioPromoP(inicioInstance));
+        
     }//GEN-LAST:event_salirBtnActionPerformed
 
 
