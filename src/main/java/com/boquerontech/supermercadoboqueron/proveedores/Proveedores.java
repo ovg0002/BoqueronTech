@@ -4,19 +4,27 @@
  */
 package com.boquerontech.supermercadoboqueron.proveedores;
 
+import com.boquerontech.supermercadoboqueron.Inicio;
+
 /**
  *
  * @author MEDAC
  */
 public class Proveedores extends javax.swing.JPanel {
 
+    private Inicio inicioInstance;
+    
     /**
      * Creates new form Proveedores
      */
     public Proveedores() {
         initComponents();
     }
-
+    public Proveedores(Inicio inicioInstance) {
+        initComponents();
+        this.inicioInstance = inicioInstance;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -25,20 +33,76 @@ public class Proveedores extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        btnDarAltaProveedor = new javax.swing.JButton();
+        btnConsultarProveedor = new javax.swing.JButton();
+        btnAsociarProductoProveedor = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(233, 253, 253));
+        setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEmptyBorder(50, 50, 50, 50), javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEmptyBorder(50, 50, 50, 50), "Proveedores", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 1, 36)), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2)))); // NOI18N
+        setLayout(new java.awt.GridBagLayout());
+
+        btnDarAltaProveedor.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnDarAltaProveedor.setForeground(new java.awt.Color(102, 127, 252));
+        btnDarAltaProveedor.setText("Alta a Proveedor");
+        btnDarAltaProveedor.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 127, 252), 2, true));
+        btnDarAltaProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDarAltaProveedorActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 300;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.insets = new java.awt.Insets(30, 0, 30, 0);
+        add(btnDarAltaProveedor, gridBagConstraints);
+
+        btnConsultarProveedor.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnConsultarProveedor.setForeground(new java.awt.Color(102, 127, 252));
+        btnConsultarProveedor.setText("Consultar un Proveedor");
+        btnConsultarProveedor.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 127, 252), 2, true));
+        btnConsultarProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarProveedorActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 300;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.insets = new java.awt.Insets(30, 0, 30, 0);
+        add(btnConsultarProveedor, gridBagConstraints);
+
+        btnAsociarProductoProveedor.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnAsociarProductoProveedor.setForeground(new java.awt.Color(102, 127, 252));
+        btnAsociarProductoProveedor.setText("Asociar Productos a Proveedores");
+        btnAsociarProductoProveedor.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 127, 252), 2, true));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 300;
+        gridBagConstraints.ipady = 19;
+        gridBagConstraints.insets = new java.awt.Insets(30, 0, 30, 0);
+        add(btnAsociarProductoProveedor, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnDarAltaProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDarAltaProveedorActionPerformed
+        inicioInstance.colocarPanel(new DarAltaProveedor(inicioInstance));
+    }//GEN-LAST:event_btnDarAltaProveedorActionPerformed
+
+    private void btnConsultarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarProveedorActionPerformed
+        inicioInstance.colocarPanel(new DarAltaProveedor(inicioInstance));
+    }//GEN-LAST:event_btnConsultarProveedorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAsociarProductoProveedor;
+    private javax.swing.JButton btnConsultarProveedor;
+    private javax.swing.JButton btnDarAltaProveedor;
     // End of variables declaration//GEN-END:variables
 }

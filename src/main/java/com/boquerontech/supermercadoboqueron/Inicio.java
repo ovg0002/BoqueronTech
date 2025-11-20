@@ -4,11 +4,17 @@
  */
 package com.boquerontech.supermercadoboqueron;
 
-import com.boquerontech.supermercadoboqueron.informes.GestionProductos;
 import com.boquerontech.supermercadoboqueron.promociones.InicioPromoP;
+import com.boquerontech.supermercadoboqueron.inventario.Inventario;
+import com.boquerontech.supermercadoboqueron.clientes.GestionClientes;
+import com.boquerontech.supermercadoboqueron.empleados.GestionEmpleado;
+import com.boquerontech.supermercadoboqueron.informes.InicioDocumentos;
+import com.boquerontech.supermercadoboqueron.proveedores.Proveedores;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.boquerontech.supermercadoboqueron.ventas.Ventas;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
@@ -26,6 +32,15 @@ public class Inicio extends javax.swing.JFrame {
         initComponents();
         setExtendedState(Inicio.MAXIMIZED_BOTH);
     }
+    
+    public Inicio(String user, String password) {
+        initComponents();
+        setExtendedState(Inicio.MAXIMIZED_BOTH);
+        seleccionarBoton(btnInicio);
+        
+ 
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -55,7 +70,6 @@ public class Inicio extends javax.swing.JFrame {
         pnlMain.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         btnInicio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnInicio.setForeground(new java.awt.Color(0, 0, 0));
         btnInicio.setText("Inicio");
         btnInicio.setBorderPainted(false);
         btnInicio.setContentAreaFilled(false);
@@ -69,7 +83,6 @@ public class Inicio extends javax.swing.JFrame {
         pnlMain.add(btnInicio);
 
         btnClientes.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnClientes.setForeground(new java.awt.Color(0, 0, 0));
         btnClientes.setText("Clientes");
         btnClientes.setBorderPainted(false);
         btnClientes.setContentAreaFilled(false);
@@ -83,7 +96,6 @@ public class Inicio extends javax.swing.JFrame {
         pnlMain.add(btnClientes);
 
         btnEmpleados.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnEmpleados.setForeground(new java.awt.Color(0, 0, 0));
         btnEmpleados.setText("Empleados");
         btnEmpleados.setBorderPainted(false);
         btnEmpleados.setContentAreaFilled(false);
@@ -97,7 +109,6 @@ public class Inicio extends javax.swing.JFrame {
         pnlMain.add(btnEmpleados);
 
         btnVentas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnVentas.setForeground(new java.awt.Color(0, 0, 0));
         btnVentas.setText("Ventas");
         btnVentas.setBorderPainted(false);
         btnVentas.setContentAreaFilled(false);
@@ -111,7 +122,6 @@ public class Inicio extends javax.swing.JFrame {
         pnlMain.add(btnVentas);
 
         btnInventario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnInventario.setForeground(new java.awt.Color(0, 0, 0));
         btnInventario.setText("Inventario");
         btnInventario.setBorderPainted(false);
         btnInventario.setContentAreaFilled(false);
@@ -125,7 +135,6 @@ public class Inicio extends javax.swing.JFrame {
         pnlMain.add(btnInventario);
 
         btnProveedores.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnProveedores.setForeground(new java.awt.Color(0, 0, 0));
         btnProveedores.setText("Proveedores");
         btnProveedores.setBorderPainted(false);
         btnProveedores.setContentAreaFilled(false);
@@ -139,7 +148,6 @@ public class Inicio extends javax.swing.JFrame {
         pnlMain.add(btnProveedores);
 
         btnPromociones.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnPromociones.setForeground(new java.awt.Color(0, 0, 0));
         btnPromociones.setText("Promociones");
         btnPromociones.setBorderPainted(false);
         btnPromociones.setContentAreaFilled(false);
@@ -153,7 +161,6 @@ public class Inicio extends javax.swing.JFrame {
         pnlMain.add(btnPromociones);
 
         btnDocumentos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnDocumentos.setForeground(new java.awt.Color(0, 0, 0));
         btnDocumentos.setText("Documentos");
         btnDocumentos.setBorderPainted(false);
         btnDocumentos.setContentAreaFilled(false);
@@ -168,6 +175,8 @@ public class Inicio extends javax.swing.JFrame {
 
         getContentPane().add(pnlMain, java.awt.BorderLayout.PAGE_START);
 
+        contenidoPanel.setMinimumSize(new java.awt.Dimension(900, 900));
+        contenidoPanel.setPreferredSize(new java.awt.Dimension(900, 900));
         contenidoPanel.setLayout(new java.awt.BorderLayout());
         getContentPane().add(contenidoPanel, java.awt.BorderLayout.CENTER);
 
@@ -175,35 +184,43 @@ public class Inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleadosActionPerformed
-        //colocarPanel();
+        colocarPanel(new GestionEmpleado());
+        seleccionarBoton(btnEmpleados);
     }//GEN-LAST:event_btnEmpleadosActionPerformed
 
     private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
-        //colocarPanel();
+        colocarPanel(new pnlInicio());
+        seleccionarBoton(btnInicio);
     }//GEN-LAST:event_btnInicioActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
-        //colocarPanel();
+        colocarPanel(new GestionClientes());
+        seleccionarBoton(btnClientes);
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
         colocarPanel(new Ventas());
+        seleccionarBoton(btnVentas);
     }//GEN-LAST:event_btnVentasActionPerformed
 
     private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioActionPerformed
-        //colocarPanel();
+        colocarPanel(new Inventario());
+        seleccionarBoton(btnInventario);
     }//GEN-LAST:event_btnInventarioActionPerformed
 
     private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
-        //colocarPanel();
+        colocarPanel(new Proveedores(this));
+        seleccionarBoton(btnProveedores);
     }//GEN-LAST:event_btnProveedoresActionPerformed
 
     private void btnPromocionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromocionesActionPerformed
-        colocarPanel(new InicioPromoP(this));
+        colocarPanel(new InicioPromoP());
+        seleccionarBoton(btnPromociones);
     }//GEN-LAST:event_btnPromocionesActionPerformed
 
     private void btnDocumentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDocumentosActionPerformed
-        colocarPanel(new GestionProductos());
+        colocarPanel(new InicioDocumentos());
+        seleccionarBoton(btnDocumentos);
     }//GEN-LAST:event_btnDocumentosActionPerformed
 
     public void colocarPanel(JPanel panel) {
@@ -211,6 +228,19 @@ public class Inicio extends javax.swing.JFrame {
         contenidoPanel.add(panel, BorderLayout.CENTER);
         contenidoPanel.revalidate();
         contenidoPanel.repaint();
+    }
+    
+    private JButton botonActivo = null; // variable para saber cuál está seleccionado
+
+    private void seleccionarBoton(JButton boton) {
+        if (botonActivo != null) {
+            // Quitar “selección” del botón anterior
+            botonActivo.setForeground(Color.BLACK);
+        }
+        // Marcar el nuevo botón como activo
+        botonActivo = boton;
+        botonActivo.setForeground(Color.BLUE);
+        
     }
     
     /**
