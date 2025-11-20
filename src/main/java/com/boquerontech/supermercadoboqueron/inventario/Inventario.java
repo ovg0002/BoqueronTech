@@ -59,10 +59,10 @@ public class Inventario extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         bottomPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        eliminarProductoBtn = new javax.swing.JButton();
         jSpinner1 = new javax.swing.JSpinner();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        anadirProductoBtn = new javax.swing.JButton();
+        pedidosBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
 
@@ -166,12 +166,12 @@ public class Inventario extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 0);
         bottomPanel.add(jLabel1, gridBagConstraints);
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setText("Eliminar Producto");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        eliminarProductoBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        eliminarProductoBtn.setText("Eliminar Producto");
+        eliminarProductoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 5);
-        bottomPanel.add(jButton1, gridBagConstraints);
+        bottomPanel.add(eliminarProductoBtn, gridBagConstraints);
 
         jSpinner1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
@@ -179,19 +179,19 @@ public class Inventario extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(20, 5, 20, 5);
         bottomPanel.add(jSpinner1, gridBagConstraints);
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton2.setText("Añadir Producto");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        anadirProductoBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        anadirProductoBtn.setText("Añadir Producto");
+        anadirProductoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(20, 5, 20, 5);
-        bottomPanel.add(jButton2, gridBagConstraints);
+        bottomPanel.add(anadirProductoBtn, gridBagConstraints);
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton3.setText("Pedidos");
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        pedidosBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        pedidosBtn.setText("Pedidos");
+        pedidosBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(20, 5, 20, 0);
-        bottomPanel.add(jButton3, gridBagConstraints);
+        bottomPanel.add(pedidosBtn, gridBagConstraints);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("CAMBIAR POR BOTON");
@@ -225,11 +225,10 @@ public class Inventario extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton anadirProductoBtn;
     private javax.swing.JPanel bottomPanel;
     private javax.swing.JTextField buscarTxt;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton eliminarProductoBtn;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -237,6 +236,7 @@ public class Inventario extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JButton pedidosBtn;
     private javax.swing.JPanel topPanel;
     private javax.swing.JPanel trabajadorPanel;
     // End of variables declaration//GEN-END:variables

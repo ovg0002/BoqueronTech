@@ -181,7 +181,7 @@ public class Login extends javax.swing.JFrame {
         // Creamos una cadena de texto para coger los datos del tfPassword
         String password = String.valueOf(tfPassword.getPassword());
         // Si el contenido es igual a Usuario y la contraseña a 123 hara lo siguiente
-        if (user.equals("Boqueron") && password.equals("123")) {
+        if (user.equals("Torrente") && password.equals("123")) {
             // Llamamos al Objeto Inicio y le damos los parametros user y password
             Inicio inicio = new Inicio(user, password);
             // Le decimos que se abra la ventana

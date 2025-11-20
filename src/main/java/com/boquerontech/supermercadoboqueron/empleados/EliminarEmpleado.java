@@ -4,7 +4,6 @@
  */
 package com.boquerontech.supermercadoboqueron.empleados;
 
-import com.boquerontech.supermercadoboqueron.clientes.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -39,17 +38,17 @@ public class EliminarEmpleado extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        nombreLbl = new javax.swing.JLabel();
+        fechaNacimientoLbl = new javax.swing.JLabel();
+        dniLbl = new javax.swing.JLabel();
+        codEmpleadoLbl = new javax.swing.JLabel();
+        fechaIncorporacionLbl = new javax.swing.JLabel();
+        tlfLbl = new javax.swing.JLabel();
+        sueldoLbl = new javax.swing.JLabel();
+        buscarTxt = new javax.swing.JTextField();
         pnlBotones = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        cancelBtn = new javax.swing.JButton();
+        darBajaBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(233, 253, 253));
         setLayout(new java.awt.BorderLayout());
@@ -57,8 +56,7 @@ public class EliminarEmpleado extends javax.swing.JPanel {
         jPanel3.setBackground(new java.awt.Color(233, 253, 253));
         jPanel3.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Dar de baja un empleado");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -67,8 +65,7 @@ public class EliminarEmpleado extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 100, 15, 0);
         jPanel3.add(jLabel1, gridBagConstraints);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Nombre y apellidos");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -78,8 +75,7 @@ public class EliminarEmpleado extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         jPanel3.add(jLabel2, gridBagConstraints);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("Fecha de nacimiento");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -89,8 +85,7 @@ public class EliminarEmpleado extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         jPanel3.add(jLabel3, gridBagConstraints);
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("Cod Empleado");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -101,8 +96,7 @@ public class EliminarEmpleado extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         jPanel3.add(jLabel4, gridBagConstraints);
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setText("DNI");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -112,8 +106,7 @@ public class EliminarEmpleado extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         jPanel3.add(jLabel5, gridBagConstraints);
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setText("Teléfono");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -123,8 +116,7 @@ public class EliminarEmpleado extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         jPanel3.add(jLabel6, gridBagConstraints);
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setText("Fecha incorp.:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -134,8 +126,7 @@ public class EliminarEmpleado extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         jPanel3.add(jLabel7, gridBagConstraints);
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setText("Sueldo:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -144,131 +135,128 @@ public class EliminarEmpleado extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         jPanel3.add(jLabel8, gridBagConstraints);
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel9.setText("<Nombre y apellidos>");
+        nombreLbl.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        nombreLbl.setText("<Nombre y apellidos>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
-        jPanel3.add(jLabel9, gridBagConstraints);
+        jPanel3.add(nombreLbl, gridBagConstraints);
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel10.setText("<dd/mm/aaaa>");
+        fechaNacimientoLbl.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        fechaNacimientoLbl.setText("<dd/mm/aaaa>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
-        jPanel3.add(jLabel10, gridBagConstraints);
+        jPanel3.add(fechaNacimientoLbl, gridBagConstraints);
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel11.setText("<12345678A>");
+        dniLbl.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        dniLbl.setText("<12345678A>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
-        jPanel3.add(jLabel11, gridBagConstraints);
+        jPanel3.add(dniLbl, gridBagConstraints);
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel12.setText("<código cliente>");
+        codEmpleadoLbl.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        codEmpleadoLbl.setText("<código cliente>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
-        jPanel3.add(jLabel12, gridBagConstraints);
+        jPanel3.add(codEmpleadoLbl, gridBagConstraints);
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel13.setText("<dd/mm/aaaa>");
+        fechaIncorporacionLbl.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        fechaIncorporacionLbl.setText("<dd/mm/aaaa>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
-        jPanel3.add(jLabel13, gridBagConstraints);
+        jPanel3.add(fechaIncorporacionLbl, gridBagConstraints);
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel14.setText("<+34 612345678>");
+        tlfLbl.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        tlfLbl.setText("<+34 612345678>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
-        jPanel3.add(jLabel14, gridBagConstraints);
+        jPanel3.add(tlfLbl, gridBagConstraints);
 
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel15.setText("<x €/h>");
+        sueldoLbl.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        sueldoLbl.setText("<x €/h>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
-        jPanel3.add(jLabel15, gridBagConstraints);
+        jPanel3.add(sueldoLbl, gridBagConstraints);
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField1.setText("jTextField1");
+        buscarTxt.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        buscarTxt.setText("jTextField1");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
-        jPanel3.add(jTextField1, gridBagConstraints);
+        jPanel3.add(buscarTxt, gridBagConstraints);
 
         add(jPanel3, java.awt.BorderLayout.CENTER);
 
         pnlBotones.setBackground(new java.awt.Color(233, 253, 253));
-        pnlBotones.setLayout(new java.awt.BorderLayout());
+        pnlBotones.setLayout(new java.awt.GridBagLayout());
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Cancelar");
-        pnlBotones.add(jButton1, java.awt.BorderLayout.WEST);
+        cancelBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        cancelBtn.setText("Cancelar");
+        cancelBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(20, 50, 20, 50);
+        pnlBotones.add(cancelBtn, gridBagConstraints);
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Dar de baja");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        darBajaBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        darBajaBtn.setText("Dar de baja");
+        darBajaBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        darBajaBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                darBajaBtnActionPerformed(evt);
             }
         });
-        pnlBotones.add(jButton2, java.awt.BorderLayout.EAST);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(20, 50, 20, 50);
+        pnlBotones.add(darBajaBtn, gridBagConstraints);
 
         add(pnlBotones, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void darBajaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darBajaBtnActionPerformed
         JOptionPane.showConfirmDialog(
         this,
         "Estas seguro de eliminar?",
         "Confirmar Eliminacion",
         JOptionPane.OK_CANCEL_OPTION,
         JOptionPane.WARNING_MESSAGE);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_darBajaBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JTextField buscarTxt;
+    private javax.swing.JButton cancelBtn;
+    private javax.swing.JLabel codEmpleadoLbl;
+    private javax.swing.JButton darBajaBtn;
+    private javax.swing.JLabel dniLbl;
+    private javax.swing.JLabel fechaIncorporacionLbl;
+    private javax.swing.JLabel fechaNacimientoLbl;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -276,9 +264,10 @@ public class EliminarEmpleado extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel nombreLbl;
     private javax.swing.JPanel pnlBotones;
+    private javax.swing.JLabel sueldoLbl;
+    private javax.swing.JLabel tlfLbl;
     // End of variables declaration//GEN-END:variables
 }

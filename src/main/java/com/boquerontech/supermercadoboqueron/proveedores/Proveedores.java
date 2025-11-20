@@ -47,6 +47,7 @@ public class Proveedores extends javax.swing.JPanel {
         btnDarAltaProveedor.setForeground(new java.awt.Color(102, 127, 252));
         btnDarAltaProveedor.setText("Alta a Proveedor");
         btnDarAltaProveedor.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 127, 252), 2, true));
+        btnDarAltaProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDarAltaProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDarAltaProveedorActionPerformed(evt);
@@ -63,6 +64,7 @@ public class Proveedores extends javax.swing.JPanel {
         btnConsultarProveedor.setForeground(new java.awt.Color(102, 127, 252));
         btnConsultarProveedor.setText("Consultar un Proveedor");
         btnConsultarProveedor.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 127, 252), 2, true));
+        btnConsultarProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConsultarProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConsultarProveedorActionPerformed(evt);
@@ -81,6 +83,7 @@ public class Proveedores extends javax.swing.JPanel {
         btnAsociarProductoProveedor.setForeground(new java.awt.Color(102, 127, 252));
         btnAsociarProductoProveedor.setText("Asociar Productos a Proveedores");
         btnAsociarProductoProveedor.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 127, 252), 2, true));
+        btnAsociarProductoProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;

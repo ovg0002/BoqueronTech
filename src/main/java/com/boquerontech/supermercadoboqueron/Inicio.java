@@ -31,14 +31,15 @@ public class Inicio extends javax.swing.JFrame {
     public Inicio() {
         initComponents();
         setExtendedState(Inicio.MAXIMIZED_BOTH);
+        colocarPanel(new pnlInicio());
+        seleccionarBoton(btnInicio);
     }
     
     public Inicio(String user, String password) {
         initComponents();
         setExtendedState(Inicio.MAXIMIZED_BOTH);
+        colocarPanel(new pnlInicio());
         seleccionarBoton(btnInicio);
-        
- 
     }
     
 

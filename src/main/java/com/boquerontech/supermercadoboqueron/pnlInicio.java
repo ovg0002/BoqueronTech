@@ -59,28 +59,25 @@ public class pnlInicio extends javax.swing.JPanel {
         pnlStock.setLayout(new java.awt.BorderLayout());
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Stock Bajo");
         pnlStock.add(jLabel4, java.awt.BorderLayout.PAGE_START);
 
         jScrollPane1.setBorder(null);
 
-        jTable1.setBackground(new java.awt.Color(255, 255, 255));
-        jTable1.setForeground(new java.awt.Color(0, 0, 0));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "", "Producto", "ventas medias", "stock actual"
+                "Producto", "ventas medias", "stock actual"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -99,7 +96,6 @@ public class pnlInicio extends javax.swing.JPanel {
         pnlIngresos.setLayout(new java.awt.GridBagLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Ingresos del dia");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -108,7 +104,6 @@ public class pnlInicio extends javax.swing.JPanel {
         pnlIngresos.add(jLabel2, gridBagConstraints);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("12345.12€");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -118,10 +113,10 @@ public class pnlInicio extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(8, 8, 8, 8);
         pnlIngresos.add(jLabel3, gridBagConstraints);
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setForeground(new java.awt.Color(100, 120, 200));
         jButton1.setText("RELIZAR VENTA");
         jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -131,10 +126,10 @@ public class pnlInicio extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(8, 8, 7, 8);
         pnlIngresos.add(jButton1, gridBagConstraints);
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setForeground(new java.awt.Color(100, 120, 200));
         jButton2.setText("NUEVO CLIENTE");
         jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -144,10 +139,10 @@ public class pnlInicio extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(8, 8, 7, 8);
         pnlIngresos.add(jButton2, gridBagConstraints);
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setForeground(new java.awt.Color(100, 120, 200));
         jButton3.setText("AÑADIR PRODUCTO");
         jButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -177,17 +172,14 @@ public class pnlInicio extends javax.swing.JPanel {
 
         lblName.setBackground(new java.awt.Color(233, 253, 253));
         lblName.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblName.setForeground(new java.awt.Color(0, 0, 0));
         lblName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblName.setText("Inicio");
         lblName.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         pnlHeader.add(lblName, java.awt.BorderLayout.CENTER);
 
         pnlUser1.setBackground(new java.awt.Color(233, 253, 253));
-        pnlUser1.setForeground(new java.awt.Color(0, 0, 0));
         pnlUser1.setLayout(new java.awt.GridBagLayout());
 
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("ico");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -199,7 +191,6 @@ public class pnlInicio extends javax.swing.JPanel {
         pnlUser1.add(jLabel8, gridBagConstraints);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Nombre Empleado");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -207,7 +198,6 @@ public class pnlInicio extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         pnlUser1.add(jLabel9, gridBagConstraints);
 
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Rol Empleado");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
