@@ -45,10 +45,11 @@ public class EliminarEmpleado extends javax.swing.JPanel {
         fechaIncorporacionLbl = new javax.swing.JLabel();
         tlfLbl = new javax.swing.JLabel();
         sueldoLbl = new javax.swing.JLabel();
-        buscarTxt = new javax.swing.JTextField();
+        searchLblIcon = new javax.swing.JLabel();
+        searchTxt = new javax.swing.JTextField();
         pnlBotones = new javax.swing.JPanel();
-        cancelBtn = new javax.swing.JButton();
-        darBajaBtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(233, 253, 253));
         setLayout(new java.awt.BorderLayout());
@@ -198,64 +199,93 @@ public class EliminarEmpleado extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
         jPanel3.add(sueldoLbl, gridBagConstraints);
 
-        buscarTxt.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        buscarTxt.setText("jTextField1");
+        searchLblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_search.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel3.add(searchLblIcon, gridBagConstraints);
+
+        searchTxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        searchTxt.setText("Buscador");
+        searchTxt.setMargin(new java.awt.Insets(2, 25, 2, 6));
+        searchTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTxtActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 15, 0);
-        jPanel3.add(buscarTxt, gridBagConstraints);
+        gridBagConstraints.ipadx = 30;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
+        jPanel3.add(searchTxt, gridBagConstraints);
 
         add(jPanel3, java.awt.BorderLayout.CENTER);
 
         pnlBotones.setBackground(new java.awt.Color(233, 253, 253));
         pnlBotones.setLayout(new java.awt.GridBagLayout());
 
-        cancelBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        cancelBtn.setText("Cancelar");
-        cancelBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(117, 117, 117));
+        jButton1.setText("Cancelar");
+        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(117, 117, 117), 1, true));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.ipadx = 25;
+        gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(20, 50, 20, 50);
-        pnlBotones.add(cancelBtn, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(10, 20, 20, 20);
+        pnlBotones.add(jButton1, gridBagConstraints);
 
-        darBajaBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        darBajaBtn.setText("Dar de baja");
-        darBajaBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        darBajaBtn.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 121, 107));
+        jButton2.setText("Dar de Baja");
+        jButton2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                darBajaBtnActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.ipadx = 25;
+        gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(20, 50, 20, 50);
-        pnlBotones.add(darBajaBtn, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(10, 20, 20, 20);
+        pnlBotones.add(jButton2, gridBagConstraints);
 
         add(pnlBotones, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void darBajaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darBajaBtnActionPerformed
+    private void searchTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchTxtActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         JOptionPane.showConfirmDialog(
-        this,
-        "Estas seguro de eliminar?",
-        "Confirmar Eliminacion",
-        JOptionPane.OK_CANCEL_OPTION,
-        JOptionPane.WARNING_MESSAGE);
-    }//GEN-LAST:event_darBajaBtnActionPerformed
+            this,
+            "Estas seguro de eliminar?",
+            "Confirmar Eliminacion",
+            JOptionPane.OK_CANCEL_OPTION,
+            JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField buscarTxt;
-    private javax.swing.JButton cancelBtn;
     private javax.swing.JLabel codEmpleadoLbl;
-    private javax.swing.JButton darBajaBtn;
     private javax.swing.JLabel dniLbl;
     private javax.swing.JLabel fechaIncorporacionLbl;
     private javax.swing.JLabel fechaNacimientoLbl;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -267,6 +297,8 @@ public class EliminarEmpleado extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel nombreLbl;
     private javax.swing.JPanel pnlBotones;
+    private javax.swing.JLabel searchLblIcon;
+    private javax.swing.JTextField searchTxt;
     private javax.swing.JLabel sueldoLbl;
     private javax.swing.JLabel tlfLbl;
     // End of variables declaration//GEN-END:variables

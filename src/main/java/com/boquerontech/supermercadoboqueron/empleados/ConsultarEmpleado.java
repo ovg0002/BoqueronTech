@@ -45,11 +45,12 @@ public class ConsultarEmpleado extends javax.swing.JPanel {
         fechaIncorpResultLbl = new javax.swing.JLabel();
         telefResultLbl = new javax.swing.JLabel();
         sueldoResultLbl = new javax.swing.JLabel();
-        buscarTxt = new javax.swing.JTextField();
         empleadosScroll = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        searchLblIcon = new javax.swing.JLabel();
+        searchTxt = new javax.swing.JTextField();
         pnlBotones = new javax.swing.JPanel();
-        cerrarBtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(233, 253, 253));
         setLayout(new java.awt.BorderLayout());
@@ -199,14 +200,6 @@ public class ConsultarEmpleado extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         mainPnl.add(sueldoResultLbl, gridBagConstraints);
 
-        buscarTxt.setText("jTextField1");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
-        mainPnl.add(buscarTxt, gridBagConstraints);
-
         empleadosScroll.setBorder(null);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -239,23 +232,59 @@ public class ConsultarEmpleado extends javax.swing.JPanel {
         gridBagConstraints.weighty = 0.5;
         mainPnl.add(empleadosScroll, gridBagConstraints);
 
+        searchLblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_search.png"))); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        mainPnl.add(searchLblIcon, gridBagConstraints);
+
+        searchTxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        searchTxt.setText("Buscador");
+        searchTxt.setMargin(new java.awt.Insets(2, 25, 2, 6));
+        searchTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTxtActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 30;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
+        mainPnl.add(searchTxt, gridBagConstraints);
+
         add(mainPnl, java.awt.BorderLayout.CENTER);
 
         pnlBotones.setBackground(new java.awt.Color(233, 253, 253));
-        pnlBotones.setLayout(new java.awt.BorderLayout());
+        pnlBotones.setLayout(new java.awt.GridBagLayout());
 
-        cerrarBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        cerrarBtn.setText("Cerrar");
-        cerrarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        pnlBotones.add(cerrarBtn, java.awt.BorderLayout.WEST);
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(117, 117, 117));
+        jButton1.setText("Cancelar");
+        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(117, 117, 117), 1, true));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.ipadx = 25;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 20, 20, 20);
+        pnlBotones.add(jButton1, gridBagConstraints);
 
         add(pnlBotones, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void searchTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchTxtActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField buscarTxt;
-    private javax.swing.JButton cerrarBtn;
     private javax.swing.JLabel codEmplLbl;
     private javax.swing.JLabel codEmplResultLbl;
     private javax.swing.JLabel dniLbl;
@@ -265,11 +294,14 @@ public class ConsultarEmpleado extends javax.swing.JPanel {
     private javax.swing.JLabel fechaIncorpResultLbl;
     private javax.swing.JLabel fechaNaciLbl;
     private javax.swing.JLabel fechaNaciResultLbl;
+    private javax.swing.JButton jButton1;
     private javax.swing.JTable jTable1;
     private javax.swing.JPanel mainPnl;
     private javax.swing.JLabel nombreLbl;
     private javax.swing.JLabel nombreResultLbl;
     private javax.swing.JPanel pnlBotones;
+    private javax.swing.JLabel searchLblIcon;
+    private javax.swing.JTextField searchTxt;
     private javax.swing.JLabel sueldoLbl;
     private javax.swing.JLabel sueldoResultLbl;
     private javax.swing.JLabel telefLbl;

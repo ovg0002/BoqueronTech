@@ -45,8 +45,8 @@ public class ConsultarCliente extends javax.swing.JPanel {
         puntosTxt = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        searchLblIcon = new javax.swing.JLabel();
+        searchTxt = new javax.swing.JTextField();
         btnPnl = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
 
@@ -231,19 +231,19 @@ public class ConsultarCliente extends javax.swing.JPanel {
         gridBagConstraints.weighty = 0.5;
         mainPnl.add(jScrollPane1, gridBagConstraints);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_search.png"))); // NOI18N
+        searchLblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_search.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        mainPnl.add(jLabel1, gridBagConstraints);
+        mainPnl.add(searchLblIcon, gridBagConstraints);
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField2.setText("Buscador");
-        jTextField2.setMargin(new java.awt.Insets(2, 25, 2, 6));
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        searchTxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        searchTxt.setText("Buscador");
+        searchTxt.setMargin(new java.awt.Insets(2, 25, 2, 6));
+        searchTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                searchTxtActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -254,7 +254,7 @@ public class ConsultarCliente extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
-        mainPnl.add(jTextField2, gridBagConstraints);
+        mainPnl.add(searchTxt, gridBagConstraints);
 
         add(mainPnl, java.awt.BorderLayout.CENTER);
 
@@ -279,9 +279,9 @@ public class ConsultarCliente extends javax.swing.JPanel {
         add(btnPnl, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void searchTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_searchTxtActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -295,15 +295,15 @@ public class ConsultarCliente extends javax.swing.JPanel {
     private javax.swing.JLabel fechaNacimientoLbl;
     private javax.swing.JLabel fechaNacimientoTxt;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel mainPnl;
     private javax.swing.JLabel nombreCompletoLbl;
     private javax.swing.JLabel nombreCompletoTxt;
     private javax.swing.JLabel puntosLbl;
     private javax.swing.JLabel puntosTxt;
+    private javax.swing.JLabel searchLblIcon;
+    private javax.swing.JTextField searchTxt;
     private javax.swing.JLabel telefonoLbl;
     private javax.swing.JLabel telefonoTxt;
     private javax.swing.JLabel tituloLbl;

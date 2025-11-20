@@ -168,7 +168,7 @@ public class Inventario extends javax.swing.JPanel {
 
         eliminarProductoBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         eliminarProductoBtn.setText("Eliminar Producto");
-        eliminarProductoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        eliminarProductoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 5);
         bottomPanel.add(eliminarProductoBtn, gridBagConstraints);
@@ -181,14 +181,14 @@ public class Inventario extends javax.swing.JPanel {
 
         anadirProductoBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         anadirProductoBtn.setText("Añadir Producto");
-        anadirProductoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        anadirProductoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(20, 5, 20, 5);
         bottomPanel.add(anadirProductoBtn, gridBagConstraints);
 
         pedidosBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         pedidosBtn.setText("Pedidos");
-        pedidosBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pedidosBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(20, 5, 20, 0);
         bottomPanel.add(pedidosBtn, gridBagConstraints);
@@ -209,19 +209,19 @@ public class Inventario extends javax.swing.JPanel {
         add(mainPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buscarTxtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_buscarTxtFocusGained
-        if (buscarTxt.getText().equals("Buscar")) {
-            buscarTxt.setText("");
-            buscarTxt.setForeground(new java.awt.Color(0, 0, 0)); // texto normal
-        }
-    }//GEN-LAST:event_buscarTxtFocusGained
-
     private void buscarTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_buscarTxtFocusLost
         if (buscarTxt.getText().trim().isEmpty()) {
             buscarTxt.setText("Buscar");
             buscarTxt.setForeground(new java.awt.Color(150, 150, 150)); // texto placeholder gris
         }
     }//GEN-LAST:event_buscarTxtFocusLost
+
+    private void buscarTxtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_buscarTxtFocusGained
+        if (buscarTxt.getText().equals("Buscar")) {
+            buscarTxt.setText("");
+            buscarTxt.setForeground(new java.awt.Color(0, 0, 0)); // texto normal
+        }
+    }//GEN-LAST:event_buscarTxtFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
