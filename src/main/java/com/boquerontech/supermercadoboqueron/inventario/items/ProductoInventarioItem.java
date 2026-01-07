@@ -4,20 +4,77 @@
  */
 package com.boquerontech.supermercadoboqueron.inventario.items;
 
+import com.boquerontech.supermercadoboqueron.inventario.Inventario;
+import com.boquerontech.supermercadoboqueron.productos.Producto;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
+import javax.swing.SwingUtilities;
 
 /**
  *
  * @author velag
  */
-public class ProductoInventarioItem extends javax.swing.JPanel {
-
+public class ProductoInventarioItem extends javax.swing.JPanel {    
+    private JPopupMenu popup = new JPopupMenu();
+    private Inventario inventario;
+    
+    private Producto producto;
+    
     /**
      * Creates new form ProductoInventarioItem
      */
-    public ProductoInventarioItem() {
+    public ProductoInventarioItem(Inventario inventario, Producto prod) {
         initComponents();
+        
+        this.inventario = inventario;
+        
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (SwingUtilities.isLeftMouseButton(e)) {
+                    // Abrir el panel de configuración del producto
+                    
+                } else if (SwingUtilities.isRightMouseButton(e)) {
+                    // Abrir el popup para acciones
+                    showPopup(e);
+                }
+            }
+            
+        });
+        
+        producto = prod;
+        
+        nombreProducto.setText(prod.getNombre());
+        stockProducto.setText(String.valueOf(prod.getStock()));
+    }
+    
+    private void showPopup(MouseEvent e) {
+        popup.removeAll();
+        
+        JMenuItem eliminarProd = new JMenuItem("Eliminar Producto");
+        
+        popup.add(eliminarProd).addActionListener(event -> eliminar());
+        
+        popup.show(e.getComponent(), e.getX(), e.getY());
+    }
+    
+    private void eliminar() {
+        int confirmacion = JOptionPane.showConfirmDialog(
+                this,
+                "¿Está seguro de eliminar el producto \"" + nombreProducto.getText() + "\"?\nEsta acción no se puede deshacer.",
+                "Confirmar eliminación",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE // Icono de advertencia para borrados
+        );
+        
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            // Método para eliminar el producto de la bbdd
+            inventario.updateProductos(producto);
+        }
     }
 
     /**

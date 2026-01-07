@@ -5,7 +5,11 @@
 package com.boquerontech.supermercadoboqueron.inventario;
 
 import com.boquerontech.supermercadoboqueron.inventario.items.ProductoInventarioItem;
-import java.awt.GridLayout;
+import com.boquerontech.supermercadoboqueron.productos.Producto;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+import javax.swing.JPanel;
 
 /**
  *
@@ -14,31 +18,77 @@ import java.awt.GridLayout;
 public class Inventario extends javax.swing.JPanel {
 
     // SOLO PARA PROBAR
-    private int numProductos = 100;
+    private final int numProductos = 42;
     
-    private byte maxProdPagina = 20;
-    private int restantes;
-    private int indexParado;
+    private final byte maxProdPagina = 20;
     
-    /**
+    
+    
+    // --------- ESTAS CAMBIAN SEGÚN LA BBDD ---------
+    private final List<Producto> productosLista = crearProductos();
+    
+    /*
      * Creates new form Inventario
      */
     public Inventario() {
         initComponents();
+        
         rellenarConProductos();
     }
+    
+    
 
-    // Esta lógica será más compleja cuanto metamos el tema de sacar la info de la bbdd
-    private void rellenarConProductos() {
+    // Prueba de productos falsos
+    private List<Producto> crearProductos() {
+        List<Producto> productos = new ArrayList<>();
+        
         for (int i = 1; i <= numProductos; i++) {
-            if (i > maxProdPagina) {
-                restantes = numProductos - maxProdPagina;
-                indexParado = i;
-                System.out.println(restantes);
-                break;
-            }
-            mainPanel.add(new ProductoInventarioItem());
+            System.out.println("Creando producto " + i);
+            productos.add(
+                new Producto(i,
+                    "Producto " + i,
+                    ThreadLocalRandom.current().nextInt(1, 102)
+                )
+            );
         }
+        
+        return productos;
+    }
+    
+    private void rellenarConProductos() {
+        mainPanel.removeAll();
+
+        int paginaActual = (Integer) paginaSpin.getValue();
+        
+        int inicio = (paginaActual - 1) * maxProdPagina;
+        
+        int fin = Math.min(inicio + maxProdPagina, productosLista.size());
+
+        for (int i = inicio; i < fin; i++) {
+            Producto p = productosLista.get(i);
+            mainPanel.add(new ProductoInventarioItem(this, p)); 
+        }
+
+        int productosPintados = fin - inicio;
+        int huecosFaltantes = maxProdPagina - productosPintados;
+        
+        for (int k = 0; k < huecosFaltantes; k++) {
+            JPanel vacio = new JPanel();
+            vacio.setOpaque(false);
+            mainPanel.add(vacio);
+        }
+
+        mainPanel.revalidate();
+        mainPanel.repaint();
+        
+        System.out.println("Página " + paginaActual + " pintada. Índices: " + inicio + " a " + fin);        
+    }
+    
+    public void updateProductos(Producto productoEliminar) {
+        this.productosLista.remove(productoEliminar);
+        System.out.println(productosLista);
+        
+        rellenarConProductos();
     }
     
     /**
@@ -55,15 +105,19 @@ public class Inventario extends javax.swing.JPanel {
         buscarTxt = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        trabajadorPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        trabajadorPanel = new javax.swing.JPanel();
+        pnlUser = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
         bottomPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        eliminarProductoBtn = new javax.swing.JButton();
-        jSpinner1 = new javax.swing.JSpinner();
+        paginaSpin = new javax.swing.JSpinner();
         anadirProductoBtn = new javax.swing.JButton();
         pedidosBtn = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        atrasBtn = new javax.swing.JButton();
+        alanteBtn = new javax.swing.JButton();
         mainPanel = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(233, 253, 253));
@@ -99,7 +153,7 @@ public class Inventario extends javax.swing.JPanel {
         jComboBox1.setPreferredSize(new java.awt.Dimension(200, 31));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 40);
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 0);
         topPanel.add(jComboBox1, gridBagConstraints);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -110,27 +164,6 @@ public class Inventario extends javax.swing.JPanel {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 0);
         topPanel.add(jLabel3, gridBagConstraints);
-
-        trabajadorPanel.setBackground(new java.awt.Color(204, 204, 204));
-        trabajadorPanel.setPreferredSize(new java.awt.Dimension(200, 50));
-
-        javax.swing.GroupLayout trabajadorPanelLayout = new javax.swing.GroupLayout(trabajadorPanel);
-        trabajadorPanel.setLayout(trabajadorPanelLayout);
-        trabajadorPanelLayout.setHorizontalGroup(
-            trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        trabajadorPanelLayout.setVerticalGroup(
-            trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 40, 20, 20);
-        topPanel.add(trabajadorPanel, gridBagConstraints);
 
         jPanel1.setMaximumSize(new java.awt.Dimension(210, 31));
         jPanel1.setMinimumSize(new java.awt.Dimension(210, 31));
@@ -149,57 +182,137 @@ public class Inventario extends javax.swing.JPanel {
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 1;
+        topPanel.add(jPanel1, gridBagConstraints);
+
+        trabajadorPanel.setBackground(new java.awt.Color(204, 204, 204));
+        trabajadorPanel.setPreferredSize(new java.awt.Dimension(200, 60));
+
+        pnlUser.setBackground(new java.awt.Color(255, 255, 255));
+        pnlUser.setBorder(javax.swing.BorderFactory.createLineBorder(null));
+        pnlUser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        pnlUser.setPreferredSize(new java.awt.Dimension(161, 60));
+        pnlUser.setLayout(new java.awt.GridBagLayout());
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/img_torrente.png"))); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        pnlUser.add(jLabel7, gridBagConstraints);
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setText("Torrente Segura");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        pnlUser.add(jLabel8, gridBagConstraints);
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel9.setText("Jefe Boqueron");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        pnlUser.add(jLabel9, gridBagConstraints);
+
+        javax.swing.GroupLayout trabajadorPanelLayout = new javax.swing.GroupLayout(trabajadorPanel);
+        trabajadorPanel.setLayout(trabajadorPanelLayout);
+        trabajadorPanelLayout.setHorizontalGroup(
+            trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+            .addGroup(trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(pnlUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        trabajadorPanelLayout.setVerticalGroup(
+            trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+            .addGroup(trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(pnlUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 20);
+        topPanel.add(trabajadorPanel, gridBagConstraints);
+
+        jSeparator1.setMaximumSize(new java.awt.Dimension(200, 0));
+        jSeparator1.setMinimumSize(new java.awt.Dimension(200, 0));
+        jSeparator1.setPreferredSize(new java.awt.Dimension(200, 0));
+        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
-        topPanel.add(jPanel1, gridBagConstraints);
+        topPanel.add(jSeparator1, gridBagConstraints);
 
         add(topPanel, java.awt.BorderLayout.PAGE_START);
 
         bottomPanel.setOpaque(false);
         bottomPanel.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setText("jLabel1");
+        paginaSpin.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        paginaSpin.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        paginaSpin.setEnabled(false);
+        paginaSpin.setPreferredSize(new java.awt.Dimension(100, 31));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 0);
-        bottomPanel.add(jLabel1, gridBagConstraints);
-
-        eliminarProductoBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        eliminarProductoBtn.setText("Eliminar Producto");
-        eliminarProductoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 5);
-        bottomPanel.add(eliminarProductoBtn, gridBagConstraints);
-
-        jSpinner1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(20, 5, 20, 5);
-        bottomPanel.add(jSpinner1, gridBagConstraints);
+        bottomPanel.add(paginaSpin, gridBagConstraints);
 
         anadirProductoBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         anadirProductoBtn.setText("Añadir Producto");
-        anadirProductoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        anadirProductoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(20, 5, 20, 5);
         bottomPanel.add(anadirProductoBtn, gridBagConstraints);
 
         pedidosBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         pedidosBtn.setText("Pedidos");
-        pedidosBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        pedidosBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(20, 5, 20, 0);
         bottomPanel.add(pedidosBtn, gridBagConstraints);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setText("CAMBIAR POR BOTON");
+        atrasBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_atras.png"))); // NOI18N
+        atrasBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        atrasBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                retrocederPagina(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 5);
+        bottomPanel.add(atrasBtn, gridBagConstraints);
+
+        alanteBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_alante.png"))); // NOI18N
+        alanteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        alanteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pasarPagina(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 20);
-        bottomPanel.add(jLabel2, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(20, 5, 20, 20);
+        bottomPanel.add(alanteBtn, gridBagConstraints);
 
         add(bottomPanel, java.awt.BorderLayout.PAGE_END);
 
@@ -223,20 +336,43 @@ public class Inventario extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_buscarTxtFocusGained
 
+    private void pasarPagina(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasarPagina
+        int paginaActual = (Integer) paginaSpin.getValue();
+        int totalItems = productosLista.size();
+        
+        if (paginaActual * maxProdPagina < totalItems) {
+            paginaSpin.setValue(paginaActual + 1);
+            rellenarConProductos();
+        }
+    }//GEN-LAST:event_pasarPagina
+
+    private void retrocederPagina(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retrocederPagina
+        int paginaActual = (Integer) paginaSpin.getValue();
+        
+        if (paginaActual > 1) {
+            paginaSpin.setValue(paginaActual - 1);
+            rellenarConProductos();
+        }
+    }//GEN-LAST:event_retrocederPagina
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton alanteBtn;
     private javax.swing.JButton anadirProductoBtn;
+    private javax.swing.JButton atrasBtn;
     private javax.swing.JPanel bottomPanel;
     private javax.swing.JTextField buscarTxt;
-    private javax.swing.JButton eliminarProductoBtn;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JSpinner paginaSpin;
     private javax.swing.JButton pedidosBtn;
+    private javax.swing.JPanel pnlUser;
     private javax.swing.JPanel topPanel;
     private javax.swing.JPanel trabajadorPanel;
     // End of variables declaration//GEN-END:variables

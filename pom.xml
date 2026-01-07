@@ -8,7 +8,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>24</maven.compiler.release>
-        <exec.mainClass>com.boquerontech.supermercadoboqueron.login.Login</exec.mainClass>
+        <!--<exec.mainClass>com.boquerontech.supermercadoboqueron.login.Login</exec.mainClass>-->
+        <exec.mainClass>com.boquerontech.supermercadoboqueron.Inicio</exec.mainClass>
     </properties>
     <dependencies>
         <dependency>
