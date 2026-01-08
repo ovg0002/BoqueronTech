@@ -43,7 +43,7 @@ public class Inventario extends javax.swing.JPanel {
         List<Producto> productos = new ArrayList<>();
         
         for (int i = 1; i <= numProductos; i++) {
-            System.out.println("Creando producto " + i);
+            //System.out.println("Creando producto " + i);
             productos.add(
                 new Producto(i,
                     "Producto " + i,
@@ -81,7 +81,7 @@ public class Inventario extends javax.swing.JPanel {
         mainPanel.revalidate();
         mainPanel.repaint();
         
-        System.out.println("Página " + paginaActual + " pintada. Índices: " + inicio + " a " + fin);        
+        //System.out.println("Página " + paginaActual + " pintada. Índices: " + inicio + " a " + fin);        
     }
     
     public void updateProductos(Producto productoEliminar) {

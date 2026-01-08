@@ -22,13 +22,15 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         // Extension Maxima de Ventana
-        setExtendedState(Login.MAXIMIZED_BOTH);
+        //setExtendedState(Login.MAXIMIZED_BOTH);
         // Le asignamos el texto siguiente
         tfPassword.setText("Introduzca una contraseña");
         // Le damos el color gray
         tfPassword.setForeground(Color.GRAY);
         // Mostrat texto visible
         tfPassword.setEchoChar((char)0);
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     /**
