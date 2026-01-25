@@ -4,37 +4,27 @@
  */
 package com.boquerontech.supermercadoboqueron.productos;
 
-import com.formdev.flatlaf.FlatLightLaf;
 import java.util.List;
 
 /**
  *
  * @author velag
  */
-public class ProductoInfoDialog extends javax.swing.JDialog {
-    private boolean modificacion = false;
+public class NuevoProducto extends javax.swing.JDialog {
     
-    private Producto producto;
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ProductoInfoDialog.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(NuevoProducto.class.getName());
 
-    public ProductoInfoDialog(java.awt.Frame parent, boolean modal) {
+    public NuevoProducto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(parent);
     }
     
-    public ProductoInfoDialog(java.awt.Frame parent, boolean modal, Producto producto, List<Categoria> categorias) {
+    public NuevoProducto(java.awt.Frame parent, boolean modal, List<Categoria> categorias) {
         super(parent, modal);
         initComponents();
-        this.producto = producto;
-        this.setTitle("Información de " + producto.getNombre());
-        
         setLocationRelativeTo(parent);
-        
-        setDialogTitle(producto);
-        setProductData(producto);
-        
-        for (Categoria cat : categorias) categoriasCombo.addItem(cat.getNombre());
+        for (Categoria cat : categorias) this.categorias.addItem(cat.getNombre());
     }
 
     /**
@@ -50,8 +40,6 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         tituloDialog = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        modificarBtn = new javax.swing.JButton();
-        eliminarBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -63,27 +51,24 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         productPrice = new javax.swing.JTextField();
         currentStock = new javax.swing.JTextField();
         minStock = new javax.swing.JTextField();
-        productoCategory = new javax.swing.JTextField();
         productImage = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         acceptBtn = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
-        categoriasCombo = new javax.swing.JComboBox<>();
+        categorias = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setBackground(new java.awt.Color(233, 253, 253));
+        setTitle("Nuevo Producto");
         setMaximumSize(new java.awt.Dimension(600, 450));
         setMinimumSize(new java.awt.Dimension(600, 450));
-        setModal(true);
         setPreferredSize(new java.awt.Dimension(600, 450));
-        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(233, 253, 253));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         tituloDialog.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         tituloDialog.setForeground(new java.awt.Color(0, 0, 0));
-        tituloDialog.setText("Información de {nombre}");
+        tituloDialog.setText("Crear nuevo producto");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -97,46 +82,17 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         jPanel2.setBackground(new java.awt.Color(233, 253, 253));
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
-        modificarBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        modificarBtn.setText("Modificar Producto");
-        modificarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        modificarBtn.setMaximumSize(new java.awt.Dimension(160, 27));
-        modificarBtn.setMinimumSize(new java.awt.Dimension(160, 27));
-        modificarBtn.setPreferredSize(new java.awt.Dimension(160, 27));
-        modificarBtn.addActionListener(this::habilitarModificacion);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(30, 10, 5, 30);
-        jPanel2.add(modificarBtn, gridBagConstraints);
-
-        eliminarBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        eliminarBtn.setText("Eliminar Producto");
-        eliminarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        eliminarBtn.setMaximumSize(new java.awt.Dimension(160, 27));
-        eliminarBtn.setMinimumSize(new java.awt.Dimension(160, 27));
-        eliminarBtn.setPreferredSize(new java.awt.Dimension(160, 27));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 30);
-        jPanel2.add(eliminarBtn, gridBagConstraints);
-
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_biometric.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.insets = new java.awt.Insets(5, 30, 5, 10);
         jPanel2.add(jLabel1, gridBagConstraints);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_name.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.insets = new java.awt.Insets(5, 30, 5, 10);
         jPanel2.add(jLabel3, gridBagConstraints);
 
@@ -144,28 +100,28 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         jLabel4.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.insets = new java.awt.Insets(5, 30, 30, 10);
         jPanel2.add(jLabel4, gridBagConstraints);
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_chart_up.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 10);
         jPanel2.add(jLabel5, gridBagConstraints);
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_chart_down.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 10);
         jPanel2.add(jLabel6, gridBagConstraints);
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_categoria.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.insets = new java.awt.Insets(5, 10, 30, 10);
         jPanel2.add(jLabel7, gridBagConstraints);
 
@@ -177,82 +133,66 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         productId.setPreferredSize(new java.awt.Dimension(150, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 10);
         jPanel2.add(productId, gridBagConstraints);
 
         productName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         productName.setText("nombre");
-        productName.setEnabled(false);
         productName.setMaximumSize(new java.awt.Dimension(150, 26));
         productName.setMinimumSize(new java.awt.Dimension(150, 26));
         productName.setPreferredSize(new java.awt.Dimension(150, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 10);
         jPanel2.add(productName, gridBagConstraints);
 
         productPrice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         productPrice.setText("precio");
-        productPrice.setEnabled(false);
         productPrice.setMaximumSize(new java.awt.Dimension(150, 26));
         productPrice.setMinimumSize(new java.awt.Dimension(150, 26));
         productPrice.setPreferredSize(new java.awt.Dimension(150, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.insets = new java.awt.Insets(5, 10, 30, 10);
         jPanel2.add(productPrice, gridBagConstraints);
 
         currentStock.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        currentStock.setText("stock");
+        currentStock.setText("0");
         currentStock.setEnabled(false);
         currentStock.setMaximumSize(new java.awt.Dimension(150, 26));
         currentStock.setMinimumSize(new java.awt.Dimension(150, 26));
         currentStock.setPreferredSize(new java.awt.Dimension(150, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 30);
         jPanel2.add(currentStock, gridBagConstraints);
 
         minStock.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         minStock.setText("minStock");
-        minStock.setEnabled(false);
         minStock.setMaximumSize(new java.awt.Dimension(150, 26));
         minStock.setMinimumSize(new java.awt.Dimension(150, 26));
         minStock.setPreferredSize(new java.awt.Dimension(150, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 30);
         jPanel2.add(minStock, gridBagConstraints);
-
-        productoCategory.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        productoCategory.setText("categoria");
-        productoCategory.setEnabled(false);
-        productoCategory.setMaximumSize(new java.awt.Dimension(150, 26));
-        productoCategory.setMinimumSize(new java.awt.Dimension(150, 26));
-        productoCategory.setPreferredSize(new java.awt.Dimension(150, 26));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(5, 10, 30, 30);
-        jPanel2.add(productoCategory, gridBagConstraints);
 
         productImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/img_vacio.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.insets = new java.awt.Insets(30, 30, 5, 10);
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.insets = new java.awt.Insets(30, 30, 30, 30);
         jPanel2.add(productImage, gridBagConstraints);
 
+        jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel3.setEnabled(false);
         jPanel3.setOpaque(false);
         jPanel3.setLayout(new java.awt.GridBagLayout());
@@ -260,7 +200,7 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         acceptBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         acceptBtn.setText("Confirmar");
         acceptBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        acceptBtn.addActionListener(this::confirmarAciton);
+        acceptBtn.addActionListener(this::acceptBtnconfirmarAciton);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -271,7 +211,7 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         cancelBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cancelBtn.setText("Cancelar");
         cancelBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cancelBtn.addActionListener(this::cancelAction);
+        cancelBtn.addActionListener(this::cancelBtncancelAction);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -280,80 +220,61 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         jPanel3.add(cancelBtn, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(5, 10, 15, 30);
+        gridBagConstraints.insets = new java.awt.Insets(30, 10, 15, 30);
         jPanel2.add(jPanel3, gridBagConstraints);
 
-        categoriasCombo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        categoriasCombo.setMaximumRowCount(5);
-        categoriasCombo.setMaximumSize(new java.awt.Dimension(150, 26));
-        categoriasCombo.setMinimumSize(new java.awt.Dimension(150, 26));
-        categoriasCombo.setPreferredSize(new java.awt.Dimension(150, 26));
+        categorias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        categorias.setMaximumRowCount(5);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(5, 10, 30, 30);
-        jPanel2.add(categoriasCombo, gridBagConstraints);
+        jPanel2.add(categorias, gridBagConstraints);
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void habilitarModificacion(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_habilitarModificacion
-        modificacion = true;
+    private void acceptBtnconfirmarAciton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptBtnconfirmarAciton
         
-        // Habilitar edicion
-        productName.setEnabled(true);
-        productPrice.setEnabled(true);
-        minStock.setEnabled(true);
-        productoCategory.setVisible(false);
-    }//GEN-LAST:event_habilitarModificacion
+    }//GEN-LAST:event_acceptBtnconfirmarAciton
 
-    private void cancelAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelAction
-        if (modificacion != true) return;
-        
-        // Deshabilitar edicion
-        productName.setEnabled(false);
-        productPrice.setEnabled(false);
-        minStock.setEnabled(false);
-        productoCategory.setVisible(true);
-        setProductData(producto);
-    }//GEN-LAST:event_cancelAction
-
-    private void confirmarAciton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarAciton
-        if (modificacion != true) return;
-        
-        // Deshabilitar edicion
-        productName.setEnabled(false);
-        productPrice.setEnabled(false);
-        minStock.setEnabled(false);
-        productoCategory.setEnabled(false);
-        productoCategory.setVisible(true);
-        
-        // Cambiar los datos en la BBDD
-        producto.setNombre(productName.getText());
-        producto.setPrecio((double)Double.valueOf(productPrice.getText()));
-        producto.setMinStock((int)Integer.valueOf(minStock.getText()));
-        // Enviar nuevas categorias a la bbdd
-        productoCategory.setText(String.valueOf(categoriasCombo.getSelectedItem()));
-    }//GEN-LAST:event_confirmarAciton
+    private void cancelBtncancelAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtncancelAction
+        this.dispose();
+    }//GEN-LAST:event_cancelBtncancelAction
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        FlatLightLaf.setup();
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                ProductoInfoDialog dialog = new ProductoInfoDialog(new javax.swing.JFrame(), true);
+                NuevoProducto dialog = new NuevoProducto(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -364,27 +285,12 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
             }
         });
     }
-    
-    // GETTER Y SETTER
-    private void setDialogTitle(Producto producto) {
-        tituloDialog.setText("Información de " + producto.getNombre());
-    }
-    
-    private void setProductData(Producto producto) {
-        productId.setText(String.valueOf(producto.getId()));
-        productName.setText(producto.getNombre());
-        productPrice.setText(String.valueOf(producto.getPrecio()));
-        currentStock.setText(String.valueOf(producto.getStock()));
-        minStock.setText(String.valueOf(producto.getMinStock()));
-        //productoCategory;
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton acceptBtn;
     private javax.swing.JButton cancelBtn;
-    private javax.swing.JComboBox<String> categoriasCombo;
+    private javax.swing.JComboBox<String> categorias;
     private javax.swing.JTextField currentStock;
-    private javax.swing.JButton eliminarBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -395,12 +301,10 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField minStock;
-    private javax.swing.JButton modificarBtn;
     private javax.swing.JTextField productId;
     private javax.swing.JLabel productImage;
     private javax.swing.JTextField productName;
     private javax.swing.JTextField productPrice;
-    private javax.swing.JTextField productoCategory;
     private javax.swing.JLabel tituloDialog;
     // End of variables declaration//GEN-END:variables
 }

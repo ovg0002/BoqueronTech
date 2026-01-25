@@ -4,44 +4,39 @@
  */
 package com.boquerontech.supermercadoboqueron.productos;
 
+import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  *
  * @author velag
  */
 public class Producto {
+    @Getter
     private int id;
+    
+    @Getter @Setter
     private String nombre;
+    
+    @Getter @Setter
+    private double precio;
+    
+    @Getter @Setter
     private int stock;
     
-    public Producto(int id, String nombre, int stock) {
+    @Getter @Setter
+    private int minStock;
+    
+    @Getter @Setter
+    private List<Categoria> categorias;
+
+    public Producto(int id, String nombre, double precio, int stock, int minStock, List<Categoria> categorias) {
         this.id = id;
         this.nombre = nombre;
+        this.precio = precio;
         this.stock = stock;
-    }
-
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
-    @Override
-    public String toString() {
-        return "Producto{" + "id=" + id + ", nombre=" + nombre + ", stock=" + stock + '}';
+        this.minStock = minStock;
+        this.categorias = categorias;
     }
 }

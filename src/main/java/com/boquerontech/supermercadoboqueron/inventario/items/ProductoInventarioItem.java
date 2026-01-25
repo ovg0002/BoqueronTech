@@ -4,14 +4,19 @@
  */
 package com.boquerontech.supermercadoboqueron.inventario.items;
 
+import com.boquerontech.supermercadoboqueron.Inicio;
 import com.boquerontech.supermercadoboqueron.inventario.Inventario;
+import com.boquerontech.supermercadoboqueron.productos.Categoria;
 import com.boquerontech.supermercadoboqueron.productos.Producto;
+import com.boquerontech.supermercadoboqueron.productos.ProductoInfoDialog;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
+import javax.swing.JSeparator;
 import javax.swing.SwingUtilities;
 
 /**
@@ -24,10 +29,7 @@ public class ProductoInventarioItem extends javax.swing.JPanel {
     
     private Producto producto;
     
-    /**
-     * Creates new form ProductoInventarioItem
-     */
-    public ProductoInventarioItem(Inventario inventario, Producto prod) {
+    public ProductoInventarioItem(Inventario inventario, Producto prod, List<Categoria> categorias) {
         initComponents();
         
         this.inventario = inventario;
@@ -40,7 +42,7 @@ public class ProductoInventarioItem extends javax.swing.JPanel {
                     
                 } else if (SwingUtilities.isRightMouseButton(e)) {
                     // Abrir el popup para acciones
-                    showPopup(e);
+                    showPopup(e, categorias);
                 }
             }
             
@@ -52,11 +54,16 @@ public class ProductoInventarioItem extends javax.swing.JPanel {
         stockProducto.setText(String.valueOf(prod.getStock()));
     }
     
-    private void showPopup(MouseEvent e) {
+    private void showPopup(MouseEvent e, List<Categoria> categorias) {
         popup.removeAll();
         
+        JMenuItem mostrarInfoProd = new JMenuItem("Ver Producto");
+        JSeparator separator = new JSeparator();
         JMenuItem eliminarProd = new JMenuItem("Eliminar Producto");
         
+        // TODO: Cambiar esto por mostrar un dialog con la info del prodcuto
+        popup.add(mostrarInfoProd).addActionListener(event -> mostrarInfo(categorias));
+        popup.add(separator);
         popup.add(eliminarProd).addActionListener(event -> eliminar());
         
         popup.show(e.getComponent(), e.getX(), e.getY());
@@ -75,6 +82,11 @@ public class ProductoInventarioItem extends javax.swing.JPanel {
             // Método para eliminar el producto de la bbdd
             inventario.updateProductos(producto);
         }
+    }
+    
+    private void mostrarInfo(List<Categoria> categorias) {
+        ProductoInfoDialog info = new ProductoInfoDialog(Inicio.getInstance(), true, producto, categorias);
+        info.setVisible(true);
     }
 
     /**
@@ -124,23 +136,13 @@ public class ProductoInventarioItem extends javax.swing.JPanel {
         add(iconProducto, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void setIconProducto(String rutaIcono) {
-        iconProducto.setIcon(new ImageIcon(getClass().getResource(rutaIcono)));
-    }
+    public void setIconProducto(String rutaIcono) {iconProducto.setIcon(new ImageIcon(getClass().getResource(rutaIcono)));}
 
-    public String getNombreProducto() {
-        return nombreProducto.getText().trim();
-    }
-    public void setNombreProducto(String nombreProducto) {
-        this.nombreProducto.setText(nombreProducto);
-    }
-
-    public Integer getStockProducto() {
-        return Integer.valueOf(stockProducto.getText().trim());
-    }
-    public void setStockProducto(Integer stockProducto) {
-        this.stockProducto.setText(String.valueOf(stockProducto));
-    }
+    public String getNombreProducto() {return nombreProducto.getText().trim();}
+    public void setNombreProducto(String nombreProducto) {this.nombreProducto.setText(nombreProducto);}
+    
+    public Integer getStockProducto() {return Integer.valueOf(stockProducto.getText().trim());}
+    public void setStockProducto(Integer stockProducto) {this.stockProducto.setText(String.valueOf(stockProducto));}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel iconProducto;
