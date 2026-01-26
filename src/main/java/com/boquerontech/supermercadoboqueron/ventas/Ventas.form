@@ -215,7 +215,7 @@
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/codigoBarras.png"/>
+                  <Image iconType="3" name="/images/icon_codigo_barras.png"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -259,7 +259,7 @@
                   <Font name="Segoe UI" size="18" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/proximo.png"/>
+                  <Image iconType="3" name="/images/icon_proximo.png"/>
                 </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Cursor Por defecto"/>
@@ -689,7 +689,6 @@
                     </Property>
                     <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                     <Property name="verticalScrollBarPolicy" type="int" value="22"/>
-                    <Property name="opaque" type="boolean" value="false"/>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">

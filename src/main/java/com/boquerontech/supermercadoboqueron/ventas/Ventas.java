@@ -221,7 +221,7 @@ public class Ventas extends javax.swing.JPanel {
         panelCodigoProd.setPreferredSize(new java.awt.Dimension(400, 40));
         panelCodigoProd.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/codigoBarras.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_codigo_barras.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 0);
@@ -249,7 +249,7 @@ public class Ventas extends javax.swing.JPanel {
         panelCodigoProd.add(codigoProductoTxt, gridBagConstraints);
 
         anadirProductoBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        anadirProductoBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/proximo.png"))); // NOI18N
+        anadirProductoBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_proximo.png"))); // NOI18N
         anadirProductoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         anadirProductoBtn.setMaximumSize(new java.awt.Dimension(40, 40));
         anadirProductoBtn.setMinimumSize(new java.awt.Dimension(40, 40));
@@ -496,7 +496,6 @@ public class Ventas extends javax.swing.JPanel {
         escaneadosScroll.setBackground(new java.awt.Color(255, 51, 51));
         escaneadosScroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         escaneadosScroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        escaneadosScroll.setOpaque(false);
 
         escaneadosPanelRellenar.setBackground(new java.awt.Color(255, 255, 255));
         escaneadosPanelRellenar.setLayout(new javax.swing.BoxLayout(escaneadosPanelRellenar, javax.swing.BoxLayout.Y_AXIS));

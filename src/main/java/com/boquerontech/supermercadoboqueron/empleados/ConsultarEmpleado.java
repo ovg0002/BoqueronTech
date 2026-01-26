@@ -64,7 +64,7 @@ public class ConsultarEmpleado extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.insets = new java.awt.Insets(5, 100, 15, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 15, 0);
         mainPnl.add(tituloLbl, gridBagConstraints);
 
         nombreLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N

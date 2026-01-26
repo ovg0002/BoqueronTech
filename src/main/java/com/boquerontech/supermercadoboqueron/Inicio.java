@@ -7,6 +7,7 @@ package com.boquerontech.supermercadoboqueron;
 import com.boquerontech.supermercadoboqueron.promociones.InicioPromoP;
 import com.boquerontech.supermercadoboqueron.inventario.Inventario;
 import com.boquerontech.supermercadoboqueron.clientes.GestionClientes;
+import com.boquerontech.supermercadoboqueron.database.DDBBConnector;
 import com.boquerontech.supermercadoboqueron.empleados.GestionEmpleado;
 import com.boquerontech.supermercadoboqueron.informes.InicioDocumentos;
 import com.boquerontech.supermercadoboqueron.proveedores.Proveedores;
@@ -22,24 +23,41 @@ import javax.swing.JPanel;
  * @author Adrian
  */
 public class Inicio extends javax.swing.JFrame {
+    // Instancia privada para el singleton
+    private static Inicio inicioInstance;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Inicio.class.getName());
 
     /**
      * Creates new form InicioBotones
      */
-    public Inicio() {
+    private Inicio() {
         initComponents();
         setExtendedState(Inicio.MAXIMIZED_BOTH);
         colocarPanel(new pnlInicio());
         seleccionarBoton(btnInicio);
     }
     
-    public Inicio(String user, String password) {
+    private Inicio(String user, String password) {
         initComponents();
         setExtendedState(Inicio.MAXIMIZED_BOTH);
         colocarPanel(new pnlInicio());
         seleccionarBoton(btnInicio);
+    }
+    
+    // SINGLETON
+    public static Inicio getInstance() {
+        if (inicioInstance == null) {
+            inicioInstance = new Inicio();
+        }
+        return inicioInstance;
+    }
+    
+    public static Inicio getInstance(String user, String password) {
+        if (inicioInstance == null) {
+            inicioInstance = new Inicio(user, password);
+        }
+        return inicioInstance;
     }
     
 
@@ -64,6 +82,11 @@ public class Inicio extends javax.swing.JFrame {
         contenidoPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                windowClosedAction(evt);
+            }
+        });
 
         pnlMain.setBackground(new java.awt.Color(255, 255, 255));
         pnlMain.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 220, 215)));
@@ -74,7 +97,7 @@ public class Inicio extends javax.swing.JFrame {
         btnInicio.setText("Inicio");
         btnInicio.setBorderPainted(false);
         btnInicio.setContentAreaFilled(false);
-        btnInicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnInicio.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnInicio.setFocusPainted(false);
         btnInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,7 +110,7 @@ public class Inicio extends javax.swing.JFrame {
         btnClientes.setText("Clientes");
         btnClientes.setBorderPainted(false);
         btnClientes.setContentAreaFilled(false);
-        btnClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnClientes.setFocusPainted(false);
         btnClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,7 +123,7 @@ public class Inicio extends javax.swing.JFrame {
         btnEmpleados.setText("Empleados");
         btnEmpleados.setBorderPainted(false);
         btnEmpleados.setContentAreaFilled(false);
-        btnEmpleados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEmpleados.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnEmpleados.setFocusPainted(false);
         btnEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,7 +136,7 @@ public class Inicio extends javax.swing.JFrame {
         btnVentas.setText("Ventas");
         btnVentas.setBorderPainted(false);
         btnVentas.setContentAreaFilled(false);
-        btnVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnVentas.setFocusPainted(false);
         btnVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,7 +149,7 @@ public class Inicio extends javax.swing.JFrame {
         btnInventario.setText("Inventario");
         btnInventario.setBorderPainted(false);
         btnInventario.setContentAreaFilled(false);
-        btnInventario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnInventario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnInventario.setFocusPainted(false);
         btnInventario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,7 +162,7 @@ public class Inicio extends javax.swing.JFrame {
         btnProveedores.setText("Proveedores");
         btnProveedores.setBorderPainted(false);
         btnProveedores.setContentAreaFilled(false);
-        btnProveedores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnProveedores.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnProveedores.setFocusPainted(false);
         btnProveedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,7 +175,7 @@ public class Inicio extends javax.swing.JFrame {
         btnPromociones.setText("Promociones");
         btnPromociones.setBorderPainted(false);
         btnPromociones.setContentAreaFilled(false);
-        btnPromociones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPromociones.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPromociones.setFocusPainted(false);
         btnPromociones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,7 +188,7 @@ public class Inicio extends javax.swing.JFrame {
         btnDocumentos.setText("Documentos");
         btnDocumentos.setBorderPainted(false);
         btnDocumentos.setContentAreaFilled(false);
-        btnDocumentos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDocumentos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnDocumentos.setFocusPainted(false);
         btnDocumentos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,6 +247,10 @@ public class Inicio extends javax.swing.JFrame {
         seleccionarBoton(btnDocumentos);
     }//GEN-LAST:event_btnDocumentosActionPerformed
 
+    private void windowClosedAction(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_windowClosedAction
+        DDBBConnector.shutdown();
+    }//GEN-LAST:event_windowClosedAction
+
     public void colocarPanel(JPanel panel) {
         contenidoPanel.removeAll();
         contenidoPanel.add(panel, BorderLayout.CENTER);
@@ -241,7 +268,6 @@ public class Inicio extends javax.swing.JFrame {
         // Marcar el nuevo botón como activo
         botonActivo = boton;
         botonActivo.setForeground(Color.BLUE);
-        
     }
     
     /**
@@ -249,11 +275,10 @@ public class Inicio extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        
         FlatLightLaf.setup();
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Inicio().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> Inicio.getInstance().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

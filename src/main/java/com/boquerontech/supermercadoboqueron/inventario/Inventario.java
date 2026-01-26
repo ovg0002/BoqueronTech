@@ -4,11 +4,14 @@
  */
 package com.boquerontech.supermercadoboqueron.inventario;
 
+import com.boquerontech.supermercadoboqueron.Inicio;
+import com.boquerontech.supermercadoboqueron.database.producto.CategoriaDAO;
+import com.boquerontech.supermercadoboqueron.database.producto.ProductoDAO;
 import com.boquerontech.supermercadoboqueron.inventario.items.ProductoInventarioItem;
+import com.boquerontech.supermercadoboqueron.productos.Categoria;
+import com.boquerontech.supermercadoboqueron.productos.NuevoProducto;
 import com.boquerontech.supermercadoboqueron.productos.Producto;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.JPanel;
 
 /**
@@ -18,14 +21,13 @@ import javax.swing.JPanel;
 public class Inventario extends javax.swing.JPanel {
 
     // SOLO PARA PROBAR
-    private final int numProductos = 42;
+    //private final int numProductos = 42;
     
     private final byte maxProdPagina = 20;
     
-    
-    
     // --------- ESTAS CAMBIAN SEGÚN LA BBDD ---------
-    private final List<Producto> productosLista = crearProductos();
+    private final List<Producto> productosLista = ProductoDAO.getProductsByMinCurrentStock(0);
+    private final List<Categoria> categoriasLista = CategoriaDAO.getAllCategories();
     
     /*
      * Creates new form Inventario
@@ -38,6 +40,17 @@ public class Inventario extends javax.swing.JPanel {
     
     
 
+    /*private List<Categoria> traerCategorias() {
+        List<Categoria> categorias = new ArrayList<>();
+        
+        for (int i = 0; i < 10; i++) {
+            categorias.add(
+                new Categoria(i, "Categoria " + i)
+            );
+        }
+        return categorias;
+    }
+    
     // Prueba de productos falsos
     private List<Producto> crearProductos() {
         List<Producto> productos = new ArrayList<>();
@@ -47,13 +60,15 @@ public class Inventario extends javax.swing.JPanel {
             productos.add(
                 new Producto(i,
                     "Producto " + i,
+                    ThreadLocalRandom.current().nextDouble(0.5, 20.0),
+                    ThreadLocalRandom.current().nextInt(1, 102),
                     ThreadLocalRandom.current().nextInt(1, 102)
                 )
             );
         }
         
         return productos;
-    }
+    }*/
     
     private void rellenarConProductos() {
         mainPanel.removeAll();
@@ -66,7 +81,36 @@ public class Inventario extends javax.swing.JPanel {
 
         for (int i = inicio; i < fin; i++) {
             Producto p = productosLista.get(i);
-            mainPanel.add(new ProductoInventarioItem(this, p)); 
+            mainPanel.add(new ProductoInventarioItem(this, p, categoriasLista)); 
+        }
+
+        int productosPintados = fin - inicio;
+        int huecosFaltantes = maxProdPagina - productosPintados;
+        
+        for (int k = 0; k < huecosFaltantes; k++) {
+            JPanel vacio = new JPanel();
+            vacio.setOpaque(false);
+            mainPanel.add(vacio);
+        }
+
+        mainPanel.revalidate();
+        mainPanel.repaint();
+        
+        //System.out.println("Página " + paginaActual + " pintada. Índices: " + inicio + " a " + fin);        
+    }
+    
+    private void rellenarConProductos(int maxCurrentStock) {
+        mainPanel.removeAll();
+
+        int paginaActual = (Integer) paginaSpin.getValue();
+        
+        int inicio = (paginaActual - 1) * maxProdPagina;
+        
+        int fin = Math.min(inicio + maxProdPagina, productosLista.size());
+
+        for (int i = inicio; i < fin; i++) {
+            Producto p = productosLista.get(i);
+            if (p.getStock() <= maxCurrentStock) mainPanel.add(new ProductoInventarioItem(this, p, categoriasLista));
         }
 
         int productosPintados = fin - inicio;
@@ -86,7 +130,7 @@ public class Inventario extends javax.swing.JPanel {
     
     public void updateProductos(Producto productoEliminar) {
         this.productosLista.remove(productoEliminar);
-        System.out.println(productosLista);
+        //System.out.println(productosLista);
         
         rellenarConProductos();
     }
@@ -103,7 +147,7 @@ public class Inventario extends javax.swing.JPanel {
 
         topPanel = new javax.swing.JPanel();
         buscarTxt = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        maxStockCombo = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         trabajadorPanel = new javax.swing.JPanel();
@@ -146,15 +190,20 @@ public class Inventario extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 10);
         topPanel.add(buscarTxt, gridBagConstraints);
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Min. Stock 10", "Min. Stock 25", "Min. Stock 50", "Min. Stock 100", "Min. Stock 200", "Min. Stock 500" }));
-        jComboBox1.setMaximumSize(new java.awt.Dimension(200, 31));
-        jComboBox1.setMinimumSize(new java.awt.Dimension(200, 31));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(200, 31));
+        maxStockCombo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        maxStockCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Max. Stock 10", "Max. Stock 25", "Max. Stock 50", "Max. Stock 100", "Max. Stock 200", "Max. Stock 500" }));
+        maxStockCombo.setMaximumSize(new java.awt.Dimension(200, 31));
+        maxStockCombo.setMinimumSize(new java.awt.Dimension(200, 31));
+        maxStockCombo.setPreferredSize(new java.awt.Dimension(200, 31));
+        maxStockCombo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                maxStockFilterChanged(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 0);
-        topPanel.add(jComboBox1, gridBagConstraints);
+        topPanel.add(maxStockCombo, gridBagConstraints);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -190,7 +239,7 @@ public class Inventario extends javax.swing.JPanel {
         trabajadorPanel.setPreferredSize(new java.awt.Dimension(200, 60));
 
         pnlUser.setBackground(new java.awt.Color(255, 255, 255));
-        pnlUser.setBorder(javax.swing.BorderFactory.createLineBorder(null));
+        pnlUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnlUser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pnlUser.setPreferredSize(new java.awt.Dimension(161, 60));
         pnlUser.setLayout(new java.awt.GridBagLayout());
@@ -269,6 +318,11 @@ public class Inventario extends javax.swing.JPanel {
         anadirProductoBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         anadirProductoBtn.setText("Añadir Producto");
         anadirProductoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        anadirProductoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anadirProducto(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -355,6 +409,42 @@ public class Inventario extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_retrocederPagina
 
+    private void anadirProducto(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anadirProducto
+        NuevoProducto nuevoProducto = new NuevoProducto(Inicio.getInstance(), true, categoriasLista);
+        nuevoProducto.setVisible(true);
+    }//GEN-LAST:event_anadirProducto
+
+    private void maxStockFilterChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_maxStockFilterChanged
+        // Definir el stock segun el indice seleccionado en el combo
+        int index = maxStockCombo.getSelectedIndex();
+        int maxStockValue = 0;
+        
+        switch (index) {
+            case 0:
+                maxStockValue = 10;
+                break;
+            case 1:
+                maxStockValue = 25;
+                break;
+            case 2:
+                maxStockValue = 50;
+                break;
+            case 3:
+                maxStockValue = 100;
+                break;
+            case 4:
+                maxStockValue = 200;
+                break;
+            case 5:
+                maxStockValue = 500;
+                break;
+            default:
+                maxStockValue = 0;
+        }
+        
+        rellenarConProductos(maxStockValue);
+    }//GEN-LAST:event_maxStockFilterChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton alanteBtn;
@@ -362,7 +452,6 @@ public class Inventario extends javax.swing.JPanel {
     private javax.swing.JButton atrasBtn;
     private javax.swing.JPanel bottomPanel;
     private javax.swing.JTextField buscarTxt;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -370,6 +459,7 @@ public class Inventario extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JComboBox<String> maxStockCombo;
     private javax.swing.JSpinner paginaSpin;
     private javax.swing.JButton pedidosBtn;
     private javax.swing.JPanel pnlUser;
