@@ -59,11 +59,6 @@ public class Login extends javax.swing.JFrame {
         setTitle("BoqueronTech");
         setBackground(new java.awt.Color(233, 253, 253));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                loginClosedAction(evt);
-            }
-        });
         getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         pPrincipal.setBackground(new java.awt.Color(233, 253, 253));
@@ -256,10 +251,6 @@ public class Login extends javax.swing.JFrame {
             tfPassword.setEchoChar((char)0); // Texto visible otra vez
         }
     }//GEN-LAST:event_tfPasswordFocusLost
-
-    private void loginClosedAction(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_loginClosedAction
-        DDBBConnector.shutdown();
-    }//GEN-LAST:event_loginClosedAction
 
     /**
      * @param args the command line arguments
