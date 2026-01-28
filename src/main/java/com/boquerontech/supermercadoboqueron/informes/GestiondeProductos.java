@@ -34,10 +34,10 @@ public class GestiondeProductos extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jPanel3 = new javax.swing.JPanel();
+        PnlBajo = new javax.swing.JPanel();
+        BtnSalir = new javax.swing.JButton();
+        CBPaginas = new javax.swing.JComboBox<>();
+        PnlCentral = new javax.swing.JPanel();
         pnlCabecera = new javax.swing.JPanel();
         lblTittle = new javax.swing.JLabel();
         relleno = new javax.swing.JPanel();
@@ -50,14 +50,14 @@ public class GestiondeProductos extends javax.swing.JPanel {
         setBackground(new java.awt.Color(233, 253, 253));
         setLayout(new java.awt.BorderLayout());
 
-        jPanel2.setOpaque(false);
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        PnlBajo.setOpaque(false);
+        PnlBajo.setLayout(new java.awt.GridBagLayout());
 
-        jButton2.setForeground(new java.awt.Color(199, 108, 108));
-        jButton2.setText("Salir");
-        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(199, 108, 108)));
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton2.setOpaque(true);
+        BtnSalir.setForeground(new java.awt.Color(199, 108, 108));
+        BtnSalir.setText("Salir");
+        BtnSalir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(199, 108, 108)));
+        BtnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        BtnSalir.setOpaque(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -65,22 +65,22 @@ public class GestiondeProductos extends javax.swing.JPanel {
         gridBagConstraints.ipady = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 40, 0);
-        jPanel2.add(jButton2, gridBagConstraints);
+        PnlBajo.add(BtnSalir, gridBagConstraints);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setOpaque(true);
+        CBPaginas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CBPaginas.setOpaque(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 65;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 40, 0);
-        jPanel2.add(jComboBox1, gridBagConstraints);
+        PnlBajo.add(CBPaginas, gridBagConstraints);
 
-        add(jPanel2, java.awt.BorderLayout.PAGE_END);
+        add(PnlBajo, java.awt.BorderLayout.PAGE_END);
 
-        jPanel3.setOpaque(false);
-        add(jPanel3, java.awt.BorderLayout.CENTER);
+        PnlCentral.setOpaque(false);
+        add(PnlCentral, java.awt.BorderLayout.CENTER);
 
         pnlCabecera.setBackground(new java.awt.Color(233, 253, 253));
         pnlCabecera.setLayout(new java.awt.GridBagLayout());
@@ -124,7 +124,7 @@ public class GestiondeProductos extends javax.swing.JPanel {
 
         pnlUser.setBackground(new java.awt.Color(255, 255, 255));
         pnlUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnlUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnlUser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pnlUser.setPreferredSize(new java.awt.Dimension(161, 60));
         pnlUser.setLayout(new java.awt.GridBagLayout());
 
@@ -181,13 +181,13 @@ public class GestiondeProductos extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton BtnSalir;
+    private javax.swing.JComboBox<String> CBPaginas;
+    private javax.swing.JPanel PnlBajo;
+    private javax.swing.JPanel PnlCentral;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lblTittle;
     private javax.swing.JPanel pnlCabecera;
     private javax.swing.JPanel pnlUser;

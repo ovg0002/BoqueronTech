@@ -37,18 +37,18 @@ public Resumendecajadiaria(Inicio inicioInstance) {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        PnlBajo = new javax.swing.JPanel();
+        SalirP2 = new javax.swing.JButton();
         GuardarP1 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        PnlCentral = new javax.swing.JPanel();
+        LblIdEmpleado = new javax.swing.JLabel();
+        TFIdEmpleado = new javax.swing.JTextField();
+        LblFecha = new javax.swing.JLabel();
+        TFFecha = new javax.swing.JTextField();
+        LblValidacion = new javax.swing.JLabel();
+        TFValidacion = new javax.swing.JTextField();
+        LblIncidencia = new javax.swing.JLabel();
+        TFIncidencia = new javax.swing.JTextField();
         pnlCabecera = new javax.swing.JPanel();
         lblTittle = new javax.swing.JLabel();
         relleno = new javax.swing.JPanel();
@@ -61,17 +61,17 @@ public Resumendecajadiaria(Inicio inicioInstance) {
         setBackground(new java.awt.Color(233, 253, 253));
         setLayout(new java.awt.BorderLayout());
 
-        jPanel2.setOpaque(false);
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        PnlBajo.setOpaque(false);
+        PnlBajo.setLayout(new java.awt.GridBagLayout());
 
-        jButton2.setForeground(new java.awt.Color(199, 108, 108));
-        jButton2.setText("Salir");
-        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(199, 108, 108)));
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton2.setOpaque(true);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        SalirP2.setForeground(new java.awt.Color(199, 108, 108));
+        SalirP2.setText("Salir");
+        SalirP2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(199, 108, 108)));
+        SalirP2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        SalirP2.setOpaque(true);
+        SalirP2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                SalirP2ActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -81,7 +81,7 @@ public Resumendecajadiaria(Inicio inicioInstance) {
         gridBagConstraints.ipady = 20;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(41, 39, 41, 0);
-        jPanel2.add(jButton2, gridBagConstraints);
+        PnlBajo.add(SalirP2, gridBagConstraints);
 
         GuardarP1.setForeground(new java.awt.Color(0, 121, 107));
         GuardarP1.setText("Guardar");
@@ -99,83 +99,83 @@ public Resumendecajadiaria(Inicio inicioInstance) {
         gridBagConstraints.ipady = 20;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(41, 646, 41, 26);
-        jPanel2.add(GuardarP1, gridBagConstraints);
+        PnlBajo.add(GuardarP1, gridBagConstraints);
 
-        add(jPanel2, java.awt.BorderLayout.PAGE_END);
+        add(PnlBajo, java.awt.BorderLayout.PAGE_END);
 
-        jPanel3.setOpaque(false);
-        jPanel3.setLayout(new java.awt.GridBagLayout());
+        PnlCentral.setOpaque(false);
+        PnlCentral.setLayout(new java.awt.GridBagLayout());
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setText("ID-Empleado");
+        LblIdEmpleado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LblIdEmpleado.setText("ID-Empleado");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel3.add(jLabel3, gridBagConstraints);
+        PnlCentral.add(LblIdEmpleado, gridBagConstraints);
 
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jTextField1.setOpaque(true);
+        TFIdEmpleado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        TFIdEmpleado.setOpaque(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 150;
         gridBagConstraints.ipady = 2;
-        jPanel3.add(jTextField1, gridBagConstraints);
+        PnlCentral.add(TFIdEmpleado, gridBagConstraints);
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setText("Fecha");
+        LblFecha.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LblFecha.setText("Fecha");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
-        jPanel3.add(jLabel4, gridBagConstraints);
+        PnlCentral.add(LblFecha, gridBagConstraints);
 
-        jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jTextField2.setOpaque(true);
+        TFFecha.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        TFFecha.setOpaque(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.ipadx = 150;
         gridBagConstraints.ipady = 2;
-        jPanel3.add(jTextField2, gridBagConstraints);
+        PnlCentral.add(TFFecha, gridBagConstraints);
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setText("Validación");
+        LblValidacion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LblValidacion.setText("Validación");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
-        jPanel3.add(jLabel5, gridBagConstraints);
+        PnlCentral.add(LblValidacion, gridBagConstraints);
 
-        jTextField3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jTextField3.setOpaque(true);
+        TFValidacion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        TFValidacion.setOpaque(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.ipadx = 150;
         gridBagConstraints.ipady = 2;
-        jPanel3.add(jTextField3, gridBagConstraints);
+        PnlCentral.add(TFValidacion, gridBagConstraints);
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setText("Incidencia");
+        LblIncidencia.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LblIncidencia.setText("Incidencia");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
-        jPanel3.add(jLabel6, gridBagConstraints);
+        PnlCentral.add(LblIncidencia, gridBagConstraints);
 
-        jTextField4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jTextField4.setOpaque(true);
+        TFIncidencia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        TFIncidencia.setOpaque(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.ipadx = 150;
         gridBagConstraints.ipady = 2;
-        jPanel3.add(jTextField4, gridBagConstraints);
+        PnlCentral.add(TFIncidencia, gridBagConstraints);
 
-        add(jPanel3, java.awt.BorderLayout.CENTER);
+        add(PnlCentral, java.awt.BorderLayout.CENTER);
 
         pnlCabecera.setBackground(new java.awt.Color(233, 253, 253));
         pnlCabecera.setLayout(new java.awt.GridBagLayout());
@@ -219,7 +219,7 @@ public Resumendecajadiaria(Inicio inicioInstance) {
 
         pnlUser.setBackground(new java.awt.Color(255, 255, 255));
         pnlUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnlUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnlUser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pnlUser.setPreferredSize(new java.awt.Dimension(161, 60));
         pnlUser.setLayout(new java.awt.GridBagLayout());
 
@@ -279,28 +279,28 @@ public Resumendecajadiaria(Inicio inicioInstance) {
         JOptionPane.showMessageDialog(null, "Guardado con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_GuardarP1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void SalirP2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirP2ActionPerformed
         // TODO add your handling code here:
         inicioInstance.colocarPanel(new InicioAnalisisyConsultas(inicioInstance));
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_SalirP2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton GuardarP1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel LblFecha;
+    private javax.swing.JLabel LblIdEmpleado;
+    private javax.swing.JLabel LblIncidencia;
+    private javax.swing.JLabel LblValidacion;
+    private javax.swing.JPanel PnlBajo;
+    private javax.swing.JPanel PnlCentral;
+    private javax.swing.JButton SalirP2;
+    private javax.swing.JTextField TFFecha;
+    private javax.swing.JTextField TFIdEmpleado;
+    private javax.swing.JTextField TFIncidencia;
+    private javax.swing.JTextField TFValidacion;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel lblTittle;
     private javax.swing.JPanel pnlCabecera;
     private javax.swing.JPanel pnlUser;

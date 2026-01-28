@@ -36,12 +36,12 @@ public class GestionProductos extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        PnlBajo = new javax.swing.JPanel();
+        BtnSalir = new javax.swing.JButton();
+        CBFiltrar = new javax.swing.JComboBox<>();
+        PnlCentral = new javax.swing.JPanel();
+        TFFiltrado = new javax.swing.JTextField();
+        CBFiltrado = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         panelListProd = new javax.swing.JPanel();
         pnlCabecera = new javax.swing.JPanel();
@@ -56,13 +56,13 @@ public class GestionProductos extends javax.swing.JPanel {
         setBackground(new java.awt.Color(233, 253, 253));
         setLayout(new java.awt.BorderLayout());
 
-        jPanel2.setOpaque(false);
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        PnlBajo.setOpaque(false);
+        PnlBajo.setLayout(new java.awt.GridBagLayout());
 
-        jButton2.setForeground(new java.awt.Color(199, 108, 108));
-        jButton2.setText("Salir");
-        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(199, 108, 108)));
-        jButton2.setOpaque(true);
+        BtnSalir.setForeground(new java.awt.Color(199, 108, 108));
+        BtnSalir.setText("Salir");
+        BtnSalir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(199, 108, 108)));
+        BtnSalir.setOpaque(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -70,10 +70,10 @@ public class GestionProductos extends javax.swing.JPanel {
         gridBagConstraints.ipady = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 30, 0);
-        jPanel2.add(jButton2, gridBagConstraints);
+        PnlBajo.add(BtnSalir, gridBagConstraints);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        CBFiltrar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CBFiltrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -81,24 +81,24 @@ public class GestionProductos extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 65;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 30, 0);
-        jPanel2.add(jComboBox1, gridBagConstraints);
+        PnlBajo.add(CBFiltrar, gridBagConstraints);
 
-        add(jPanel2, java.awt.BorderLayout.PAGE_END);
+        add(PnlBajo, java.awt.BorderLayout.PAGE_END);
 
-        jPanel3.setOpaque(false);
-        jPanel3.setLayout(new java.awt.GridBagLayout());
+        PnlCentral.setOpaque(false);
+        PnlCentral.setLayout(new java.awt.GridBagLayout());
 
-        jTextField1.setText("Producto");
-        jTextField1.setOpaque(true);
+        TFFiltrado.setText("Producto");
+        TFFiltrado.setOpaque(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 450, 0, 0);
-        jPanel3.add(jTextField1, gridBagConstraints);
+        PnlCentral.add(TFFiltrado, gridBagConstraints);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CBFiltrado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel3.add(jComboBox2, gridBagConstraints);
+        PnlCentral.add(CBFiltrado, gridBagConstraints);
 
         panelListProd.setLayout(new javax.swing.BoxLayout(panelListProd, javax.swing.BoxLayout.Y_AXIS));
         jScrollPane1.setViewportView(panelListProd);
@@ -111,9 +111,9 @@ public class GestionProductos extends javax.swing.JPanel {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 20);
-        jPanel3.add(jScrollPane1, gridBagConstraints);
+        PnlCentral.add(jScrollPane1, gridBagConstraints);
 
-        add(jPanel3, java.awt.BorderLayout.CENTER);
+        add(PnlCentral, java.awt.BorderLayout.CENTER);
 
         pnlCabecera.setBackground(new java.awt.Color(233, 253, 253));
         pnlCabecera.setLayout(new java.awt.GridBagLayout());
@@ -157,7 +157,7 @@ public class GestionProductos extends javax.swing.JPanel {
 
         pnlUser.setBackground(new java.awt.Color(255, 255, 255));
         pnlUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnlUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnlUser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pnlUser.setPreferredSize(new java.awt.Dimension(161, 60));
         pnlUser.setLayout(new java.awt.GridBagLayout());
 
@@ -214,16 +214,16 @@ public class GestionProductos extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JButton BtnSalir;
+    private javax.swing.JComboBox<String> CBFiltrado;
+    private javax.swing.JComboBox<String> CBFiltrar;
+    private javax.swing.JPanel PnlBajo;
+    private javax.swing.JPanel PnlCentral;
+    private javax.swing.JTextField TFFiltrado;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblTittle;
     private javax.swing.JPanel panelListProd;
     private javax.swing.JPanel pnlCabecera;

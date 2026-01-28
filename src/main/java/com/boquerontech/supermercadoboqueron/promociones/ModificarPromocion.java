@@ -36,84 +36,84 @@ public class ModificarPromocion extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        CancelarP = new javax.swing.JButton();
-        GuardarP1 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jLabel9 = new javax.swing.JLabel();
+        topPanel = new javax.swing.JPanel();
+        tituloPromocionesConcurrentes = new javax.swing.JLabel();
+        tituloEmpleado = new javax.swing.JLabel();
+        midPanel = new javax.swing.JPanel();
+        CancelarBtn = new javax.swing.JButton();
+        GuardarBtn = new javax.swing.JButton();
+        bottomPanel = new javax.swing.JPanel();
+        nameLbl = new javax.swing.JLabel();
+        nameTF = new javax.swing.JTextField();
+        tipoLbl = new javax.swing.JLabel();
+        tipoTF = new javax.swing.JTextField();
+        aplicableLbl = new javax.swing.JLabel();
+        aplicableTF = new javax.swing.JTextField();
+        reglasLbl = new javax.swing.JLabel();
+        reglasTF = new javax.swing.JTextField();
+        vigenciaLbl = new javax.swing.JLabel();
+        vigenciaTF = new javax.swing.JTextField();
+        productoLbl = new javax.swing.JLabel();
+        productoTF = new javax.swing.JTextField();
+        concurrenteCB = new javax.swing.JCheckBox();
+        imagenLbl = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(233, 253, 253));
         setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setOpaque(false);
+        topPanel.setOpaque(false);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Promociones Concurrentes");
+        tituloPromocionesConcurrentes.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        tituloPromocionesConcurrentes.setForeground(new java.awt.Color(0, 0, 0));
+        tituloPromocionesConcurrentes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloPromocionesConcurrentes.setText("Promociones Concurrentes");
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("<html>Nombre empleado<br> <small>Rol empleado</small></html>");
-        jLabel1.setOpaque(true);
+        tituloEmpleado.setBackground(new java.awt.Color(255, 255, 255));
+        tituloEmpleado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tituloEmpleado.setForeground(new java.awt.Color(0, 0, 0));
+        tituloEmpleado.setText("<html>Nombre empleado<br> <small>Rol empleado</small></html>");
+        tituloEmpleado.setOpaque(true);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout topPanelLayout = new javax.swing.GroupLayout(topPanel);
+        topPanel.setLayout(topPanelLayout);
+        topPanelLayout.setHorizontalGroup(
+            topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 924, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(topPanelLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 924, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(tituloPromocionesConcurrentes, javax.swing.GroupLayout.PREFERRED_SIZE, 924, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(topPanelLayout.createSequentialGroup()
                             .addGap(599, 599, 599)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(tituloEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        topPanelLayout.setVerticalGroup(
+            topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 127, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(topPanelLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tituloPromocionesConcurrentes, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, 0)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tituloEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        add(jPanel1, java.awt.BorderLayout.PAGE_START);
+        add(topPanel, java.awt.BorderLayout.PAGE_START);
 
-        jPanel4.setOpaque(false);
-        jPanel4.setLayout(new java.awt.GridBagLayout());
+        midPanel.setOpaque(false);
+        midPanel.setLayout(new java.awt.GridBagLayout());
 
-        CancelarP.setBackground(new java.awt.Color(255, 255, 255));
-        CancelarP.setForeground(new java.awt.Color(199, 108, 108));
-        CancelarP.setText("Cancelar");
-        CancelarP.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(199, 108, 108)));
-        CancelarP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        CancelarP.addActionListener(new java.awt.event.ActionListener() {
+        CancelarBtn.setBackground(new java.awt.Color(255, 255, 255));
+        CancelarBtn.setForeground(new java.awt.Color(199, 108, 108));
+        CancelarBtn.setText("Cancelar");
+        CancelarBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(199, 108, 108)));
+        CancelarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        CancelarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancelarPActionPerformed(evt);
+                CancelarBtnActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -121,169 +121,169 @@ public class ModificarPromocion extends javax.swing.JPanel {
         gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 350);
-        jPanel4.add(CancelarP, gridBagConstraints);
+        midPanel.add(CancelarBtn, gridBagConstraints);
 
-        GuardarP1.setBackground(new java.awt.Color(255, 255, 255));
-        GuardarP1.setForeground(new java.awt.Color(0, 121, 107));
-        GuardarP1.setText("Guardar");
-        GuardarP1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 121, 107)));
-        GuardarP1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        GuardarP1.addActionListener(new java.awt.event.ActionListener() {
+        GuardarBtn.setBackground(new java.awt.Color(255, 255, 255));
+        GuardarBtn.setForeground(new java.awt.Color(0, 121, 107));
+        GuardarBtn.setText("Guardar");
+        GuardarBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 121, 107)));
+        GuardarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        GuardarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GuardarP1ActionPerformed(evt);
+                GuardarBtnActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.ipady = 5;
         gridBagConstraints.insets = new java.awt.Insets(20, 350, 20, 0);
-        jPanel4.add(GuardarP1, gridBagConstraints);
+        midPanel.add(GuardarBtn, gridBagConstraints);
 
-        add(jPanel4, java.awt.BorderLayout.PAGE_END);
+        add(midPanel, java.awt.BorderLayout.PAGE_END);
 
-        jPanel3.setOpaque(false);
-        jPanel3.setLayout(new java.awt.GridBagLayout());
+        bottomPanel.setOpaque(false);
+        bottomPanel.setLayout(new java.awt.GridBagLayout());
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Nombre");
+        nameLbl.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        nameLbl.setForeground(new java.awt.Color(0, 0, 0));
+        nameLbl.setText("Nombre");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 10);
-        jPanel3.add(jLabel3, gridBagConstraints);
+        bottomPanel.add(nameLbl, gridBagConstraints);
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        nameTF.setBackground(new java.awt.Color(255, 255, 255));
+        nameTF.setForeground(new java.awt.Color(0, 0, 0));
+        nameTF.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 10);
-        jPanel3.add(jTextField1, gridBagConstraints);
+        bottomPanel.add(nameTF, gridBagConstraints);
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Tipo");
+        tipoLbl.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        tipoLbl.setForeground(new java.awt.Color(0, 0, 0));
+        tipoLbl.setText("Tipo");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 10);
-        jPanel3.add(jLabel5, gridBagConstraints);
+        bottomPanel.add(tipoLbl, gridBagConstraints);
 
-        jTextField8.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField8.setForeground(new java.awt.Color(0, 0, 0));
+        tipoTF.setBackground(new java.awt.Color(255, 255, 255));
+        tipoTF.setForeground(new java.awt.Color(0, 0, 0));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 10);
-        jPanel3.add(jTextField8, gridBagConstraints);
+        bottomPanel.add(tipoTF, gridBagConstraints);
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Aplicable a:");
+        aplicableLbl.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        aplicableLbl.setForeground(new java.awt.Color(0, 0, 0));
+        aplicableLbl.setText("Aplicable a:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 10);
-        jPanel3.add(jLabel4, gridBagConstraints);
+        bottomPanel.add(aplicableLbl, gridBagConstraints);
 
-        jTextField7.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField7.setForeground(new java.awt.Color(0, 0, 0));
+        aplicableTF.setBackground(new java.awt.Color(255, 255, 255));
+        aplicableTF.setForeground(new java.awt.Color(0, 0, 0));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 10);
-        jPanel3.add(jTextField7, gridBagConstraints);
+        bottomPanel.add(aplicableTF, gridBagConstraints);
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("Reglas");
+        reglasLbl.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        reglasLbl.setForeground(new java.awt.Color(0, 0, 0));
+        reglasLbl.setText("Reglas");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 10);
-        jPanel3.add(jLabel6, gridBagConstraints);
+        bottomPanel.add(reglasLbl, gridBagConstraints);
 
-        jTextField9.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField9.setForeground(new java.awt.Color(0, 0, 0));
+        reglasTF.setBackground(new java.awt.Color(255, 255, 255));
+        reglasTF.setForeground(new java.awt.Color(0, 0, 0));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 10);
-        jPanel3.add(jTextField9, gridBagConstraints);
+        bottomPanel.add(reglasTF, gridBagConstraints);
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel8.setText("Vigencia");
+        vigenciaLbl.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        vigenciaLbl.setForeground(new java.awt.Color(0, 0, 0));
+        vigenciaLbl.setText("Vigencia");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
-        jPanel3.add(jLabel8, gridBagConstraints);
+        bottomPanel.add(vigenciaLbl, gridBagConstraints);
 
-        jTextField11.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField11.setForeground(new java.awt.Color(0, 0, 0));
+        vigenciaTF.setBackground(new java.awt.Color(255, 255, 255));
+        vigenciaTF.setForeground(new java.awt.Color(0, 0, 0));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
-        jPanel3.add(jTextField11, gridBagConstraints);
+        bottomPanel.add(vigenciaTF, gridBagConstraints);
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Producto");
+        productoLbl.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        productoLbl.setForeground(new java.awt.Color(0, 0, 0));
+        productoLbl.setText("Producto");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
-        jPanel3.add(jLabel7, gridBagConstraints);
+        bottomPanel.add(productoLbl, gridBagConstraints);
 
-        jTextField10.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField10.setForeground(new java.awt.Color(0, 0, 0));
+        productoTF.setBackground(new java.awt.Color(255, 255, 255));
+        productoTF.setForeground(new java.awt.Color(0, 0, 0));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
-        jPanel3.add(jTextField10, gridBagConstraints);
+        bottomPanel.add(productoTF, gridBagConstraints);
 
-        jCheckBox1.setBackground(new java.awt.Color(233, 253, 253));
-        jCheckBox1.setForeground(new java.awt.Color(0, 0, 0));
-        jCheckBox1.setText("¿Es concurrente?");
-        jCheckBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        concurrenteCB.setBackground(new java.awt.Color(233, 253, 253));
+        concurrenteCB.setForeground(new java.awt.Color(0, 0, 0));
+        concurrenteCB.setText("¿Es concurrente?");
+        concurrenteCB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
-        jPanel3.add(jCheckBox1, gridBagConstraints);
+        bottomPanel.add(concurrenteCB, gridBagConstraints);
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel9.setText("IMAGE");
+        imagenLbl.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        imagenLbl.setForeground(new java.awt.Color(0, 0, 0));
+        imagenLbl.setText("IMAGE");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
-        jPanel3.add(jLabel9, gridBagConstraints);
+        bottomPanel.add(imagenLbl, gridBagConstraints);
 
-        add(jPanel3, java.awt.BorderLayout.CENTER);
+        add(bottomPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CancelarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarPActionPerformed
+    private void CancelarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarBtnActionPerformed
         // TODO add your handling code here:
         int opcion = JOptionPane.showConfirmDialog(
             this,
@@ -302,36 +302,36 @@ public class ModificarPromocion extends javax.swing.JPanel {
             System.out.println("No cancelado.");
         }
         
-    }//GEN-LAST:event_CancelarPActionPerformed
+    }//GEN-LAST:event_CancelarBtnActionPerformed
 
-    private void GuardarP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarP1ActionPerformed
+    private void GuardarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarBtnActionPerformed
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(null, "Guardado con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
         
-    }//GEN-LAST:event_GuardarP1ActionPerformed
+    }//GEN-LAST:event_GuardarBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CancelarP;
-    private javax.swing.JButton GuardarP1;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JButton CancelarBtn;
+    private javax.swing.JButton GuardarBtn;
+    private javax.swing.JLabel aplicableLbl;
+    private javax.swing.JTextField aplicableTF;
+    private javax.swing.JPanel bottomPanel;
+    private javax.swing.JCheckBox concurrenteCB;
+    private javax.swing.JLabel imagenLbl;
+    private javax.swing.JPanel midPanel;
+    private javax.swing.JLabel nameLbl;
+    private javax.swing.JTextField nameTF;
+    private javax.swing.JLabel productoLbl;
+    private javax.swing.JTextField productoTF;
+    private javax.swing.JLabel reglasLbl;
+    private javax.swing.JTextField reglasTF;
+    private javax.swing.JLabel tipoLbl;
+    private javax.swing.JTextField tipoTF;
+    private javax.swing.JLabel tituloEmpleado;
+    private javax.swing.JLabel tituloPromocionesConcurrentes;
+    private javax.swing.JPanel topPanel;
+    private javax.swing.JLabel vigenciaLbl;
+    private javax.swing.JTextField vigenciaTF;
     // End of variables declaration//GEN-END:variables
 }

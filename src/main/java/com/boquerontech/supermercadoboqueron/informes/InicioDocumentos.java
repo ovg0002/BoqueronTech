@@ -33,10 +33,10 @@ public InicioDocumentos(Inicio inicioInstance) {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        PnlCentralBajo = new javax.swing.JPanel();
+        BtnAnalisisyConsultas = new javax.swing.JButton();
+        BtnGestionProductos = new javax.swing.JButton();
+        BtnConsultasdeClientes = new javax.swing.JButton();
         pnlCabecera = new javax.swing.JPanel();
         lblTittle = new javax.swing.JLabel();
         relleno = new javax.swing.JPanel();
@@ -49,16 +49,17 @@ public InicioDocumentos(Inicio inicioInstance) {
         setBackground(new java.awt.Color(233, 253, 253));
         setLayout(new java.awt.BorderLayout());
 
-        jPanel3.setOpaque(false);
-        jPanel3.setLayout(new java.awt.GridBagLayout());
+        PnlCentralBajo.setOpaque(false);
+        PnlCentralBajo.setLayout(new java.awt.GridBagLayout());
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(48, 91, 171));
-        jButton1.setText("Análisis y consultas");
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(48, 91, 171)));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnAnalisisyConsultas.setBackground(new java.awt.Color(255, 255, 255));
+        BtnAnalisisyConsultas.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        BtnAnalisisyConsultas.setForeground(new java.awt.Color(48, 91, 171));
+        BtnAnalisisyConsultas.setText("Análisis y consultas");
+        BtnAnalisisyConsultas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(48, 91, 171)));
+        BtnAnalisisyConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BtnAnalisisyConsultasActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -66,15 +67,16 @@ public InicioDocumentos(Inicio inicioInstance) {
         gridBagConstraints.ipadx = 150;
         gridBagConstraints.ipady = 40;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
-        jPanel3.add(jButton1, gridBagConstraints);
+        PnlCentralBajo.add(BtnAnalisisyConsultas, gridBagConstraints);
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(48, 91, 171));
-        jButton2.setText("Gestión de productos");
-        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(48, 91, 171)));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        BtnGestionProductos.setBackground(new java.awt.Color(255, 255, 255));
+        BtnGestionProductos.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        BtnGestionProductos.setForeground(new java.awt.Color(48, 91, 171));
+        BtnGestionProductos.setText("Gestión de productos");
+        BtnGestionProductos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(48, 91, 171)));
+        BtnGestionProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BtnGestionProductosActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -84,15 +86,16 @@ public InicioDocumentos(Inicio inicioInstance) {
         gridBagConstraints.ipadx = 150;
         gridBagConstraints.ipady = 40;
         gridBagConstraints.insets = new java.awt.Insets(30, 0, 30, 0);
-        jPanel3.add(jButton2, gridBagConstraints);
+        PnlCentralBajo.add(BtnGestionProductos, gridBagConstraints);
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(48, 91, 171));
-        jButton3.setText("Consultas de clientes");
-        jButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(48, 91, 171)));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        BtnConsultasdeClientes.setBackground(new java.awt.Color(255, 255, 255));
+        BtnConsultasdeClientes.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        BtnConsultasdeClientes.setForeground(new java.awt.Color(48, 91, 171));
+        BtnConsultasdeClientes.setText("Consultas de clientes");
+        BtnConsultasdeClientes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(48, 91, 171)));
+        BtnConsultasdeClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                BtnConsultasdeClientesActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -102,9 +105,9 @@ public InicioDocumentos(Inicio inicioInstance) {
         gridBagConstraints.ipadx = 150;
         gridBagConstraints.ipady = 40;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
-        jPanel3.add(jButton3, gridBagConstraints);
+        PnlCentralBajo.add(BtnConsultasdeClientes, gridBagConstraints);
 
-        add(jPanel3, java.awt.BorderLayout.CENTER);
+        add(PnlCentralBajo, java.awt.BorderLayout.CENTER);
 
         pnlCabecera.setBackground(new java.awt.Color(233, 253, 253));
         pnlCabecera.setLayout(new java.awt.GridBagLayout());
@@ -148,7 +151,7 @@ public InicioDocumentos(Inicio inicioInstance) {
 
         pnlUser.setBackground(new java.awt.Color(255, 255, 255));
         pnlUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnlUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnlUser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pnlUser.setPreferredSize(new java.awt.Dimension(161, 60));
         pnlUser.setLayout(new java.awt.GridBagLayout());
 
@@ -203,31 +206,31 @@ public InicioDocumentos(Inicio inicioInstance) {
         add(pnlCabecera, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BtnAnalisisyConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAnalisisyConsultasActionPerformed
         // TODO add your handling code here:
         
          inicioInstance.colocarPanel(new InicioAnalisisyConsultas(inicioInstance));
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BtnAnalisisyConsultasActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void BtnGestionProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGestionProductosActionPerformed
         // TODO add your handling code here:
          inicioInstance.colocarPanel(new GestiondeProductos(inicioInstance));
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_BtnGestionProductosActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void BtnConsultasdeClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConsultasdeClientesActionPerformed
         // TODO add your handling code here:
          inicioInstance.colocarPanel(new ConsultarClientes(inicioInstance));
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_BtnConsultasdeClientesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton BtnAnalisisyConsultas;
+    private javax.swing.JButton BtnConsultasdeClientes;
+    private javax.swing.JButton BtnGestionProductos;
+    private javax.swing.JPanel PnlCentralBajo;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lblTittle;
     private javax.swing.JPanel pnlCabecera;
     private javax.swing.JPanel pnlUser;

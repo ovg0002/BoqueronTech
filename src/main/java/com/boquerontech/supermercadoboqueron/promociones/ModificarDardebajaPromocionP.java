@@ -45,8 +45,6 @@ public class ModificarDardebajaPromocionP extends javax.swing.JPanel {
         buscarTF = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         itemsPanel = new javax.swing.JPanel();
-        itemModificardardebajaPromocion1 = new com.boquerontech.supermercadoboqueron.promociones.items.itemModificardardebajaPromocion();
-        itemModificardardebajaPromocion2 = new com.boquerontech.supermercadoboqueron.promociones.items.itemModificardardebajaPromocion();
 
         setBackground(new java.awt.Color(233, 253, 253));
         setForeground(new java.awt.Color(0, 0, 0));
@@ -55,7 +53,7 @@ public class ModificarDardebajaPromocionP extends javax.swing.JPanel {
         topPanel.setOpaque(false);
         topPanel.setLayout(new java.awt.GridBagLayout());
 
-        tituloLbl.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        tituloLbl.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         tituloLbl.setForeground(new java.awt.Color(0, 0, 0));
         tituloLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tituloLbl.setText("Modificar/dar de baja promoción");
@@ -120,13 +118,11 @@ public class ModificarDardebajaPromocionP extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipady = 7;
+        gridBagConstraints.ipadx = 50;
+        gridBagConstraints.ipady = 20;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
         midPanel.add(buscarTF, gridBagConstraints);
-
-        itemsPanel.add(itemModificardardebajaPromocion1);
-        itemsPanel.add(itemModificardardebajaPromocion2);
 
         jScrollPane1.setViewportView(itemsPanel);
 
@@ -150,8 +146,6 @@ public class ModificarDardebajaPromocionP extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bottomPanel;
     private javax.swing.JTextField buscarTF;
-    private com.boquerontech.supermercadoboqueron.promociones.items.itemModificardardebajaPromocion itemModificardardebajaPromocion1;
-    private com.boquerontech.supermercadoboqueron.promociones.items.itemModificardardebajaPromocion itemModificardardebajaPromocion2;
     private javax.swing.JPanel itemsPanel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel midPanel;

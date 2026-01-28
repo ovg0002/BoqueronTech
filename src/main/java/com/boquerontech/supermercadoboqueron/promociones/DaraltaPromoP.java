@@ -36,75 +36,75 @@ public class DaraltaPromoP extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        PnlCabecera = new javax.swing.JPanel();
+        LblTitulo = new javax.swing.JLabel();
+        LblEMpleado = new javax.swing.JLabel();
+        PnlBajo = new javax.swing.JPanel();
         CancelarP = new javax.swing.JButton();
         GuardarP1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jLabel9 = new javax.swing.JLabel();
+        LblNombre = new javax.swing.JLabel();
+        TFNombre = new javax.swing.JTextField();
+        LblTipo = new javax.swing.JLabel();
+        TFTipo = new javax.swing.JTextField();
+        LblAplicable = new javax.swing.JLabel();
+        TFAplicable = new javax.swing.JTextField();
+        LblReglas = new javax.swing.JLabel();
+        TFReglas = new javax.swing.JTextField();
+        LblVigencia = new javax.swing.JLabel();
+        TFVigencia = new javax.swing.JTextField();
+        LblProducto = new javax.swing.JLabel();
+        TFProducto = new javax.swing.JTextField();
+        CheckBConcurrente = new javax.swing.JCheckBox();
+        LblImage = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(233, 253, 253));
         setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setOpaque(false);
+        PnlCabecera.setOpaque(false);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Promociones Concurrentes");
+        LblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        LblTitulo.setForeground(new java.awt.Color(0, 0, 0));
+        LblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LblTitulo.setText("Promociones Concurrentes");
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("<html>Nombre empleado<br> <small>Rol empleado</small></html>");
-        jLabel1.setOpaque(true);
+        LblEMpleado.setBackground(new java.awt.Color(255, 255, 255));
+        LblEMpleado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        LblEMpleado.setForeground(new java.awt.Color(0, 0, 0));
+        LblEMpleado.setText("<html>Nombre empleado<br> <small>Rol empleado</small></html>");
+        LblEMpleado.setOpaque(true);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout PnlCabeceraLayout = new javax.swing.GroupLayout(PnlCabecera);
+        PnlCabecera.setLayout(PnlCabeceraLayout);
+        PnlCabeceraLayout.setHorizontalGroup(
+            PnlCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 924, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(PnlCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PnlCabeceraLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 924, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(PnlCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(LblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 924, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(PnlCabeceraLayout.createSequentialGroup()
                             .addGap(599, 599, 599)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(LblEMpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        PnlCabeceraLayout.setVerticalGroup(
+            PnlCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 127, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(PnlCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PnlCabeceraLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, 0)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblEMpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        add(jPanel1, java.awt.BorderLayout.PAGE_START);
+        add(PnlCabecera, java.awt.BorderLayout.PAGE_START);
 
-        jPanel4.setOpaque(false);
-        jPanel4.setLayout(new java.awt.GridBagLayout());
+        PnlBajo.setOpaque(false);
+        PnlBajo.setLayout(new java.awt.GridBagLayout());
 
         CancelarP.setBackground(new java.awt.Color(255, 255, 255));
         CancelarP.setForeground(new java.awt.Color(199, 108, 108));
@@ -121,7 +121,7 @@ public class DaraltaPromoP extends javax.swing.JPanel {
         gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 350);
-        jPanel4.add(CancelarP, gridBagConstraints);
+        PnlBajo.add(CancelarP, gridBagConstraints);
 
         GuardarP1.setBackground(new java.awt.Color(255, 255, 255));
         GuardarP1.setForeground(new java.awt.Color(0, 121, 107));
@@ -137,148 +137,148 @@ public class DaraltaPromoP extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.ipady = 5;
         gridBagConstraints.insets = new java.awt.Insets(20, 350, 20, 0);
-        jPanel4.add(GuardarP1, gridBagConstraints);
+        PnlBajo.add(GuardarP1, gridBagConstraints);
 
-        add(jPanel4, java.awt.BorderLayout.PAGE_END);
+        add(PnlBajo, java.awt.BorderLayout.PAGE_END);
 
         jPanel3.setOpaque(false);
         jPanel3.setLayout(new java.awt.GridBagLayout());
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Nombre");
+        LblNombre.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        LblNombre.setForeground(new java.awt.Color(0, 0, 0));
+        LblNombre.setText("Nombre");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 10);
-        jPanel3.add(jLabel3, gridBagConstraints);
+        jPanel3.add(LblNombre, gridBagConstraints);
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        TFNombre.setBackground(new java.awt.Color(255, 255, 255));
+        TFNombre.setForeground(new java.awt.Color(0, 0, 0));
+        TFNombre.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 10);
-        jPanel3.add(jTextField1, gridBagConstraints);
+        jPanel3.add(TFNombre, gridBagConstraints);
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Tipo");
+        LblTipo.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        LblTipo.setForeground(new java.awt.Color(0, 0, 0));
+        LblTipo.setText("Tipo");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 10);
-        jPanel3.add(jLabel5, gridBagConstraints);
+        jPanel3.add(LblTipo, gridBagConstraints);
 
-        jTextField8.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField8.setForeground(new java.awt.Color(0, 0, 0));
+        TFTipo.setBackground(new java.awt.Color(255, 255, 255));
+        TFTipo.setForeground(new java.awt.Color(0, 0, 0));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 10);
-        jPanel3.add(jTextField8, gridBagConstraints);
+        jPanel3.add(TFTipo, gridBagConstraints);
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Aplicable a:");
+        LblAplicable.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        LblAplicable.setForeground(new java.awt.Color(0, 0, 0));
+        LblAplicable.setText("Aplicable a:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 10);
-        jPanel3.add(jLabel4, gridBagConstraints);
+        jPanel3.add(LblAplicable, gridBagConstraints);
 
-        jTextField7.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField7.setForeground(new java.awt.Color(0, 0, 0));
+        TFAplicable.setBackground(new java.awt.Color(255, 255, 255));
+        TFAplicable.setForeground(new java.awt.Color(0, 0, 0));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 10);
-        jPanel3.add(jTextField7, gridBagConstraints);
+        jPanel3.add(TFAplicable, gridBagConstraints);
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("Reglas");
+        LblReglas.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        LblReglas.setForeground(new java.awt.Color(0, 0, 0));
+        LblReglas.setText("Reglas");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 10);
-        jPanel3.add(jLabel6, gridBagConstraints);
+        jPanel3.add(LblReglas, gridBagConstraints);
 
-        jTextField9.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField9.setForeground(new java.awt.Color(0, 0, 0));
+        TFReglas.setBackground(new java.awt.Color(255, 255, 255));
+        TFReglas.setForeground(new java.awt.Color(0, 0, 0));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 10);
-        jPanel3.add(jTextField9, gridBagConstraints);
+        jPanel3.add(TFReglas, gridBagConstraints);
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel8.setText("Vigencia");
+        LblVigencia.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        LblVigencia.setForeground(new java.awt.Color(0, 0, 0));
+        LblVigencia.setText("Vigencia");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
-        jPanel3.add(jLabel8, gridBagConstraints);
+        jPanel3.add(LblVigencia, gridBagConstraints);
 
-        jTextField11.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField11.setForeground(new java.awt.Color(0, 0, 0));
+        TFVigencia.setBackground(new java.awt.Color(255, 255, 255));
+        TFVigencia.setForeground(new java.awt.Color(0, 0, 0));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
-        jPanel3.add(jTextField11, gridBagConstraints);
+        jPanel3.add(TFVigencia, gridBagConstraints);
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Producto");
+        LblProducto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        LblProducto.setForeground(new java.awt.Color(0, 0, 0));
+        LblProducto.setText("Producto");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
-        jPanel3.add(jLabel7, gridBagConstraints);
+        jPanel3.add(LblProducto, gridBagConstraints);
 
-        jTextField10.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField10.setForeground(new java.awt.Color(0, 0, 0));
+        TFProducto.setBackground(new java.awt.Color(255, 255, 255));
+        TFProducto.setForeground(new java.awt.Color(0, 0, 0));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
-        jPanel3.add(jTextField10, gridBagConstraints);
+        jPanel3.add(TFProducto, gridBagConstraints);
 
-        jCheckBox1.setBackground(new java.awt.Color(233, 253, 253));
-        jCheckBox1.setForeground(new java.awt.Color(0, 0, 0));
-        jCheckBox1.setText("¿Es concurrente?");
-        jCheckBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        CheckBConcurrente.setBackground(new java.awt.Color(233, 253, 253));
+        CheckBConcurrente.setForeground(new java.awt.Color(0, 0, 0));
+        CheckBConcurrente.setText("¿Es concurrente?");
+        CheckBConcurrente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
-        jPanel3.add(jCheckBox1, gridBagConstraints);
+        jPanel3.add(CheckBConcurrente, gridBagConstraints);
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel9.setText("IMAGE");
+        LblImage.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        LblImage.setForeground(new java.awt.Color(0, 0, 0));
+        LblImage.setText("IMAGE");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
-        jPanel3.add(jLabel9, gridBagConstraints);
+        jPanel3.add(LblImage, gridBagConstraints);
 
         add(jPanel3, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -313,25 +313,25 @@ public class DaraltaPromoP extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelarP;
+    private javax.swing.JCheckBox CheckBConcurrente;
     private javax.swing.JButton GuardarP1;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel LblAplicable;
+    private javax.swing.JLabel LblEMpleado;
+    private javax.swing.JLabel LblImage;
+    private javax.swing.JLabel LblNombre;
+    private javax.swing.JLabel LblProducto;
+    private javax.swing.JLabel LblReglas;
+    private javax.swing.JLabel LblTipo;
+    private javax.swing.JLabel LblTitulo;
+    private javax.swing.JLabel LblVigencia;
+    private javax.swing.JPanel PnlBajo;
+    private javax.swing.JPanel PnlCabecera;
+    private javax.swing.JTextField TFAplicable;
+    private javax.swing.JTextField TFNombre;
+    private javax.swing.JTextField TFProducto;
+    private javax.swing.JTextField TFReglas;
+    private javax.swing.JTextField TFTipo;
+    private javax.swing.JTextField TFVigencia;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 }

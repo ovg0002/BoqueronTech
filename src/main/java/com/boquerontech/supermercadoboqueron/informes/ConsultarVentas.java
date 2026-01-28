@@ -30,17 +30,15 @@ public class ConsultarVentas extends javax.swing.JPanel {
         java.awt.GridBagConstraints gridBagConstraints;
 
         PanelMedioItemVentas = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        BtnSalir = new javax.swing.JButton();
+        CBPaginas = new javax.swing.JComboBox<>();
         PanelInferiorConsultaVentas = new javax.swing.JPanel();
         scroll = new javax.swing.JScrollPane();
-        jPanel2 = new javax.swing.JPanel();
+        PnlCentralItems = new javax.swing.JPanel();
         itemConsultasVentas1 = new com.boquerontech.supermercadoboqueron.informes.items.ItemConsultasVentas();
-        itemConsultasVentas2 = new com.boquerontech.supermercadoboqueron.informes.items.ItemConsultasVentas();
-        itemConsultasVentas3 = new com.boquerontech.supermercadoboqueron.informes.items.ItemConsultasVentas();
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        TFBuscar = new javax.swing.JTextField();
+        CBFiltrar = new javax.swing.JComboBox<>();
         pnlCabecera = new javax.swing.JPanel();
         lblTittle = new javax.swing.JLabel();
         relleno = new javax.swing.JPanel();
@@ -56,11 +54,11 @@ public class ConsultarVentas extends javax.swing.JPanel {
         PanelMedioItemVentas.setOpaque(false);
         PanelMedioItemVentas.setLayout(new java.awt.GridBagLayout());
 
-        jButton2.setForeground(new java.awt.Color(199, 108, 108));
-        jButton2.setText("Salir");
-        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(199, 108, 108)));
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton2.setOpaque(true);
+        BtnSalir.setForeground(new java.awt.Color(199, 108, 108));
+        BtnSalir.setText("Salir");
+        BtnSalir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(199, 108, 108)));
+        BtnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        BtnSalir.setOpaque(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -68,11 +66,11 @@ public class ConsultarVentas extends javax.swing.JPanel {
         gridBagConstraints.ipady = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 40, 0);
-        PanelMedioItemVentas.add(jButton2, gridBagConstraints);
+        PanelMedioItemVentas.add(BtnSalir, gridBagConstraints);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jComboBox1.setOpaque(true);
+        CBPaginas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CBPaginas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        CBPaginas.setOpaque(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -80,7 +78,7 @@ public class ConsultarVentas extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 65;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 40, 0);
-        PanelMedioItemVentas.add(jComboBox1, gridBagConstraints);
+        PanelMedioItemVentas.add(CBPaginas, gridBagConstraints);
 
         add(PanelMedioItemVentas, java.awt.BorderLayout.PAGE_END);
 
@@ -89,11 +87,9 @@ public class ConsultarVentas extends javax.swing.JPanel {
 
         scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        jPanel2.add(itemConsultasVentas1);
-        jPanel2.add(itemConsultasVentas2);
-        jPanel2.add(itemConsultasVentas3);
+        PnlCentralItems.add(itemConsultasVentas1);
 
-        scroll.setViewportView(jPanel2);
+        scroll.setViewportView(PnlCentralItems);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -106,23 +102,23 @@ public class ConsultarVentas extends javax.swing.JPanel {
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setText("Buscar");
-        jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTextField1.setOpaque(true);
+        TFBuscar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        TFBuscar.setText("Buscar");
+        TFBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        TFBuscar.setOpaque(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel1.add(jTextField1, gridBagConstraints);
+        jPanel1.add(TFBuscar, gridBagConstraints);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        CBFiltrar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CBFiltrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        jPanel1.add(jComboBox2, gridBagConstraints);
+        jPanel1.add(CBFiltrar, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -173,7 +169,7 @@ public class ConsultarVentas extends javax.swing.JPanel {
 
         pnlUser.setBackground(new java.awt.Color(255, 255, 255));
         pnlUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnlUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnlUser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pnlUser.setPreferredSize(new java.awt.Dimension(161, 60));
         pnlUser.setLayout(new java.awt.GridBagLayout());
 
@@ -234,20 +230,18 @@ public class ConsultarVentas extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnSalir;
+    private javax.swing.JComboBox<String> CBFiltrar;
+    private javax.swing.JComboBox<String> CBPaginas;
     private javax.swing.JPanel PanelInferiorConsultaVentas;
     private javax.swing.JPanel PanelMedioItemVentas;
+    private javax.swing.JPanel PnlCentralItems;
+    private javax.swing.JTextField TFBuscar;
     private com.boquerontech.supermercadoboqueron.informes.items.ItemConsultasVentas itemConsultasVentas1;
-    private com.boquerontech.supermercadoboqueron.informes.items.ItemConsultasVentas itemConsultasVentas2;
-    private com.boquerontech.supermercadoboqueron.informes.items.ItemConsultasVentas itemConsultasVentas3;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblTittle;
     private javax.swing.JPanel pnlCabecera;
     private javax.swing.JPanel pnlUser;

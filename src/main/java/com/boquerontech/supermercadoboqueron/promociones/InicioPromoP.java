@@ -36,26 +36,26 @@ public class InicioPromoP extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        topPanel = new javax.swing.JPanel();
+        LblTitulo = new javax.swing.JLabel();
+        LblEmpleado = new javax.swing.JLabel();
+        midPanel = new javax.swing.JPanel();
+        BtnAltaPromocion = new javax.swing.JButton();
+        BtnConfigVigencia = new javax.swing.JButton();
+        BtnListadoPromosActiva = new javax.swing.JButton();
+        BtnDarBajaModificarPromo = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setBackground(new java.awt.Color(233, 253, 253));
-        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.setFocusTraversalPolicyProvider(true);
-        jPanel1.setLayout(new java.awt.GridBagLayout());
+        topPanel.setBackground(new java.awt.Color(233, 253, 253));
+        topPanel.setForeground(new java.awt.Color(0, 0, 0));
+        topPanel.setFocusTraversalPolicyProvider(true);
+        topPanel.setLayout(new java.awt.GridBagLayout());
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Promociones ");
+        LblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        LblTitulo.setForeground(new java.awt.Color(0, 0, 0));
+        LblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LblTitulo.setText("Promociones ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -64,35 +64,35 @@ public class InicioPromoP extends javax.swing.JPanel {
         gridBagConstraints.ipady = 68;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 13, 0, 13);
-        jPanel1.add(jLabel2, gridBagConstraints);
+        topPanel.add(LblTitulo, gridBagConstraints);
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("<html>Nombre empleado<br> <small>Rol empleado</small></html>");
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-        jLabel1.setOpaque(true);
+        LblEmpleado.setBackground(new java.awt.Color(255, 255, 255));
+        LblEmpleado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        LblEmpleado.setForeground(new java.awt.Color(0, 0, 0));
+        LblEmpleado.setText("<html>Nombre empleado<br> <small>Rol empleado</small></html>");
+        LblEmpleado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        LblEmpleado.setOpaque(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 611, 0, 0);
-        jPanel1.add(jLabel1, gridBagConstraints);
+        topPanel.add(LblEmpleado, gridBagConstraints);
 
-        add(jPanel1, java.awt.BorderLayout.PAGE_START);
+        add(topPanel, java.awt.BorderLayout.PAGE_START);
 
-        jPanel2.setBackground(new java.awt.Color(233, 253, 253));
-        jPanel2.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        midPanel.setBackground(new java.awt.Color(233, 253, 253));
+        midPanel.setForeground(new java.awt.Color(0, 0, 0));
+        midPanel.setLayout(new java.awt.GridBagLayout());
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(48, 91, 171));
-        jButton1.setText("Dar alta promoción");
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(48, 91, 171)));
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnAltaPromocion.setBackground(new java.awt.Color(255, 255, 255));
+        BtnAltaPromocion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        BtnAltaPromocion.setForeground(new java.awt.Color(48, 91, 171));
+        BtnAltaPromocion.setText("Dar alta promoción");
+        BtnAltaPromocion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(48, 91, 171)));
+        BtnAltaPromocion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnAltaPromocion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 darAltaPromocionBtn(evt);
             }
@@ -104,17 +104,17 @@ public class InicioPromoP extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 150;
         gridBagConstraints.ipady = 30;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
-        jPanel2.add(jButton1, gridBagConstraints);
+        midPanel.add(BtnAltaPromocion, gridBagConstraints);
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(48, 91, 171));
-        jButton2.setText("Configurar vigencia temporal");
-        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(48, 91, 171)));
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        BtnConfigVigencia.setBackground(new java.awt.Color(255, 255, 255));
+        BtnConfigVigencia.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        BtnConfigVigencia.setForeground(new java.awt.Color(48, 91, 171));
+        BtnConfigVigencia.setText("Configurar vigencia temporal");
+        BtnConfigVigencia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(48, 91, 171)));
+        BtnConfigVigencia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnConfigVigencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BtnConfigVigenciaActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -124,17 +124,17 @@ public class InicioPromoP extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 150;
         gridBagConstraints.ipady = 30;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
-        jPanel2.add(jButton2, gridBagConstraints);
+        midPanel.add(BtnConfigVigencia, gridBagConstraints);
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 255));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(48, 91, 171));
-        jButton3.setText("Listado de promociones activas");
-        jButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(48, 91, 171)));
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        BtnListadoPromosActiva.setBackground(new java.awt.Color(255, 255, 255));
+        BtnListadoPromosActiva.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        BtnListadoPromosActiva.setForeground(new java.awt.Color(48, 91, 171));
+        BtnListadoPromosActiva.setText("Listado de promociones activas");
+        BtnListadoPromosActiva.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(48, 91, 171)));
+        BtnListadoPromosActiva.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnListadoPromosActiva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                BtnListadoPromosActivaActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -143,15 +143,15 @@ public class InicioPromoP extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 150;
         gridBagConstraints.ipady = 30;
-        jPanel2.add(jButton3, gridBagConstraints);
+        midPanel.add(BtnListadoPromosActiva, gridBagConstraints);
 
-        jButton4.setBackground(new java.awt.Color(255, 255, 255));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(48, 91, 171));
-        jButton4.setText("Modificar/dar de baja promoción");
-        jButton4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(48, 91, 171)));
-        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        BtnDarBajaModificarPromo.setBackground(new java.awt.Color(255, 255, 255));
+        BtnDarBajaModificarPromo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        BtnDarBajaModificarPromo.setForeground(new java.awt.Color(48, 91, 171));
+        BtnDarBajaModificarPromo.setText("Modificar/dar de baja promoción");
+        BtnDarBajaModificarPromo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(48, 91, 171)));
+        BtnDarBajaModificarPromo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnDarBajaModificarPromo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modificarPromocionAct(evt);
             }
@@ -163,9 +163,9 @@ public class InicioPromoP extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 150;
         gridBagConstraints.ipady = 30;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
-        jPanel2.add(jButton4, gridBagConstraints);
+        midPanel.add(BtnDarBajaModificarPromo, gridBagConstraints);
 
-        add(jPanel2, java.awt.BorderLayout.CENTER);
+        add(midPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void modificarPromocionAct(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarPromocionAct
@@ -176,24 +176,24 @@ public class InicioPromoP extends javax.swing.JPanel {
         inicioInstance.colocarPanel(new DaraltaPromoP(inicioInstance));
     }//GEN-LAST:event_darAltaPromocionBtn
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void BtnConfigVigenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfigVigenciaActionPerformed
         // TODO add your handling code here:
         inicioInstance.colocarPanel(new PromocionesConcurrentesP(inicioInstance));
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_BtnConfigVigenciaActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void BtnListadoPromosActivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnListadoPromosActivaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_BtnListadoPromosActivaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton BtnAltaPromocion;
+    private javax.swing.JButton BtnConfigVigencia;
+    private javax.swing.JButton BtnDarBajaModificarPromo;
+    private javax.swing.JButton BtnListadoPromosActiva;
+    private javax.swing.JLabel LblEmpleado;
+    private javax.swing.JLabel LblTitulo;
+    private javax.swing.JPanel midPanel;
+    private javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables
 }

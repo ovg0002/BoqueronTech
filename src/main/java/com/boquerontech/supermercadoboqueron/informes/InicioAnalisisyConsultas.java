@@ -36,12 +36,12 @@ public class InicioAnalisisyConsultas extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel2 = new javax.swing.JPanel();
+        PnlBajo = new javax.swing.JPanel();
         CancelarP3 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        PnlCentral = new javax.swing.JPanel();
+        BtnGenerarresumencaja = new javax.swing.JButton();
+        BtnGenerarinformesinventario = new javax.swing.JButton();
+        BtnConsultarVentas = new javax.swing.JButton();
         pnlCabecera = new javax.swing.JPanel();
         lblTittle = new javax.swing.JLabel();
         relleno = new javax.swing.JPanel();
@@ -54,10 +54,11 @@ public class InicioAnalisisyConsultas extends javax.swing.JPanel {
         setBackground(new java.awt.Color(233, 253, 253));
         setLayout(new java.awt.BorderLayout());
 
-        jPanel2.setOpaque(false);
-        jPanel2.setPreferredSize(new java.awt.Dimension(879, 100));
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        PnlBajo.setOpaque(false);
+        PnlBajo.setPreferredSize(new java.awt.Dimension(879, 100));
+        PnlBajo.setLayout(new java.awt.GridBagLayout());
 
+        CancelarP3.setBackground(new java.awt.Color(255, 255, 255));
         CancelarP3.setForeground(new java.awt.Color(199, 108, 108));
         CancelarP3.setText("Cancelar");
         CancelarP3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(199, 108, 108)));
@@ -74,27 +75,29 @@ public class InicioAnalisisyConsultas extends javax.swing.JPanel {
         gridBagConstraints.ipady = 20;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(46, 34, 36, 757);
-        jPanel2.add(CancelarP3, gridBagConstraints);
+        PnlBajo.add(CancelarP3, gridBagConstraints);
 
-        add(jPanel2, java.awt.BorderLayout.PAGE_END);
+        add(PnlBajo, java.awt.BorderLayout.PAGE_END);
 
-        jPanel3.setOpaque(false);
-        jPanel3.setLayout(new java.awt.GridBagLayout());
+        PnlCentral.setOpaque(false);
+        PnlCentral.setLayout(new java.awt.GridBagLayout());
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(48, 91, 171));
-        jButton1.setText("Generar resumen de caja diaria.");
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(48, 91, 171)));
+        BtnGenerarresumencaja.setBackground(new java.awt.Color(255, 255, 255));
+        BtnGenerarresumencaja.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        BtnGenerarresumencaja.setForeground(new java.awt.Color(48, 91, 171));
+        BtnGenerarresumencaja.setText("Generar resumen de caja diaria.");
+        BtnGenerarresumencaja.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(48, 91, 171)));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 150;
         gridBagConstraints.ipady = 40;
-        jPanel3.add(jButton1, gridBagConstraints);
+        PnlCentral.add(BtnGenerarresumencaja, gridBagConstraints);
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(48, 91, 171));
-        jButton2.setText("Generar informes de inventario");
-        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(48, 91, 171)));
+        BtnGenerarinformesinventario.setBackground(new java.awt.Color(255, 255, 255));
+        BtnGenerarinformesinventario.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        BtnGenerarinformesinventario.setForeground(new java.awt.Color(48, 91, 171));
+        BtnGenerarinformesinventario.setText("Generar informes de inventario");
+        BtnGenerarinformesinventario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(48, 91, 171)));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -102,15 +105,16 @@ public class InicioAnalisisyConsultas extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 150;
         gridBagConstraints.ipady = 40;
         gridBagConstraints.insets = new java.awt.Insets(40, 0, 40, 0);
-        jPanel3.add(jButton2, gridBagConstraints);
+        PnlCentral.add(BtnGenerarinformesinventario, gridBagConstraints);
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(48, 91, 171));
-        jButton3.setText("Consultar ventas");
-        jButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(48, 91, 171)));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        BtnConsultarVentas.setBackground(new java.awt.Color(255, 255, 255));
+        BtnConsultarVentas.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        BtnConsultarVentas.setForeground(new java.awt.Color(48, 91, 171));
+        BtnConsultarVentas.setText("Consultar ventas");
+        BtnConsultarVentas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(48, 91, 171)));
+        BtnConsultarVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                BtnConsultarVentasActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -119,14 +123,15 @@ public class InicioAnalisisyConsultas extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 150;
         gridBagConstraints.ipady = 40;
-        jPanel3.add(jButton3, gridBagConstraints);
+        PnlCentral.add(BtnConsultarVentas, gridBagConstraints);
 
-        add(jPanel3, java.awt.BorderLayout.CENTER);
+        add(PnlCentral, java.awt.BorderLayout.CENTER);
 
         pnlCabecera.setBackground(new java.awt.Color(233, 253, 253));
         pnlCabecera.setLayout(new java.awt.GridBagLayout());
 
         lblTittle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lblTittle.setForeground(new java.awt.Color(0, 0, 0));
         lblTittle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTittle.setText("Analisis y Consultas");
         lblTittle.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
@@ -165,7 +170,7 @@ public class InicioAnalisisyConsultas extends javax.swing.JPanel {
 
         pnlUser.setBackground(new java.awt.Color(255, 255, 255));
         pnlUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnlUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnlUser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pnlUser.setPreferredSize(new java.awt.Dimension(161, 60));
         pnlUser.setLayout(new java.awt.GridBagLayout());
 
@@ -224,21 +229,21 @@ public class InicioAnalisisyConsultas extends javax.swing.JPanel {
      
     }//GEN-LAST:event_CancelarP3ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void BtnConsultarVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConsultarVentasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_BtnConsultarVentasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnConsultarVentas;
+    private javax.swing.JButton BtnGenerarinformesinventario;
+    private javax.swing.JButton BtnGenerarresumencaja;
     private javax.swing.JButton CancelarP3;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JPanel PnlBajo;
+    private javax.swing.JPanel PnlCentral;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lblTittle;
     private javax.swing.JPanel pnlCabecera;
     private javax.swing.JPanel pnlUser;

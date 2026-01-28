@@ -34,14 +34,14 @@ public class ConsultarClientes extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        PanelAbajo = new javax.swing.JPanel();
+        SalirBtn = new javax.swing.JButton();
+        NumPaginasCB = new javax.swing.JComboBox<>();
+        PnlCentral = new javax.swing.JPanel();
+        BuscarTF = new javax.swing.JTextField();
+        FiltradoCB = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel4 = new javax.swing.JPanel();
+        PanelMedio = new javax.swing.JPanel();
         itemConsultarClientes1 = new com.boquerontech.supermercadoboqueron.informes.items.ItemConsultarClientes();
         itemConsultarClientes2 = new com.boquerontech.supermercadoboqueron.informes.items.ItemConsultarClientes();
         itemConsultarClientes3 = new com.boquerontech.supermercadoboqueron.informes.items.ItemConsultarClientes();
@@ -50,24 +50,24 @@ public class ConsultarClientes extends javax.swing.JPanel {
         relleno = new javax.swing.JPanel();
         trabajadorPanel = new javax.swing.JPanel();
         pnlUser = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        ListadoLbl = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(233, 253, 253));
         setLayout(new java.awt.BorderLayout());
 
-        jPanel2.setOpaque(false);
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        PanelAbajo.setOpaque(false);
+        PanelAbajo.setLayout(new java.awt.GridBagLayout());
 
-        jButton2.setForeground(new java.awt.Color(199, 108, 108));
-        jButton2.setText("Salir");
-        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(199, 108, 108)));
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton2.setOpaque(true);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        SalirBtn.setBackground(null);
+        SalirBtn.setForeground(new java.awt.Color(199, 108, 108));
+        SalirBtn.setText("Salir");
+        SalirBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(199, 108, 108)));
+        SalirBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        SalirBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                SalirBtnActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -77,10 +77,11 @@ public class ConsultarClientes extends javax.swing.JPanel {
         gridBagConstraints.ipady = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 40, 0);
-        jPanel2.add(jButton2, gridBagConstraints);
+        PanelAbajo.add(SalirBtn, gridBagConstraints);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        NumPaginasCB.setBackground(null);
+        NumPaginasCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        NumPaginasCB.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -88,37 +89,43 @@ public class ConsultarClientes extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 65;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 40, 0);
-        jPanel2.add(jComboBox1, gridBagConstraints);
+        PanelAbajo.add(NumPaginasCB, gridBagConstraints);
 
-        add(jPanel2, java.awt.BorderLayout.PAGE_END);
+        add(PanelAbajo, java.awt.BorderLayout.PAGE_END);
 
-        jPanel3.setOpaque(false);
-        jPanel3.setLayout(new java.awt.GridBagLayout());
+        PnlCentral.setOpaque(false);
+        PnlCentral.setLayout(new java.awt.GridBagLayout());
 
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setText("Buscar");
-        jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTextField1.setOpaque(true);
+        BuscarTF.setBackground(null);
+        BuscarTF.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        BuscarTF.setText("Buscar");
+        BuscarTF.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        BuscarTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarTFActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 450, 0, 0);
-        jPanel3.add(jTextField1, gridBagConstraints);
+        PnlCentral.add(BuscarTF, gridBagConstraints);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        FiltradoCB.setBackground(null);
+        FiltradoCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        FiltradoCB.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel3.add(jComboBox2, gridBagConstraints);
+        PnlCentral.add(FiltradoCB, gridBagConstraints);
 
-        jPanel4.add(itemConsultarClientes1);
-        jPanel4.add(itemConsultarClientes2);
-        jPanel4.add(itemConsultarClientes3);
+        PanelMedio.add(itemConsultarClientes1);
+        PanelMedio.add(itemConsultarClientes2);
+        PanelMedio.add(itemConsultarClientes3);
 
-        jScrollPane1.setViewportView(jPanel4);
+        jScrollPane1.setViewportView(PanelMedio);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -128,14 +135,15 @@ public class ConsultarClientes extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel3.add(jScrollPane1, gridBagConstraints);
+        PnlCentral.add(jScrollPane1, gridBagConstraints);
 
-        add(jPanel3, java.awt.BorderLayout.CENTER);
+        add(PnlCentral, java.awt.BorderLayout.CENTER);
 
         pnlCabecera.setBackground(new java.awt.Color(233, 253, 253));
         pnlCabecera.setLayout(new java.awt.GridBagLayout());
 
         lblTittle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lblTittle.setForeground(new java.awt.Color(0, 0, 0));
         lblTittle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTittle.setText("Consultar Clientes");
         lblTittle.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
@@ -174,11 +182,11 @@ public class ConsultarClientes extends javax.swing.JPanel {
 
         pnlUser.setBackground(new java.awt.Color(255, 255, 255));
         pnlUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnlUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnlUser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pnlUser.setPreferredSize(new java.awt.Dimension(161, 60));
         pnlUser.setLayout(new java.awt.GridBagLayout());
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/img_torrente.png"))); // NOI18N
+        ListadoLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/img_torrente.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -186,7 +194,7 @@ public class ConsultarClientes extends javax.swing.JPanel {
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        pnlUser.add(jLabel5, gridBagConstraints);
+        pnlUser.add(ListadoLbl, gridBagConstraints);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Torrente Segura");
@@ -229,27 +237,31 @@ public class ConsultarClientes extends javax.swing.JPanel {
         add(pnlCabecera, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void SalirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirBtnActionPerformed
         // TODO add your handling code here:
         inicioInstance.colocarPanel(new InicioAnalisisyConsultas(inicioInstance));
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_SalirBtnActionPerformed
+
+    private void BuscarTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscarTFActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField BuscarTF;
+    private javax.swing.JComboBox<String> FiltradoCB;
+    private javax.swing.JLabel ListadoLbl;
+    private javax.swing.JComboBox<String> NumPaginasCB;
+    private javax.swing.JPanel PanelAbajo;
+    private javax.swing.JPanel PanelMedio;
+    private javax.swing.JPanel PnlCentral;
+    private javax.swing.JButton SalirBtn;
     private com.boquerontech.supermercadoboqueron.informes.items.ItemConsultarClientes itemConsultarClientes1;
     private com.boquerontech.supermercadoboqueron.informes.items.ItemConsultarClientes itemConsultarClientes2;
     private com.boquerontech.supermercadoboqueron.informes.items.ItemConsultarClientes itemConsultarClientes3;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblTittle;
     private javax.swing.JPanel pnlCabecera;
     private javax.swing.JPanel pnlUser;

@@ -41,9 +41,6 @@ public class PromocionesConcurrentesP extends javax.swing.JPanel {
         midPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         promosPanel = new javax.swing.JPanel();
-        itemPromocionConcurrente1 = new com.boquerontech.supermercadoboqueron.promociones.items.itemPromocionConcurrente();
-        itemPromocionConcurrente2 = new com.boquerontech.supermercadoboqueron.promociones.items.itemPromocionConcurrente();
-        itemPromocionConcurrente3 = new com.boquerontech.supermercadoboqueron.promociones.items.itemPromocionConcurrente();
         bottomPanel = new javax.swing.JPanel();
         salirBtn = new javax.swing.JButton();
 
@@ -84,11 +81,6 @@ public class PromocionesConcurrentesP extends javax.swing.JPanel {
 
         jScrollPane1.setBackground(new java.awt.Color(233, 253, 253));
         jScrollPane1.setOpaque(false);
-
-        promosPanel.add(itemPromocionConcurrente1);
-        promosPanel.add(itemPromocionConcurrente2);
-        promosPanel.add(itemPromocionConcurrente3);
-
         jScrollPane1.setViewportView(promosPanel);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -140,9 +132,6 @@ public class PromocionesConcurrentesP extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bottomPanel;
-    private com.boquerontech.supermercadoboqueron.promociones.items.itemPromocionConcurrente itemPromocionConcurrente1;
-    private com.boquerontech.supermercadoboqueron.promociones.items.itemPromocionConcurrente itemPromocionConcurrente2;
-    private com.boquerontech.supermercadoboqueron.promociones.items.itemPromocionConcurrente itemPromocionConcurrente3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelusuario;
     private javax.swing.JPanel midPanel;
