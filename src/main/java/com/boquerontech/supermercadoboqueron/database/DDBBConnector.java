@@ -22,7 +22,7 @@ public class DDBBConnector {
             HikariConfig config = new HikariConfig();
             
             config.setJdbcUrl("jdbc:mysql://localhost:3306/superboqueron");
-            config.setUsername("root");
+            config.setUsername("SuperBoqueron");
             config.setPassword("superboqueron1234");
             config.setDriverClassName("com.mysql.cj.jdbc.Driver");
             
