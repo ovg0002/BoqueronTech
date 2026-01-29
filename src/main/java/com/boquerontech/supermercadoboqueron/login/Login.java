@@ -5,10 +5,9 @@
 package com.boquerontech.supermercadoboqueron.login;
 
 import com.boquerontech.supermercadoboqueron.Inicio;
-import com.boquerontech.supermercadoboqueron.database.DDBBConnector;
+import com.boquerontech.supermercadoboqueron.database.empleado.EmpleadoDAO;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -184,8 +183,9 @@ public class Login extends javax.swing.JFrame {
         String user = tfUser.getText();                                       
         // Creamos una cadena de texto para coger los datos del tfPassword
         String password = String.valueOf(tfPassword.getPassword());
+        
         // Si el contenido es igual a Usuario y la contraseña a 123 hara lo siguiente
-        if (user.equals("Torrente") && password.equals("123")) {
+        if (EmpleadoDAO.isCorrectEmployee(user, password)) {
             // Llamamos al Objeto Inicio y le damos los parametros user y password
             Inicio.getInstance(user, password).setVisible(true);
             // Cerramos la ventana de Login
