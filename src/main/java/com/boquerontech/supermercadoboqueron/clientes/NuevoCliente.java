@@ -71,7 +71,7 @@ public class NuevoCliente extends javax.swing.JPanel {
         pnlCentral.add(tituloLbl, gridBagConstraints);
 
         apellido1Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        apellido1Lbl.setText("Primer apellido");
+        apellido1Lbl.setText("Primer apellido *");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
@@ -81,7 +81,7 @@ public class NuevoCliente extends javax.swing.JPanel {
         pnlCentral.add(apellido1Lbl, gridBagConstraints);
 
         apellido2Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        apellido2Lbl.setText("Segundo apellido");
+        apellido2Lbl.setText("Segundo apellido *");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 13;
         gridBagConstraints.gridy = 1;
@@ -91,7 +91,7 @@ public class NuevoCliente extends javax.swing.JPanel {
         pnlCentral.add(apellido2Lbl, gridBagConstraints);
 
         dniLbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        dniLbl.setText("DNI");
+        dniLbl.setText("DNI *");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -102,7 +102,7 @@ public class NuevoCliente extends javax.swing.JPanel {
         pnlCentral.add(dniLbl, gridBagConstraints);
 
         TelefLbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        TelefLbl.setText("Teléfono");
+        TelefLbl.setText("Teléfono *");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 3;
@@ -192,7 +192,7 @@ public class NuevoCliente extends javax.swing.JPanel {
         pnlCentral.add(nombreTxt, gridBagConstraints);
 
         nombreLbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        nombreLbl.setText("Nombre");
+        nombreLbl.setText("Nombre *");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -273,7 +273,7 @@ public class NuevoCliente extends javax.swing.JPanel {
 
         // 2. Validar que los campos obligatorios no estén vacíos
         if (nombre.isEmpty() || apellido1.isEmpty() || dni.isEmpty() || telefono.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Los campos Nombre, Primer Apellido, DNI y Teléfono son obligatorios.", "Error de validación", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Los campos Nombre, Primer Apellido, Segundo Apellido, DNI y Teléfono son obligatorios.", "Error de validación", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
