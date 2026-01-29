@@ -18,10 +18,10 @@ public class GestionEmpleado extends javax.swing.JPanel {
      */
     public GestionEmpleado() {
         initComponents();
-        pnlCard.add(new NuevoEmpleado(), "NuevoEmpleado");
-        pnlCard.add(new ConsultarEmpleado(), "ConsultarEmpleado");
-        pnlCard.add(new ModificarEmpleado(), "ModificarEmpleado");
-        pnlCard.add(new EliminarEmpleado(), "EliminarEmpleado");
+        cardPnl.add(new NuevoEmpleado(), "NuevoEmpleado");
+        cardPnl.add(new ConsultarEmpleado(), "ConsultarEmpleado");
+        cardPnl.add(new ModificarEmpleado(), "ModificarEmpleado");
+        cardPnl.add(new EliminarEmpleado(), "EliminarEmpleado");
         
     }
 
@@ -35,45 +35,41 @@ public class GestionEmpleado extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        pnlFondo = new javax.swing.JPanel();
-        pnlContenido = new javax.swing.JPanel();
+        mainPnl = new javax.swing.JPanel();
         pnlBotones = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        pnlCard = new javax.swing.JPanel();
-        cabecera = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        nuevoEmplBtn = new javax.swing.JButton();
+        consultarEmplBtn = new javax.swing.JButton();
+        eliminarEmplBtn = new javax.swing.JButton();
+        modificarEmplBtn = new javax.swing.JButton();
+        cardPnl = new javax.swing.JPanel();
+        cabeceraPnl = new javax.swing.JPanel();
+        tituloLbl = new javax.swing.JLabel();
         relleno = new javax.swing.JPanel();
-        trabajadorPanel = new javax.swing.JPanel();
-        pnlUser = new javax.swing.JPanel();
+        trabajadorPnl = new javax.swing.JPanel();
+        userPnl = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
         setLayout(new java.awt.BorderLayout());
 
-        pnlFondo.setBackground(new java.awt.Color(233, 253, 253));
-        pnlFondo.setLayout(new java.awt.BorderLayout());
-
-        pnlContenido.setBackground(new java.awt.Color(233, 253, 253));
-        pnlContenido.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 0, 20, 20));
-        pnlContenido.setLayout(new java.awt.BorderLayout());
+        mainPnl.setBackground(new java.awt.Color(233, 253, 253));
+        mainPnl.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 0, 20, 20));
+        mainPnl.setLayout(new java.awt.BorderLayout());
 
         pnlBotones.setBackground(new java.awt.Color(233, 253, 253));
         pnlBotones.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
         pnlBotones.setLayout(new java.awt.GridBagLayout());
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(100, 120, 200));
-        jButton1.setText("NUEVO EMPLEADO");
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setMargin(new java.awt.Insets(2, 40, 3, 40));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        nuevoEmplBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        nuevoEmplBtn.setForeground(new java.awt.Color(100, 120, 200));
+        nuevoEmplBtn.setText("NUEVO EMPLEADO");
+        nuevoEmplBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
+        nuevoEmplBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        nuevoEmplBtn.setMargin(new java.awt.Insets(2, 40, 3, 40));
+        nuevoEmplBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                nuevoEmplBtnActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -81,16 +77,16 @@ public class GestionEmpleado extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.ipady = 18;
         gridBagConstraints.insets = new java.awt.Insets(10, 25, 10, 25);
-        pnlBotones.add(jButton1, gridBagConstraints);
+        pnlBotones.add(nuevoEmplBtn, gridBagConstraints);
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(100, 120, 200));
-        jButton2.setText("CONSULTAR EMPLEADO");
-        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        consultarEmplBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        consultarEmplBtn.setForeground(new java.awt.Color(100, 120, 200));
+        consultarEmplBtn.setText("CONSULTAR EMPLEADO");
+        consultarEmplBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
+        consultarEmplBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        consultarEmplBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                consultarEmplBtnActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -100,16 +96,16 @@ public class GestionEmpleado extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.ipady = 18;
         gridBagConstraints.insets = new java.awt.Insets(10, 25, 10, 25);
-        pnlBotones.add(jButton2, gridBagConstraints);
+        pnlBotones.add(consultarEmplBtn, gridBagConstraints);
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(100, 120, 200));
-        jButton3.setText("ELIMINAR EMPLEADO");
-        jButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        eliminarEmplBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        eliminarEmplBtn.setForeground(new java.awt.Color(100, 120, 200));
+        eliminarEmplBtn.setText("ELIMINAR EMPLEADO");
+        eliminarEmplBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
+        eliminarEmplBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        eliminarEmplBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                eliminarEmplBtnActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -119,16 +115,16 @@ public class GestionEmpleado extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.ipady = 18;
         gridBagConstraints.insets = new java.awt.Insets(10, 25, 10, 25);
-        pnlBotones.add(jButton3, gridBagConstraints);
+        pnlBotones.add(eliminarEmplBtn, gridBagConstraints);
 
-        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(100, 120, 200));
-        jButton4.setText("MODIFICAR EMPLEADO");
-        jButton4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
-        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        modificarEmplBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        modificarEmplBtn.setForeground(new java.awt.Color(100, 120, 200));
+        modificarEmplBtn.setText("MODIFICAR EMPLEADO");
+        modificarEmplBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
+        modificarEmplBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        modificarEmplBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                modificarEmplBtnActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -138,33 +134,31 @@ public class GestionEmpleado extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.ipady = 18;
         gridBagConstraints.insets = new java.awt.Insets(10, 25, 10, 25);
-        pnlBotones.add(jButton4, gridBagConstraints);
+        pnlBotones.add(modificarEmplBtn, gridBagConstraints);
 
-        pnlContenido.add(pnlBotones, java.awt.BorderLayout.WEST);
+        mainPnl.add(pnlBotones, java.awt.BorderLayout.WEST);
 
-        pnlCard.setBackground(new java.awt.Color(233, 253, 253));
-        pnlCard.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        pnlCard.setLayout(new java.awt.CardLayout());
-        pnlContenido.add(pnlCard, java.awt.BorderLayout.CENTER);
+        cardPnl.setBackground(new java.awt.Color(233, 253, 253));
+        cardPnl.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        cardPnl.setLayout(new java.awt.CardLayout());
+        mainPnl.add(cardPnl, java.awt.BorderLayout.CENTER);
 
-        pnlFondo.add(pnlContenido, java.awt.BorderLayout.CENTER);
+        add(mainPnl, java.awt.BorderLayout.CENTER);
 
-        add(pnlFondo, java.awt.BorderLayout.CENTER);
+        cabeceraPnl.setBackground(new java.awt.Color(233, 253, 253));
+        cabeceraPnl.setLayout(new java.awt.GridBagLayout());
 
-        cabecera.setBackground(new java.awt.Color(233, 253, 253));
-        cabecera.setLayout(new java.awt.GridBagLayout());
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Empleados");
-        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        tituloLbl.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        tituloLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloLbl.setText("Empleados");
+        tituloLbl.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 0);
-        cabecera.add(jLabel2, gridBagConstraints);
+        cabeceraPnl.add(tituloLbl, gridBagConstraints);
 
         relleno.setBackground(new java.awt.Color(204, 204, 204));
         relleno.setOpaque(false);
@@ -186,16 +180,16 @@ public class GestionEmpleado extends javax.swing.JPanel {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 0);
-        cabecera.add(relleno, gridBagConstraints);
+        cabeceraPnl.add(relleno, gridBagConstraints);
 
-        trabajadorPanel.setBackground(new java.awt.Color(204, 204, 204));
-        trabajadorPanel.setPreferredSize(new java.awt.Dimension(200, 60));
+        trabajadorPnl.setBackground(new java.awt.Color(204, 204, 204));
+        trabajadorPnl.setPreferredSize(new java.awt.Dimension(200, 60));
 
-        pnlUser.setBackground(new java.awt.Color(255, 255, 255));
-        pnlUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnlUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pnlUser.setPreferredSize(new java.awt.Dimension(161, 60));
-        pnlUser.setLayout(new java.awt.GridBagLayout());
+        userPnl.setBackground(new java.awt.Color(255, 255, 255));
+        userPnl.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        userPnl.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        userPnl.setPreferredSize(new java.awt.Dimension(161, 60));
+        userPnl.setLayout(new java.awt.GridBagLayout());
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/img_torrente.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -205,7 +199,7 @@ public class GestionEmpleado extends javax.swing.JPanel {
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        pnlUser.add(jLabel5, gridBagConstraints);
+        userPnl.add(jLabel5, gridBagConstraints);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Torrente Segura");
@@ -213,7 +207,7 @@ public class GestionEmpleado extends javax.swing.JPanel {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        pnlUser.add(jLabel6, gridBagConstraints);
+        userPnl.add(jLabel6, gridBagConstraints);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("Jefe Boqueron");
@@ -222,70 +216,69 @@ public class GestionEmpleado extends javax.swing.JPanel {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        pnlUser.add(jLabel7, gridBagConstraints);
+        userPnl.add(jLabel7, gridBagConstraints);
 
-        javax.swing.GroupLayout trabajadorPanelLayout = new javax.swing.GroupLayout(trabajadorPanel);
-        trabajadorPanel.setLayout(trabajadorPanelLayout);
-        trabajadorPanelLayout.setHorizontalGroup(
-            trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout trabajadorPnlLayout = new javax.swing.GroupLayout(trabajadorPnl);
+        trabajadorPnl.setLayout(trabajadorPnlLayout);
+        trabajadorPnlLayout.setHorizontalGroup(
+            trabajadorPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 200, Short.MAX_VALUE)
-            .addGroup(trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(pnlUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(trabajadorPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(userPnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        trabajadorPanelLayout.setVerticalGroup(
-            trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        trabajadorPnlLayout.setVerticalGroup(
+            trabajadorPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 60, Short.MAX_VALUE)
-            .addGroup(trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(pnlUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(trabajadorPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(userPnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 20);
-        cabecera.add(trabajadorPanel, gridBagConstraints);
+        cabeceraPnl.add(trabajadorPnl, gridBagConstraints);
 
-        add(cabecera, java.awt.BorderLayout.PAGE_START);
+        add(cabeceraPnl, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        CardLayout cl = (CardLayout) pnlCard.getLayout();
-        cl.show(pnlCard, "NuevoEmpleado");
+    private void nuevoEmplBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoEmplBtnActionPerformed
+        CardLayout cl = (CardLayout) cardPnl.getLayout();
+        cl.show(cardPnl, "NuevoEmpleado");
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_nuevoEmplBtnActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        CardLayout cl = (CardLayout) pnlCard.getLayout();
-        cl.show(pnlCard, "ConsultarEmpleado");
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void consultarEmplBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarEmplBtnActionPerformed
+        CardLayout cl = (CardLayout) cardPnl.getLayout();
+        cl.show(cardPnl, "ConsultarEmpleado");
+    }//GEN-LAST:event_consultarEmplBtnActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        CardLayout cl = (CardLayout) pnlCard.getLayout();
-        cl.show(pnlCard, "ModificarEmpleado");
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void modificarEmplBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarEmplBtnActionPerformed
+        CardLayout cl = (CardLayout) cardPnl.getLayout();
+        cl.show(cardPnl, "ModificarEmpleado");
+    }//GEN-LAST:event_modificarEmplBtnActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        CardLayout cl = (CardLayout) pnlCard.getLayout();
-        cl.show(pnlCard, "EliminarEmpleado");
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void eliminarEmplBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarEmplBtnActionPerformed
+        CardLayout cl = (CardLayout) cardPnl.getLayout();
+        cl.show(cardPnl, "EliminarEmpleado");
+    }//GEN-LAST:event_eliminarEmplBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel cabecera;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel cabeceraPnl;
+    private javax.swing.JPanel cardPnl;
+    private javax.swing.JButton consultarEmplBtn;
+    private javax.swing.JButton eliminarEmplBtn;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel mainPnl;
+    private javax.swing.JButton modificarEmplBtn;
+    private javax.swing.JButton nuevoEmplBtn;
     private javax.swing.JPanel pnlBotones;
-    private javax.swing.JPanel pnlCard;
-    private javax.swing.JPanel pnlContenido;
-    private javax.swing.JPanel pnlFondo;
-    private javax.swing.JPanel pnlUser;
     private javax.swing.JPanel relleno;
-    private javax.swing.JPanel trabajadorPanel;
+    private javax.swing.JLabel tituloLbl;
+    private javax.swing.JPanel trabajadorPnl;
+    private javax.swing.JPanel userPnl;
     // End of variables declaration//GEN-END:variables
 }

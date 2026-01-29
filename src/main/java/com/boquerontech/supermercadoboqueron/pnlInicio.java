@@ -119,7 +119,7 @@ public class pnlInicio extends javax.swing.JPanel {
         jButton1.setForeground(new java.awt.Color(100, 120, 200));
         jButton1.setText("RELIZAR VENTA");
         jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -132,7 +132,7 @@ public class pnlInicio extends javax.swing.JPanel {
         jButton2.setForeground(new java.awt.Color(100, 120, 200));
         jButton2.setText("NUEVO CLIENTE");
         jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -145,7 +145,7 @@ public class pnlInicio extends javax.swing.JPanel {
         jButton3.setForeground(new java.awt.Color(100, 120, 200));
         jButton3.setText("AÑADIR PRODUCTO");
         jButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 120, 200), 2));
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -215,7 +215,7 @@ public class pnlInicio extends javax.swing.JPanel {
 
         pnlUser.setBackground(new java.awt.Color(255, 255, 255));
         pnlUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnlUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnlUser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pnlUser.setPreferredSize(new java.awt.Dimension(161, 60));
         pnlUser.setLayout(new java.awt.GridBagLayout());
 
@@ -252,7 +252,7 @@ public class pnlInicio extends javax.swing.JPanel {
             trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 200, Short.MAX_VALUE)
             .addGroup(trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(pnlUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pnlUser, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
         );
         trabajadorPanelLayout.setVerticalGroup(
             trabajadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

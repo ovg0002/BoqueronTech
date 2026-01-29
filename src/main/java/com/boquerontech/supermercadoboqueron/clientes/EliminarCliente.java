@@ -45,7 +45,8 @@ public class EliminarCliente extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        searchLblIcon = new javax.swing.JLabel();
+        searchTxt = new javax.swing.JTextField();
         pnlBotones = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -62,10 +63,9 @@ public class EliminarCliente extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.insets = new java.awt.Insets(5, 100, 15, 0);
         jPanel3.add(jLabel1, gridBagConstraints);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel2.setText("Nombre y apellidos");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -75,7 +75,7 @@ public class EliminarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         jPanel3.add(jLabel2, gridBagConstraints);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel3.setText("Fecha de nacimiento");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -85,7 +85,7 @@ public class EliminarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         jPanel3.add(jLabel3, gridBagConstraints);
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel4.setText("Cod Cliente");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -96,7 +96,7 @@ public class EliminarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         jPanel3.add(jLabel4, gridBagConstraints);
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel5.setText("DNI");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -106,7 +106,7 @@ public class EliminarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         jPanel3.add(jLabel5, gridBagConstraints);
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel6.setText("Teléfono");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -116,7 +116,7 @@ public class EliminarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         jPanel3.add(jLabel6, gridBagConstraints);
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel7.setText("Edad");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -126,7 +126,7 @@ public class EliminarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         jPanel3.add(jLabel7, gridBagConstraints);
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel8.setText("Puntos");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -135,7 +135,7 @@ public class EliminarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         jPanel3.add(jLabel8, gridBagConstraints);
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel9.setText("<Nombre y apellidos>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -144,7 +144,7 @@ public class EliminarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         jPanel3.add(jLabel9, gridBagConstraints);
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel10.setText("<dd/mm/aaaa>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -153,7 +153,7 @@ public class EliminarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         jPanel3.add(jLabel10, gridBagConstraints);
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel11.setText("<12345678A>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -162,7 +162,7 @@ public class EliminarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         jPanel3.add(jLabel11, gridBagConstraints);
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel12.setText("<código cliente>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -171,7 +171,7 @@ public class EliminarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         jPanel3.add(jLabel12, gridBagConstraints);
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel13.setText("<Edad actual>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
@@ -180,7 +180,7 @@ public class EliminarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         jPanel3.add(jLabel13, gridBagConstraints);
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel14.setText("<+34 612345678>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
@@ -189,7 +189,7 @@ public class EliminarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         jPanel3.add(jLabel14, gridBagConstraints);
 
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel15.setText("<x ptos.>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
@@ -198,44 +198,83 @@ public class EliminarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         jPanel3.add(jLabel15, gridBagConstraints);
 
-        jTextField1.setText("jTextField1");
+        searchLblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_search.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel3.add(searchLblIcon, gridBagConstraints);
+
+        searchTxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        searchTxt.setText("Buscador");
+        searchTxt.setMargin(new java.awt.Insets(2, 25, 2, 6));
+        searchTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTxtActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
-        jPanel3.add(jTextField1, gridBagConstraints);
+        gridBagConstraints.ipadx = 30;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
+        jPanel3.add(searchTxt, gridBagConstraints);
 
         add(jPanel3, java.awt.BorderLayout.CENTER);
 
         pnlBotones.setBackground(new java.awt.Color(233, 253, 253));
-        pnlBotones.setLayout(new java.awt.BorderLayout());
+        pnlBotones.setLayout(new java.awt.GridBagLayout());
 
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(117, 117, 117));
         jButton1.setText("Cancelar");
+        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(117, 117, 117), 1, true));
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pnlBotones.add(jButton1, java.awt.BorderLayout.WEST);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.ipadx = 25;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 20, 20, 20);
+        pnlBotones.add(jButton1, gridBagConstraints);
 
+        jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton2.setText("Dar de baja");
+        jButton2.setForeground(new java.awt.Color(0, 121, 107));
+        jButton2.setText("Dar de Baja");
+        jButton2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        pnlBotones.add(jButton2, java.awt.BorderLayout.EAST);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.ipadx = 25;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 20, 20, 20);
+        pnlBotones.add(jButton2, gridBagConstraints);
 
         add(pnlBotones, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void searchTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchTxtActionPerformed
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         JOptionPane.showConfirmDialog(
-        this,
-        "Estas seguro de eliminar?",
-        "Confirmar Eliminacion",
-        JOptionPane.OK_CANCEL_OPTION,
-        JOptionPane.WARNING_MESSAGE);
+            this,
+            "Estas seguro de eliminar?",
+            "Confirmar Eliminacion",
+            JOptionPane.OK_CANCEL_OPTION,
+            JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
@@ -258,7 +297,8 @@ public class EliminarCliente extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel pnlBotones;
+    private javax.swing.JLabel searchLblIcon;
+    private javax.swing.JTextField searchTxt;
     // End of variables declaration//GEN-END:variables
 }

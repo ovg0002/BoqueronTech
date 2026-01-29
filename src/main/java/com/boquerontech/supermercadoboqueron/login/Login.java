@@ -5,6 +5,7 @@
 package com.boquerontech.supermercadoboqueron.login;
 
 import com.boquerontech.supermercadoboqueron.Inicio;
+import com.boquerontech.supermercadoboqueron.database.DDBBConnector;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
 import javax.swing.ImageIcon;
@@ -22,13 +23,15 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         // Extension Maxima de Ventana
-        setExtendedState(Login.MAXIMIZED_BOTH);
+        //setExtendedState(Login.MAXIMIZED_BOTH);
         // Le asignamos el texto siguiente
         tfPassword.setText("Introduzca una contraseña");
         // Le damos el color gray
         tfPassword.setForeground(Color.GRAY);
         // Mostrat texto visible
         tfPassword.setEchoChar((char)0);
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -96,6 +99,7 @@ public class Login extends javax.swing.JFrame {
         btnLogin.setForeground(new java.awt.Color(102, 127, 252));
         btnLogin.setText("Login");
         btnLogin.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 127, 252), 2, true));
+        btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
@@ -183,9 +187,7 @@ public class Login extends javax.swing.JFrame {
         // Si el contenido es igual a Usuario y la contraseña a 123 hara lo siguiente
         if (user.equals("Torrente") && password.equals("123")) {
             // Llamamos al Objeto Inicio y le damos los parametros user y password
-            Inicio inicio = new Inicio(user, password);
-            // Le decimos que se abra la ventana
-            inicio.setVisible(true);
+            Inicio.getInstance(user, password).setVisible(true);
             // Cerramos la ventana de Login
             this.dispose(); 
         // En el caso de que el usuario / contraseña esten vacios o tengan los siguientes datos que haga lo siguiente
