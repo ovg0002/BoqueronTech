@@ -80,12 +80,12 @@ public class ProductoInventarioItem extends javax.swing.JPanel {
         
         if (confirmacion == JOptionPane.YES_OPTION) {
             // Método para eliminar el producto de la bbdd
-            inventario.updateProductos(producto);
+            inventario.updateProductosOnDelete(producto);
         }
     }
     
     private void mostrarInfo(List<Categoria> categorias) {
-        ProductoInfoDialog info = new ProductoInfoDialog(Inicio.getInstance(), true, producto, categorias);
+        ProductoInfoDialog info = new ProductoInfoDialog(Inicio.getInstance(), true, producto, categorias, inventario);
         info.setVisible(true);
     }
 

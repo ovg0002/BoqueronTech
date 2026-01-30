@@ -26,8 +26,8 @@ public class Inventario extends javax.swing.JPanel {
     private final byte maxProdPagina = 20;
     
     // --------- ESTAS CAMBIAN SEGÚN LA BBDD ---------
-    private final List<Producto> productosLista = ProductoDAO.getProductsByMinCurrentStock(0);
-    private final List<Categoria> categoriasLista = CategoriaDAO.getAllCategories();
+    private final List<Producto> productosLista;
+    private final List<Categoria> categoriasLista;
     
     /*
      * Creates new form Inventario
@@ -35,40 +35,11 @@ public class Inventario extends javax.swing.JPanel {
     public Inventario() {
         initComponents();
         
+        productosLista = ProductoDAO.getProductsByMinCurrentStock(0);
+        categoriasLista = CategoriaDAO.getAllCategories();
+        
         rellenarConProductos();
     }
-    
-    
-
-    /*private List<Categoria> traerCategorias() {
-        List<Categoria> categorias = new ArrayList<>();
-        
-        for (int i = 0; i < 10; i++) {
-            categorias.add(
-                new Categoria(i, "Categoria " + i)
-            );
-        }
-        return categorias;
-    }
-    
-    // Prueba de productos falsos
-    private List<Producto> crearProductos() {
-        List<Producto> productos = new ArrayList<>();
-        
-        for (int i = 1; i <= numProductos; i++) {
-            //System.out.println("Creando producto " + i);
-            productos.add(
-                new Producto(i,
-                    "Producto " + i,
-                    ThreadLocalRandom.current().nextDouble(0.5, 20.0),
-                    ThreadLocalRandom.current().nextInt(1, 102),
-                    ThreadLocalRandom.current().nextInt(1, 102)
-                )
-            );
-        }
-        
-        return productos;
-    }*/
     
     private void rellenarConProductos() {
         mainPanel.removeAll();
@@ -128,10 +99,30 @@ public class Inventario extends javax.swing.JPanel {
         //System.out.println("Página " + paginaActual + " pintada. Índices: " + inicio + " a " + fin);        
     }
     
-    public void updateProductos(Producto productoEliminar) {
+    public void updateProductosOnDelete(Producto productoEliminar) {
         this.productosLista.remove(productoEliminar);
         //System.out.println(productosLista);
         
+        rellenarConProductos();
+    }
+    
+    public void updateProductosOnUpdate(Producto productoInicial, Producto productoModificado) {
+        int indice = -1;
+    
+        // Búsqueda manual por ID para asegurar que lo encontramos
+        for (int i = 0; i < productosLista.size(); i++) {
+            if (productosLista.get(i).getId() == productoInicial.getId()) {
+                indice = i;
+                break;
+            }
+        }
+
+        if (indice != -1) {
+            this.productosLista.set(indice, productoModificado);
+        } else {
+            this.productosLista.add(productoModificado);
+        }
+
         rellenarConProductos();
     }
     

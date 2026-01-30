@@ -63,4 +63,46 @@ public class CategoriaDAO {
         }
         return categorias;
     }
+    
+    public static int getCategoryIdByName(String categoryName) {
+        String sql = """
+        SELECT idCategoria
+            FROM Categoria
+            WHERE nombre = ?
+        """;
+        
+        try (Connection conn = DDBBConnector.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, categoryName);
+            
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("idCategoria");
+                }
+            }
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+        return 0;
+    }
+    
+    public static boolean checkProductCategoryExists(int idProduct, int idCategory) {
+        String sql = """
+        SELECT Categoria_idCategoria FROM Producto_has_Categoria
+            WHERE Producto_idProducto = ?
+        """;
+        
+        try (Connection conn = DDBBConnector.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, idProduct);
+            
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) if (rs.getInt("Categoria_idCategoria") == idCategory) return true;
+                return false;
+            }
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+        return false;
+    }
 }

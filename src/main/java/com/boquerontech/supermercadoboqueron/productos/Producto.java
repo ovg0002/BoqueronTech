@@ -5,13 +5,19 @@
 package com.boquerontech.supermercadoboqueron.productos;
 
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
  *
  * @author velag
  */
+@Builder(toBuilder = true)
+@AllArgsConstructor
+@NoArgsConstructor
 public class Producto {
     @Getter
     private int id;
@@ -28,15 +34,7 @@ public class Producto {
     @Getter @Setter
     private int minStock;
     
+    // CAMBIO: Ahora es un objeto único, no una lista
     @Getter @Setter
-    private List<Categoria> categorias;
-
-    public Producto(int id, String nombre, double precio, int stock, int minStock, List<Categoria> categorias) {
-        this.id = id;
-        this.nombre = nombre;
-        this.precio = precio;
-        this.stock = stock;
-        this.minStock = minStock;
-        this.categorias = categorias;
-    }
+    private Categoria categoria; 
 }

@@ -4,6 +4,8 @@
  */
 package com.boquerontech.supermercadoboqueron.productos;
 
+import com.boquerontech.supermercadoboqueron.database.producto.ProductoDAO;
+import com.boquerontech.supermercadoboqueron.inventario.Inventario;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.util.List;
 
@@ -13,28 +15,31 @@ import java.util.List;
  */
 public class ProductoInfoDialog extends javax.swing.JDialog {
     private boolean modificacion = false;
-    
+    private Inventario inventario;
     private Producto producto;
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ProductoInfoDialog.class.getName());
-
     public ProductoInfoDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
     
-    public ProductoInfoDialog(java.awt.Frame parent, boolean modal, Producto producto, List<Categoria> categorias) {
+    public ProductoInfoDialog(java.awt.Frame parent, boolean modal, Producto producto, List<Categoria> categorias, Inventario inventario) {
         super(parent, modal);
         initComponents();
+        this.inventario = inventario;
         this.producto = producto;
         this.setTitle("Información de " + producto.getNombre());
         
         setLocationRelativeTo(parent);
         
+        // 1. Rellenar combo
+        for (Categoria cat : categorias) categoriasCombo.addItem(cat.getNombre());
+        
+        // 2. Ocultar combo inicialmente
+        categoriasCombo.setVisible(false);
+        
         setDialogTitle(producto);
         setProductData(producto);
-        
-        for (Categoria cat : categorias) categoriasCombo.addItem(cat.getNombre());
     }
 
     /**
@@ -305,41 +310,84 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
 
     private void habilitarModificacion(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_habilitarModificacion
         modificacion = true;
-        
-        // Habilitar edicion
         productName.setEnabled(true);
         productPrice.setEnabled(true);
         minStock.setEnabled(true);
-        productoCategory.setVisible(false);
+        
+        productoCategory.setVisible(false); 
+        categoriasCombo.setVisible(true);   
+        productName.requestFocus();
     }//GEN-LAST:event_habilitarModificacion
 
     private void cancelAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelAction
-        if (modificacion != true) return;
+        if (!modificacion) return;
         
-        // Deshabilitar edicion
+        modificacion = false;
         productName.setEnabled(false);
         productPrice.setEnabled(false);
         minStock.setEnabled(false);
-        productoCategory.setVisible(true);
-        setProductData(producto);
+        
+        productoCategory.setVisible(true);  
+        categoriasCombo.setVisible(false);  
+        
+        setProductData(producto); 
     }//GEN-LAST:event_cancelAction
 
     private void confirmarAciton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarAciton
-        if (modificacion != true) return;
+        if (!modificacion) return;
         
-        // Deshabilitar edicion
+        modificacion = false;
         productName.setEnabled(false);
         productPrice.setEnabled(false);
         minStock.setEnabled(false);
-        productoCategory.setEnabled(false);
-        productoCategory.setVisible(true);
         
-        // Cambiar los datos en la BBDD
-        producto.setNombre(productName.getText());
-        producto.setPrecio((double)Double.valueOf(productPrice.getText()));
-        producto.setMinStock((int)Integer.valueOf(minStock.getText()));
-        // Enviar nuevas categorias a la bbdd
-        productoCategory.setText(String.valueOf(categoriasCombo.getSelectedItem()));
+        productoCategory.setVisible(true);  
+        categoriasCombo.setVisible(false);  
+        
+        // Recoger datos
+        String nombreProd = productName.getText();
+        double precioProd;
+        int minStockProd;
+        
+        try {
+            precioProd = Double.parseDouble(productPrice.getText().replace(",", "."));
+            minStockProd = Integer.parseInt(minStock.getText());
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error en el formato de números", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            cancelAction(null);
+            return;
+        }
+
+        String nombreCat = String.valueOf(categoriasCombo.getSelectedItem());
+        
+        // --- ACTUALIZACIÓN EN MEMORIA (SIMPLIFICADA) ---
+        // Al ser un objeto directo, simplemente actualizamos el nombre de la categoría del objeto
+        if (producto.getCategoria() != null) {
+            producto.getCategoria().setNombre(nombreCat);
+        } else {
+            // Si por algún motivo venía nulo (raro con tu nueva BBDD), le creamos una dummy
+            producto.setCategoria(new Categoria(0, nombreCat));
+        }
+        
+        // Copia para la lista
+        Producto prodAntiguo = producto.toBuilder().build(); 
+        
+        // Actualizar objeto principal
+        producto.setNombre(nombreProd);
+        producto.setPrecio(precioProd);
+        producto.setMinStock(minStockProd);
+        
+        // Enviar a la Base de Datos (Ahora es update directo)
+        ProductoDAO.updateProduct(
+                producto.getId(),
+                producto.getNombre(),
+                producto.getPrecio(),
+                producto.getMinStock(),
+                nombreCat
+        );
+        
+        setProductData(producto);
+        inventario.updateProductosOnUpdate(prodAntiguo, producto);
     }//GEN-LAST:event_confirmarAciton
 
     /**
@@ -376,7 +424,14 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         productPrice.setText(String.valueOf(producto.getPrecio()));
         currentStock.setText(String.valueOf(producto.getStock()));
         minStock.setText(String.valueOf(producto.getMinStock()));
-        //productoCategory;
+        
+        if (producto.getCategoria() != null) {
+            String nombreCategoria = producto.getCategoria().getNombre();
+            categoriasCombo.setSelectedItem(nombreCategoria);
+            productoCategory.setText(nombreCategoria);
+        } else {
+            productoCategory.setText(""); 
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
