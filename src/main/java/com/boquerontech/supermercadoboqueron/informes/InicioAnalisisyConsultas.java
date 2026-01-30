@@ -87,6 +87,11 @@ public class InicioAnalisisyConsultas extends javax.swing.JPanel {
         BtnGenerarresumencaja.setForeground(new java.awt.Color(48, 91, 171));
         BtnGenerarresumencaja.setText("Generar resumen de caja diaria.");
         BtnGenerarresumencaja.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(48, 91, 171)));
+        BtnGenerarresumencaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGenerarresumencajaActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 150;
@@ -226,12 +231,26 @@ public class InicioAnalisisyConsultas extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CancelarP3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarP3ActionPerformed
-     
+if (inicioInstance != null) {
+            // Volver al menú principal de Documentos
+            inicioInstance.colocarPanel(new InicioDocumentos(inicioInstance));
+        }     
     }//GEN-LAST:event_CancelarP3ActionPerformed
 
     private void BtnConsultarVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConsultarVentasActionPerformed
         // TODO add your handling code here:
+        if (inicioInstance != null) {
+            // Navegar al panel de ConsultarVentas
+            inicioInstance.colocarPanel(new com.boquerontech.supermercadoboqueron.informes.ConsultarVentas(inicioInstance));
+        }
     }//GEN-LAST:event_BtnConsultarVentasActionPerformed
+
+    private void BtnGenerarresumencajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGenerarresumencajaActionPerformed
+        // TODO add your handling code here:
+        if (inicioInstance != null) {
+            inicioInstance.colocarPanel(new Resumendecajadiaria(inicioInstance));
+        }
+    }//GEN-LAST:event_BtnGenerarresumencajaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

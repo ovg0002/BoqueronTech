@@ -330,6 +330,70 @@ public class DaraltaPromoP extends javax.swing.JPanel {
         add(pnlCabecera, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>                        
 
+    
+   private void GuardarP1ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // 1. RECOGER DATOS
+        String nombre = TFNombre.getText().trim();
+        String vigenciaStr = TFVigencia.getText().trim(); 
+
+        // --- VALIDACIÓN BÁSICA ---
+        if (nombre.isEmpty() || vigenciaStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El nombre y la fecha de vigencia son obligatorios.", "Faltan Datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            // 2. CONVERTIR DATOS
+            java.time.LocalDate fechaInicio = java.time.LocalDate.parse(vigenciaStr);
+            java.time.LocalDate fechaFin = fechaInicio.plusDays(15); 
+
+            // --- VALORES POR DEFECTO PARA LA BD ---
+            int unidades = 1;        
+            double precio = 0.0;     
+            int idCategoria = 1;    // Categoría 1 por defecto
+
+            try {
+                String tipoTxt = TFTipo.getText().trim();
+                if(!tipoTxt.isEmpty()) {
+                    idCategoria = Integer.parseInt(tipoTxt); 
+                }
+            } catch(NumberFormatException e) {
+                System.out.println("El tipo no es un número, se usa categoría 1.");
+            }
+
+            // 3. CREAR OBJETO
+            com.boquerontech.supermercadoboqueron.promociones.Promocion nuevaPromo = 
+                new com.boquerontech.supermercadoboqueron.promociones.Promocion(nombre, unidades, precio, fechaInicio, fechaFin, idCategoria);
+
+            // 4. GUARDAR EN BD
+            boolean exito = com.boquerontech.supermercadoboqueron.database.promocion.PromocionDAO.insertarPromocion(nuevaPromo);
+
+            // 5. RESULTADO Y LIMPIEZA
+            if (exito) {
+                JOptionPane.showMessageDialog(null, "Guardado con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
+                
+                // --- AQUÍ LIMPIAMOS TODOS LOS CAMPOS ---
+                TFNombre.setText("");
+                TFVigencia.setText("");
+                TFTipo.setText("");
+                TFProducto.setText(""); 
+                TFAplicable.setText(""); // AHORA SÍ SE BORRARÁ
+                TFReglas.setText("");    // AHORA SÍ SE BORRARÁ
+                
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al guardar en la base de datos.", "Error BD", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (java.time.format.DateTimeParseException dtpe) {
+            JOptionPane.showMessageDialog(this, 
+                "La fecha '" + vigenciaStr + "' no es válida.\nFormato requerido: AAAA-MM-DD (Ej: 2026-01-29)", 
+                "Error de Formato", JOptionPane.WARNING_MESSAGE);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     private void CancelarPActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
         int opcion = JOptionPane.showConfirmDialog(
@@ -348,12 +412,10 @@ public class DaraltaPromoP extends javax.swing.JPanel {
             // Aquí lo que quieras si pulsa "No"
             System.out.println("No cancelado.");
         }
+        
     }                                         
 
-    private void GuardarP1ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Guardado con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
-    }                                         
+                                       
 
 
     // Variables declaration - do not modify                     

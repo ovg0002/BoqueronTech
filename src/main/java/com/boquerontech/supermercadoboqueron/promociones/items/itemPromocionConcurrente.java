@@ -4,19 +4,93 @@
  */
 package com.boquerontech.supermercadoboqueron.promociones.items;
 
+import com.boquerontech.supermercadoboqueron.database.promocion.PromocionDAO;
+import com.boquerontech.supermercadoboqueron.promociones.Promocion;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 /**
  *
  * @author navas
  */
 public class itemPromocionConcurrente extends javax.swing.JPanel {
 
+   private Promocion promocionActual;
+
     /**
-     * Creates new form PromocionItem
+     * Creates new form itemPromocionConcurrente
      */
     public itemPromocionConcurrente() {
         initComponents();
+        
+        // Añadimos el listener al checkbox
+        activarpromoCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkActivarActionPerformed(evt);
+            }
+        });
     }
 
+    // Método para rellenar los datos visuales desde un objeto Promocion
+    public void setDatos(Promocion promo) {
+        this.promocionActual = promo;
+        
+        // Asignar nombre
+        promocionLbl.setText(promo.getNombrePromocion());
+        
+        // Asignar vigencia y calcular estado inicial del checkbox
+        boolean esActiva = false;
+        
+        if (promo.getFechaFin() != null) {
+            // Si tiene fecha fin, mostramos la fecha
+            vigenciaLbl.setText("Vence: " + promo.getFechaFin().toString());
+            
+            // Comprobamos si la fecha es futura (Activa) o pasada (Inactiva)
+            esActiva = promo.getFechaFin().isAfter(java.time.LocalDate.now());
+        } else {
+            // Si fecha fin es null, es indefinida (Activa)
+            vigenciaLbl.setText("Indefinida");
+            esActiva = true; 
+        }
+        
+        // --- TRUCO IMPORTANTE ---
+        // Quitamos el listener temporalmente para que al hacer setSelected NO se dispare el evento de guardar en BD
+        ActionListener[] listeners = activarpromoCheckBox.getActionListeners();
+        for(ActionListener l : listeners) activarpromoCheckBox.removeActionListener(l);
+        
+        // Marcamos o desmarcamos según el estado real
+        activarpromoCheckBox.setSelected(esActiva);
+        
+        // Volvemos a poner el listener para que funcione cuando el usuario haga click
+        for(ActionListener l : listeners) activarpromoCheckBox.addActionListener(l);
+    }
+
+    // LÓGICA REAL DE BASE DE DATOS
+    private void chkActivarActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        if(promocionActual == null) return;
+        
+        boolean activar = activarpromoCheckBox.isSelected();
+        int id = promocionActual.getIdPromociones();
+        
+        // Llamada al DAO para actualizar la fecha fin en la BD
+        boolean exito = PromocionDAO.cambiarEstadoPromocion(id, activar);
+        
+        if (exito) {
+            // Actualizar la interfaz visualmente
+            if (activar) {
+                vigenciaLbl.setText("Indefinida"); // Al activar, la ponemos indefinida (NULL)
+            } else {
+                vigenciaLbl.setText("Desactivada"); // Al desactivar, caduca hoy
+            }
+            
+            // Mensaje de éxito (puedes comentarlo si prefieres que sea silencioso)
+            // JOptionPane.showMessageDialog(this, "Estado actualizado correctamente.");
+            
+        } else {
+            // Si falla la BD, revertimos el checkbox visualmente
+            activarpromoCheckBox.setSelected(!activar); 
+            JOptionPane.showMessageDialog(this, "Error al conectar con la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

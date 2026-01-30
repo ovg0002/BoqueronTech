@@ -5,7 +5,13 @@
 package com.boquerontech.supermercadoboqueron.promociones;
 
 import com.boquerontech.supermercadoboqueron.Inicio;
+import com.boquerontech.supermercadoboqueron.database.DDBBConnector;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import com.boquerontech.supermercadoboqueron.promociones.Promocion; // Este es importante
 
 /**
  *
@@ -14,17 +20,54 @@ import javax.swing.JOptionPane;
 public class ModificarPromocion extends javax.swing.JPanel {
 
     private Inicio inicioInstance;
-    
+    private com.boquerontech.supermercadoboqueron.promociones.Promocion promocionActual;
+
     /**
-     * Creates new form DaraltaPromoP
+     * Constructor vacío (necesario a veces para el diseñador)
      */
     public ModificarPromocion() {
         initComponents();
     }
+
+    /**
+     * Constructor normal (para crear nueva, si se usara)
+     */
     public ModificarPromocion(Inicio inicioInstance) {
         initComponents();
         this.inicioInstance = inicioInstance;
     }
+
+    /**
+     * CONSTRUCTOR PARA EDITAR (Recibe Inicio y la Promoción)
+     */
+    public ModificarPromocion(Inicio inicioInstance, com.boquerontech.supermercadoboqueron.promociones.Promocion promo) {
+        initComponents();
+        this.inicioInstance = inicioInstance;
+        this.promocionActual = promo;
+        
+        cargarDatosEnFormulario(); // Rellenar campos al iniciar
+    }
+
+    // Método para poner los datos en los TextFields
+    private void cargarDatosEnFormulario() {
+        if (promocionActual != null) {
+            nameTF.setText(promocionActual.getNombrePromocion());
+            
+            if (promocionActual.getFechaInicio() != null) {
+                vigenciaTF.setText(promocionActual.getFechaInicio().toString());
+            }
+            
+            tipoTF.setText(String.valueOf(promocionActual.getIdCategoria()));
+            
+            
+        }
+    }
+    
+    /**
+     * Creates new form DaraltaPromoP
+     */
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -364,10 +407,61 @@ public class ModificarPromocion extends javax.swing.JPanel {
     }                                           
 
     private void GuardarBtnActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Guardado con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
+       // 1. Recoger datos modificados
+        String nuevoNombre = nameTF.getText().trim();
+        String nuevaVigencia = vigenciaTF.getText().trim();
         
-    }                                          
+        if (nuevoNombre.isEmpty() || nuevaVigencia.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Faltan datos obligatorios.", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            // Actualizar el objeto local
+            promocionActual.setNombrePromocion(nuevoNombre);
+            promocionActual.setFechaInicio(java.time.LocalDate.parse(nuevaVigencia));
+            // Actualizar otros campos si los modificaste...
+            
+            // 2. LLAMAR AL DAO PARA ACTUALIZAR (UPDATE)
+            boolean exito = com.boquerontech.supermercadoboqueron.database.promocion.PromocionDAO.actualizarPromocion(promocionActual);
+            
+            if (exito) {
+                JOptionPane.showMessageDialog(null, "Modificación guardada con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
+                // Volver a la lista
+                inicioInstance.colocarPanel(new ModificarDardebajaPromocionP(inicioInstance));
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al actualizar en BD.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error en los datos: " + e.getMessage());
+        }
+    }      
+    // Método para ACTUALIZAR una promoción existente
+    public static boolean actualizarPromocion(Promocion promo) {
+        String sql = "UPDATE Promociones SET nombrePromocion=?, unidadesAfectadas=?, precioPorUnidad=?, fechaInicio=?, fechaFin=?, Categoria_idCategoria=? WHERE idPromociones=?";
+        
+        try (Connection conn = DDBBConnector.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, promo.getNombrePromocion());
+            pstmt.setInt(2, promo.getUnidadesAfectadas());
+            pstmt.setDouble(3, promo.getPrecioPorUnidad());
+            pstmt.setDate(4, Date.valueOf(promo.getFechaInicio()));
+            
+            if (promo.getFechaFin() != null) pstmt.setDate(5, Date.valueOf(promo.getFechaFin()));
+            else pstmt.setDate(5, null);
+            
+            pstmt.setInt(6, promo.getIdCategoria());
+            pstmt.setInt(7, promo.getIdPromociones()); // Importante: el ID para el WHERE
+
+            return pstmt.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 
     // Variables declaration - do not modify                     

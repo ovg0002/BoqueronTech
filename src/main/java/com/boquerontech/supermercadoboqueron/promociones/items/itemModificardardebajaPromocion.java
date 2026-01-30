@@ -13,10 +13,36 @@ public class itemModificardardebajaPromocion extends javax.swing.JPanel {
     /**
      * Creates new form itemModificardardebajaPromocion
      */
+private com.boquerontech.supermercadoboqueron.promociones.Promocion promoDatos;
+    private com.boquerontech.supermercadoboqueron.Inicio inicioInstance;
+    // ----------------------------
+
     public itemModificardardebajaPromocion() {
         initComponents();
     }
+    
+   
 
+    // Modificamos setDatos para recibir también 'Inicio'
+    public void setDatos(com.boquerontech.supermercadoboqueron.promociones.Promocion promo, 
+                         com.boquerontech.supermercadoboqueron.Inicio inicio) {
+        this.promoDatos = promo;
+        this.inicioInstance = inicio;
+
+        // Asignar nombre 
+        promocionLbl.setText(promo.getNombrePromocion());
+        
+        // Asignar vigencia
+        if (promo.getFechaFin() != null) {
+            VigenciaLbl.setText("Vence: " + promo.getFechaFin().toString());
+        } else {
+            VigenciaLbl.setText("Indefinida");
+        }
+    }
+    // ACCIÓN DEL BOTÓN MODIFICAR
+ 
+    
+    // ... Resto del código
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,13 +56,14 @@ public class itemModificardardebajaPromocion extends javax.swing.JPanel {
         promocionLbl = new javax.swing.JLabel();
         modificarBtn = new javax.swing.JButton();
         dardebajaBtn = new javax.swing.JButton();
+        VigenciaLbl = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(233, 253, 253));
         setLayout(new java.awt.GridBagLayout());
 
         promocionLbl.setBackground(new java.awt.Color(255, 255, 255));
         promocionLbl.setForeground(new java.awt.Color(0, 0, 0));
-        promocionLbl.setText("<html>Promoción<br> <small>Vigencia</small></html>");
+        promocionLbl.setText("<html>Promoción<br> </html>");
         promocionLbl.setOpaque(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = 6;
@@ -49,6 +76,11 @@ public class itemModificardardebajaPromocion extends javax.swing.JPanel {
         modificarBtn.setText("Modificar");
         modificarBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 121, 107)));
         modificarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        modificarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarBtnActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 0;
@@ -62,16 +94,83 @@ public class itemModificardardebajaPromocion extends javax.swing.JPanel {
         dardebajaBtn.setText("Dar de baja");
         dardebajaBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(199, 108, 108)));
         dardebajaBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        dardebajaBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dardebajaBtnActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 20;
         gridBagConstraints.ipady = 20;
         add(dardebajaBtn, gridBagConstraints);
+
+        VigenciaLbl.setForeground(new java.awt.Color(0, 0, 0));
+        VigenciaLbl.setText("<html><small>Vigencia</small></html>");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        add(VigenciaLbl, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void dardebajaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dardebajaBtnActionPerformed
+        // TODO add your handling code here:
+        // 1. Verificación de seguridad
+        if (promoDatos == null || inicioInstance == null) return;
+
+        // 2. DIÁLOGO DE CONFIRMACIÓN (Como en tu imagen)
+        int opcion = javax.swing.JOptionPane.showConfirmDialog(
+            this,
+            "¿Estás seguro de que desea dar de baja esta promoción?", 
+            "Confirmación",
+            javax.swing.JOptionPane.YES_NO_OPTION,
+            javax.swing.JOptionPane.QUESTION_MESSAGE
+        );
+
+        // Si el usuario dice "SÍ" (YES_OPTION)
+        if (opcion == javax.swing.JOptionPane.YES_OPTION) {
+            
+            // 3. LLAMAR AL DAO PARA BORRAR DE LA BASE DE DATOS
+            boolean eliminado = com.boquerontech.supermercadoboqueron.database.promocion.PromocionDAO.eliminarPromocion(promoDatos.getIdPromociones());
+            
+            if (eliminado) {
+                // 4. MENSAJE DE ÉXITO (Como en tu imagen)
+                javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "La promoción: " + promoDatos.getNombrePromocion() + " ¡Se ha dado de baja con éxito!",
+                    "Éxito",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE
+                );
+                
+                // 5. RECARGAR LA PANTALLA
+                // Esto es fundamental: recargamos el panel padre para que la lista se actualice y la promoción desaparezca visualmente
+                inicioInstance.colocarPanel(new com.boquerontech.supermercadoboqueron.promociones.ModificarDardebajaPromocionP(inicioInstance));
+                
+            } else {
+                // Mensaje de error si falla la BD
+                javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "No se pudo dar de baja. Verifica que no tenga productos asociados.",
+                    "Error",
+                    javax.swing.JOptionPane.ERROR_MESSAGE
+                );
+            }
+        }
+    }//GEN-LAST:event_dardebajaBtnActionPerformed
+
+    private void modificarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarBtnActionPerformed
+if (inicioInstance != null && promoDatos != null) {
+            
+            inicioInstance.colocarPanel(new com.boquerontech.supermercadoboqueron.promociones.ModificarPromocion(inicioInstance, promoDatos));
+        } else {
+            System.out.println("Error: Datos nulos.");
+        }
+    }//GEN-LAST:event_modificarBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel VigenciaLbl;
     private javax.swing.JButton dardebajaBtn;
     private javax.swing.JButton modificarBtn;
     private javax.swing.JLabel promocionLbl;

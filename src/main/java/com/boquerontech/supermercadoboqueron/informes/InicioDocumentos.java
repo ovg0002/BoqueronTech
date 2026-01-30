@@ -57,6 +57,7 @@ public InicioDocumentos(Inicio inicioInstance) {
         BtnAnalisisyConsultas.setForeground(new java.awt.Color(48, 91, 171));
         BtnAnalisisyConsultas.setText("Análisis y consultas");
         BtnAnalisisyConsultas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(48, 91, 171)));
+        BtnAnalisisyConsultas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnAnalisisyConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAnalisisyConsultasActionPerformed(evt);
@@ -74,6 +75,7 @@ public InicioDocumentos(Inicio inicioInstance) {
         BtnGestionProductos.setForeground(new java.awt.Color(48, 91, 171));
         BtnGestionProductos.setText("Gestión de productos");
         BtnGestionProductos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(48, 91, 171)));
+        BtnGestionProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnGestionProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnGestionProductosActionPerformed(evt);
@@ -93,6 +95,7 @@ public InicioDocumentos(Inicio inicioInstance) {
         BtnConsultasdeClientes.setForeground(new java.awt.Color(48, 91, 171));
         BtnConsultasdeClientes.setText("Consultas de clientes");
         BtnConsultasdeClientes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(48, 91, 171)));
+        BtnConsultasdeClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnConsultasdeClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnConsultasdeClientesActionPerformed(evt);

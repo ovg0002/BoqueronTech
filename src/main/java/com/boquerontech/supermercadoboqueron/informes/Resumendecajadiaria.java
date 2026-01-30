@@ -276,12 +276,54 @@ public Resumendecajadiaria(Inicio inicioInstance) {
 
     private void GuardarP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarP1ActionPerformed
         // TODO add your handling code here:
+        // 1. RECOGER DATOS
+        String idEmpStr = TFIdEmpleado.getText().trim();
+        String fechaStr = TFFecha.getText().trim(); // Formato AAAA-MM-DD
+        String validacion = TFValidacion.getText().trim();
+        String incidencia = TFIncidencia.getText().trim();
+
+        if (idEmpStr.isEmpty() || fechaStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "ID Empleado y Fecha son obligatorios.", "Faltan datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            // 2. CONVERTIR TIPOS
+            int idEmpleado = Integer.parseInt(idEmpStr);
+            java.time.LocalDate fecha = java.time.LocalDate.parse(fechaStr);
+
+            // 3. CREAR OBJETO
+            com.boquerontech.supermercadoboqueron.informes.modelo.CierreCaja nuevoCierre = 
+                new com.boquerontech.supermercadoboqueron.informes.modelo.CierreCaja(idEmpleado, fecha, validacion, incidencia);
+
+            // 4. GUARDAR EN BD
+            boolean exito = com.boquerontech.supermercadoboqueron.database.informes.CierreCajaDAO.insertarCierre(nuevoCierre);
+
+            if (exito) {
+                JOptionPane.showMessageDialog(this, "Resumen guardado con éxito.\nListo para generar informe.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                // Volver atrás
+                inicioInstance.colocarPanel(new InicioAnalisisyConsultas(inicioInstance));
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al guardar en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El ID de empleado debe ser un número.", "Error formato", JOptionPane.WARNING_MESSAGE);
+        } catch (java.time.format.DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this, "Formato de fecha incorrecto (use AAAA-MM-DD).", "Error fecha", JOptionPane.WARNING_MESSAGE);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage());
+        }
         JOptionPane.showMessageDialog(null, "Guardado con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_GuardarP1ActionPerformed
 
     private void SalirP2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirP2ActionPerformed
         // TODO add your handling code here:
         inicioInstance.colocarPanel(new InicioAnalisisyConsultas(inicioInstance));
+        if (inicioInstance != null) {
+            inicioInstance.colocarPanel(new InicioAnalisisyConsultas(inicioInstance));
+        }
     }//GEN-LAST:event_SalirP2ActionPerformed
 
 
