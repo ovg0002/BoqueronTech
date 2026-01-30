@@ -6,7 +6,7 @@ package com.boquerontech.supermercadoboqueron.informes;
 
 import com.boquerontech.supermercadoboqueron.Inicio;
 import com.boquerontech.supermercadoboqueron.clientes.Cliente;
-import com.boquerontech.supermercadoboqueron.database.informes.ClienteDAO;
+import com.boquerontech.supermercadoboqueron.database.cliente.ClienteDAO;
 import java.util.List;
 import javax.swing.JPanel;
 

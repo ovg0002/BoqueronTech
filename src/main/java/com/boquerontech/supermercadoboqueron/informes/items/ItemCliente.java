@@ -21,10 +21,10 @@ public class ItemCliente extends javax.swing.JPanel {
     
     // Método para rellenar datos
     public void setDatos(Cliente cliente) {
-        lblNombreID.setText(cliente.getNombreCompleto() + " (ID: " + cliente.getIdCliente() + ")");
+        lblNombreID.setText(cliente.getNombre() + " (ID: " + cliente.getIdCliente() + ")");
         lblTelefono.setText(cliente.getTelefono());
-        lblCompras.setText(String.valueOf(cliente.getNumCompras()) + " compras");
-        lblPuntos.setText(String.valueOf(cliente.getPuntos()) + " pts");
+        lblCompras.setText(String.valueOf(cliente.getTotalCompras()) + " compras");
+        lblPuntos.setText(String.valueOf(cliente.getPuntosCliente()) + " pts");
     }
 
     /**
