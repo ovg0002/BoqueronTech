@@ -15,6 +15,7 @@ public class Cliente {
     private String dni;
     private int puntosCliente;
     private String codigoCliente;
+
     private int totalCompras;
 
     public Cliente() {
@@ -104,4 +105,6 @@ public int getTotalCompras() {
 public void setTotalCompras(int totalCompras) {
     this.totalCompras = totalCompras;
 }
+
+
 }
