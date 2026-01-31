@@ -126,6 +126,11 @@ public class Inventario extends javax.swing.JPanel {
         rellenarConProductos();
     }
     
+    public void addProductoALista(Producto producto) {
+        this.productosLista.add(producto);
+        rellenarConProductos();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -402,7 +407,7 @@ public class Inventario extends javax.swing.JPanel {
     }//GEN-LAST:event_retrocederPagina
 
     private void anadirProducto(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anadirProducto
-        NuevoProducto nuevoProducto = new NuevoProducto(Inicio.getInstance(), true, categoriasLista);
+        NuevoProducto nuevoProducto = new NuevoProducto(Inicio.getInstance(), true, categoriasLista, this);
         nuevoProducto.setVisible(true);
     }//GEN-LAST:event_anadirProducto
 
@@ -439,7 +444,6 @@ public class Inventario extends javax.swing.JPanel {
         
         rellenarConProductos(maxStockValue);
     }//GEN-LAST:event_maxStockFilterChanged
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton alanteBtn;

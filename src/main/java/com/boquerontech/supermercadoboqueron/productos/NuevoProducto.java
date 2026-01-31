@@ -4,15 +4,19 @@
  */
 package com.boquerontech.supermercadoboqueron.productos;
 
+import com.boquerontech.supermercadoboqueron.database.producto.ProductoDAO;
+import com.boquerontech.supermercadoboqueron.inventario.Inventario;
+import com.formdev.flatlaf.FlatLightLaf;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author velag
  */
 public class NuevoProducto extends javax.swing.JDialog {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(NuevoProducto.class.getName());
+    private List<Categoria> categoriaList;
+    private Inventario inventario;
 
     public NuevoProducto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -20,10 +24,17 @@ public class NuevoProducto extends javax.swing.JDialog {
         setLocationRelativeTo(parent);
     }
     
-    public NuevoProducto(java.awt.Frame parent, boolean modal, List<Categoria> categorias) {
+    public NuevoProducto(java.awt.Frame parent, boolean modal, List<Categoria> categorias, Inventario inventario) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
+        
+        this.categoriaList = categorias;
+        this.inventario = inventario;
+        
+        productId.setEnabled(false);
+        currentStock.setEnabled(false);
+        
         for (Categoria cat : categorias) this.categorias.addItem(cat.getNombre());
     }
 
@@ -266,7 +277,54 @@ public class NuevoProducto extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void acceptBtnconfirmarAciton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptBtnconfirmarAciton
-        
+        // 1. Recogemos datos
+        String nombre = productName.getText();
+        String precioTexto = productPrice.getText().replace(",", "."); // Arreglamos comas
+        String minStockTexto = this.minStock.getText();
+        int categoryIndex = categorias.getSelectedIndex(); // OJO: Asegúrate que el combo tiene items
+
+        // 2. Validamos (ahora detecta si pone "precio" o "nombre")
+        if (validarDatos(nombre, precioTexto, minStockTexto, categoryIndex)) {
+
+            try {
+                // 3. Conversión segura (dentro de try)
+                double precio = Double.parseDouble(precioTexto);
+                int minStock = Integer.parseInt(minStockTexto);
+
+                // 4. Crear objeto
+                Producto prod = new Producto(
+                    -1, // ID temporal
+                    nombre,
+                    precio,
+                    0, // Stock inicial siempre 0
+                    minStock,
+                    categoriaList.get(categoryIndex),
+                    true // Activo
+                );
+
+                // 5. Insertar en BD
+                int nuevoId = ProductoDAO.insertNewProduct(prod);
+
+                if (nuevoId > 0) {
+                    // ÉXITO
+                    prod.setId(nuevoId);
+                    inventario.addProductoALista(prod);
+                    JOptionPane.showMessageDialog(this, "Producto creado correctamente.");
+                    this.dispose(); // IMPORTANTE: Cerrar la ventana al terminar
+                } else {
+                    // FALLO SQL
+                    JOptionPane.showMessageDialog(this, "Error al guardar en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+            } catch (NumberFormatException e) {
+                // FALLO DE NÚMEROS (Por si acaso validarDatos se le pasó algo)
+                JOptionPane.showMessageDialog(this, "El precio o el stock deben ser números válidos (ej: 10.50)", "Error de Formato", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e) {
+                // CUALQUIER OTRO ERROR
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_acceptBtnconfirmarAciton
 
     private void cancelBtncancelAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtncancelAction
@@ -320,36 +378,58 @@ public class NuevoProducto extends javax.swing.JDialog {
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+        FlatLightLaf.setup();
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                NuevoProducto dialog = new NuevoProducto(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            NuevoProducto dialog = new NuevoProducto(new javax.swing.JFrame(), true);
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            dialog.setVisible(true);
         });
+    }
+    
+    private boolean validarDatos(String nombre, String precio, String minStock, int categoriaID) {
+        String titleMsg = "Datos inválidos";
+        StringBuilder mainMsg = new StringBuilder("Revisa los siguientes campos:\n"); // StringBuilder es más eficiente
+        boolean incorrecto = false;
+
+        // Comprobamos si es nulo, vacío O SI TIENE EL TEXTO POR DEFECTO
+        if (nombre == null || nombre.trim().isEmpty() || nombre.equals("nombre")) {
+            incorrecto = true;
+            mainMsg.append("- El Nombre no puede estar vacío.\n");
+        }
+
+        if (precio == null || precio.trim().isEmpty() || precio.equals("precio")) {
+            incorrecto = true;
+            mainMsg.append("- El Precio es obligatorio.\n");
+        }
+
+        if (minStock == null || minStock.trim().isEmpty() || minStock.equals("minStock")) {
+            incorrecto = true;
+            mainMsg.append("- El Stock Mínimo es obligatorio.\n");
+        }
+
+        if (categoriaID < 0) {
+            incorrecto = true;
+            mainMsg.append("- Debes seleccionar una categoría.\n");
+        }
+
+        if (incorrecto) {
+            JOptionPane.showMessageDialog(
+                this,
+                mainMsg.toString(),
+                titleMsg,
+                JOptionPane.WARNING_MESSAGE
+            );
+            return false;
+        } else {
+            return true;
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -18,7 +18,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Producto {
-    @Getter
+    @Getter @Setter
     private int id;
     
     @Getter @Setter

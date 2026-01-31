@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -125,6 +126,32 @@ public class ProductoDAO {
         } catch (SQLException sqle) {
             sqle.printStackTrace();
         }
+    }
+    
+    public static int insertNewProduct(Producto producto) {
+        int insertId = -1;
+        // Por defecto el activo es 1 (producto habilitado)
+        String insert = """
+        INSERT INTO Producto (nombre, precio, minStock, Categoria_idCategoria)
+            VALUES (?, ?, ?, ?)
+        """;
+        
+        try (Connection conn = DDBBConnector.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS)) {
+            pstmt.setString(1, producto.getNombre());
+            pstmt.setDouble(2, producto.getPrecio());
+            pstmt.setInt(3, producto.getMinStock());
+            pstmt.setInt(4, producto.getCategoria().getId());
+            
+            if (pstmt.executeUpdate() > 0) {
+                try (ResultSet rs = pstmt.getGeneratedKeys()) {
+                    if (rs.next()) insertId = rs.getInt(1);
+                }
+            }
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+        return insertId;
     }
     
     // ==============================
