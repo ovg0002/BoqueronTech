@@ -7,7 +7,6 @@ package com.boquerontech.supermercadoboqueron.database.producto;
 import com.boquerontech.supermercadoboqueron.database.DDBBConnector;
 import com.boquerontech.supermercadoboqueron.productos.Categoria;
 import com.boquerontech.supermercadoboqueron.productos.Producto;
-import com.boquerontech.supermercadoboqueron.informes.modelo.ProductoRow; // Asegúrate de importar esto donde lo tengas
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +23,7 @@ public class ProductoDAO {
     // QUERY BASE: Usamos un JOIN para traer los datos del producto Y su categoría de golpe.
     // Usamos alias (c.nombre AS nombre_categoria) para no confundirlo con el nombre del producto.
     private static final String BASE_QUERY = """
-        SELECT p.idProducto, p.nombre, p.precio, p.stock, p.minStock, p.Categoria_idCategoria,
+        SELECT p.idProducto, p.nombre, p.precio, p.stock, p.minStock, p.Categoria_idCategoria, p.activo,
                c.nombre AS nombre_categoria
         FROM Producto p
         INNER JOIN Categoria c ON p.Categoria_idCategoria = c.idCategoria
@@ -32,7 +31,7 @@ public class ProductoDAO {
 
     public static Producto getProductoByID(int id) {
         Producto producto = null;
-        String sql = BASE_QUERY + " WHERE p.idProducto = ?";
+        String sql = BASE_QUERY + " WHERE p.idProducto = ? AND p.activo = 1";
         
         try (Connection conn = DDBBConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -51,7 +50,7 @@ public class ProductoDAO {
     
     public static Producto getProductoByName(String name) {
         Producto producto = null;
-        String sql = BASE_QUERY + " WHERE p.nombre = ?";
+        String sql = BASE_QUERY + " WHERE p.nombre = ? AND p.activo = 1";
         
         try (Connection conn = DDBBConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -70,7 +69,7 @@ public class ProductoDAO {
     
     public static List<Producto> getProductsByMinCurrentStock(int minCurrentStock) {
         List<Producto> productos = new ArrayList<>();
-        String sql = BASE_QUERY + " WHERE p.stock >= ?";
+        String sql = BASE_QUERY + " WHERE p.stock >= ? AND p.activo = 1";
         
         try (Connection conn = DDBBConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -86,7 +85,7 @@ public class ProductoDAO {
         return productos;
     }
     
-    public static void updateProduct(int id, String nombre, double precio, int minStock, String categoryName) {
+    public static void updateProduct(int id, String nombre, double precio, int minStock, String categoryName, boolean productEnabled) {
         // Obtenemos el ID de la categoría nueva
         int idCategoria = CategoriaDAO.getCategoryIdByName(categoryName);
         if (idCategoria == 0) return; // Si no existe la categoría, abortamos (o lanzamos error)
@@ -94,7 +93,7 @@ public class ProductoDAO {
         // AHORA EL UPDATE ES DIRECTO Y MUCHO MÁS LIMPIO
         String updateProducto = """
             UPDATE Producto
-                SET nombre = ?, precio = ?, minStock = ?, Categoria_idCategoria = ?
+                SET nombre = ?, precio = ?, minStock = ?, Categoria_idCategoria = ?, activo = ?
                 WHERE idProducto = ?
         """;
         
@@ -104,7 +103,8 @@ public class ProductoDAO {
             pstmt.setDouble(2, precio);
             pstmt.setInt(3, minStock);
             pstmt.setInt(4, idCategoria); // Actualizamos la FK directamente
-            pstmt.setInt(5, id);
+            pstmt.setBoolean(5, productEnabled);
+            pstmt.setInt(6, id);
             
             pstmt.executeUpdate();
             
@@ -117,9 +117,7 @@ public class ProductoDAO {
     
     // Método para borrar (Lógico o Físico, tú decides, aquí pongo el Delete físico simple adaptado)
     public static void deleteProducto(int idProducto) {
-        // Recuerda que si tienes ON DELETE NO ACTION, primero tendrías que borrar dependencias 
-        // o usar el método del Soft Delete (activo = 0) si modificas la tabla.
-        String sql = "DELETE FROM Producto WHERE idProducto = ?";
+        String sql = "UPDATE Producto SET activo = 0 WHERE idProducto = ?";
         try (Connection conn = DDBBConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, idProducto);
@@ -145,8 +143,8 @@ public class ProductoDAO {
             rs.getDouble("precio"),
             rs.getInt("stock"),
             rs.getInt("minStock"),
-            cat // Asignamos el objeto único
-        
+            cat,
+            rs.getBoolean("activo")
         );
     }
 }

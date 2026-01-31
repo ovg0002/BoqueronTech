@@ -142,6 +142,14 @@ public class NuevoProducto extends javax.swing.JDialog {
         productName.setMaximumSize(new java.awt.Dimension(150, 26));
         productName.setMinimumSize(new java.awt.Dimension(150, 26));
         productName.setPreferredSize(new java.awt.Dimension(150, 26));
+        productName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                productNameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                productNameFocusLost(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -153,6 +161,14 @@ public class NuevoProducto extends javax.swing.JDialog {
         productPrice.setMaximumSize(new java.awt.Dimension(150, 26));
         productPrice.setMinimumSize(new java.awt.Dimension(150, 26));
         productPrice.setPreferredSize(new java.awt.Dimension(150, 26));
+        productPrice.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                productPriceFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                productPriceFocusLost(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -177,6 +193,14 @@ public class NuevoProducto extends javax.swing.JDialog {
         minStock.setMaximumSize(new java.awt.Dimension(150, 26));
         minStock.setMinimumSize(new java.awt.Dimension(150, 26));
         minStock.setPreferredSize(new java.awt.Dimension(150, 26));
+        minStock.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                minStockFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                minStockFocusLost(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 2;
@@ -248,6 +272,48 @@ public class NuevoProducto extends javax.swing.JDialog {
     private void cancelBtncancelAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtncancelAction
         this.dispose();
     }//GEN-LAST:event_cancelBtncancelAction
+
+    private void productNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_productNameFocusGained
+        if (productName.getText().equals("nombre")) {
+            productName.setText("");
+            productName.setForeground(new java.awt.Color(0, 0, 0)); // texto normal
+        }
+    }//GEN-LAST:event_productNameFocusGained
+
+    private void productPriceFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_productPriceFocusGained
+        if (productPrice.getText().equals("precio")) {
+            productPrice.setText("");
+            productPrice.setForeground(new java.awt.Color(0, 0, 0)); // texto normal
+        }
+    }//GEN-LAST:event_productPriceFocusGained
+
+    private void minStockFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_minStockFocusGained
+        if (minStock.getText().equals("minStock")) {
+            minStock.setText("");
+            minStock.setForeground(new java.awt.Color(0, 0, 0)); // texto normal
+        }
+    }//GEN-LAST:event_minStockFocusGained
+
+    private void productNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_productNameFocusLost
+        if (productName.getText().trim().isEmpty()) {
+            productName.setText("nombre");
+            productName.setForeground(new java.awt.Color(150, 150, 150)); // texto placeholder gris
+        }
+    }//GEN-LAST:event_productNameFocusLost
+
+    private void productPriceFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_productPriceFocusLost
+        if (productPrice.getText().trim().isEmpty()) {
+            productPrice.setText("precio");
+            productPrice.setForeground(new java.awt.Color(150, 150, 150)); // texto placeholder gris
+        }
+    }//GEN-LAST:event_productPriceFocusLost
+
+    private void minStockFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_minStockFocusLost
+        if (minStock.getText().trim().isEmpty()) {
+            minStock.setText("minStock");
+            minStock.setForeground(new java.awt.Color(150, 150, 150)); // texto placeholder gris
+        }
+    }//GEN-LAST:event_minStockFocusLost
 
     /**
      * @param args the command line arguments

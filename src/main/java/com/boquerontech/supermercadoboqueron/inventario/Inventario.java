@@ -182,7 +182,8 @@ public class Inventario extends javax.swing.JPanel {
         topPanel.add(buscarTxt, gridBagConstraints);
 
         maxStockCombo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        maxStockCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Max. Stock 10", "Max. Stock 25", "Max. Stock 50", "Max. Stock 100", "Max. Stock 200", "Max. Stock 500" }));
+        maxStockCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Max. Stock 10", "Max. Stock 25", "Max. Stock 50", "Max. Stock 100", "Max. Stock 200", "Max. Stock 500", "Todos" }));
+        maxStockCombo.setSelectedIndex(6);
         maxStockCombo.setMaximumSize(new java.awt.Dimension(200, 31));
         maxStockCombo.setMinimumSize(new java.awt.Dimension(200, 31));
         maxStockCombo.setPreferredSize(new java.awt.Dimension(200, 31));
@@ -428,6 +429,9 @@ public class Inventario extends javax.swing.JPanel {
                 break;
             case 5:
                 maxStockValue = 500;
+                break;
+            case 6:
+                maxStockValue = Integer.MAX_VALUE;
                 break;
             default:
                 maxStockValue = 0;

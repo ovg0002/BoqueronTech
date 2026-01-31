@@ -74,6 +74,7 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         acceptBtn = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
         categoriasCombo = new javax.swing.JComboBox<>();
+        enableProduct = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(233, 253, 253));
@@ -150,7 +151,7 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.insets = new java.awt.Insets(5, 30, 30, 10);
+        gridBagConstraints.insets = new java.awt.Insets(5, 30, 5, 10);
         jPanel2.add(jLabel4, gridBagConstraints);
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_chart_up.png"))); // NOI18N
@@ -171,7 +172,7 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.insets = new java.awt.Insets(5, 10, 30, 10);
+        gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 10);
         jPanel2.add(jLabel7, gridBagConstraints);
 
         productId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -207,7 +208,7 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.insets = new java.awt.Insets(5, 10, 30, 10);
+        gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 10);
         jPanel2.add(productPrice, gridBagConstraints);
 
         currentStock.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -246,7 +247,7 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(5, 10, 30, 30);
+        gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 30);
         jPanel2.add(productoCategory, gridBagConstraints);
 
         productImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/img_vacio.png"))); // NOI18N
@@ -300,8 +301,19 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.insets = new java.awt.Insets(5, 10, 30, 30);
+        gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 30);
         jPanel2.add(categoriasCombo, gridBagConstraints);
+
+        enableProduct.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        enableProduct.setForeground(new java.awt.Color(0, 0, 0));
+        enableProduct.setText("Producto Habilitado");
+        enableProduct.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.insets = new java.awt.Insets(5, 30, 30, 30);
+        jPanel2.add(enableProduct, gridBagConstraints);
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
 
@@ -313,6 +325,7 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         productName.setEnabled(true);
         productPrice.setEnabled(true);
         minStock.setEnabled(true);
+        enableProduct.setEnabled(true);
         
         productoCategory.setVisible(false); 
         categoriasCombo.setVisible(true);   
@@ -326,6 +339,7 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         productName.setEnabled(false);
         productPrice.setEnabled(false);
         minStock.setEnabled(false);
+        enableProduct.setEnabled(false);
         
         productoCategory.setVisible(true);  
         categoriasCombo.setVisible(false);  
@@ -340,9 +354,10 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         productName.setEnabled(false);
         productPrice.setEnabled(false);
         minStock.setEnabled(false);
+        enableProduct.setEnabled(false);
         
-        productoCategory.setVisible(true);  
-        categoriasCombo.setVisible(false);  
+        productoCategory.setVisible(true);
+        categoriasCombo.setVisible(false);
         
         // Recoger datos
         String nombreProd = productName.getText();
@@ -376,14 +391,16 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         producto.setNombre(nombreProd);
         producto.setPrecio(precioProd);
         producto.setMinStock(minStockProd);
+        producto.setActivo(enableProduct.isSelected());
         
         // Enviar a la Base de Datos (Ahora es update directo)
         ProductoDAO.updateProduct(
-                producto.getId(),
-                producto.getNombre(),
-                producto.getPrecio(),
-                producto.getMinStock(),
-                nombreCat
+            producto.getId(),
+            producto.getNombre(),
+            producto.getPrecio(),
+            producto.getMinStock(),
+            nombreCat,
+            enableProduct.isSelected()
         );
         
         setProductData(producto);
@@ -432,6 +449,10 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         } else {
             productoCategory.setText(""); 
         }
+        
+        if (producto.isActivo()) {
+            enableProduct.setSelected(producto.isActivo());
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -440,6 +461,7 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> categoriasCombo;
     private javax.swing.JTextField currentStock;
     private javax.swing.JButton eliminarBtn;
+    private javax.swing.JCheckBox enableProduct;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

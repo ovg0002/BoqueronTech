@@ -4,7 +4,6 @@
  */
 package com.boquerontech.supermercadoboqueron.productos;
 
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -37,4 +36,8 @@ public class Producto {
     // CAMBIO: Ahora es un objeto único, no una lista
     @Getter @Setter
     private Categoria categoria; 
+    
+    @Getter @Setter
+    @Builder.Default
+    private boolean activo = true;
 }
