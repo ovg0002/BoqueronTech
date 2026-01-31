@@ -5,6 +5,8 @@
 package com.boquerontech.supermercadoboqueron.promociones;
 
 import com.boquerontech.supermercadoboqueron.Inicio;
+import com.boquerontech.supermercadoboqueron.database.promocion.PromocionDAO;
+import java.util.List;
 
 /**
  *
@@ -12,17 +14,55 @@ import com.boquerontech.supermercadoboqueron.Inicio;
  */
 public class PromocionesConcurrentesP extends javax.swing.JPanel {
 
-     private Inicio inicioInstance;
+    private Inicio inicioInstance;
+    
     /**
      * Creates new form PromocionesConcurrentesP
      */
     public PromocionesConcurrentesP() {
         initComponents();
-        
+        cargarPromociones();
     }
-     public PromocionesConcurrentesP(Inicio inicioInstance) {
+    
+    public PromocionesConcurrentesP(Inicio inicioInstance) {
         initComponents();
         this.inicioInstance = inicioInstance;
+        cargarPromociones();
+    }
+
+    private void cargarPromociones() {
+        // 1. Obtener lista de la BD
+        List<Promocion> lista = PromocionDAO.listarPromociones();
+        
+        // 2. Limpiar panel
+        promosPanel.removeAll();
+        // Usamos BoxLayout vertical para que se apilen uno debajo de otro
+        promosPanel.setLayout(new javax.swing.BoxLayout(promosPanel, javax.swing.BoxLayout.Y_AXIS));
+        
+        // 3. Rellenar
+        if (lista != null && !lista.isEmpty()) {
+            for (Promocion p : lista) {
+                // Crear item
+                com.boquerontech.supermercadoboqueron.promociones.items.itemPromocionConcurrente item = 
+                        new com.boquerontech.supermercadoboqueron.promociones.items.itemPromocionConcurrente();
+                
+                // Pasar datos
+                item.setDatos(p);
+                
+                // Añadir al panel visual
+                promosPanel.add(item);
+                
+                // Añadir un pequeño espacio entre items
+                promosPanel.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(0, 10)));
+            }
+        } else {
+            javax.swing.JLabel lblEmpty = new javax.swing.JLabel("No hay promociones registradas.");
+            promosPanel.add(lblEmpty);
+        }
+        
+        // 4. Refrescar
+        promosPanel.revalidate();
+        promosPanel.repaint();
     }
 
     /**

@@ -5,7 +5,7 @@
 package com.boquerontech.supermercadoboqueron.promociones;
 
 import com.boquerontech.supermercadoboqueron.Inicio;
-import javax.swing.JPanel;
+import java.util.List;
 
 /**
  *
@@ -14,16 +14,85 @@ import javax.swing.JPanel;
 public class ModificarDardebajaPromocionP extends javax.swing.JPanel {
 
     private Inicio inicioInstance;
-    
+    private List<Promocion> promocionesLista;
+    private List<Promocion> promocionBusqueda;
     /**
      * Creates new form ModificarDardebajaPromocionP
      */
     public ModificarDardebajaPromocionP() {
         initComponents();
+        cargarDatos();
     }
     public ModificarDardebajaPromocionP(Inicio inicioInstance) {
-        initComponents();
+        initComponents(); // Aquí se inicializan todos los componentes
         this.inicioInstance = inicioInstance;
+        
+        cargarDatos();
+        
+        // --- CONFIGURACIÓN MANUAL DEL BUSCADOR ---
+        // (Esto sobreescribe o complementa lo que hace initComponents)
+        buscarTF.setBackground(new java.awt.Color(233, 253, 253));
+        buscarTF.setText("Buscar");
+        buscarTF.setOpaque(true);
+        buscarTF.setPreferredSize(new java.awt.Dimension(64, 100));
+        
+        // Listeners para la búsqueda en tiempo real
+        buscarTF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                buscarTFKeyReleased(evt);
+            }
+        });
+        
+        buscarTF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                buscarTFFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                buscarTFFocusLost(evt);
+            }
+        });
+        
+    }
+    
+    private void cargarDatos() {
+        // Traer datos de BBDD
+        promocionesLista = com.boquerontech.supermercadoboqueron.database.promocion.PromocionDAO.listarPromociones();
+        rellenarPromociones();
+    }
+
+    // 2. MÉTODO DE RELLENADO
+    private void rellenarPromociones() {
+        // Limpiar el panel contenedor
+        itemsPanel.removeAll();
+        
+        // Configurar Layout (Vertical para una lista)
+        itemsPanel.setLayout(new javax.swing.BoxLayout(itemsPanel, javax.swing.BoxLayout.Y_AXIS));
+
+        // Verificamos si la lista no es nula
+        if (promocionesLista != null) {
+            // Bucle para crear y añadir items
+            for (com.boquerontech.supermercadoboqueron.promociones.Promocion p : promocionesLista) {
+                
+                // Instanciar el item visual específico de esta pantalla
+                // Asegúrate de que el paquete es correcto:
+                com.boquerontech.supermercadoboqueron.promociones.items.itemModificardardebajaPromocion item = 
+                        new com.boquerontech.supermercadoboqueron.promociones.items.itemModificardardebajaPromocion();
+                
+                // Pasar los datos al item (Asegúrate de haber añadido el método setDatos en el item)
+                // Le pasamos la promoción 'p' Y la instancia de 'inicioInstance'
+                item.setDatos(p, this.inicioInstance);
+                
+                // Añadir al panel
+                itemsPanel.add(item);
+                
+                // Añadir espacio/separador
+                itemsPanel.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(0, 10)));
+            }
+        }
+
+        // Refrescar la interfaz para mostrar cambios
+        itemsPanel.revalidate();
+        itemsPanel.repaint();
     }
 
     /**
@@ -206,10 +275,64 @@ public class ModificarDardebajaPromocionP extends javax.swing.JPanel {
 
     private void salirBtnActionPerformed(java.awt.event.ActionEvent evt) {                                         
         inicioInstance.colocarPanel(new InicioPromoP(inicioInstance));
-        
     }                                        
 
+    // Método para filtrar la lista según el texto de búsqueda
+    private void filtrarPromociones(String textoBusqueda) {
+        // Limpiar panel
+        itemsPanel.removeAll();
+        itemsPanel.setLayout(new javax.swing.BoxLayout(itemsPanel, javax.swing.BoxLayout.Y_AXIS));
 
+        if (promocionesLista != null) {
+            String texto = textoBusqueda.toLowerCase().trim(); // Convertir a minúsculas para comparar mejor
+
+            for (com.boquerontech.supermercadoboqueron.promociones.Promocion p : promocionesLista) {
+                // Verificar si el nombre contiene el texto buscado
+                if (p.getNombrePromocion().toLowerCase().contains(texto)) {
+                    
+                    // Crear y añadir el item
+                    com.boquerontech.supermercadoboqueron.promociones.items.itemModificardardebajaPromocion item = 
+                            new com.boquerontech.supermercadoboqueron.promociones.items.itemModificardardebajaPromocion();
+                    
+                    // Le pasamos la promoción 'p' Y la instancia de 'inicioInstance'
+                    item.setDatos(p, this.inicioInstance);
+                    itemsPanel.add(item);
+                    itemsPanel.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(0, 10)));
+                }
+            }
+        }
+        
+        itemsPanel.revalidate();
+        itemsPanel.repaint();
+    }
+
+    // Listener para detectar escritura en tiempo real (KeyReleased)
+    private void buscarTFKeyReleased(java.awt.event.KeyEvent evt) {                                     
+        String texto = buscarTF.getText();
+        
+        // Si dice "Buscar" (el placeholder) lo tratamos como vacío
+        if(texto.equals("Buscar")) texto = "";
+        
+        filtrarPromociones(texto);
+    } 
+    
+    // Listener para limpiar el placeholder "Buscar" al hacer click
+    private void buscarTFFocusGained(java.awt.event.FocusEvent evt) {                                     
+        if (buscarTF.getText().equals("Buscar")) {
+            buscarTF.setText("");
+            buscarTF.setForeground(new java.awt.Color(0, 0, 0)); // Texto negro
+        }
+    }                                    
+
+    // Listener para restaurar "Buscar" si se deja vacío
+    private void buscarTFFocusLost(java.awt.event.FocusEvent evt) {                                   
+        if (buscarTF.getText().trim().isEmpty()) {
+            buscarTF.setText("Buscar");
+            buscarTF.setForeground(new java.awt.Color(153, 153, 153)); // Texto gris
+            filtrarPromociones(""); // Restaurar la lista completa
+        }
+    }
+    
     // Variables declaration - do not modify                     
     private javax.swing.JPanel bottomPanel;
     private javax.swing.JTextField buscarTF;

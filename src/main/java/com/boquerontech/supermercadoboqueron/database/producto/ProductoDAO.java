@@ -7,6 +7,7 @@ package com.boquerontech.supermercadoboqueron.database.producto;
 import com.boquerontech.supermercadoboqueron.database.DDBBConnector;
 import com.boquerontech.supermercadoboqueron.productos.Categoria;
 import com.boquerontech.supermercadoboqueron.productos.Producto;
+import com.boquerontech.supermercadoboqueron.informes.modelo.ProductoRow; // Asegúrate de importar esto donde lo tengas
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -131,13 +132,13 @@ public class ProductoDAO {
     // ==============================
     //            HELPERS
     // ==============================
+    // Helper privado para los métodos originales
     private static Producto crearProductoDeResultSet(ResultSet rs) throws SQLException {
         // Creamos el objeto Categoría al vuelo con los datos del JOIN
         Categoria cat = new Categoria(
             rs.getInt("Categoria_idCategoria"),
             rs.getString("nombre_categoria") // OJO AL ALIAS DEL SQL
         );
-        
         return new Producto(
             rs.getInt("idProducto"),
             rs.getString("nombre"),
@@ -145,6 +146,7 @@ public class ProductoDAO {
             rs.getInt("stock"),
             rs.getInt("minStock"),
             cat // Asignamos el objeto único
+        
         );
     }
 }

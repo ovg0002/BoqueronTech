@@ -46,6 +46,8 @@ public class ModificarCliente extends javax.swing.JPanel {
         nombreTxt = new javax.swing.JTextField();
         nombreLbl = new javax.swing.JLabel();
         prefijoCombo = new javax.swing.JComboBox<>();
+        searchLblIcon = new javax.swing.JLabel();
+        searchTxt = new javax.swing.JTextField();
         pnlBotones = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -61,16 +63,15 @@ public class ModificarCliente extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(0, 107, 0, 0);
+        gridBagConstraints.gridwidth = 10;
+        gridBagConstraints.insets = new java.awt.Insets(19, 0, 40, 0);
         pnlCentral.add(tituloLbl, gridBagConstraints);
 
         apellido1Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         apellido1Lbl.setText("Primer apellido");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipady = 24;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
@@ -80,7 +81,7 @@ public class ModificarCliente extends javax.swing.JPanel {
         apellido2Lbl.setText("Segundo apellido");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 13;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipady = 24;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
@@ -90,7 +91,7 @@ public class ModificarCliente extends javax.swing.JPanel {
         dniLbl.setText("DNI");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipady = 24;
@@ -101,7 +102,7 @@ public class ModificarCliente extends javax.swing.JPanel {
         TelefLbl.setText("Teléfono");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipady = 24;
@@ -112,7 +113,7 @@ public class ModificarCliente extends javax.swing.JPanel {
         fechaLbl.setText("Fecha de nacimiento");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 13;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipady = 24;
@@ -120,7 +121,7 @@ public class ModificarCliente extends javax.swing.JPanel {
         pnlCentral.add(fechaLbl, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 10;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 238;
@@ -129,7 +130,7 @@ public class ModificarCliente extends javax.swing.JPanel {
         pnlCentral.add(apellido1Txt, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 13;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 103;
@@ -144,7 +145,7 @@ public class ModificarCliente extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -154,7 +155,7 @@ public class ModificarCliente extends javax.swing.JPanel {
         pnlCentral.add(dniTxt, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 67;
@@ -163,7 +164,7 @@ public class ModificarCliente extends javax.swing.JPanel {
         pnlCentral.add(telefTxt, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 13;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -179,7 +180,7 @@ public class ModificarCliente extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 67;
@@ -191,7 +192,7 @@ public class ModificarCliente extends javax.swing.JPanel {
         nombreLbl.setText("Nombre");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipady = 24;
@@ -201,12 +202,35 @@ public class ModificarCliente extends javax.swing.JPanel {
         prefijoCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 67;
         gridBagConstraints.ipady = 24;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
         pnlCentral.add(prefijoCombo, gridBagConstraints);
+
+        searchLblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_search.png"))); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        pnlCentral.add(searchLblIcon, gridBagConstraints);
+
+        searchTxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        searchTxt.setText("Buscador");
+        searchTxt.setMargin(new java.awt.Insets(2, 25, 2, 6));
+        searchTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTxtActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        pnlCentral.add(searchTxt, gridBagConstraints);
 
         add(pnlCentral, java.awt.BorderLayout.CENTER);
 
@@ -261,6 +285,10 @@ public class ModificarCliente extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void searchTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchTxtActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel TelefLbl;
@@ -279,6 +307,8 @@ public class ModificarCliente extends javax.swing.JPanel {
     private javax.swing.JPanel pnlBotones;
     private javax.swing.JPanel pnlCentral;
     private javax.swing.JComboBox<String> prefijoCombo;
+    private javax.swing.JLabel searchLblIcon;
+    private javax.swing.JTextField searchTxt;
     private javax.swing.JTextField telefTxt;
     private javax.swing.JLabel tituloLbl;
     // End of variables declaration//GEN-END:variables

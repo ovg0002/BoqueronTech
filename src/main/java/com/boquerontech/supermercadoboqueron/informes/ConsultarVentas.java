@@ -4,19 +4,128 @@
  */
 package com.boquerontech.supermercadoboqueron.informes;
 
-import com.boquerontech.supermercadoboqueron.informes.items.ItemConsultasVentas;
-
+import com.boquerontech.supermercadoboqueron.informes.items.ItemVenta;
+import com.boquerontech.supermercadoboqueron.Inicio;
+import com.boquerontech.supermercadoboqueron.informes.modelo.VentaRow;
+import com.boquerontech.supermercadoboqueron.database.informes.VentaDAO;
+import java.util.List;
+import javax.swing.JPanel;
 /**
  *
  * @author navas
  */
 public class ConsultarVentas extends javax.swing.JPanel {
-
+private Inicio inicioInstance;
+private List<VentaRow> listaCompleta;
+    private int paginaActual = 1;
+    private final int ITEMS_POR_PAGINA = 7;
     /**
      * Creates new form ListadodeProductos
      */
     public ConsultarVentas() {
         initComponents();
+        cargarDatos();
+    }
+    public ConsultarVentas(Inicio inicioInstance) {
+        initComponents();
+        this.inicioInstance = inicioInstance;
+        
+        // Cargar opciones del combo si no están
+        if (CBFiltrar.getItemCount() == 0 || CBFiltrar.getItemAt(0).startsWith("Item")) {
+            CBFiltrar.setModel(new javax.swing.DefaultComboBoxModel<>(
+                new String[] { "Recientes", "Por Empleado", "Forma de Pago" }
+            ));
+        }
+        
+        configurarListeners();
+        cargarDatos();
+    }
+    private void configurarListeners() {
+        // Buscador por fecha
+        TFBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cargarDatos();
+            }
+        });
+        
+        TFBuscar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if(TFBuscar.getText().equals("Buscar")) TFBuscar.setText("");
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if(TFBuscar.getText().isEmpty()) TFBuscar.setText("Buscar");
+            }
+        });
+        
+        // Filtro
+        CBFiltrar.addActionListener(evt -> cargarDatos());
+        
+        // Paginación (Combo de abajo)
+        CBPaginas.addActionListener(evt -> {
+            if(CBPaginas.getSelectedItem() != null) {
+                try {
+                    paginaActual = Integer.parseInt(CBPaginas.getSelectedItem().toString());
+                    pintarPagina();
+                } catch(NumberFormatException e) {}
+            }
+        });
+    }
+
+    private void cargarDatos() {
+        String texto = TFBuscar.getText().trim();
+        if(texto.equals("Buscar")) texto = "";
+        
+        int filtro = CBFiltrar.getSelectedIndex();
+        
+        // 1. Obtener datos del DAO
+        listaCompleta = VentaDAO.listarVentasInforme(texto, filtro);
+        
+        // 2. Calcular páginas
+        int totalItems = listaCompleta.size();
+        int totalPaginas = (int) Math.ceil((double) totalItems / ITEMS_POR_PAGINA);
+        if(totalPaginas == 0) totalPaginas = 1;
+        
+        // 3. Rellenar combo paginación (evitando bucles de eventos)
+        java.awt.event.ActionListener[] listeners = CBPaginas.getActionListeners();
+        for(java.awt.event.ActionListener l : listeners) CBPaginas.removeActionListener(l);
+        
+        CBPaginas.removeAllItems();
+        for(int i=1; i<=totalPaginas; i++) {
+            CBPaginas.addItem(String.valueOf(i));
+        }
+        
+        for(java.awt.event.ActionListener l : listeners) CBPaginas.addActionListener(l);
+        
+        // 4. Pintar
+        paginaActual = 1;
+        pintarPagina();
+    }
+    
+    private void pintarPagina() {
+        PnlCentralItems.removeAll();
+        // Layout vertical para la lista
+        PnlCentralItems.setLayout(new javax.swing.BoxLayout(PnlCentralItems, javax.swing.BoxLayout.Y_AXIS));
+        
+        if (listaCompleta != null && !listaCompleta.isEmpty()) {
+            int inicio = (paginaActual - 1) * ITEMS_POR_PAGINA;
+            int fin = Math.min(inicio + ITEMS_POR_PAGINA, listaCompleta.size());
+            
+            for (int i = inicio; i < fin; i++) {
+                VentaRow v = listaCompleta.get(i);
+                
+                com.boquerontech.supermercadoboqueron.informes.items.ItemVenta item = 
+                        new com.boquerontech.supermercadoboqueron.informes.items.ItemVenta();
+                
+                item.setDatos(v);
+                PnlCentralItems.add(item);
+                PnlCentralItems.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(0, 5)));
+            }
+        } else {
+            PnlCentralItems.add(new javax.swing.JLabel("No se encontraron ventas."));
+        }
+        
+        PnlCentralItems.revalidate();
+        PnlCentralItems.repaint();
     }
 
     /**
@@ -35,7 +144,6 @@ public class ConsultarVentas extends javax.swing.JPanel {
         PanelInferiorConsultaVentas = new javax.swing.JPanel();
         scroll = new javax.swing.JScrollPane();
         PnlCentralItems = new javax.swing.JPanel();
-        itemConsultasVentas1 = new com.boquerontech.supermercadoboqueron.informes.items.ItemConsultasVentas();
         jPanel1 = new javax.swing.JPanel();
         TFBuscar = new javax.swing.JTextField();
         CBFiltrar = new javax.swing.JComboBox<>();
@@ -59,6 +167,11 @@ public class ConsultarVentas extends javax.swing.JPanel {
         BtnSalir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(199, 108, 108)));
         BtnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BtnSalir.setOpaque(true);
+        BtnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSalirActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -86,9 +199,6 @@ public class ConsultarVentas extends javax.swing.JPanel {
         PanelInferiorConsultaVentas.setLayout(new java.awt.GridBagLayout());
 
         scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-        PnlCentralItems.add(itemConsultasVentas1);
-
         scroll.setViewportView(PnlCentralItems);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -224,6 +334,14 @@ public class ConsultarVentas extends javax.swing.JPanel {
         add(pnlCabecera, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
+        // TODO add your handling code here:
+        // Volver a Inicio de Analisis
+        if (inicioInstance != null) {
+            inicioInstance.colocarPanel(new InicioAnalisisyConsultas(inicioInstance));
+        }
+    }//GEN-LAST:event_BtnSalirActionPerformed
+
     // Esto añade más items al panel del scroll
     private void ponerItems() {
         //panelVentasRealizadas.add(new ItemConsultasVentas());
@@ -237,7 +355,6 @@ public class ConsultarVentas extends javax.swing.JPanel {
     private javax.swing.JPanel PanelMedioItemVentas;
     private javax.swing.JPanel PnlCentralItems;
     private javax.swing.JTextField TFBuscar;
-    private com.boquerontech.supermercadoboqueron.informes.items.ItemConsultasVentas itemConsultasVentas1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

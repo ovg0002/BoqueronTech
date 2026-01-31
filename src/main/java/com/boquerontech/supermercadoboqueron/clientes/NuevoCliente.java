@@ -4,8 +4,10 @@
  */
 package com.boquerontech.supermercadoboqueron.clientes;
 
-import com.boquerontech.supermercadoboqueron.empleados.*;
-import com.boquerontech.supermercadoboqueron.clientes.*;
+import com.boquerontech.supermercadoboqueron.clientes.Cliente;
+import com.boquerontech.supermercadoboqueron.database.cliente.ClienteDAO;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +21,8 @@ public class NuevoCliente extends javax.swing.JPanel {
      */
     public NuevoCliente() {
         initComponents();
+        // Inicializar con valores vacíos o predeterminados si es necesario
+        prefijoCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "+34", "+1", "+44", "+33" }));
     }
 
     /**
@@ -67,7 +71,7 @@ public class NuevoCliente extends javax.swing.JPanel {
         pnlCentral.add(tituloLbl, gridBagConstraints);
 
         apellido1Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        apellido1Lbl.setText("Primer apellido");
+        apellido1Lbl.setText("Primer apellido *");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
@@ -77,7 +81,7 @@ public class NuevoCliente extends javax.swing.JPanel {
         pnlCentral.add(apellido1Lbl, gridBagConstraints);
 
         apellido2Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        apellido2Lbl.setText("Segundo apellido");
+        apellido2Lbl.setText("Segundo apellido *");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 13;
         gridBagConstraints.gridy = 1;
@@ -87,7 +91,7 @@ public class NuevoCliente extends javax.swing.JPanel {
         pnlCentral.add(apellido2Lbl, gridBagConstraints);
 
         dniLbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        dniLbl.setText("DNI");
+        dniLbl.setText("DNI *");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -98,7 +102,7 @@ public class NuevoCliente extends javax.swing.JPanel {
         pnlCentral.add(dniLbl, gridBagConstraints);
 
         TelefLbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        TelefLbl.setText("Teléfono");
+        TelefLbl.setText("Teléfono *");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 3;
@@ -188,7 +192,7 @@ public class NuevoCliente extends javax.swing.JPanel {
         pnlCentral.add(nombreTxt, gridBagConstraints);
 
         nombreLbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        nombreLbl.setText("Nombre");
+        nombreLbl.setText("Nombre *");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -258,9 +262,63 @@ public class NuevoCliente extends javax.swing.JPanel {
     }//GEN-LAST:event_dniTxtActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+        // 1. Recoger los datos de los campos
+        String nombre = nombreTxt.getText().trim();
+        String apellido1 = apellido1Txt.getText().trim();
+        String apellido2 = apellido2Txt.getText().trim();
+        String dni = dniTxt.getText().trim();
+        String prefijo = (String) prefijoCombo.getSelectedItem();
+        String telefono = telefTxt.getText().trim();
+        String fechaStr = fechaTxt.getText().trim();
+
+        // 2. Validar que los campos obligatorios no estén vacíos
+        if (nombre.isEmpty() || apellido1.isEmpty() || dni.isEmpty() || telefono.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Los campos Nombre, Primer Apellido, Segundo Apellido, DNI y Teléfono son obligatorios.", "Error de validación", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // 3. Crear el objeto Cliente
+        Cliente cliente = new Cliente();
+        cliente.setNombre(nombre);
+        cliente.setApellidos((apellido1 + " " + apellido2).trim());
+        cliente.setDni(dni);
+        cliente.setTelefono(prefijo + telefono);
+
+        // 4. Procesar la fecha de nacimiento
+        if (!fechaStr.isEmpty()) {
+            try {
+                // Asumimos formato AAAA-MM-DD
+                LocalDate fechaNacimiento = LocalDate.parse(fechaStr);
+                cliente.setFechaNacimiento(fechaNacimiento);
+            } catch (DateTimeParseException e) {
+                JOptionPane.showMessageDialog(this, "El formato de la fecha de nacimiento no es válido. Use AAAA-MM-DD.", "Error de formato", JOptionPane.ERROR_MESSAGE);
+                return; // Detener la ejecución si la fecha es inválida
+            }
+        }
+
+        // 5. Usar el DAO para guardar el cliente
+        ClienteDAO clienteDAO = new ClienteDAO();
+        boolean exito = clienteDAO.crearCliente(cliente);
+
+        // 6. Mostrar feedback al usuario
+        if (exito) {
+            JOptionPane.showMessageDialog(this, "Cliente guardado con éxito.", "Operación exitosa", JOptionPane.INFORMATION_MESSAGE);
+            // 7. Limpiar los campos del formulario
+            limpiarCampos();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al guardar el cliente. Verifique los datos o consulte los logs.\nUn DNI o teléfono duplicado puede ser la causa.", "Error en la base de datos", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void limpiarCampos() {
+        nombreTxt.setText("");
+        apellido1Txt.setText("");
+        apellido2Txt.setText("");
+        dniTxt.setText("");
+        telefTxt.setText("");
+        fechaTxt.setText("");
+        prefijoCombo.setSelectedIndex(0);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel TelefLbl;
