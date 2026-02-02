@@ -4,6 +4,8 @@
  */
 package com.boquerontech.supermercadoboqueron.productos;
 
+import com.boquerontech.supermercadoboqueron.database.producto.ProductoDAO;
+import com.boquerontech.supermercadoboqueron.inventario.Inventario;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.util.List;
 
@@ -13,28 +15,31 @@ import java.util.List;
  */
 public class ProductoInfoDialog extends javax.swing.JDialog {
     private boolean modificacion = false;
-    
+    private Inventario inventario;
     private Producto producto;
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ProductoInfoDialog.class.getName());
-
     public ProductoInfoDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
     
-    public ProductoInfoDialog(java.awt.Frame parent, boolean modal, Producto producto, List<Categoria> categorias) {
+    public ProductoInfoDialog(java.awt.Frame parent, boolean modal, Producto producto, List<Categoria> categorias, Inventario inventario) {
         super(parent, modal);
         initComponents();
+        this.inventario = inventario;
         this.producto = producto;
         this.setTitle("Información de " + producto.getNombre());
         
         setLocationRelativeTo(parent);
         
+        // 1. Rellenar combo
+        for (Categoria cat : categorias) categoriasCombo.addItem(cat.getNombre());
+        
+        // 2. Ocultar combo inicialmente
+        categoriasCombo.setVisible(false);
+        
         setDialogTitle(producto);
         setProductData(producto);
-        
-        for (Categoria cat : categorias) categoriasCombo.addItem(cat.getNombre());
     }
 
     /**
@@ -69,6 +74,7 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         acceptBtn = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
         categoriasCombo = new javax.swing.JComboBox<>();
+        enableProduct = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(233, 253, 253));
@@ -145,7 +151,7 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.insets = new java.awt.Insets(5, 30, 30, 10);
+        gridBagConstraints.insets = new java.awt.Insets(5, 30, 5, 10);
         jPanel2.add(jLabel4, gridBagConstraints);
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_chart_up.png"))); // NOI18N
@@ -166,7 +172,7 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.insets = new java.awt.Insets(5, 10, 30, 10);
+        gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 10);
         jPanel2.add(jLabel7, gridBagConstraints);
 
         productId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -202,7 +208,7 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.insets = new java.awt.Insets(5, 10, 30, 10);
+        gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 10);
         jPanel2.add(productPrice, gridBagConstraints);
 
         currentStock.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -241,7 +247,7 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(5, 10, 30, 30);
+        gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 30);
         jPanel2.add(productoCategory, gridBagConstraints);
 
         productImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/img_vacio.png"))); // NOI18N
@@ -295,8 +301,19 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.insets = new java.awt.Insets(5, 10, 30, 30);
+        gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 30);
         jPanel2.add(categoriasCombo, gridBagConstraints);
+
+        enableProduct.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        enableProduct.setForeground(new java.awt.Color(0, 0, 0));
+        enableProduct.setText("Producto Habilitado");
+        enableProduct.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.insets = new java.awt.Insets(5, 30, 30, 30);
+        jPanel2.add(enableProduct, gridBagConstraints);
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
 
@@ -305,41 +322,89 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
 
     private void habilitarModificacion(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_habilitarModificacion
         modificacion = true;
-        
-        // Habilitar edicion
         productName.setEnabled(true);
         productPrice.setEnabled(true);
         minStock.setEnabled(true);
-        productoCategory.setVisible(false);
+        enableProduct.setEnabled(true);
+        
+        productoCategory.setVisible(false); 
+        categoriasCombo.setVisible(true);   
+        productName.requestFocus();
     }//GEN-LAST:event_habilitarModificacion
 
     private void cancelAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelAction
-        if (modificacion != true) return;
+        if (!modificacion) return;
         
-        // Deshabilitar edicion
+        modificacion = false;
         productName.setEnabled(false);
         productPrice.setEnabled(false);
         minStock.setEnabled(false);
-        productoCategory.setVisible(true);
-        setProductData(producto);
+        enableProduct.setEnabled(false);
+        
+        productoCategory.setVisible(true);  
+        categoriasCombo.setVisible(false);  
+        
+        setProductData(producto); 
     }//GEN-LAST:event_cancelAction
 
     private void confirmarAciton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarAciton
-        if (modificacion != true) return;
+        if (!modificacion) return;
         
-        // Deshabilitar edicion
+        modificacion = false;
         productName.setEnabled(false);
         productPrice.setEnabled(false);
         minStock.setEnabled(false);
-        productoCategory.setEnabled(false);
-        productoCategory.setVisible(true);
+        enableProduct.setEnabled(false);
         
-        // Cambiar los datos en la BBDD
-        producto.setNombre(productName.getText());
-        producto.setPrecio((double)Double.valueOf(productPrice.getText()));
-        producto.setMinStock((int)Integer.valueOf(minStock.getText()));
-        // Enviar nuevas categorias a la bbdd
-        productoCategory.setText(String.valueOf(categoriasCombo.getSelectedItem()));
+        productoCategory.setVisible(true);
+        categoriasCombo.setVisible(false);
+        
+        // Recoger datos
+        String nombreProd = productName.getText();
+        double precioProd;
+        int minStockProd;
+        
+        try {
+            precioProd = Double.parseDouble(productPrice.getText().replace(",", "."));
+            minStockProd = Integer.parseInt(minStock.getText());
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error en el formato de números", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            cancelAction(null);
+            return;
+        }
+
+        String nombreCat = String.valueOf(categoriasCombo.getSelectedItem());
+        
+        // --- ACTUALIZACIÓN EN MEMORIA (SIMPLIFICADA) ---
+        // Al ser un objeto directo, simplemente actualizamos el nombre de la categoría del objeto
+        if (producto.getCategoria() != null) {
+            producto.getCategoria().setNombre(nombreCat);
+        } else {
+            // Si por algún motivo venía nulo (raro con tu nueva BBDD), le creamos una dummy
+            producto.setCategoria(new Categoria(0, nombreCat));
+        }
+        
+        // Copia para la lista
+        Producto prodAntiguo = producto.toBuilder().build(); 
+        
+        // Actualizar objeto principal
+        producto.setNombre(nombreProd);
+        producto.setPrecio(precioProd);
+        producto.setMinStock(minStockProd);
+        producto.setActivo(enableProduct.isSelected());
+        
+        // Enviar a la Base de Datos (Ahora es update directo)
+        ProductoDAO.updateProduct(
+            producto.getId(),
+            producto.getNombre(),
+            producto.getPrecio(),
+            producto.getMinStock(),
+            nombreCat,
+            enableProduct.isSelected()
+        );
+        
+        setProductData(producto);
+        inventario.updateProductosOnUpdate(prodAntiguo, producto);
     }//GEN-LAST:event_confirmarAciton
 
     /**
@@ -376,7 +441,18 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         productPrice.setText(String.valueOf(producto.getPrecio()));
         currentStock.setText(String.valueOf(producto.getStock()));
         minStock.setText(String.valueOf(producto.getMinStock()));
-        //productoCategory;
+        
+        if (producto.getCategoria() != null) {
+            String nombreCategoria = producto.getCategoria().getNombre();
+            categoriasCombo.setSelectedItem(nombreCategoria);
+            productoCategory.setText(nombreCategoria);
+        } else {
+            productoCategory.setText(""); 
+        }
+        
+        if (producto.isActivo()) {
+            enableProduct.setSelected(producto.isActivo());
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -385,6 +461,7 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> categoriasCombo;
     private javax.swing.JTextField currentStock;
     private javax.swing.JButton eliminarBtn;
+    private javax.swing.JCheckBox enableProduct;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
