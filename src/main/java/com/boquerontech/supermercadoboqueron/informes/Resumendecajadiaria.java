@@ -5,9 +5,14 @@
 package com.boquerontech.supermercadoboqueron.informes;
 
 import com.boquerontech.supermercadoboqueron.Inicio;
-import com.boquerontech.supermercadoboqueron.promociones.InicioPromoP;
+import com.boquerontech.supermercadoboqueron.informes.InicioAnalisisyConsultas; // Asegúrate de importar esto si lo usas
 import javax.swing.JOptionPane;
-
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.view.JasperViewer;
+import java.util.HashMap;
+import java.util.Map;
+import java.sql.Connection;
+import java.io.InputStream;
 /**
  *
  * @author navas
@@ -275,56 +280,106 @@ public Resumendecajadiaria(Inicio inicioInstance) {
     }// </editor-fold>//GEN-END:initComponents
 
     private void GuardarP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarP1ActionPerformed
-        // TODO add your handling code here:
-        // 1. RECOGER DATOS
+       // 1. RECOGER DATOS
         String idEmpStr = TFIdEmpleado.getText().trim();
-        String fechaStr = TFFecha.getText().trim(); // Formato AAAA-MM-DD
+        String fechaStr = TFFecha.getText().trim(); 
         String validacion = TFValidacion.getText().trim();
         String incidencia = TFIncidencia.getText().trim();
 
+        // Validaciones básicas
         if (idEmpStr.isEmpty() || fechaStr.isEmpty()) {
             JOptionPane.showMessageDialog(this, "ID Empleado y Fecha son obligatorios.", "Faltan datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         try {
-            // 2. CONVERTIR TIPOS
+            // Conversión de datos
             int idEmpleado = Integer.parseInt(idEmpStr);
             java.time.LocalDate fecha = java.time.LocalDate.parse(fechaStr);
 
-            // 3. CREAR OBJETO
+            // 2. CREAR OBJETO MODELO
             com.boquerontech.supermercadoboqueron.informes.modelo.CierreCaja nuevoCierre = 
                 new com.boquerontech.supermercadoboqueron.informes.modelo.CierreCaja(idEmpleado, fecha, validacion, incidencia);
 
-            // 4. GUARDAR EN BD
+            // 3. GUARDAR EN BASE DE DATOS
             boolean exito = com.boquerontech.supermercadoboqueron.database.informes.CierreCajaDAO.insertarCierre(nuevoCierre);
 
             if (exito) {
-                JOptionPane.showMessageDialog(this, "Resumen guardado con éxito.\nListo para generar informe.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                // Volver atrás
-                inicioInstance.colocarPanel(new InicioAnalisisyConsultas(inicioInstance));
+                // 4. RECUPERAR EL ID GENERADO (Vital para el informe)
+                int idGenerado = com.boquerontech.supermercadoboqueron.database.informes.CierreCajaDAO.obtenerUltimoIdCierre(idEmpleado, fecha);
+                
+                if (idGenerado != -1) {
+                    JOptionPane.showMessageDialog(this, "Guardado correctamente. Generando informe...", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    
+                    // --- AQUÍ LLAMAMOS AL MÉTODO QUE ABRE EL INFORME ---
+                    generarInformeJasper(idGenerado);
+                    
+                    // (Opcional) Volver al inicio después de ver el informe
+                    // inicioInstance.colocarPanel(new InicioAnalisisyConsultas(inicioInstance));
+                } else {
+                    JOptionPane.showMessageDialog(this, "Se guardó, pero no se pudo recuperar el ID para el reporte.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Error al guardar en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Error al guardar en la base de datos.", "Error BD", JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "El ID de empleado debe ser un número.", "Error formato", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "El ID de empleado debe ser numérico.", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (java.time.format.DateTimeParseException e) {
-            JOptionPane.showMessageDialog(this, "Formato de fecha incorrecto (use AAAA-MM-DD).", "Error fecha", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "La fecha debe ser AAAA-MM-DD.", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage());
         }
-        JOptionPane.showMessageDialog(null, "Guardado con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_GuardarP1ActionPerformed
 
     private void SalirP2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirP2ActionPerformed
         // TODO add your handling code here:
-        inicioInstance.colocarPanel(new InicioAnalisisyConsultas(inicioInstance));
         if (inicioInstance != null) {
-            inicioInstance.colocarPanel(new InicioAnalisisyConsultas(inicioInstance));
+            // Asegúrate de que InicioAnalisisyConsultas existe en tu proyecto o cámbialo por el panel correcto
+            // inicioInstance.colocarPanel(new InicioAnalisisyConsultas(inicioInstance)); 
+            
+            // Si InicioAnalisisyConsultas está en otro paquete, impórtalo arriba.
+            // Si no, pon aquí el panel al que quieras volver.
+            // Ejemplo genérico si no tienes el import:
+             inicioInstance.colocarPanel(new com.boquerontech.supermercadoboqueron.informes.InicioAnalisisyConsultas(inicioInstance));
         }
     }//GEN-LAST:event_SalirP2ActionPerformed
+
+    // --- MÉTODO AUXILIAR PARA COMPILAR Y MOSTRAR EL JRXML ---
+    private void generarInformeJasper(int idCierre) {
+        try {
+            // A. Conexión a la BDD
+            Connection conn = com.boquerontech.supermercadoboqueron.database.DDBBConnector.getConnection();
+            
+            // B. Parámetros (El nombre "idCierreParam" debe ser IGUAL al de tu archivo XML)
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("idCierreParam", idCierre);
+            
+            // C. Cargar el archivo fuente (.jrxml)
+            // La ruta empieza con / porque está en src/main/resources
+            InputStream reportStream = getClass().getResourceAsStream("/reportes/ResumenCaja1.jrxml");
+            
+            if (reportStream == null) {
+                JOptionPane.showMessageDialog(this, "No se encuentra el archivo .jrxml en /reportes/", "Error Archivo", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // D. COMPILAR EL REPORTE (Esto convierte el jrxml en un objeto JasperReport)
+            JasperReport reporteCompilado = JasperCompileManager.compileReport(reportStream);
+
+            // E. LLENAR EL REPORTE CON DATOS
+            JasperPrint print = JasperFillManager.fillReport(reporteCompilado, parametros, conn);
+            
+            // F. MOSTRAR EN PANTALLA (VISOR)
+            // El 'false' es muy importante para que al cerrar el PDF no se cierre tu programa entero.
+            JasperViewer.viewReport(print, false);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al generar el reporte: " + e.getMessage());
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -349,4 +404,5 @@ public Resumendecajadiaria(Inicio inicioInstance) {
     private javax.swing.JPanel relleno;
     private javax.swing.JPanel trabajadorPanel;
     // End of variables declaration//GEN-END:variables
+
 }

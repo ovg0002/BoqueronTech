@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="InformeInventario" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SupermercadoDB"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	
+	<style name="Title" forecolor="#00796B" fontName="SansSerif" fontSize="26" isBold="true"/>
+	<style name="Header" forecolor="#00796B" fontName="SansSerif" fontSize="12" isBold="true"/>
+	<style name="Row" mode="Transparent" fontName="SansSerif" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#E9FDFD"/>
+		</conditionalStyle>
+	</style>
+
+	<queryString language="SQL">
+		<![CDATA[SELECT 
+    p.idProducto,
+    p.nombre AS nombreProducto,
+    c.nombre AS nombreCategoria,
+    p.precio AS precioUnitario,
+    p.stock AS stockActual,
+    
+    COALESCE((SELECT SUM(dp.cantidad) FROM DetallePedido dp WHERE dp.Producto_idProducto = p.idProducto), 0) AS entradas,
+    COALESCE((SELECT SUM(dv.cantidad) FROM DetalleVenta dv WHERE dv.Producto_idProducto = p.idProducto), 0) AS salidas,
+    
+    (p.stock - COALESCE((SELECT SUM(dp.cantidad) FROM DetallePedido dp WHERE dp.Producto_idProducto = p.idProducto), 0) 
+             + COALESCE((SELECT SUM(dv.cantidad) FROM DetalleVenta dv WHERE dv.Producto_idProducto = p.idProducto), 0)) AS stockInicial,
+
+    (p.stock * p.precio) AS valorTotalInventario
+FROM Producto p
+JOIN Categoria c ON p.Categoria_idCategoria = c.idCategoria
+ORDER BY c.nombre, p.nombre]]>
+	</queryString>
+
+	<field name="idProducto" class="java.lang.Integer"/>
+	<field name="nombreProducto" class="java.lang.String"/>
+	<field name="nombreCategoria" class="java.lang.String"/>
+	<field name="precioUnitario" class="java.math.BigDecimal"/>
+	<field name="stockActual" class="java.lang.Integer"/>
+	<field name="entradas" class="java.lang.Long"/>
+	<field name="salidas" class="java.lang.Long"/>
+	<field name="stockInicial" class="java.lang.Long"/>
+	<field name="valorTotalInventario" class="java.math.BigDecimal"/>
+
+	<variable name="SumValorCategoria" class="java.math.BigDecimal" resetType="Group" resetGroup="GrupoCategoria" calculation="Sum">
+		<variableExpression><![CDATA[$F{valorTotalInventario}]]></variableExpression>
+	</variable>
+	<variable name="GranTotalValor" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{valorTotalInventario}]]></variableExpression>
+	</variable>
+
+	<group name="GrupoCategoria">
+		<groupExpression><![CDATA[$F{nombreCategoria}]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<rectangle>
+					<reportElement x="0" y="0" width="802" height="30" backcolor="#00796B"/>
+					<graphicElement><pen lineWidth="0.0"/></graphicElement>
+				</rectangle>
+				<textField>
+					<reportElement x="10" y="0" width="400" height="30" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["CATEGORÍA: " + $F{nombreCategoria}.toUpperCase()]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<staticText>
+					<reportElement x="550" y="0" width="100" height="20" forecolor="#00796B"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Categoría:]]></text>
+				</staticText>
+				<textField pattern="#,##0.00 ¤">
+					<reportElement x="660" y="0" width="140" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SumValorCategoria}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+
+	<title>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="0" y="10" width="500" height="40"/>
+				<text><![CDATA[Informe de Inventario y Valoración]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy HH:mm">
+				<reportElement x="600" y="10" width="200" height="20" forecolor="#666666"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="60" width="802" height="1" forecolor="#00796B"/>
+				<graphicElement><pen lineWidth="2.0"/></graphicElement>
+			</line>
+		</band>
+	</title>
+
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="802" height="30" backcolor="#E0E0E0"/>
+				<graphicElement><pen lineWidth="0.0"/></graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement style="Header" x="5" y="0" width="50" height="30"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Header" x="60" y="0" width="200" height="30"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Header" x="270" y="0" width="70" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Inicial]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Header" x="350" y="0" width="70" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Entradas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Header" x="430" y="0" width="70" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Salidas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Header" x="510" y="0" width="70" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Final]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Header" x="590" y="0" width="100" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[P. Unitario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Header" x="700" y="0" width="100" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Valor Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+
+	<detail>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" x="0" y="0" width="802" height="25"/>
+				<textField>
+					<reportElement x="5" y="0" width="50" height="25"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{idProducto}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="60" y="0" width="200" height="25"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{nombreProducto}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="270" y="0" width="70" height="25" forecolor="#666666"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{stockInicial}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="350" y="0" width="70" height="25" forecolor="#009900"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["+" + $F{entradas}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="430" y="0" width="70" height="25" forecolor="#CC0000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["-" + $F{salidas}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="510" y="0" width="70" height="25"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{stockActual}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00 ¤">
+					<reportElement x="590" y="0" width="100" height="25"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{precioUnitario}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00 ¤">
+					<reportElement x="700" y="0" width="100" height="25"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{valorTotalInventario}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+
+	<summary>
+		<band height="300" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="450" y="20" width="352" height="50" backcolor="#00796B"/>
+				<graphicElement><pen lineWidth="0.0"/></graphicElement>
+			</rectangle>
+			
+			<staticText>
+				<reportElement x="470" y="30" width="130" height="30" forecolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALOR TOTAL:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00 ¤">
+				<reportElement x="600" y="30" width="180" height="30" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{GranTotalValor}]]></textFieldExpression>
+			</textField>
+
+			<staticText>
+				<reportElement x="0" y="80" width="802" height="30" forecolor="#00796B"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Distribución de Valor por Categoría]]></text>
+			</staticText>
+
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="150" y="110" width="500" height="180"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset incrementType="Group" incrementGroup="GrupoCategoria"/>
+					
+					<keyExpression><![CDATA[$F{nombreCategoria}]]></keyExpression>
+					<valueExpression><![CDATA[$V{SumValorCategoria}]]></valueExpression>
+					<labelExpression><![CDATA[$F{nombreCategoria} + "\n" + String.format("%.2f €", $V{SumValorCategoria}.doubleValue())]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+		</band>
+	</summary>
+</jasperReport>

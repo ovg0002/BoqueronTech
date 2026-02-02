@@ -103,6 +103,11 @@ public class InicioAnalisisyConsultas extends javax.swing.JPanel {
         BtnGenerarinformesinventario.setForeground(new java.awt.Color(48, 91, 171));
         BtnGenerarinformesinventario.setText("Generar informes de inventario");
         BtnGenerarinformesinventario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(48, 91, 171)));
+        BtnGenerarinformesinventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGenerarinformesinventarioActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -251,6 +256,43 @@ if (inicioInstance != null) {
             inicioInstance.colocarPanel(new Resumendecajadiaria(inicioInstance));
         }
     }//GEN-LAST:event_BtnGenerarresumencajaActionPerformed
+
+    private void BtnGenerarinformesinventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGenerarinformesinventarioActionPerformed
+        // TODO add your handling code here:
+        try {
+            // 1. Mensaje de carga (opcional, por si tarda)
+            // javax.swing.JOptionPane.showMessageDialog(this, "Generando inventario...", "Espere", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+            // 2. Conexión a la Base de Datos
+            java.sql.Connection conn = com.boquerontech.supermercadoboqueron.database.DDBBConnector.getConnection();
+            
+            // 3. Parámetros (No necesitamos ninguno para un inventario general, pero el mapa debe existir)
+            java.util.Map<String, Object> parametros = new java.util.HashMap<>();
+            
+            // 4. Cargar el JRXML
+            // Asegúrate de que el nombre del archivo es exactamente "InformeInventario.jrxml"
+            java.io.InputStream reportStream = getClass().getResourceAsStream("/reportes/InformeInventario.jrxml");
+            
+            if (reportStream == null) {
+                javax.swing.JOptionPane.showMessageDialog(this, "No se encuentra el archivo .jrxml en /reportes/InformeInventario.jrxml", "Error Crítico", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // 5. Compilar
+            net.sf.jasperreports.engine.JasperReport reporteCompilado = net.sf.jasperreports.engine.JasperCompileManager.compileReport(reportStream);
+
+            // 6. Llenar
+            net.sf.jasperreports.engine.JasperPrint print = net.sf.jasperreports.engine.JasperFillManager.fillReport(reporteCompilado, parametros, conn);
+            
+            // 7. Mostrar
+            // 'false' para que al cerrar el informe NO se cierre la aplicación
+            net.sf.jasperreports.view.JasperViewer.viewReport(print, false);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al generar el inventario: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_BtnGenerarinformesinventarioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

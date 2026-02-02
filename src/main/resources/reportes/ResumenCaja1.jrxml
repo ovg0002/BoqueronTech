@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ResumenCajaBoqueron" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SupermercadoDB"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	
+	<parameter name="idCierreParam" class="java.lang.Integer"/>
+
+	<queryString language="SQL">
+		<![CDATA[SELECT 
+    cc.idCierre,
+    cc.fecha,
+    cc.validacion,
+    cc.incidencia,
+    e.nombre AS nombreEmpleado,
+    e.apellidos AS apellidosEmpleado,
+    e.dni,
+    (SELECT COALESCE(SUM(dv.cantidad * dv.precioUnitarioHistorico), 0) FROM Venta v JOIN DetalleVenta dv ON v.idVenta = dv.Venta_idVenta WHERE v.fecha = cc.fecha AND v.Empleado_idEmpleado = cc.Empleado_idEmpleado AND v.metodoPago = 'Efectivo') as totalEfectivo,
+    (SELECT COALESCE(SUM(dv.cantidad * dv.precioUnitarioHistorico), 0) FROM Venta v JOIN DetalleVenta dv ON v.idVenta = dv.Venta_idVenta WHERE v.fecha = cc.fecha AND v.Empleado_idEmpleado = cc.Empleado_idEmpleado AND v.metodoPago = 'Tarjeta') as totalTarjeta
+FROM CierreCaja cc
+JOIN Empleado e ON cc.Empleado_idEmpleado = e.idEmpleado
+WHERE cc.idCierre = $P{idCierreParam}]]>
+	</queryString>
+
+	<field name="fecha" class="java.sql.Date"/>
+	<field name="validacion" class="java.lang.String"/>
+	<field name="incidencia" class="java.lang.String"/>
+	<field name="nombreEmpleado" class="java.lang.String"/>
+	<field name="apellidosEmpleado" class="java.lang.String"/>
+	<field name="dni" class="java.lang.String"/>
+	<field name="totalEfectivo" class="java.math.BigDecimal"/>
+	<field name="totalTarjeta" class="java.math.BigDecimal"/>
+
+	<variable name="GranTotal" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$F{totalEfectivo}.add($F{totalTarjeta})]]></variableExpression>
+	</variable>
+
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+
+	<title>
+		<band height="100" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="90" backcolor="#E9FDFD"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement x="0" y="90" width="555" height="1" forecolor="#00796B"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="20" y="20" width="380" height="40" forecolor="#00796B"/>
+				<textElement verticalAlignment="Middle">
+					<font size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Resumen de Caja Diaria]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy HH:mm">
+				<reportElement x="430" y="10" width="120" height="20" forecolor="#666666"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+
+	<detail>
+		<band height="450" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="10" width="555" height="80" backcolor="#E9FDFD"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineColor="#00796B"/>
+				</graphicElement>
+			</rectangle>
+			
+			<staticText>
+				<reportElement x="20" y="20" width="100" height="20" forecolor="#00796B"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Empleado:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="20" y="40" width="250" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreEmpleado} + " " + $F{apellidosEmpleado}]]></textFieldExpression>
+			</textField>
+
+			<staticText>
+				<reportElement x="20" y="60" width="40" height="20" forecolor="#00796B"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DNI:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="60" y="60" width="150" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dni}]]></textFieldExpression>
+			</textField>
+
+			<staticText>
+				<reportElement x="350" y="20" width="180" height="20" forecolor="#00796B"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de Arqueo]]></text>
+			</staticText>
+			<textField pattern="EEEE, dd MMMM yyyy">
+				<reportElement x="300" y="40" width="230" height="30"/>
+				<textElement textAlignment="Right">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+
+			<staticText>
+				<reportElement x="0" y="110" width="200" height="20" forecolor="#00796B"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado de Validación:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="130" width="260" height="40"/>
+				<box topPadding="5" leftPadding="5" bottomPadding="5" rightPadding="5">
+					<pen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{validacion}]]></textFieldExpression>
+			</textField>
+
+			<staticText>
+				<reportElement x="290" y="110" width="200" height="20" forecolor="#00796B"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Incidencias Registradas:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="290" y="130" width="265" height="80"/>
+				<box topPadding="5" leftPadding="5" bottomPadding="5" rightPadding="5">
+					<pen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{incidencia} == null || $F{incidencia}.isEmpty() ? "Sin incidencias." : $F{incidencia}]]></textFieldExpression>
+			</textField>
+
+			<staticText>
+				<reportElement x="0" y="240" width="300" height="30" forecolor="#00796B"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Desglose Económico]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="270" width="555" height="1" forecolor="#00796B"/>
+			</line>
+
+			<rectangle>
+				<reportElement x="0" y="280" width="555" height="30" backcolor="#F5F5F5"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="20" y="285" width="150" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Ventas en Efectivo]]></text>
+			</staticText>
+			<textField pattern="#,##0.00 ¤">
+				<reportElement x="400" y="285" width="130" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalEfectivo}]]></textFieldExpression>
+			</textField>
+
+			<rectangle>
+				<reportElement x="0" y="315" width="555" height="30" backcolor="#FFFFFF"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="20" y="320" width="150" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Ventas con Tarjeta]]></text>
+			</staticText>
+			<textField pattern="#,##0.00 ¤">
+				<reportElement x="400" y="320" width="130" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalTarjeta}]]></textFieldExpression>
+			</textField>
+
+			<rectangle radius="10">
+				<reportElement x="300" y="360" width="255" height="50" backcolor="#00796B"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="320" y="370" width="80" height="30" forecolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00 ¤">
+				<reportElement x="400" y="370" width="140" height="30" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{GranTotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#999999"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

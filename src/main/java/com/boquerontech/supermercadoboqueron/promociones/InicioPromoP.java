@@ -183,6 +183,32 @@ public class InicioPromoP extends javax.swing.JPanel {
 
     private void BtnListadoPromosActivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnListadoPromosActivaActionPerformed
         // TODO add your handling code here:
+        try {
+            // 1. Conexión
+            java.sql.Connection conn = com.boquerontech.supermercadoboqueron.database.DDBBConnector.getConnection();
+            
+            // 2. Parámetros (Map vacío, porque el filtro es automático por fecha del sistema)
+            java.util.Map<String, Object> parametros = new java.util.HashMap<>();
+            
+            // 3. Cargar JRXML
+            java.io.InputStream reportStream = getClass().getResourceAsStream("/reportes/ListadoPromociones.jrxml");
+            
+            if (reportStream == null) {
+                javax.swing.JOptionPane.showMessageDialog(this, "No se encuentra el archivo .jrxml en /reportes/ListadoPromociones.jrxml", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // 4. Compilar, Llenar y Mostrar
+            net.sf.jasperreports.engine.JasperReport reporteCompilado = net.sf.jasperreports.engine.JasperCompileManager.compileReport(reportStream);
+            net.sf.jasperreports.engine.JasperPrint print = net.sf.jasperreports.engine.JasperFillManager.fillReport(reporteCompilado, parametros, conn);
+            
+            // Visualizar (false para no cerrar la app)
+            net.sf.jasperreports.view.JasperViewer.viewReport(print, false);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al generar el listado de promociones: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_BtnListadoPromosActivaActionPerformed
 
 
