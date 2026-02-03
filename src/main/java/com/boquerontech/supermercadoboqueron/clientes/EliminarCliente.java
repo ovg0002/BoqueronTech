@@ -4,6 +4,10 @@
  */
 package com.boquerontech.supermercadoboqueron.clientes;
 
+import com.boquerontech.supermercadoboqueron.database.cliente.ClienteDAO;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,11 +16,16 @@ import javax.swing.JOptionPane;
  */
 public class EliminarCliente extends javax.swing.JPanel {
 
+    private final ClienteDAO clienteDAO;
+    private Cliente clienteActual;
+
     /**
      * Creates new form NuevoCliente
      */
     public EliminarCliente() {
         initComponents();
+        clienteDAO = new ClienteDAO();
+        clearFields();
     }
 
     /**
@@ -38,18 +47,18 @@ public class EliminarCliente extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        nombreCompletoTxt = new javax.swing.JLabel();
+        fechaNacimientoTxt = new javax.swing.JLabel();
+        dniTxt = new javax.swing.JLabel();
+        codigoClienteTxt = new javax.swing.JLabel();
+        edadTxt = new javax.swing.JLabel();
+        telefonoTxt = new javax.swing.JLabel();
+        puntosTxt = new javax.swing.JLabel();
         searchLblIcon = new javax.swing.JLabel();
         searchTxt = new javax.swing.JTextField();
         pnlBotones = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(233, 253, 253));
         setLayout(new java.awt.BorderLayout());
@@ -135,68 +144,68 @@ public class EliminarCliente extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
         jPanel3.add(jLabel8, gridBagConstraints);
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel9.setText("<Nombre y apellidos>");
+        nombreCompletoTxt.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        nombreCompletoTxt.setText("<Nombre y apellidos>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
-        jPanel3.add(jLabel9, gridBagConstraints);
+        jPanel3.add(nombreCompletoTxt, gridBagConstraints);
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel10.setText("<dd/mm/aaaa>");
+        fechaNacimientoTxt.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        fechaNacimientoTxt.setText("<dd/mm/aaaa>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
-        jPanel3.add(jLabel10, gridBagConstraints);
+        jPanel3.add(fechaNacimientoTxt, gridBagConstraints);
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel11.setText("<12345678A>");
+        dniTxt.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        dniTxt.setText("<12345678A>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
-        jPanel3.add(jLabel11, gridBagConstraints);
+        jPanel3.add(dniTxt, gridBagConstraints);
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel12.setText("<código cliente>");
+        codigoClienteTxt.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        codigoClienteTxt.setText("<código cliente>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
-        jPanel3.add(jLabel12, gridBagConstraints);
+        jPanel3.add(codigoClienteTxt, gridBagConstraints);
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel13.setText("<Edad actual>");
+        edadTxt.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        edadTxt.setText("<Edad actual>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
-        jPanel3.add(jLabel13, gridBagConstraints);
+        jPanel3.add(edadTxt, gridBagConstraints);
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel14.setText("<+34 612345678>");
+        telefonoTxt.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        telefonoTxt.setText("<+34 612345678>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
-        jPanel3.add(jLabel14, gridBagConstraints);
+        jPanel3.add(telefonoTxt, gridBagConstraints);
 
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel15.setText("<x ptos.>");
+        puntosTxt.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        puntosTxt.setText("<x ptos.>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 0, 0);
-        jPanel3.add(jLabel15, gridBagConstraints);
+        jPanel3.add(puntosTxt, gridBagConstraints);
 
         searchLblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_search.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -208,6 +217,11 @@ public class EliminarCliente extends javax.swing.JPanel {
         searchTxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         searchTxt.setText("Buscador");
         searchTxt.setMargin(new java.awt.Insets(2, 25, 2, 6));
+        searchTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchTxtMouseClicked(evt);
+            }
+        });
         searchTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchTxtActionPerformed(evt);
@@ -228,29 +242,34 @@ public class EliminarCliente extends javax.swing.JPanel {
         pnlBotones.setBackground(new java.awt.Color(233, 253, 253));
         pnlBotones.setLayout(new java.awt.GridBagLayout());
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(117, 117, 117));
-        jButton1.setText("Cancelar");
-        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(117, 117, 117), 1, true));
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(117, 117, 117));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(117, 117, 117), 1, true));
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.ipadx = 25;
         gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(10, 20, 20, 20);
-        pnlBotones.add(jButton1, gridBagConstraints);
+        pnlBotones.add(btnCancelar, gridBagConstraints);
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 121, 107));
-        jButton2.setText("Dar de Baja");
-        jButton2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.setBackground(new java.awt.Color(255, 255, 255));
+        btnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnEliminar.setForeground(new java.awt.Color(211, 47, 47));
+        btnEliminar.setText("Dar de Baja");
+        btnEliminar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(211, 47, 47), 1, true));
+        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -259,35 +278,100 @@ public class EliminarCliente extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(10, 20, 20, 20);
-        pnlBotones.add(jButton2, gridBagConstraints);
+        pnlBotones.add(btnEliminar, gridBagConstraints);
 
         add(pnlBotones, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTxtActionPerformed
-        // TODO add your handling code here:
+        String searchTerm = searchTxt.getText();
+        if (searchTerm.isEmpty() || searchTerm.equals("Buscador")) {
+            clearFields();
+            return;
+        }
+
+        List<Cliente> clientes = clienteDAO.buscarClientesPorNombreOApellido(searchTerm);
+
+        if (clientes.size() == 1) {
+            clienteActual = clientes.get(0);
+            populateFields(clienteActual);
+        } else if (clientes.size() > 1) {
+            clearFields();
+            JOptionPane.showMessageDialog(this, "Se encontraron varios clientes con ese nombre. Por favor, sea más específico.", "Múltiples coincidencias", JOptionPane.WARNING_MESSAGE);
+        } else {
+            clearFields();
+            JOptionPane.showMessageDialog(this, "No se encontró ningún cliente con ese nombre.", "Sin resultados", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_searchTxtActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        JOptionPane.showConfirmDialog(
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        if (clienteActual == null) {
+            JOptionPane.showMessageDialog(this, "Primero busque y seleccione un cliente para eliminar.", "Ningún cliente seleccionado", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int confirm = JOptionPane.showConfirmDialog(
             this,
-            "Estas seguro de eliminar?",
-            "Confirmar Eliminacion",
+            "¿Está seguro de que desea eliminar a " + clienteActual.getNombre() + " " + clienteActual.getApellidos() + "?",
+            "Confirmar Eliminación",
             JOptionPane.OK_CANCEL_OPTION,
             JOptionPane.WARNING_MESSAGE);
-    }//GEN-LAST:event_jButton2ActionPerformed
+
+        if (confirm == JOptionPane.OK_OPTION) {
+            boolean exito = clienteDAO.eliminarCliente(clienteActual.getIdCliente());
+            if (exito) {
+                JOptionPane.showMessageDialog(this, "Cliente eliminado con éxito.", "Eliminación Exitosa", JOptionPane.INFORMATION_MESSAGE);
+                clearFields();
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo eliminar el cliente.", "Error de Eliminación", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void searchTxtMouseClicked(java.awt.event.MouseEvent evt) {
+        searchTxt.setText("");
+    }
+    
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {
+        clearFields();
+    }
+
+    private void populateFields(Cliente cliente) {
+        nombreCompletoTxt.setText(cliente.getNombre() + " " + cliente.getApellidos());
+        if (cliente.getFechaNacimiento() != null) {
+            fechaNacimientoTxt.setText(cliente.getFechaNacimiento().toString());
+            edadTxt.setText(String.valueOf(Period.between(cliente.getFechaNacimiento(), LocalDate.now()).getYears()));
+        } else {
+            fechaNacimientoTxt.setText("N/A");
+            edadTxt.setText("N/A");
+        }
+        dniTxt.setText(cliente.getDni());
+        codigoClienteTxt.setText(cliente.getCodigoCliente());
+        telefonoTxt.setText(cliente.getTelefono());
+        puntosTxt.setText(String.valueOf(cliente.getPuntosCliente()) + " ptos.");
+    }
+
+    private void clearFields() {
+        nombreCompletoTxt.setText("<Nombre y apellidos>");
+        fechaNacimientoTxt.setText("<dd/mm/aaaa>");
+        dniTxt.setText("<12345678A>");
+        codigoClienteTxt.setText("<código cliente>");
+        edadTxt.setText("<Edad actual>");
+        telefonoTxt.setText("<+34 612345678>");
+        puntosTxt.setText("<x ptos.>");
+        searchTxt.setText("Buscador");
+        clienteActual = null;
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JLabel codigoClienteTxt;
+    private javax.swing.JLabel dniTxt;
+    private javax.swing.JLabel edadTxt;
+    private javax.swing.JLabel fechaNacimientoTxt;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -295,10 +379,12 @@ public class EliminarCliente extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel nombreCompletoTxt;
     private javax.swing.JPanel pnlBotones;
+    private javax.swing.JLabel puntosTxt;
     private javax.swing.JLabel searchLblIcon;
     private javax.swing.JTextField searchTxt;
+    private javax.swing.JLabel telefonoTxt;
     // End of variables declaration//GEN-END:variables
 }

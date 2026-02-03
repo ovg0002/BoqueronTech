@@ -4,17 +4,40 @@
  */
 package com.boquerontech.supermercadoboqueron.clientes;
 
+import com.boquerontech.supermercadoboqueron.database.cliente.ClienteDAO;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author adrih
  */
 public class ConsultarCliente extends javax.swing.JPanel {
 
+    private final ClienteDAO clienteDAO;
+    private Cliente clienteActual;
+
     /**
      * Creates new form NuevoCliente
      */
     public ConsultarCliente() {
         initComponents();
+        clienteDAO = new ClienteDAO();
+        clearFields();
+        
+        searchTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchTxtMouseClicked(evt);
+            }
+        });
+        
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
     }
 
     /**
@@ -48,7 +71,7 @@ public class ConsultarCliente extends javax.swing.JPanel {
         searchLblIcon = new javax.swing.JLabel();
         searchTxt = new javax.swing.JTextField();
         btnPnl = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(233, 253, 253));
         setLayout(new java.awt.BorderLayout());
@@ -261,27 +284,79 @@ public class ConsultarCliente extends javax.swing.JPanel {
         btnPnl.setBackground(new java.awt.Color(233, 253, 253));
         btnPnl.setLayout(new java.awt.GridBagLayout());
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(117, 117, 117));
-        jButton1.setText("Cerrar");
-        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(117, 117, 117), 1, true));
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(117, 117, 117));
+        btnCancelar.setText("Cerrar");
+        btnCancelar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(117, 117, 117), 1, true));
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.ipadx = 25;
         gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(10, 20, 20, 20);
-        btnPnl.add(jButton1, gridBagConstraints);
+        btnPnl.add(btnCancelar, gridBagConstraints);
 
         add(btnPnl, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTxtActionPerformed
-        // TODO add your handling code here:
+        String searchTerm = searchTxt.getText();
+        if (searchTerm.isEmpty() || searchTerm.equals("Buscador")) {
+            clearFields();
+            return;
+        }
+
+        List<Cliente> clientes = clienteDAO.buscarClientesPorNombreOApellido(searchTerm);
+
+        if (clientes.size() == 1) {
+            clienteActual = clientes.get(0);
+            populateFields(clienteActual);
+        } else if (clientes.size() > 1) {
+            clearFields();
+            JOptionPane.showMessageDialog(this, "Se encontraron varios clientes con ese nombre. Por favor, sea más específico.", "Múltiples coincidencias", JOptionPane.WARNING_MESSAGE);
+        } else {
+            clearFields();
+            JOptionPane.showMessageDialog(this, "No se encontró ningún cliente con ese nombre.", "Sin resultados", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_searchTxtActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {
+        clearFields();
+    }
+    
+    private void searchTxtMouseClicked(java.awt.event.MouseEvent evt) {
+        searchTxt.setText("");
+    }
+    
+    private void populateFields(Cliente cliente) {
+        nombreCompletoTxt.setText(cliente.getNombre() + " " + cliente.getApellidos());
+        if (cliente.getFechaNacimiento() != null) {
+            fechaNacimientoTxt.setText(cliente.getFechaNacimiento().toString());
+            edadTxt.setText(String.valueOf(Period.between(cliente.getFechaNacimiento(), LocalDate.now()).getYears()));
+        } else {
+            fechaNacimientoTxt.setText("N/A");
+            edadTxt.setText("N/A");
+        }
+        dniTxt.setText(cliente.getDni());
+        codigoClienteTxt.setText(cliente.getCodigoCliente());
+        telefonoTxt.setText(cliente.getTelefono());
+        puntosTxt.setText(String.valueOf(cliente.getPuntosCliente()) + " ptos.");
+    }
+    
+    private void clearFields() {
+        nombreCompletoTxt.setText("<Nombre y apellidos>");
+        fechaNacimientoTxt.setText("<dd/mm/aaaa>");
+        dniTxt.setText("<12345678A>");
+        codigoClienteTxt.setText("<código cliente>");
+        edadTxt.setText("<Edad actual>");
+        telefonoTxt.setText("<+34 612345678>");
+        puntosTxt.setText("<x ptos.>");
+        searchTxt.setText("Buscador");
+        clienteActual = null;
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -294,7 +369,7 @@ public class ConsultarCliente extends javax.swing.JPanel {
     private javax.swing.JLabel edadTxt;
     private javax.swing.JLabel fechaNacimientoLbl;
     private javax.swing.JLabel fechaNacimientoTxt;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JPanel mainPnl;

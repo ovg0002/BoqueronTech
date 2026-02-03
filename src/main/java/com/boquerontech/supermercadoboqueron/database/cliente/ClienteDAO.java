@@ -110,6 +110,83 @@ public class ClienteDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return lista;
-    }
-}
+                return lista;
+            }
+        
+            public List<Cliente> buscarClientesPorNombreOApellido(String nombreOApellido) {
+                List<Cliente> lista = new ArrayList<>();
+                String sql = "SELECT * FROM Cliente WHERE nombre LIKE ? OR apellidos LIKE ?";
+        
+                try (Connection conn = DDBBConnector.getConnection();
+                     PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        
+                    String searchPattern = "%" + nombreOApellido + "%";
+                    pstmt.setString(1, searchPattern);
+                    pstmt.setString(2, searchPattern);
+        
+                    try (ResultSet rs = pstmt.executeQuery()) {
+                        while (rs.next()) {
+                            Cliente c = new Cliente();
+                            c.setIdCliente(rs.getInt("idCliente"));
+                            c.setNombre(rs.getString("nombre"));
+                            c.setApellidos(rs.getString("apellidos"));
+                            Date fechaNacimiento = rs.getDate("fechaNacimiento");
+                            if (fechaNacimiento != null) {
+                                c.setFechaNacimiento(fechaNacimiento.toLocalDate());
+                            }
+                            c.setTelefono(rs.getString("telefono"));
+                            c.setDni(rs.getString("dni"));
+                            c.setPuntosCliente(rs.getInt("puntosCliente"));
+                            c.setCodigoCliente(rs.getString("codigoCliente"));
+                            lista.add(c);
+                        }
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                return lista;
+            }
+            
+            public boolean eliminarCliente(int idCliente) {
+                String sql = "DELETE FROM Cliente WHERE idCliente = ?";
+        
+                try (Connection conn = DDBBConnector.getConnection();
+                     PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        
+                    pstmt.setInt(1, idCliente);
+                    int affectedRows = pstmt.executeUpdate();
+                    return affectedRows > 0;
+        
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            }
+            
+            public boolean actualizarCliente(Cliente cliente) {
+                String sql = "UPDATE Cliente SET nombre = ?, apellidos = ?, fechaNacimiento = ?, telefono = ?, dni = ? WHERE idCliente = ?";
+
+                try (Connection conn = DDBBConnector.getConnection();
+                     PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+                    pstmt.setString(1, cliente.getNombre());
+                    pstmt.setString(2, cliente.getApellidos());
+                    if (cliente.getFechaNacimiento() != null) {
+                        pstmt.setDate(3, java.sql.Date.valueOf(cliente.getFechaNacimiento()));
+                    } else {
+                        pstmt.setNull(3, java.sql.Types.DATE);
+                    }
+                    pstmt.setString(4, cliente.getTelefono());
+                    pstmt.setString(5, cliente.getDni());
+                    pstmt.setInt(6, cliente.getIdCliente());
+
+                    int affectedRows = pstmt.executeUpdate();
+                    return affectedRows > 0;
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            }
+        }
+        

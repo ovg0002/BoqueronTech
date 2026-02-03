@@ -4,8 +4,12 @@
  */
 package com.boquerontech.supermercadoboqueron.clientes;
 
-import com.boquerontech.supermercadoboqueron.empleados.*;
-import com.boquerontech.supermercadoboqueron.clientes.*;
+import com.boquerontech.supermercadoboqueron.database.cliente.ClienteDAO;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,11 +18,22 @@ import javax.swing.JOptionPane;
  */
 public class ModificarCliente extends javax.swing.JPanel {
 
+    private final ClienteDAO clienteDAO;
+    private Cliente clienteActual;
+
     /**
      * Creates new form NuevoCliente
      */
     public ModificarCliente() {
         initComponents();
+        clienteDAO = new ClienteDAO();
+        clearFields();
+        
+        searchTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchTxtMouseClicked(evt);
+            }
+        });
     }
 
     /**
@@ -49,8 +64,8 @@ public class ModificarCliente extends javax.swing.JPanel {
         searchLblIcon = new javax.swing.JLabel();
         searchTxt = new javax.swing.JTextField();
         pnlBotones = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(233, 253, 253));
         setLayout(new java.awt.BorderLayout());
@@ -237,29 +252,34 @@ public class ModificarCliente extends javax.swing.JPanel {
         pnlBotones.setBackground(new java.awt.Color(233, 253, 253));
         pnlBotones.setLayout(new java.awt.GridBagLayout());
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(117, 117, 117));
-        jButton1.setText("Cancelar");
-        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(117, 117, 117), 1, true));
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(117, 117, 117));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(117, 117, 117), 1, true));
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.ipadx = 25;
         gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(10, 20, 20, 20);
-        pnlBotones.add(jButton1, gridBagConstraints);
+        pnlBotones.add(btnCancelar, gridBagConstraints);
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 121, 107));
-        jButton2.setText("Guardar");
-        jButton2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setBackground(new java.awt.Color(255, 255, 255));
+        btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnGuardar.setForeground(new java.awt.Color(0, 121, 107));
+        btnGuardar.setText("Guardar");
+        btnGuardar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -268,7 +288,7 @@ public class ModificarCliente extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(10, 20, 20, 20);
-        pnlBotones.add(jButton2, gridBagConstraints);
+        pnlBotones.add(btnGuardar, gridBagConstraints);
 
         add(pnlBotones, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
@@ -281,13 +301,106 @@ public class ModificarCliente extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_dniTxtActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        if (clienteActual == null) {
+            JOptionPane.showMessageDialog(this, "Primero busque y seleccione un cliente para modificar.", "Ningún cliente seleccionado", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+        try {
+            String nombre = nombreTxt.getText();
+            String apellido1 = apellido1Txt.getText();
+            String apellido2 = apellido2Txt.getText();
+            String dni = dniTxt.getText();
+            String telefono = telefTxt.getText();
+            
+            if (nombre.isEmpty() || apellido1.isEmpty() || dni.isEmpty() || telefono.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Los campos Nombre, Primer Apellido, DNI y Teléfono no pueden estar vacíos.", "Campos Requeridos", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            clienteActual.setNombre(nombre);
+            clienteActual.setApellidos(apellido1 + " " + apellido2);
+            clienteActual.setDni(dni);
+            clienteActual.setTelefono(telefono);
+
+            if (!fechaTxt.getText().isEmpty()) {
+                try {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDate fechaNacimiento = LocalDate.parse(fechaTxt.getText(), formatter);
+                    clienteActual.setFechaNacimiento(fechaNacimiento);
+                } catch (DateTimeParseException e) {
+                    JOptionPane.showMessageDialog(this, "Formato de fecha inválido. Use YYYY-MM-DD.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+
+            boolean exito = clienteDAO.actualizarCliente(clienteActual);
+
+            if (exito) {
+                JOptionPane.showMessageDialog(this, "Cliente actualizado con éxito.", "Actualización Exitosa", JOptionPane.INFORMATION_MESSAGE);
+                clearFields();
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo actualizar el cliente.", "Error de Actualización", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocurrió un error al actualizar el cliente: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void searchTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTxtActionPerformed
-        // TODO add your handling code here:
+        String searchTerm = searchTxt.getText();
+        if (searchTerm.isEmpty() || searchTerm.equals("Buscador")) {
+            clearFields();
+            return;
+        }
+
+        List<Cliente> clientes = clienteDAO.buscarClientesPorNombreOApellido(searchTerm);
+
+        if (clientes.size() == 1) {
+            clienteActual = clientes.get(0);
+            populateFields(clienteActual);
+        } else if (clientes.size() > 1) {
+            clearFields();
+            JOptionPane.showMessageDialog(this, "Se encontraron varios clientes con ese nombre. Por favor, sea más específico.", "Múltiples coincidencias", JOptionPane.WARNING_MESSAGE);
+        } else {
+            clearFields();
+            JOptionPane.showMessageDialog(this, "No se encontró ningún cliente con ese nombre.", "Sin resultados", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_searchTxtActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {
+        clearFields();
+    }
+    
+    private void searchTxtMouseClicked(java.awt.event.MouseEvent evt) {
+        searchTxt.setText("");
+    }
+    
+    private void populateFields(Cliente cliente) {
+        nombreTxt.setText(cliente.getNombre());
+        String[] apellidos = cliente.getApellidos().split(" ");
+        apellido1Txt.setText(apellidos.length > 0 ? apellidos[0] : "");
+        apellido2Txt.setText(apellidos.length > 1 ? apellidos[1] : "");
+        dniTxt.setText(cliente.getDni());
+        telefTxt.setText(cliente.getTelefono());
+        if (cliente.getFechaNacimiento() != null) {
+            fechaTxt.setText(cliente.getFechaNacimiento().toString());
+        } else {
+            fechaTxt.setText("");
+        }
+    }
+    
+    private void clearFields() {
+        nombreTxt.setText("");
+        apellido1Txt.setText("");
+        apellido2Txt.setText("");
+        dniTxt.setText("");
+        telefTxt.setText("");
+        fechaTxt.setText("");
+        searchTxt.setText("Buscador");
+        clienteActual = null;
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -300,8 +413,8 @@ public class ModificarCliente extends javax.swing.JPanel {
     private javax.swing.JTextField dniTxt;
     private javax.swing.JLabel fechaLbl;
     private javax.swing.JTextField fechaTxt;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel nombreLbl;
     private javax.swing.JTextField nombreTxt;
     private javax.swing.JPanel pnlBotones;
