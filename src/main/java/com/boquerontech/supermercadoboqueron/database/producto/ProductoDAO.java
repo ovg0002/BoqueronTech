@@ -117,14 +117,15 @@ public class ProductoDAO {
     }
     
     // Método para borrar (Lógico o Físico, tú decides, aquí pongo el Delete físico simple adaptado)
-    public static void deleteProducto(int idProducto) {
+    public static boolean deleteProducto(int idProducto) {
         String sql = "UPDATE Producto SET activo = 0 WHERE idProducto = ?";
         try (Connection conn = DDBBConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, idProducto);
-            pstmt.executeUpdate();
+            return pstmt.executeUpdate() > 0;
         } catch (SQLException sqle) {
             sqle.printStackTrace();
+            return false; // Error
         }
     }
     

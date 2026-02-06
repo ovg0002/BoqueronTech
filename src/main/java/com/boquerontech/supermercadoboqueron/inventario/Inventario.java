@@ -11,8 +11,14 @@ import com.boquerontech.supermercadoboqueron.inventario.items.ProductoInventario
 import com.boquerontech.supermercadoboqueron.productos.Categoria;
 import com.boquerontech.supermercadoboqueron.productos.NuevoProducto;
 import com.boquerontech.supermercadoboqueron.productos.Producto;
+import java.awt.event.ItemEvent;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -27,6 +33,7 @@ public class Inventario extends javax.swing.JPanel {
     
     // --------- ESTAS CAMBIAN SEGÚN LA BBDD ---------
     private final List<Producto> productosLista;
+    private final List<Producto> productosFiltrados;
     private final List<Categoria> categoriasLista;
     
     /*
@@ -35,11 +42,23 @@ public class Inventario extends javax.swing.JPanel {
     public Inventario() {
         initComponents();
         
+        // Cargar de la BBDD
         productosLista = ProductoDAO.getProductsByMinCurrentStock(0);
         categoriasLista = CategoriaDAO.getAllCategories();
         
+        // Rellenar el combo de las categorias
+        rellenarComboCategorias();
+        
+        // Iniciar la lista de los productos filtrados
+        productosFiltrados = new ArrayList<>(productosLista);
+        
+        // Configurar el buscador para que tenga el listener
+        configurarBuscadorRealtime();
+        
         rellenarConProductos();
     }
+    
+    // ---------------- MÉTODOS PRINCIPALES ----------------
     
     private void rellenarConProductos() {
         mainPanel.removeAll();
@@ -48,10 +67,10 @@ public class Inventario extends javax.swing.JPanel {
         
         int inicio = (paginaActual - 1) * maxProdPagina;
         
-        int fin = Math.min(inicio + maxProdPagina, productosLista.size());
+        int fin = Math.min(inicio + maxProdPagina, productosFiltrados.size());
 
         for (int i = inicio; i < fin; i++) {
-            Producto p = productosLista.get(i);
+            Producto p = productosFiltrados.get(i);
             mainPanel.add(new ProductoInventarioItem(this, p, categoriasLista)); 
         }
 
@@ -70,40 +89,94 @@ public class Inventario extends javax.swing.JPanel {
         //System.out.println("Página " + paginaActual + " pintada. Índices: " + inicio + " a " + fin);        
     }
     
-    private void rellenarConProductos(int maxCurrentStock) {
-        mainPanel.removeAll();
+    private void aplicarFiltrosGlobales() {
+        String textoBusqueda = buscarTxt.getText().trim().toLowerCase();
+        String categoriaSeleccionada = (categoriesCombo.getSelectedItem() != null) 
+                ? categoriesCombo.getSelectedItem().toString() : "Todos";
 
-        int paginaActual = (Integer) paginaSpin.getValue();
-        
-        int inicio = (paginaActual - 1) * maxProdPagina;
-        
-        int fin = Math.min(inicio + maxProdPagina, productosLista.size());
+        // Obtener valor del stock del combo
+        int indiceStock = maxStockCombo.getSelectedIndex();
+        int maxStockValue = switch (indiceStock) {
+            case 0 -> 10;
+            case 1 -> 25;
+            case 2 -> 50;
+            case 3 -> 100;
+            case 4 -> 200;
+            case 5 -> 500;
+            case 6 -> Integer.MAX_VALUE; // Todos
+            default -> Integer.MAX_VALUE;
+        };
 
-        for (int i = inicio; i < fin; i++) {
-            Producto p = productosLista.get(i);
-            if (p.getStock() <= maxCurrentStock) mainPanel.add(new ProductoInventarioItem(this, p, categoriasLista));
+        // Reiniciamos la lista filtrada
+        productosFiltrados.clear();
+
+        for (Producto p : productosLista) {
+            // 1. Chequeo de Nombre
+            boolean coincideNombre = textoBusqueda.isEmpty() || 
+                                     textoBusqueda.equals("buscar") || 
+                                     p.getNombre().toLowerCase().contains(textoBusqueda);
+
+            // 2. Chequeo de Categoría
+            boolean coincideCategoria = categoriaSeleccionada.equalsIgnoreCase("Todos") || 
+                                        Objects.equals(p.getCategoria().getNombre(), categoriaSeleccionada);
+
+            // 3. Chequeo de Stock
+            boolean coincideStock = p.getStock() <= maxStockValue;
+            
+            // 4. Chequeo de Activo
+            boolean esActivo = p.isActivo(); 
+
+            // Si cumple LAS CUATRO condiciones, se añade
+            if (coincideNombre && coincideCategoria && coincideStock && esActivo) {
+                productosFiltrados.add(p);
+            }
         }
 
-        int productosPintados = fin - inicio;
-        int huecosFaltantes = maxProdPagina - productosPintados;
-        
-        for (int k = 0; k < huecosFaltantes; k++) {
-            JPanel vacio = new JPanel();
-            vacio.setOpaque(false);
-            mainPanel.add(vacio);
+        // Resetear a página 1 y pintar
+        paginaSpin.setValue(1);
+        rellenarConProductos();
+    }
+    
+    // ---------------- EVENTOS DE UI (LISTENERS) ----------------
+    
+    // Añade el listener al hueco de búsqueda
+    private void configurarBuscadorRealtime() {
+        buscarTxt.getDocument().addDocumentListener(new DocumentListener() {
+            @Override public void insertUpdate(DocumentEvent e) {aplicarFiltrosGlobales();}
+            @Override public void removeUpdate(DocumentEvent e) {aplicarFiltrosGlobales();}
+            @Override public void changedUpdate(DocumentEvent e) {aplicarFiltrosGlobales();}
+        });
+    }
+    
+    // ---------------- OTROS MÉTODOS DE GESTIÓN ----------------
+    
+    private void rellenarComboCategorias() {
+        if (categoriasLista != null) {
+            for (Categoria c : categoriasLista) {
+                categoriesCombo.addItem(c.getNombre());
+            }
         }
-
-        mainPanel.revalidate();
-        mainPanel.repaint();
-        
-        //System.out.println("Página " + paginaActual + " pintada. Índices: " + inicio + " a " + fin);        
     }
     
     public void updateProductosOnDelete(Producto productoEliminar) {
-        this.productosLista.remove(productoEliminar);
-        //System.out.println(productosLista);
-        
-        rellenarConProductos();
+        if (ProductoDAO.deleteProducto(productoEliminar.getId())) {
+            this.productosLista.remove(productoEliminar);
+            // Actualizar interfaz
+            aplicarFiltrosGlobales();
+            JOptionPane.showMessageDialog(
+                this,
+                "El producto \"" + productoEliminar.getNombre() + "\" ha sido eliminado con éxito de la base de datos.",
+                "Éxito",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+        } else {
+            JOptionPane.showMessageDialog(
+                this,
+                "Error al eliminar el producto \"" + productoEliminar.getNombre() + "\" de la base de datos.",
+                "Error",
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
     }
     
     public void updateProductosOnUpdate(Producto productoInicial, Producto productoModificado) {
@@ -123,13 +196,17 @@ public class Inventario extends javax.swing.JPanel {
             this.productosLista.add(productoModificado);
         }
 
-        rellenarConProductos();
+        aplicarFiltrosGlobales();
     }
     
     public void addProductoALista(Producto producto) {
         this.productosLista.add(producto);
-        rellenarConProductos();
+        aplicarFiltrosGlobales();
     }
+    
+    
+    
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -152,6 +229,7 @@ public class Inventario extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        categoriesCombo = new javax.swing.JComboBox<>();
         bottomPanel = new javax.swing.JPanel();
         paginaSpin = new javax.swing.JSpinner();
         anadirProductoBtn = new javax.swing.JButton();
@@ -199,28 +277,30 @@ public class Inventario extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 0);
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 10);
         topPanel.add(maxStockCombo, gridBagConstraints);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("INVENTARIO");
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 0);
         topPanel.add(jLabel3, gridBagConstraints);
 
-        jPanel1.setMaximumSize(new java.awt.Dimension(210, 31));
-        jPanel1.setMinimumSize(new java.awt.Dimension(210, 31));
+        jPanel1.setMaximumSize(new java.awt.Dimension(400, 31));
+        jPanel1.setMinimumSize(new java.awt.Dimension(400, 31));
         jPanel1.setOpaque(false);
-        jPanel1.setPreferredSize(new java.awt.Dimension(210, 31));
+        jPanel1.setPreferredSize(new java.awt.Dimension(400, 31));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 210, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,7 +309,7 @@ public class Inventario extends javax.swing.JPanel {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 0;
         topPanel.add(jPanel1, gridBagConstraints);
 
         trabajadorPanel.setBackground(new java.awt.Color(204, 204, 204));
@@ -284,7 +364,7 @@ public class Inventario extends javax.swing.JPanel {
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 20);
         topPanel.add(trabajadorPanel, gridBagConstraints);
@@ -293,9 +373,27 @@ public class Inventario extends javax.swing.JPanel {
         jSeparator1.setMinimumSize(new java.awt.Dimension(200, 0));
         jSeparator1.setPreferredSize(new java.awt.Dimension(200, 0));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
         topPanel.add(jSeparator1, gridBagConstraints);
+
+        categoriesCombo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        categoriesCombo.setMaximumRowCount(10);
+        categoriesCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos" }));
+        categoriesCombo.setMaximumSize(new java.awt.Dimension(200, 31));
+        categoriesCombo.setMinimumSize(new java.awt.Dimension(200, 31));
+        categoriesCombo.setPreferredSize(new java.awt.Dimension(200, 31));
+        categoriesCombo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                categoryFilterChanged(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 0);
+        topPanel.add(categoriesCombo, gridBagConstraints);
 
         add(topPanel, java.awt.BorderLayout.PAGE_START);
 
@@ -389,7 +487,7 @@ public class Inventario extends javax.swing.JPanel {
 
     private void pasarPagina(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasarPagina
         int paginaActual = (Integer) paginaSpin.getValue();
-        int totalItems = productosLista.size();
+        int totalItems = productosFiltrados.size();
         
         if (paginaActual * maxProdPagina < totalItems) {
             paginaSpin.setValue(paginaActual + 1);
@@ -412,38 +510,16 @@ public class Inventario extends javax.swing.JPanel {
     }//GEN-LAST:event_anadirProducto
 
     private void maxStockFilterChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_maxStockFilterChanged
-        // Definir el stock segun el indice seleccionado en el combo
-        int index = maxStockCombo.getSelectedIndex();
-        int maxStockValue = 0;
-        
-        switch (index) {
-            case 0:
-                maxStockValue = 10;
-                break;
-            case 1:
-                maxStockValue = 25;
-                break;
-            case 2:
-                maxStockValue = 50;
-                break;
-            case 3:
-                maxStockValue = 100;
-                break;
-            case 4:
-                maxStockValue = 200;
-                break;
-            case 5:
-                maxStockValue = 500;
-                break;
-            case 6:
-                maxStockValue = Integer.MAX_VALUE;
-                break;
-            default:
-                maxStockValue = 0;
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            aplicarFiltrosGlobales();
         }
-        
-        rellenarConProductos(maxStockValue);
     }//GEN-LAST:event_maxStockFilterChanged
+
+    private void categoryFilterChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_categoryFilterChanged
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            aplicarFiltrosGlobales();
+        }
+    }//GEN-LAST:event_categoryFilterChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton alanteBtn;
@@ -451,6 +527,7 @@ public class Inventario extends javax.swing.JPanel {
     private javax.swing.JButton atrasBtn;
     private javax.swing.JPanel bottomPanel;
     private javax.swing.JTextField buscarTxt;
+    private javax.swing.JComboBox<String> categoriesCombo;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
