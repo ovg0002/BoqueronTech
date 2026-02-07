@@ -24,7 +24,7 @@ public class ProductoDAO {
     // QUERY BASE: Usamos un JOIN para traer los datos del producto Y su categoría de golpe.
     // Usamos alias (c.nombre AS nombre_categoria) para no confundirlo con el nombre del producto.
     private static final String BASE_QUERY = """
-        SELECT p.idProducto, p.nombre, p.precio, p.stock, p.minStock, p.Categoria_idCategoria, p.activo,
+        SELECT p.idProducto, p.nombre, p.precio, p.stock, p.minStock, p.Categoria_idCategoria, p.codigoProducto, p.activo,
                c.nombre AS nombre_categoria
         FROM Producto p
         INNER JOIN Categoria c ON p.Categoria_idCategoria = c.idCategoria
@@ -71,6 +71,24 @@ public class ProductoDAO {
     public static List<Producto> getProductsByMinCurrentStock(int minCurrentStock) {
         List<Producto> productos = new ArrayList<>();
         String sql = BASE_QUERY + " WHERE p.stock >= ?";
+        
+        try (Connection conn = DDBBConnector.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, minCurrentStock);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    productos.add(crearProductoDeResultSet(rs));
+                }
+            }
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+        return productos;
+    }
+    
+    public static List<Producto> getActiveOnlyProductsByMinCurrentStock(int minCurrentStock) {
+        List<Producto> productos = new ArrayList<>();
+        String sql = BASE_QUERY + " WHERE p.stock >= ? AND p.activo = 1";
         
         try (Connection conn = DDBBConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -164,6 +182,31 @@ public class ProductoDAO {
         return insertId;
     }
     
+    public static int contarProductosTotales() {
+        String sql = """
+        SELECT COUNT(p.idProducto)
+            FROM Producto p
+        """;
+        
+        try (Connection conn = DDBBConnector.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            int total = -1;
+            
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) total = rs.getInt(1);
+            }
+            
+            if (total >= 0) {
+                return total;
+            } else return 0;
+            
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+            return 0;
+        }
+    }
+    
     // ==============================
     //            HELPERS
     // ==============================
@@ -181,6 +224,7 @@ public class ProductoDAO {
             rs.getInt("stock"),
             rs.getInt("minStock"),
             cat,
+            rs.getString("codigoProducto"),
             rs.getBoolean("activo")
         );
     }

@@ -4,17 +4,32 @@
  */
 package com.boquerontech.supermercadoboqueron.ventas.items;
 
+import com.boquerontech.supermercadoboqueron.productos.Producto;
+import com.boquerontech.supermercadoboqueron.ventas.Ventas;
+
 /**
  *
  * @author velag
  */
 public class ProductoEscaneadoItem extends javax.swing.JPanel {
+    private final Ventas ventasPanel;
 
-    /**
+    private Producto prod = null;
+    private int cantidad = 0;
+    
+    /*
      * Creates new form ProductoEscaneadoItem
      */
-    public ProductoEscaneadoItem() {
+    public ProductoEscaneadoItem(Producto producto, Ventas ventasPanel) {
         initComponents();
+        this.ventasPanel = ventasPanel;
+        this.prod = producto;
+        cantidad = 1;
+        
+        nombreProductoLbl.setText(producto.getNombre());
+        categoriaLbl.setText(producto.getCategoria().getNombre());
+        cantidadSpinner.setValue(cantidad);
+        precioConIVALbl.setText(String.valueOf(producto.getPrecio()) + "€");
     }
 
     /**
@@ -31,7 +46,6 @@ public class ProductoEscaneadoItem extends javax.swing.JPanel {
         categoriaLbl = new javax.swing.JLabel();
         cantidadSpinner = new javax.swing.JSpinner();
         precioConIVALbl = new javax.swing.JLabel();
-        procentajeIVALbl = new javax.swing.JLabel();
 
         setOpaque(false);
         setLayout(new java.awt.GridBagLayout());
@@ -61,12 +75,6 @@ public class ProductoEscaneadoItem extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(5, 7, 5, 7);
         add(precioConIVALbl, gridBagConstraints);
-
-        procentajeIVALbl.setForeground(new java.awt.Color(0, 0, 0));
-        procentajeIVALbl.setText("% IVA");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.insets = new java.awt.Insets(5, 17, 5, 5);
-        add(procentajeIVALbl, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     public String getProducto() {
@@ -93,19 +101,11 @@ public class ProductoEscaneadoItem extends javax.swing.JPanel {
     public void setPrecio(String precioConIVA) {
         precioConIVALbl.setText(precioConIVA);
     }
-    
-    public String getPorcentajeIVA() {
-        return procentajeIVALbl.getText().trim();
-    }
-    public void setPorcentajeIVA(String porcentajeIVA) {
-        procentajeIVALbl.setText(porcentajeIVA);
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner cantidadSpinner;
     private javax.swing.JLabel categoriaLbl;
     private javax.swing.JLabel nombreProductoLbl;
     private javax.swing.JLabel precioConIVALbl;
-    private javax.swing.JLabel procentajeIVALbl;
     // End of variables declaration//GEN-END:variables
 }

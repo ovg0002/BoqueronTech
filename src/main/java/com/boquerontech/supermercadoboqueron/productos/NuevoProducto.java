@@ -299,6 +299,7 @@ public class NuevoProducto extends javax.swing.JDialog {
                     0, // Stock inicial siempre 0
                     minStock,
                     categoriaList.get(categoryIndex),
+                    null,
                     true // Activo
                 );
 

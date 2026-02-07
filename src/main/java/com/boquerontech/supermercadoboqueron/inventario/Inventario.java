@@ -263,7 +263,6 @@ public class Inventario extends javax.swing.JPanel {
         bottomPanel = new javax.swing.JPanel();
         paginaSpin = new javax.swing.JSpinner();
         anadirProductoBtn = new javax.swing.JButton();
-        pedidosBtn = new javax.swing.JButton();
         atrasBtn = new javax.swing.JButton();
         alanteBtn = new javax.swing.JButton();
         mainPanel = new javax.swing.JPanel();
@@ -454,15 +453,6 @@ public class Inventario extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(20, 5, 20, 5);
         bottomPanel.add(anadirProductoBtn, gridBagConstraints);
 
-        pedidosBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        pedidosBtn.setText("Pedidos");
-        pedidosBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new java.awt.Insets(20, 5, 20, 0);
-        bottomPanel.add(pedidosBtn, gridBagConstraints);
-
         atrasBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_atras.png"))); // NOI18N
         atrasBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         atrasBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -567,7 +557,6 @@ public class Inventario extends javax.swing.JPanel {
     private javax.swing.JPanel mainPanel;
     private javax.swing.JComboBox<String> maxStockCombo;
     private javax.swing.JSpinner paginaSpin;
-    private javax.swing.JButton pedidosBtn;
     private javax.swing.JPanel pnlUser;
     private javax.swing.JPanel topPanel;
     private javax.swing.JPanel trabajadorPanel;

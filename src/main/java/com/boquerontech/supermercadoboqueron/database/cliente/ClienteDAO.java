@@ -7,6 +7,7 @@ package com.boquerontech.supermercadoboqueron.database.cliente;
 import com.boquerontech.supermercadoboqueron.database.DDBBConnector;
 import com.boquerontech.supermercadoboqueron.clientes.Cliente;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -76,10 +77,13 @@ public class ClienteDAO {
 
         // Ordenación
         switch (orden) {
-            case 0: sql += " ORDER BY c.nombre ASC, c.apellidos ASC"; break; // A-Z
-            case 1: sql += " ORDER BY totalCompras DESC"; break;             // Num Compras
-            case 2: sql += " ORDER BY c.puntosCliente DESC"; break;          // Puntos
-            default: sql += " ORDER BY c.nombre ASC"; 
+            // A-Z
+            case 0 -> sql += " ORDER BY c.nombre ASC, c.apellidos ASC";
+            // Num Compras
+            case 1 -> sql += " ORDER BY totalCompras DESC";
+            // Puntos
+            case 2 -> sql += " ORDER BY c.puntosCliente DESC";
+            default -> sql += " ORDER BY c.nombre ASC";
         }
 
         try (Connection conn = DDBBConnector.getConnection();
@@ -110,83 +114,166 @@ public class ClienteDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-                return lista;
-            }
+        return lista;
+    }
         
-            public List<Cliente> buscarClientesPorNombreOApellido(String nombreOApellido) {
-                List<Cliente> lista = new ArrayList<>();
-                String sql = "SELECT * FROM Cliente WHERE nombre LIKE ? OR apellidos LIKE ?";
-        
-                try (Connection conn = DDBBConnector.getConnection();
-                     PreparedStatement pstmt = conn.prepareStatement(sql)) {
-        
-                    String searchPattern = "%" + nombreOApellido + "%";
-                    pstmt.setString(1, searchPattern);
-                    pstmt.setString(2, searchPattern);
-        
-                    try (ResultSet rs = pstmt.executeQuery()) {
-                        while (rs.next()) {
-                            Cliente c = new Cliente();
-                            c.setIdCliente(rs.getInt("idCliente"));
-                            c.setNombre(rs.getString("nombre"));
-                            c.setApellidos(rs.getString("apellidos"));
-                            Date fechaNacimiento = rs.getDate("fechaNacimiento");
-                            if (fechaNacimiento != null) {
-                                c.setFechaNacimiento(fechaNacimiento.toLocalDate());
-                            }
-                            c.setTelefono(rs.getString("telefono"));
-                            c.setDni(rs.getString("dni"));
-                            c.setPuntosCliente(rs.getInt("puntosCliente"));
-                            c.setCodigoCliente(rs.getString("codigoCliente"));
-                            lista.add(c);
-                        }
+    public List<Cliente> buscarClientesPorNombreOApellido(String nombreOApellido) {
+        List<Cliente> lista = new ArrayList<>();
+        String sql = "SELECT * FROM Cliente WHERE nombre LIKE ? OR apellidos LIKE ?";
+
+        try (Connection conn = DDBBConnector.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            String searchPattern = "%" + nombreOApellido + "%";
+            pstmt.setString(1, searchPattern);
+            pstmt.setString(2, searchPattern);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    Cliente c = new Cliente();
+                    c.setIdCliente(rs.getInt("idCliente"));
+                    c.setNombre(rs.getString("nombre"));
+                    c.setApellidos(rs.getString("apellidos"));
+                    Date fechaNacimiento = rs.getDate("fechaNacimiento");
+                    if (fechaNacimiento != null) {
+                        c.setFechaNacimiento(fechaNacimiento.toLocalDate());
                     }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                return lista;
-            }
-            
-            public boolean eliminarCliente(int idCliente) {
-                String sql = "DELETE FROM Cliente WHERE idCliente = ?";
-        
-                try (Connection conn = DDBBConnector.getConnection();
-                     PreparedStatement pstmt = conn.prepareStatement(sql)) {
-        
-                    pstmt.setInt(1, idCliente);
-                    int affectedRows = pstmt.executeUpdate();
-                    return affectedRows > 0;
-        
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    return false;
+                    c.setTelefono(rs.getString("telefono"));
+                    c.setDni(rs.getString("dni"));
+                    c.setPuntosCliente(rs.getInt("puntosCliente"));
+                    c.setCodigoCliente(rs.getString("codigoCliente"));
+                    lista.add(c);
                 }
             }
-            
-            public boolean actualizarCliente(Cliente cliente) {
-                String sql = "UPDATE Cliente SET nombre = ?, apellidos = ?, fechaNacimiento = ?, telefono = ?, dni = ? WHERE idCliente = ?";
-
-                try (Connection conn = DDBBConnector.getConnection();
-                     PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-                    pstmt.setString(1, cliente.getNombre());
-                    pstmt.setString(2, cliente.getApellidos());
-                    if (cliente.getFechaNacimiento() != null) {
-                        pstmt.setDate(3, java.sql.Date.valueOf(cliente.getFechaNacimiento()));
-                    } else {
-                        pstmt.setNull(3, java.sql.Types.DATE);
-                    }
-                    pstmt.setString(4, cliente.getTelefono());
-                    pstmt.setString(5, cliente.getDni());
-                    pstmt.setInt(6, cliente.getIdCliente());
-
-                    int affectedRows = pstmt.executeUpdate();
-                    return affectedRows > 0;
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    return false;
-                }
-            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return lista;
+    }
+
+    public boolean eliminarCliente(int idCliente) {
+        String sql = "DELETE FROM Cliente WHERE idCliente = ?";
+
+        try (Connection conn = DDBBConnector.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, idCliente);
+            int affectedRows = pstmt.executeUpdate();
+            return affectedRows > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean actualizarCliente(Cliente cliente) {
+        String sql = "UPDATE Cliente SET nombre = ?, apellidos = ?, fechaNacimiento = ?, telefono = ?, dni = ? WHERE idCliente = ?";
+
+        try (Connection conn = DDBBConnector.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, cliente.getNombre());
+            pstmt.setString(2, cliente.getApellidos());
+            if (cliente.getFechaNacimiento() != null) {
+                pstmt.setDate(3, java.sql.Date.valueOf(cliente.getFechaNacimiento()));
+            } else {
+                pstmt.setNull(3, java.sql.Types.DATE);
+            }
+            pstmt.setString(4, cliente.getTelefono());
+            pstmt.setString(5, cliente.getDni());
+            pstmt.setInt(6, cliente.getIdCliente());
+
+            int affectedRows = pstmt.executeUpdate();
+            return affectedRows > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public static Cliente getClienteByCodigoCliente(String codigoCliente) {
+        String sql = """
+        SELECT c.idCliente, c.nombre, c.apellidos, c.fechaNacimiento, c.telefono, c.dni,
+            c.puntosCliente, c.codigoCliente
+            FROM Cliente c
+            WHERE c.codigoCliente = ?
+        """;
+        
+        try (Connection conn = DDBBConnector.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setString(1, codigoCliente);
+            
+            Cliente cliente = createClienteFromResultSet(pstmt.executeQuery());
+            
+            if (cliente != null) {
+                return cliente;
+            } else return null;
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public static Cliente getClienteByTelefono(String telefono) {
+        String sql = """
+        SELECT c.idCliente, c.nombre, c.apellidos, c.fechaNacimiento, c.telefono, c.dni,
+            c.puntosCliente, c.codigoCliente
+            FROM Cliente c
+            WHERE c.telefono = ?
+        """;
+        
+        try (Connection conn = DDBBConnector.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setString(1, telefono);
+            
+            Cliente cliente = createClienteFromResultSet(pstmt.executeQuery());
+            
+            if (cliente != null) {
+                return cliente;
+            } else return null;
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    private static Cliente createClienteFromResultSet(ResultSet rs) {
+        if (rs == null) return null;
+        
+        try {
+            if (rs.next()) {
+                return new Cliente(
+                    rs.getInt("idCliente"),
+                    rs.getString("nombre"),
+                    rs.getString("apellidos"),
+                    rs.getObject("fechaNacimiento", LocalDate.class),
+                    rs.getString("telefono"),
+                    rs.getString("dni"),
+                    rs.getInt("puntosCliente"),
+                    rs.getString("codigoCliente")
+                );
+            } else return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public static boolean sumarPuntos(Connection conn, int idCliente, int puntosGanados) throws SQLException {
+        String sql = "UPDATE Cliente SET puntosCliente = puntosCliente + ? WHERE idCliente = ?";
+
+        // NOTA: No cerramos la conexión aquí porque viene de la transacción de VentaDAO
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, puntosGanados);
+            ps.setInt(2, idCliente);
+            return ps.executeUpdate() > 0;
+        }
+    }
+}
         

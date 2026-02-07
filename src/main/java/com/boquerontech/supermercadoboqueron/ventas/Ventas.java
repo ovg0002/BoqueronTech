@@ -4,31 +4,39 @@
  */
 package com.boquerontech.supermercadoboqueron.ventas;
 
-import com.boquerontech.supermercadoboqueron.ventas.items.ProductoEscaneadoItem;
+import com.boquerontech.supermercadoboqueron.clientes.Cliente;
+import com.boquerontech.supermercadoboqueron.database.cliente.ClienteDAO;
+import com.boquerontech.supermercadoboqueron.database.producto.ProductoDAO;
+import com.boquerontech.supermercadoboqueron.database.promocion.PromocionDAO;
+import com.boquerontech.supermercadoboqueron.database.venta.VentaDAO;
+import com.boquerontech.supermercadoboqueron.productos.Producto;
+import com.boquerontech.supermercadoboqueron.promociones.Promocion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author velag
  */
 public class Ventas extends javax.swing.JPanel {
+    private final List<Producto> productosActivosLista;
+    private Cliente currentClient = null;
+    
+    private final List<Producto> ventaActual = new ArrayList<>();
+    private final Map<Producto, Integer> carrito = new LinkedHashMap();
 
-    /**
-     * Creates new form Ventas
-     */
     public Ventas() {
         initComponents();
         configurarEventosPago();
-        rellenarEscaneados();
-    }
-    
-    private void rellenarEscaneados() {
-        for (int i = 0; i < 15; i++) {
-            escaneadosPanelRellenar.add(new ProductoEscaneadoItem());
-            ticketVirtualPanelRellenar.add(new ProductoEscaneadoItem());
-        }
+        
+        productosActivosLista = ProductoDAO.getActiveOnlyProductsByMinCurrentStock(0);
     }
 
     /*
@@ -54,6 +62,104 @@ public class Ventas extends javax.swing.JPanel {
         if (efectivoOpt.isSelected()) {
             metodoPagoLabel.setText("Método de pago: " + efectivoOpt.getText());
         }
+    }
+    
+    private void repintarVenta() {
+        DefaultTableModel tablaEscaneadosModel = (DefaultTableModel) tablaEscaneados.getModel();
+        DefaultTableModel tablaTickectModel = (DefaultTableModel) tablaTicket.getModel();
+        
+        // 1. Limpiar tablas
+        tablaEscaneadosModel.setRowCount(0);
+        tablaTickectModel.setRowCount(0);
+        
+        double totalBaseSinDescuentos = 0.0;
+        
+        // 2. Recorrer el carrito
+        for (Map.Entry<Producto, Integer> entrada : carrito.entrySet()) {
+            Producto p = entrada.getKey();
+            Integer cantidad = entrada.getValue();
+            
+            // Cálculos
+            Double precioTotalBase = p.getPrecio() * cantidad;
+            Double precioConDescuento = calcularMejorPrecioLinea(p, cantidad);
+            
+            totalBaseSinDescuentos += precioTotalBase;
+            
+            // 3. Rellenar Tabla de Escaneados (Izquierda)
+            tablaEscaneadosModel.addRow(new Object[] {
+                p.getNombre(), // Usamos nombre, no el objeto entero para que se vea texto
+                p.getCategoria().getNombre(),
+                cantidad,
+                p.getPrecio()
+            });
+            
+            // 4. Rellenar Tabla Ticket Virtual (Derecha)
+            tablaTickectModel.addRow(new Object[] {
+                p.getNombre(),
+                p.getCategoria().getNombre(),
+                cantidad,
+                p.getPrecio(),
+                precioTotalBase,      // Precio normal
+                precioConDescuento    // Precio con promo (si hay)
+            });
+        }
+        
+        // 5. Actualizar los Labels de Totales en la pantalla
+        Double totalFinal = calcularPrecioTotalTrasPromociones();
+        
+        totalEscaneadosLabel.setText("Total sin descuentos: " + String.format("%.2f €", totalBaseSinDescuentos));
+        totalTicketVirtualLabel.setText("TOTAL A PAGAR: " + String.format("%.2f €", totalFinal));
+        
+        // Actualizar información del ticket virtual
+        if(currentClient != null){
+            atendidoLabel.setText("Cliente: " + currentClient.getNombre() + " (Puntos: " + currentClient.getPuntosCliente() + ")");
+        } else {
+            atendidoLabel.setText("Cliente: Anónimo");
+        }
+    }
+    
+    private Double calcularPrecioTotalTrasPromociones() {
+        double totalAcumulado = 0.0;
+        
+        for (Map.Entry<Producto, Integer> entrada : carrito.entrySet()) {
+            Producto p = entrada.getKey();
+            Integer cantidad = entrada.getValue();
+            
+            // Sumamos el precio optimizado de esta línea
+            totalAcumulado += calcularMejorPrecioLinea(p, cantidad);
+        }
+        
+        return totalAcumulado;
+    }
+
+    private double calcularMejorPrecioLinea(Producto p, int cantidad) {
+        // 1. Precio base (Sin promoción) -> El peor escenario
+        double mejorPrecio = p.getPrecio() * cantidad;
+
+        // 2. Traer promociones activas de este producto desde la BBDD
+        // Usamos el DAO que ya tienes implementado
+        List<Promocion> promos = PromocionDAO.getPromocionesPorProducto(p.getId());
+
+        // 3. Evaluar cada promoción
+        for (Promocion promo : promos) {
+            int unidadesPack = promo.getUnidadesAfectadas(); // Ej: 3 (para un 3x2)
+            double precioPromoUnitario = promo.getPrecioPorUnidad(); // El precio rebajado
+
+            // Solo aplicamos si la cantidad comprada alcanza para al menos un pack
+            if (unidadesPack > 0 && cantidad >= unidadesPack) {
+                int numPacks = cantidad / unidadesPack; // Cuántos packs completos (Ej: 2 packs de 3)
+                int resto = cantidad % unidadesPack;    // Unidades sueltas fuera de promo
+
+                // Fórmula: (Packs * Unidades/Pack * PrecioRebajado) + (Sueltas * PrecioNormal)
+                double precioConPromo = (numPacks * unidadesPack * precioPromoUnitario) + (resto * p.getPrecio());
+
+                // Si esta promoción sale más barata que la anterior (o que el precio base), nos la quedamos
+                if (precioConPromo < mejorPrecio) {
+                    mejorPrecio = precioConPromo;
+                }
+            }
+        }
+        return mejorPrecio;
     }
     
     /**
@@ -93,6 +199,8 @@ public class Ventas extends javax.swing.JPanel {
         enviarClienteBtn = new javax.swing.JButton();
         puntosLbl = new javax.swing.JLabel();
         prefijoTlfTxt = new javax.swing.JFormattedTextField();
+        jLabel8 = new javax.swing.JLabel();
+        codigoClienteTxt = new javax.swing.JTextField();
         metodoPagoLbl = new javax.swing.JLabel();
         metodoPagoPanel = new javax.swing.JPanel();
         efectivoOpt = new javax.swing.JRadioButton();
@@ -103,15 +211,15 @@ public class Ventas extends javax.swing.JPanel {
         escaneadosPanel = new javax.swing.JPanel();
         bottomEscaneados = new javax.swing.JPanel();
         totalEscaneadosLabel = new javax.swing.JLabel();
-        escaneadosScroll = new javax.swing.JScrollPane();
-        escaneadosPanelRellenar = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaEscaneados = new javax.swing.JTable();
         ticketVirtualPanel = new javax.swing.JPanel();
         bottomTickVirt = new javax.swing.JPanel();
         totalTicketVirtualLabel = new javax.swing.JLabel();
         atendidoLabel = new javax.swing.JLabel();
         metodoPagoLabel = new javax.swing.JLabel();
-        TickVirtScroll = new javax.swing.JScrollPane();
-        ticketVirtualPanelRellenar = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaTicket = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(233, 253, 253));
         setLayout(new java.awt.BorderLayout());
@@ -227,9 +335,9 @@ public class Ventas extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 0);
         panelCodigoProd.add(jLabel1, gridBagConstraints);
 
-        codigoProductoTxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        codigoProductoTxt.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         codigoProductoTxt.setForeground(new java.awt.Color(150, 150, 150));
-        codigoProductoTxt.setText("Código del producto");
+        codigoProductoTxt.setText("Código o nombre del producto");
         codigoProductoTxt.setMaximumSize(new java.awt.Dimension(300, 40));
         codigoProductoTxt.setMinimumSize(new java.awt.Dimension(300, 40));
         codigoProductoTxt.setPreferredSize(new java.awt.Dimension(300, 40));
@@ -250,10 +358,15 @@ public class Ventas extends javax.swing.JPanel {
 
         anadirProductoBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         anadirProductoBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_proximo.png"))); // NOI18N
-        anadirProductoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        anadirProductoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         anadirProductoBtn.setMaximumSize(new java.awt.Dimension(40, 40));
         anadirProductoBtn.setMinimumSize(new java.awt.Dimension(40, 40));
         anadirProductoBtn.setPreferredSize(new java.awt.Dimension(40, 40));
+        anadirProductoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anadirProductoAction(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -313,6 +426,7 @@ public class Ventas extends javax.swing.JPanel {
         nombreClienteTxt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         nombreClienteTxt.setForeground(new java.awt.Color(150, 150, 150));
         nombreClienteTxt.setText("Nombre de cliente");
+        nombreClienteTxt.setEnabled(false);
         nombreClienteTxt.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 nombreClienteTxtFocusGained(evt);
@@ -335,7 +449,7 @@ public class Ventas extends javax.swing.JPanel {
         jLabel4.setText("Teléfono");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
         usuarioPanel.add(jLabel4, gridBagConstraints);
@@ -353,7 +467,7 @@ public class Ventas extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
@@ -363,16 +477,21 @@ public class Ventas extends javax.swing.JPanel {
 
         enviarClienteBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         enviarClienteBtn.setText("LogIn");
-        enviarClienteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        enviarClienteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        enviarClienteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enviarClienteAction(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
         usuarioPanel.add(enviarClienteBtn, gridBagConstraints);
 
         puntosLbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        puntosLbl.setText("{puntos}");
+        puntosLbl.setText("Puntos:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -386,10 +505,40 @@ public class Ventas extends javax.swing.JPanel {
         prefijoTlfTxt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
         usuarioPanel.add(prefijoTlfTxt, gridBagConstraints);
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel8.setText("Código de Cliente");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
+        usuarioPanel.add(jLabel8, gridBagConstraints);
+
+        codigoClienteTxt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        codigoClienteTxt.setForeground(new java.awt.Color(150, 150, 150));
+        codigoClienteTxt.setText("Código de Cliente");
+        codigoClienteTxt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                codigoClienteTxtFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                codigoClienteTxtFocusLost(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        usuarioPanel.add(codigoClienteTxt, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -466,10 +615,15 @@ public class Ventas extends javax.swing.JPanel {
 
         finalizarBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         finalizarBtn.setText("Finalizar Compra");
-        finalizarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        finalizarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         finalizarBtn.setMaximumSize(new java.awt.Dimension(200, 40));
         finalizarBtn.setMinimumSize(new java.awt.Dimension(200, 40));
         finalizarBtn.setPreferredSize(new java.awt.Dimension(200, 40));
+        finalizarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finalizarCompraAction(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
@@ -493,15 +647,38 @@ public class Ventas extends javax.swing.JPanel {
 
         escaneadosPanel.add(bottomEscaneados, java.awt.BorderLayout.PAGE_END);
 
-        escaneadosScroll.setBackground(new java.awt.Color(255, 51, 51));
-        escaneadosScroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        escaneadosScroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        tablaEscaneados.setBackground(new java.awt.Color(255, 255, 255));
+        tablaEscaneados.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tablaEscaneados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Producto", "Categoria", "Cantidad", "Precio"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
-        escaneadosPanelRellenar.setBackground(new java.awt.Color(255, 255, 255));
-        escaneadosPanelRellenar.setLayout(new javax.swing.BoxLayout(escaneadosPanelRellenar, javax.swing.BoxLayout.Y_AXIS));
-        escaneadosScroll.setViewportView(escaneadosPanelRellenar);
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
-        escaneadosPanel.add(escaneadosScroll, java.awt.BorderLayout.CENTER);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaEscaneados.setToolTipText("");
+        jScrollPane1.setViewportView(tablaEscaneados);
+
+        escaneadosPanel.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -550,15 +727,34 @@ public class Ventas extends javax.swing.JPanel {
 
         ticketVirtualPanel.add(bottomTickVirt, java.awt.BorderLayout.PAGE_END);
 
-        TickVirtScroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        TickVirtScroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        tablaTicket.setBackground(new java.awt.Color(255, 255, 255));
+        tablaTicket.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tablaTicket.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        ticketVirtualPanelRellenar.setBackground(new java.awt.Color(255, 255, 255));
-        ticketVirtualPanelRellenar.setPreferredSize(new java.awt.Dimension(526, 581));
-        ticketVirtualPanelRellenar.setLayout(new javax.swing.BoxLayout(ticketVirtualPanelRellenar, javax.swing.BoxLayout.Y_AXIS));
-        TickVirtScroll.setViewportView(ticketVirtualPanelRellenar);
+            },
+            new String [] {
+                "Producto", "Categoría", "Cantidad", "Precio unitario", "Precio total", "Precio con promociones"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
 
-        ticketVirtualPanel.add(TickVirtScroll, java.awt.BorderLayout.CENTER);
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tablaTicket);
+
+        ticketVirtualPanel.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -576,7 +772,7 @@ public class Ventas extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     
     private void codigoProductoTxtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_codigoProductoTxtFocusGained
-        if (codigoProductoTxt.getText().equals("Código del producto")) {
+        if (codigoProductoTxt.getText().equals("Código o nombre del producto")) {
             codigoProductoTxt.setText("");
             codigoProductoTxt.setForeground(new java.awt.Color(0, 0, 0)); // texto normal
         }
@@ -584,7 +780,7 @@ public class Ventas extends javax.swing.JPanel {
 
     private void codigoProductoTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_codigoProductoTxtFocusLost
         if (codigoProductoTxt.getText().trim().isEmpty()) {
-            codigoProductoTxt.setText("Código del producto");
+            codigoProductoTxt.setText("Código o nombre del producto");
             codigoProductoTxt.setForeground(new java.awt.Color(150, 150, 150)); // texto placeholder gris
         }
     }//GEN-LAST:event_codigoProductoTxtFocusLost
@@ -617,9 +813,225 @@ public class Ventas extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_telefonoTxtFocusLost
 
+    private void codigoClienteTxtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_codigoClienteTxtFocusGained
+        if (codigoClienteTxt.getText().equals("Código de Cliente")) {
+            codigoClienteTxt.setText("");
+            codigoClienteTxt.setForeground(new java.awt.Color(0, 0, 0)); // texto normal
+        }
+    }//GEN-LAST:event_codigoClienteTxtFocusGained
 
+    private void codigoClienteTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_codigoClienteTxtFocusLost
+        if (codigoClienteTxt.getText().trim().isEmpty()) {
+            codigoClienteTxt.setText("Código de Cliente");
+            codigoClienteTxt.setForeground(new java.awt.Color(150, 150, 150)); // texto placeholder gris
+        }
+    }//GEN-LAST:event_codigoClienteTxtFocusLost
+
+    private void enviarClienteAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarClienteAction
+        String codigoCliente = codigoClienteTxt.getText().trim();
+        String telefonoCliente = telefonoTxt.getText().trim();
+        
+        if (codigoCliente != null && !codigoCliente.isEmpty() && !codigoCliente.equals("Código de Cliente")) {
+            Cliente cliente = ClienteDAO.getClienteByCodigoCliente(codigoCliente);
+            checkCliente(cliente, "código de cliente");
+            currentClient = cliente;
+            
+        } else if (telefonoCliente != null && !telefonoCliente.isEmpty() && !codigoCliente.equals("612345678")) {
+            Cliente cliente = ClienteDAO.getClienteByTelefono(
+                prefijoTlfTxt.getText().trim() + " " + telefonoCliente
+            );
+            checkCliente(cliente, "número de teléfono");
+            currentClient = cliente;
+        }
+    }//GEN-LAST:event_enviarClienteAction
+
+    private void checkCliente(Cliente cliente, String msg) {
+        if (cliente != null) {
+            puntosLbl.setText("Puntos: " + cliente.getPuntosCliente());
+            
+            nombreClienteTxt.setText(cliente.getNombre() + " " + cliente.getApellidos());
+            
+            codigoClienteTxt.setText(cliente.getCodigoCliente());
+            codigoClienteTxt.setForeground(new java.awt.Color(0, 0, 0));
+            
+            String[] telefono = cliente.getTelefono().split(" ");
+            String prefijo = telefono[0];
+            String numero = telefono[1];
+            prefijoTlfTxt.setText(prefijo);
+            telefonoTxt.setText(numero);
+        } else {
+            JOptionPane.showMessageDialog(
+                this,
+                "No se ha encontrado un cliente con dicho " + msg + ".",
+                "Error de cliente",
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
+    
+    private void anadirProductoAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anadirProductoAction
+        String prodBuscar = codigoProductoTxt.getText().trim();
+        
+        if (prodBuscar != null && !prodBuscar.isEmpty() && !prodBuscar.equals("Código o nombre del producto")) {
+            Producto[] productos = getProductosCodigoNombre(prodBuscar);
+            if (productos == null) {
+                JOptionPane.showMessageDialog(
+                    this,
+                    "No se encontró ningún producto relativo a \"" + prodBuscar + "\".",
+                    "No se encontró",
+                    JOptionPane.INFORMATION_MESSAGE
+                );
+                return;
+            }
+            Object seleccionado = JOptionPane.showInputDialog(
+                this,
+                "Selecciona un producto.",
+                "Elección de producto",
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                productos,
+                productos[0]
+            );
+            
+            if (seleccionado != null) {
+                //ventaActual.add((Producto) seleccionado);
+                carrito.merge((Producto) seleccionado, 1, Integer::sum);
+                repintarVenta();
+            } else {
+                JOptionPane.showMessageDialog(
+                    this,
+                    "No ha seleccionado ningún producto.",
+                    "No se seleccionó producto",
+                    JOptionPane.INFORMATION_MESSAGE
+                );
+            }
+        }
+    }//GEN-LAST:event_anadirProductoAction
+
+    private Producto[] getProductosCodigoNombre(String datoProd) {
+        if (datoProd != null && !datoProd.isEmpty()) {
+            int aux = 0;
+            Producto[] prods = new Producto[ProductoDAO.contarProductosTotales()];
+            String dato = datoProd.toLowerCase();
+            for (Producto p : productosActivosLista) {
+                if (p.getNombre().toLowerCase().contains(dato) || p.getCodigoProducto().toLowerCase().contains(dato)) {
+                    prods[aux] = p;
+                    aux++;
+                }
+            }
+            if (prods != null) return prods;
+            else return null;
+        } else return null;
+    }
+    
+    private void finalizarCompraAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalizarCompraAction
+        // 1. Validaciones
+        if (carrito.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "El carrito está vacío.",
+                "Error",
+                JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
+        if (currentClient == null) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Debe seleccionar un cliente.",
+                "Cliente requerido",
+                JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
+
+        // 2. Calcular Total Final (Con descuentos aplicados)
+        Double totalVenta = calcularPrecioTotalTrasPromociones();
+
+        // 3. Confirmación
+        int confirm = JOptionPane.showConfirmDialog(
+            this, 
+            "Total a pagar: " + totalVenta + "\n¿Finalizar venta?", 
+            "Confirmar Venta",
+            JOptionPane.YES_NO_OPTION
+        );
+        
+        if (confirm != JOptionPane.YES_OPTION) return;
+
+        // 4. Preparar datos
+        String metodoPago = "Efectivo";
+        if (tarjetaOpt.isSelected()) metodoPago = "Tarjeta";
+        else if (bizumOpt.isSelected()) metodoPago = "Bizum";
+
+        // TODO: Usar el usuario logueado real
+        int idEmpleado = 1; 
+
+        Venta nuevaVenta = Venta.builder()
+            .fecha(java.time.LocalDate.now())
+            .metodoPago(metodoPago)
+            .idEmpleado(idEmpleado)
+            .idCliente(currentClient.getIdCliente())
+            .build();
+
+        // 5. Llamar al DAO pasando también el total para los puntos
+        boolean exito = VentaDAO.registrarVentaCompleta(nuevaVenta, carrito, totalVenta);
+
+        if (exito) {
+            int puntosGanados = (int) (totalVenta * 100);
+            String mensaje = String.format("¡Venta registrada!\n\nCliente: %s\nPuntos ganados: %d", 
+                    currentClient.getNombre(), puntosGanados);
+            
+            JOptionPane.showMessageDialog(
+                this,
+                mensaje,
+                "Venta Finalizada",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            resetearVenta();
+        } else {
+            JOptionPane.showMessageDialog(
+                this,
+                "Error crítico al registrar la venta.",
+                "Error",
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }//GEN-LAST:event_finalizarCompraAction
+
+    private void resetearVenta() {
+        // 1. Limpiar datos lógicos
+        carrito.clear();
+        currentClient = null;
+        
+        // 2. Limpiar UI de Cliente
+        nombreClienteTxt.setText("Nombre de cliente");
+        nombreClienteTxt.setForeground(new java.awt.Color(150, 150, 150));
+        
+        codigoClienteTxt.setText("Código de Cliente");
+        codigoClienteTxt.setForeground(new java.awt.Color(150, 150, 150));
+        
+        prefijoTlfTxt.setText("+34");
+        telefonoTxt.setText("612345678");
+        telefonoTxt.setForeground(new java.awt.Color(150, 150, 150));
+        
+        puntosLbl.setText("Puntos:");
+        
+        // 3. Limpiar UI de Producto
+        codigoProductoTxt.setText("Código o nombre del producto");
+        codigoProductoTxt.setForeground(new java.awt.Color(150, 150, 150));
+        
+        // 4. Resetear Opciones de Pago
+        efectivoOpt.setSelected(true);
+        metodoPagoLabel.setText("Método de pago: Efectivo");
+        
+        // 5. Repintar tablas (se quedarán vacías porque el carrito está empty)
+        repintarVenta();
+        
+        // 6. Focus al inicio
+        codigoProductoTxt.requestFocus();
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane TickVirtScroll;
     private javax.swing.JButton anadirProductoBtn;
     private javax.swing.JLabel atendidoLabel;
     private javax.swing.JRadioButton bizumOpt;
@@ -628,12 +1040,11 @@ public class Ventas extends javax.swing.JPanel {
     private javax.swing.JPanel bottomTickVirt;
     private javax.swing.JPanel cabecera;
     private javax.swing.JLabel clienteFoto;
+    private javax.swing.JTextField codigoClienteTxt;
     private javax.swing.JTextField codigoProductoTxt;
     private javax.swing.JRadioButton efectivoOpt;
     private javax.swing.JButton enviarClienteBtn;
     private javax.swing.JPanel escaneadosPanel;
-    private javax.swing.JPanel escaneadosPanelRellenar;
-    private javax.swing.JScrollPane escaneadosScroll;
     private javax.swing.Box.Filler filler1;
     private javax.swing.JButton finalizarBtn;
     private javax.swing.JLabel jLabel1;
@@ -643,6 +1054,9 @@ public class Ventas extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel listaLbl;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JLabel metodoPagoLabel;
@@ -655,11 +1069,12 @@ public class Ventas extends javax.swing.JPanel {
     private javax.swing.JFormattedTextField prefijoTlfTxt;
     private javax.swing.JLabel puntosLbl;
     private javax.swing.JPanel relleno;
+    private javax.swing.JTable tablaEscaneados;
+    private javax.swing.JTable tablaTicket;
     private javax.swing.JRadioButton tarjetaOpt;
     private javax.swing.JTextField telefonoTxt;
     private javax.swing.JLabel ticketVirtualLbl;
     private javax.swing.JPanel ticketVirtualPanel;
-    private javax.swing.JPanel ticketVirtualPanelRellenar;
     private javax.swing.JLabel totalEscaneadosLabel;
     private javax.swing.JLabel totalTicketVirtualLabel;
     private javax.swing.JPanel trabajadorPanel;

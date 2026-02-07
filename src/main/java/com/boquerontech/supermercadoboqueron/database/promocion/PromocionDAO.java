@@ -13,7 +13,10 @@ import com.boquerontech.supermercadoboqueron.promociones.Promocion;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PromocionDAO {
 
@@ -50,13 +53,13 @@ public class PromocionDAO {
         }
     }
     // Método para LISTAR todas las promociones
-    public static java.util.List<Promocion> listarPromociones() {
-        java.util.List<Promocion> lista = new java.util.ArrayList<>();
+    public static List<Promocion> listarPromociones() {
+        List<Promocion> lista = new ArrayList<>();
         String sql = "SELECT * FROM Promociones";
 
         try (Connection conn = DDBBConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
-             java.sql.ResultSet rs = pstmt.executeQuery()) {
+             ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
                 Promocion p = new Promocion();
@@ -82,7 +85,7 @@ public class PromocionDAO {
         return lista;
     }
     // Método para ACTUALIZAR una promoción existente
-    public static boolean actualizarPromocion(com.boquerontech.supermercadoboqueron.promociones.Promocion promo) {
+    public static boolean actualizarPromocion(Promocion promo) {
         String sql = "UPDATE Promociones SET nombrePromocion=?, unidadesAfectadas=?, precioPorUnidad=?, fechaInicio=?, fechaFin=?, Categoria_idCategoria=? WHERE idPromociones=?";
         
         try (Connection conn = DDBBConnector.getConnection();
@@ -155,5 +158,47 @@ public class PromocionDAO {
             e.printStackTrace();
             return false;
         }
+    }
+    
+    // Método para OBTENER las promociones asociadas a un producto específico
+    public static List<Promocion> getPromocionesPorProducto(int idProducto) {
+        List<Promocion> lista = new ArrayList<>();
+
+        // Hacemos JOIN con la tabla intermedia para sacar las promos de ese producto
+        String sql = """
+            SELECT p.* FROM Promociones p
+            INNER JOIN Promociones_has_Producto php ON p.idPromociones = php.Promociones_idPromociones
+            WHERE php.Producto_idProducto = ? AND (p.fechaFin IS NULL OR p.fechaFin >= CURDATE())
+        """;
+
+        try (Connection conn = DDBBConnector.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, idProducto);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    Promocion p = new Promocion();
+                    p.setIdPromociones(rs.getInt("idPromociones"));
+                    p.setNombrePromocion(rs.getString("nombrePromocion"));
+                    p.setUnidadesAfectadas(rs.getInt("unidadesAfectadas"));
+                    p.setPrecioPorUnidad(rs.getDouble("precioPorUnidad"));
+
+                    // Fechas
+                    Date fechaIni = rs.getDate("fechaInicio");
+                    if (fechaIni != null) p.setFechaInicio(fechaIni.toLocalDate());
+
+                    Date fechaFin = rs.getDate("fechaFin");
+                    if (fechaFin != null) p.setFechaFin(fechaFin.toLocalDate());
+
+                    p.setIdCategoria(rs.getInt("Categoria_idCategoria"));
+
+                    lista.add(p);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
     }
 }
