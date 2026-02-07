@@ -9,6 +9,7 @@ import com.boquerontech.supermercadoboqueron.inventario.Inventario;
 import com.boquerontech.supermercadoboqueron.productos.Categoria;
 import com.boquerontech.supermercadoboqueron.productos.Producto;
 import com.boquerontech.supermercadoboqueron.productos.ProductoInfoDialog;
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -24,10 +25,10 @@ import javax.swing.SwingUtilities;
  * @author velag
  */
 public class ProductoInventarioItem extends javax.swing.JPanel {    
-    private JPopupMenu popup = new JPopupMenu();
-    private Inventario inventario;
+    private final JPopupMenu popup = new JPopupMenu();
+    private final Inventario inventario;
     
-    private Producto producto;
+    private final Producto producto;
     
     public ProductoInventarioItem(Inventario inventario, Producto prod, List<Categoria> categorias) {
         initComponents();
@@ -50,6 +51,10 @@ public class ProductoInventarioItem extends javax.swing.JPanel {
         
         producto = prod;
         
+        if (!prod.isActivo()) {
+            this.setBackground(Color.yellow);
+        }
+        
         nombreProducto.setText(prod.getNombre());
         stockProducto.setText(String.valueOf(prod.getStock()));
     }
@@ -58,29 +63,52 @@ public class ProductoInventarioItem extends javax.swing.JPanel {
         popup.removeAll();
         
         JMenuItem mostrarInfoProd = new JMenuItem("Ver Producto");
+        JMenuItem habilitarProd = new JMenuItem("Habilitar Producto");
         JSeparator separator = new JSeparator();
-        JMenuItem eliminarProd = new JMenuItem("Eliminar Producto");
+        JMenuItem deshabilitarProd = new JMenuItem("Deshabilitar Producto");
+        
+        if (producto.isActivo()) {
+            habilitarProd.setEnabled(false);
+        }
         
         // TODO: Cambiar esto por mostrar un dialog con la info del prodcuto
         popup.add(mostrarInfoProd).addActionListener(event -> mostrarInfo(categorias));
+        popup.add(habilitarProd).addActionListener(event -> habilitar());
         popup.add(separator);
-        popup.add(eliminarProd).addActionListener(event -> eliminar());
+        popup.add(deshabilitarProd).addActionListener(event -> deshabilitar());
         
         popup.show(e.getComponent(), e.getX(), e.getY());
     }
     
-    private void eliminar() {
+    private void deshabilitar() {
         int confirmacion = JOptionPane.showConfirmDialog(
                 this,
-                "¿Está seguro de eliminar el producto \"" + nombreProducto.getText() + "\"?\nEsta acción no se puede deshacer.",
-                "Confirmar eliminación",
+                "¿Está seguro de deshabilitar el producto \"" + nombreProducto.getText() + "\"?",
+                "Confirmar deshabilitación",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.WARNING_MESSAGE // Icono de advertencia para borrados
         );
         
         if (confirmacion == JOptionPane.YES_OPTION) {
             // Método para eliminar el producto de la bbdd
-            inventario.updateProductosOnDelete(producto);
+            this.setBackground(Color.yellow);
+            inventario.updateProductosOnDeshabilitar(producto);
+        }
+    }
+    
+    private void habilitar() {
+        int confirmacion = JOptionPane.showConfirmDialog(
+                this,
+                "¿Está seguro de habilitar el producto \"" + nombreProducto.getText() + "\"?",
+                "Confirmar habilitación",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE // Icono de advertencia para borrados
+        );
+        
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            // Método para eliminar el producto de la bbdd
+            this.setBackground(new Color(239,239,239));
+            inventario.updateProductosOnHabilitar(producto);
         }
     }
     

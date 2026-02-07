@@ -22,7 +22,7 @@ import javax.swing.event.DocumentListener;
 
 /**
  *
- * @author MEDAC
+ * @author velag
  */
 public class Inventario extends javax.swing.JPanel {
 
@@ -122,12 +122,9 @@ public class Inventario extends javax.swing.JPanel {
 
             // 3. Chequeo de Stock
             boolean coincideStock = p.getStock() <= maxStockValue;
-            
-            // 4. Chequeo de Activo
-            boolean esActivo = p.isActivo(); 
 
-            // Si cumple LAS CUATRO condiciones, se añade
-            if (coincideNombre && coincideCategoria && coincideStock && esActivo) {
+            // Si cumple LAS TRES condiciones, se añade
+            if (coincideNombre && coincideCategoria && coincideStock) {
                 productosFiltrados.add(p);
             }
         }
@@ -158,21 +155,54 @@ public class Inventario extends javax.swing.JPanel {
         }
     }
     
-    public void updateProductosOnDelete(Producto productoEliminar) {
-        if (ProductoDAO.deleteProducto(productoEliminar.getId())) {
-            this.productosLista.remove(productoEliminar);
+    public void updateProductosOnDeshabilitar(Producto productoDeshabilitar) {
+        if (ProductoDAO.deshabilitarProducto(productoDeshabilitar.getId())) {
+            
+            for (int i = 0; i < productosLista.size(); i++) {
+                Producto p = productosLista.get(i);
+                if (p.getId() == productoDeshabilitar.getId()) {
+                    p.setActivo(false);
+                    this.productosLista.set(i, p);
+                }
+            }
+            
             // Actualizar interfaz
             aplicarFiltrosGlobales();
-            JOptionPane.showMessageDialog(
-                this,
-                "El producto \"" + productoEliminar.getNombre() + "\" ha sido eliminado con éxito de la base de datos.",
+            JOptionPane.showMessageDialog(this,
+                "El producto \"" + productoDeshabilitar.getNombre() + "\" ha sido deshabilitado con éxito.",
                 "Éxito",
                 JOptionPane.INFORMATION_MESSAGE
             );
         } else {
-            JOptionPane.showMessageDialog(
-                this,
-                "Error al eliminar el producto \"" + productoEliminar.getNombre() + "\" de la base de datos.",
+            JOptionPane.showMessageDialog(this,
+                "Error al deshabilitar el producto \"" + productoDeshabilitar.getNombre() + "\".",
+                "Error",
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
+    
+    public void updateProductosOnHabilitar(Producto productoHabilitar) {
+        if (ProductoDAO.habilitarProducto(productoHabilitar.getId())) {
+            
+            for (int i = 0; i < productosLista.size(); i++) {
+                Producto p = productosLista.get(i);
+                if (p.getId() == productoHabilitar.getId()) {
+                    p.setActivo(true);
+                    this.productosLista.set(i, p);
+                }
+            }
+            
+            // Actualizar interfaz
+            aplicarFiltrosGlobales();
+            JOptionPane.showMessageDialog(this,
+                "El producto \"" + productoHabilitar.getNombre() + "\" ha sido deshabilitado con éxito.",
+                "Éxito",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+        } else {
+            JOptionPane.showMessageDialog(this,
+                "Error al deshabilitar el producto \"" + productoHabilitar.getNombre() + "\".",
                 "Error",
                 JOptionPane.ERROR_MESSAGE
             );
@@ -405,7 +435,7 @@ public class Inventario extends javax.swing.JPanel {
         paginaSpin.setEnabled(false);
         paginaSpin.setPreferredSize(new java.awt.Dimension(100, 31));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(20, 5, 20, 5);
         bottomPanel.add(paginaSpin, gridBagConstraints);
@@ -428,7 +458,7 @@ public class Inventario extends javax.swing.JPanel {
         pedidosBtn.setText("Pedidos");
         pedidosBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(20, 5, 20, 0);
         bottomPanel.add(pedidosBtn, gridBagConstraints);
@@ -456,7 +486,7 @@ public class Inventario extends javax.swing.JPanel {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.weightx = 1.0;

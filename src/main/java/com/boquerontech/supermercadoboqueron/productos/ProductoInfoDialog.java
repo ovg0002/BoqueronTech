@@ -8,6 +8,7 @@ import com.boquerontech.supermercadoboqueron.database.producto.ProductoDAO;
 import com.boquerontech.supermercadoboqueron.inventario.Inventario;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -368,7 +369,7 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
             precioProd = Double.parseDouble(productPrice.getText().replace(",", "."));
             minStockProd = Integer.parseInt(minStock.getText());
         } catch (NumberFormatException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Error en el formato de números", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error en el formato de números", "Error", JOptionPane.ERROR_MESSAGE);
             cancelAction(null);
             return;
         }
@@ -415,18 +416,15 @@ public class ProductoInfoDialog extends javax.swing.JDialog {
         FlatLightLaf.setup();
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                ProductoInfoDialog dialog = new ProductoInfoDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            ProductoInfoDialog dialog = new ProductoInfoDialog(new javax.swing.JFrame(), true);
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            dialog.setVisible(true);
         });
     }
     

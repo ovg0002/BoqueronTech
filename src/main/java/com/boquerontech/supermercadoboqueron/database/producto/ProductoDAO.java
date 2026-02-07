@@ -32,7 +32,7 @@ public class ProductoDAO {
 
     public static Producto getProductoByID(int id) {
         Producto producto = null;
-        String sql = BASE_QUERY + " WHERE p.idProducto = ? AND p.activo = 1";
+        String sql = BASE_QUERY + " WHERE p.idProducto = ?";
         
         try (Connection conn = DDBBConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -51,7 +51,7 @@ public class ProductoDAO {
     
     public static Producto getProductoByName(String name) {
         Producto producto = null;
-        String sql = BASE_QUERY + " WHERE p.nombre = ? AND p.activo = 1";
+        String sql = BASE_QUERY + " WHERE p.nombre = ?";
         
         try (Connection conn = DDBBConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -70,7 +70,7 @@ public class ProductoDAO {
     
     public static List<Producto> getProductsByMinCurrentStock(int minCurrentStock) {
         List<Producto> productos = new ArrayList<>();
-        String sql = BASE_QUERY + " WHERE p.stock >= ? AND p.activo = 1";
+        String sql = BASE_QUERY + " WHERE p.stock >= ?";
         
         try (Connection conn = DDBBConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -116,17 +116,26 @@ public class ProductoDAO {
         }
     }
     
-    // Método para borrar (Lógico o Físico, tú decides, aquí pongo el Delete físico simple adaptado)
-    public static boolean deleteProducto(int idProducto) {
-        String sql = "UPDATE Producto SET activo = 0 WHERE idProducto = ?";
+    // Cambia el estado del producto de true a false o viceversa
+    private static boolean cambiarEstadoProducto(int idProducto, boolean estado) {
+        String sql = "UPDATE Producto SET activo = ? WHERE idProducto = ?";
         try (Connection conn = DDBBConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, idProducto);
+            pstmt.setBoolean(1, estado);
+            pstmt.setInt(2, idProducto);
             return pstmt.executeUpdate() > 0;
         } catch (SQLException sqle) {
             sqle.printStackTrace();
             return false; // Error
         }
+    }
+    
+    public static boolean deshabilitarProducto(int producto) {
+        return cambiarEstadoProducto(producto, false);
+    }
+    
+    public static boolean habilitarProducto(int producto) {
+        return cambiarEstadoProducto(producto, true);
     }
     
     public static int insertNewProduct(Producto producto) {
